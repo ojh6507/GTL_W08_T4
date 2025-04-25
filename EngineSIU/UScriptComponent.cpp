@@ -3,7 +3,7 @@
 UScriptComponent::UScriptComponent()
     : isScriptLoaded(false)
 {
-   
+
 }
 
 UScriptComponent::~UScriptComponent()
@@ -55,24 +55,27 @@ bool UScriptComponent::LoadScript(const std::string& inScriptPath)
     scriptPath = inScriptPath;
 
     // LuaManager를 통해 스크립트 로드
-    lua_State* L = GLuaManager.GetState();
-    if (!L) return false;
+    try {
+        // 스크립트 로드
+        sol::state& lua = GLuaManager.GetState();
 
-    if (!GLuaManager.RunFile(scriptPath))
-    {
-        std::cerr << "스크립트 로드 실패: " << scriptPath << std::endl;
+        // 액터 참조를 Lua 글로벌 변수로 설정
+        lua["obj"] = GetOwner();
+
+        // 스크립트 파일 실행
+        lua.script_file(scriptPath);
+
+        // 스크립트에서 사용할 함수 등록
+        RegisterLuaFunctions(lua);
+
+        isScriptLoaded = true;
+        return true;
+    }
+    catch (const sol::error& e) {
+        std::cerr << "스크립트 로드 실패: " << scriptPath
+            << "\n오류: " << e.what() << std::endl;
         return false;
     }
-
-    // 스크립트에 액터 참조 설정
-    lua_pushlightuserdata(L, GetOwner());
-    lua_setglobal(L, "obj");
-
-    // 스크립트에서 사용할 함수 등록
-    RegisterLuaFunctions();
-
-    isScriptLoaded = true;
-    return true;
 }
 
 void UScriptComponent::OnOverlap(AActor* OtherActor)
@@ -83,92 +86,89 @@ void UScriptComponent::OnOverlap(AActor* OtherActor)
     }
 }
 
-void UScriptComponent::RegisterLuaFunctions()
+void UScriptComponent::RegisterLuaFunctions(sol::state& lua)
 {
-    // 여기서 스크립트에서 사용할 C++ 함수를 등록
-    lua_State* L = GLuaManager.GetState();
-    if (!L) return;
-
-    // 예시: 위치 설정 함수
-    lua_register(L, "SetActorLocation", [](lua_State* L) -> int {
-        AActor* actor = (AActor*)lua_touserdata(L, 1);
-        float x = (float)luaL_checknumber(L, 2);
-        float y = (float)luaL_checknumber(L, 3);
-        float z = (float)luaL_checknumber(L, 4);
-
-        std::cout << actor->GetUUID() << std::endl;
-
+    // 위치 설정 함수 (참조로 캡처)
+    lua["SetActorLocation"] = [&lua](AActor* actor, float x, float y, float z) {
         if (actor)
         {
             actor->SetActorLocation(FVector(x, y, z));
         }
-        return 0;
-        });
+        };
 
-    // 필요한 다른 함수들도 등록
+    // 위치 가져오기 함수 (참조로 캡처)
+    lua["GetActorLocation"] = [&lua](AActor* actor) -> sol::table {
+        if (actor)
+        {
+            FVector loc = actor->GetActorLocation();
+            sol::table result = lua.create_table();
+            result["x"] = loc.X;
+            result["y"] = loc.Y;
+            result["z"] = loc.Z;
+            return result;
+        }
+        return sol::nil;
+        };
+
+    // 회전 설정 함수 (참조로 캡처)
+    lua["SetActorRotation"] = [&lua](AActor* actor, float pitch, float yaw, float roll) {
+        if (actor)
+        {
+            actor->SetActorRotation(FRotator(pitch, yaw, roll));
+        }
+        };
+
+    // 컴포넌트 고유의 추가 함수들
+    // 예: 특정 함수나 현재 액터와 관련된 특별한 기능들
+    lua["GetComponentOwner"] = [this]() {
+        return GetOwner();
+        };
 }
 
 void UScriptComponent::CallScriptFunction(const char* functionName)
 {
-    lua_State* L = GLuaManager.GetState();
-    if (!L) return;
+    try {
+        sol::state& lua = GLuaManager.GetState();
+        sol::function func = lua[functionName];
 
-    lua_getglobal(L, functionName);
-    if (lua_isfunction(L, -1))
-    {
-        if (lua_pcall(L, 0, 0, 0) != 0)
-        {
-            std::cerr << "Lua 함수 호출 오류 (" << functionName << "): "
-                << lua_tostring(L, -1) << std::endl;
-            lua_pop(L, 1);
+        if (func.valid()) {
+            func();
         }
     }
-    else
-    {
-        lua_pop(L, 1);
+    catch (const sol::error& e) {
+        std::cerr << "Lua 함수 호출 오류 (" << functionName << "): "
+            << e.what() << std::endl;
     }
 }
 
 void UScriptComponent::CallScriptFunction(const char* functionName, float value)
 {
-    lua_State* L = GLuaManager.GetState();
-    if (!L) return;
+    try {
+        sol::state& lua = GLuaManager.GetState();
+        sol::function func = lua[functionName];
 
-    lua_getglobal(L, functionName);
-    if (lua_isfunction(L, -1))
-    {
-        lua_pushnumber(L, value);
-        if (lua_pcall(L, 1, 0, 0) != 0)
-        {
-            std::cerr << "Lua 함수 호출 오류 (" << functionName << "): "
-                << lua_tostring(L, -1) << std::endl;
-            lua_pop(L, 1);
+        if (func.valid()) {
+            func(value);
         }
     }
-    else
-    {
-        lua_pop(L, 1);
+    catch (const sol::error& e) {
+        std::cerr << "Lua 함수 호출 오류 (" << functionName << "): "
+            << e.what() << std::endl;
     }
 }
 
 void UScriptComponent::CallScriptFunction(const char* functionName, AActor* actor)
 {
-    lua_State* L = GLuaManager.GetState();
-    if (!L) return;
+    try {
+        sol::state& lua = GLuaManager.GetState();
+        sol::function func = lua[functionName];
 
-    lua_getglobal(L, functionName);
-    if (lua_isfunction(L, -1))
-    {
-        lua_pushlightuserdata(L, actor);
-        if (lua_pcall(L, 1, 0, 0) != 0)
-        {
-            std::cerr << "Lua 함수 호출 오류 (" << functionName << "): "
-                << lua_tostring(L, -1) << std::endl;
-            lua_pop(L, 1);
+        if (func.valid()) {
+            func(actor);
         }
     }
-    else
-    {
-        lua_pop(L, 1);
+    catch (const sol::error& e) {
+        std::cerr << "Lua 함수 호출 오류 (" << functionName << "): "
+            << e.what() << std::endl;
     }
 }

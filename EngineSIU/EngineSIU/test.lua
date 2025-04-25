@@ -8,11 +8,9 @@ function Tick(dt)
     
     x = x + dt
      x = x + dt
-    SetActorLocation(obj, x, 0, 0)
-end
+     x = x + dt
 
-function OnOverlap(other)
-    Log("다른 액터와 충돌했습니다!")
+    SetActorLocation(obj, x, 0, 0)
 end
 
 function EndPlay()

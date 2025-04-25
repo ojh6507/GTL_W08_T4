@@ -305,14 +305,6 @@ void ControlEditorPanel::CreateModifyButton(ImVec2 ButtonSize, ImFont* IconFont)
                     SpawnedActor->SetActorLabel(TEXT("OBJ_SPHERE"));
                     USphereComp* SphereComp = SpawnedActor->AddComponent<USphereComp>(TEXT("SphereComponent"));
                     SphereComp->SetStaticMesh(FManagerOBJ::GetStaticMesh(L"Contents/Sphere.obj"));
-
-                    UScriptComponent* scriptComp = SpawnedActor->AddComponent<UScriptComponent>("ScriptComponent");
-                    if (scriptComp)
-                    {
-                        bool success = scriptComp->LoadScript("test.lua");
-                        std::cout << "스크립트 로드 " << (success ? "성공" : "실패") << std::endl;
-                    }
-
                     break;
                 }
                 case OBJ_CUBE:

@@ -36,6 +36,7 @@ UObject* ULevel::Duplicate(UObject* InOuter)
     for (AActor* Actor : Actors)
     {
         AActor* DuplicatedActor = static_cast<AActor*>(Actor->Duplicate(InOuter));
+
         UScriptComponent* OriginalScriptComp = Actor->GetComponentByClass<UScriptComponent>();
 
         if (OriginalScriptComp && !OriginalScriptComp->GetScriptPath().empty())
@@ -50,10 +51,8 @@ UObject* ULevel::Duplicate(UObject* InOuter)
                     << " - " << OriginalScriptComp->GetScriptPath() << std::endl;
             }
         }
-
         // 복제된 액터를 새 레벨에 추가
         NewLevel->Actors.Emplace(DuplicatedActor);
-
     }
 
     return NewLevel;

@@ -6,27 +6,28 @@ extern "C" {
 #include "lauxlib.h"
 }
 // #include "luajit.h" 제거
-
+#pragma once
+#include <sol/sol.hpp>
+#include <memory>
 #include <string>
 
 class LuaManager {
 private:
-    lua_State* L;
+    sol::state lua;
     bool initialized;
+
+    void RegisterEngineAPI();
 
 public:
     LuaManager();
     ~LuaManager();
 
+    sol::state& GetState();
+
     bool Initialize();
     void Cleanup();
-    lua_State* GetState() { return L; }
-
     bool RunString(const std::string& code);
     bool RunFile(const std::string& filename);
-
-    void RegisterEngineAPI();
 };
 
-// 전역 LuaManager 인스턴스
 extern LuaManager GLuaManager;

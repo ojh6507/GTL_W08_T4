@@ -4,76 +4,84 @@
 // 전역 인스턴스
 LuaManager GLuaManager;
 
-LuaManager::LuaManager() : L(nullptr), initialized(false) {}
+LuaManager::LuaManager() : initialized(false) {}
 
 LuaManager::~LuaManager() {
     Cleanup();
 }
 
+sol::state& LuaManager::GetState()
+{
+    if (!initialized) {
+        throw std::runtime_error("Lua 상태가 초기화되지 않았습니다.");
+    }
+    return lua;
+}
+
 bool LuaManager::Initialize() {
     if (initialized) return true;
 
-    // Lua 상태 생성
-    L = luaL_newstate();
-    if (!L) {
-        std::cerr << "Lua 초기화 실패!" << std::endl;
+    try {
+        // 기본 라이브러리 로드
+        lua.open_libraries(
+            sol::lib::base,
+            sol::lib::package,
+            sol::lib::string,
+            sol::lib::math,
+            sol::lib::table
+        );
+
+        // 엔진 API 등록
+        RegisterEngineAPI();
+
+        initialized = true;
+        std::cout << "Lua 초기화 완료" << std::endl;
+        return true;
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Lua 초기화 실패: " << e.what() << std::endl;
         return false;
     }
-
-    // 기본 라이브러리 로드
-    luaL_openlibs(L);
-
-    // 엔진 API 등록
-    RegisterEngineAPI();
-
-    initialized = true;
-    std::cout << "Lua 초기화 완료" << std::endl;
-    return true;
 }
 
 void LuaManager::Cleanup() {
-    if (L) {
-        lua_close(L);
-        L = nullptr;
-    }
+    // sol::state는 자동으로 정리됨
     initialized = false;
 }
 
 bool LuaManager::RunString(const std::string& code) {
-    if (!L) return false;
+    if (!initialized) return false;
 
-    if (luaL_dostring(L, code.c_str()) != 0) {
-        std::cerr << "Lua 오류: " << lua_tostring(L, -1) << std::endl;
-        lua_pop(L, 1);
+    try {
+        lua.script(code);
+        return true;
+    }
+    catch (const sol::error& e) {
+        std::cerr << "Lua 오류: " << e.what() << std::endl;
         return false;
     }
-    return true;
 }
 
 bool LuaManager::RunFile(const std::string& filename) {
-    if (!L) return false;
+    if (!initialized) return false;
 
-    if (luaL_dofile(L, filename.c_str()) != 0) {
-        std::cerr << "Lua 파일 오류: " << lua_tostring(L, -1) << std::endl;
-        lua_pop(L, 1);
+    try {
+        lua.script_file(filename);
+        return true;
+    }
+    catch (const sol::error& e) {
+        std::cerr << "Lua 파일 오류: " << e.what() << std::endl;
         return false;
     }
-    return true;
-}
-
-// 로그 함수 (Lua에서 호출)
-static int LuaLog(lua_State* L) {
-    const char* message = luaL_checkstring(L, 1);
-    std::cout << "Lua: " << message << std::endl;
-    return 0;
 }
 
 void LuaManager::RegisterEngineAPI() {
-    if (!L) return;
+    // 로그 함수 등록 (람다 사용)
+    lua["Log"] = [](const std::string& message) {
+        std::cout << "Lua: " << message << std::endl;
+        };
 
-    // 유틸리티 함수 등록
-    lua_register(L, "Log", LuaLog);
-
-    // 여기에 엔진 고유 함수들을 등록하세요
-    // 예: 렌더링, 입력, 물리 등의 함수
+    // 추가 엔진 함수 등록 예시
+    // lua["Render"] = &YourRenderFunction;
+    // lua["GetPlayerPosition"] = &YourPositionFunction;
 }

@@ -30,7 +30,7 @@ public:
     const std::string& GetScriptPath() const { return scriptPath; }
 
     // 스크립트에서 호출할 함수 등록
-    void RegisterLuaFunctions();
+    void RegisterLuaFunctions(sol::state& lua);
 
 private:
     std::string scriptPath;
