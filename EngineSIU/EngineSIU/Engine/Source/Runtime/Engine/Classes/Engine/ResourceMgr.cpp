@@ -9,8 +9,9 @@
 #include "Engine/FLoaderOBJ.h"
 
 
-void FResourceMgr::Initialize(FRenderer* renderer, FGraphicsDevice* device)
+void FResourceMgr::Initialize(FRenderer* renderer, FGraphicsDevice* InDevice)
 {
+    device = InDevice;
     LoadTextureFromFile(device->Device, device->DeviceContext, L"Assets/Texture/font.png");
     LoadTextureFromDDS(device->Device, device->DeviceContext, L"Assets/Texture/font.dds");
     LoadTextureFromFile(device->Device, device->DeviceContext, L"Assets/Texture/T_Explosion_SubUV.png");
@@ -55,10 +56,20 @@ struct TupleHash {
     }
 };
 
-std::shared_ptr<FTexture> FResourceMgr::GetTexture(const FWString& name) const
+std::shared_ptr<FTexture> FResourceMgr::GetTexture(const FWString& name)
 {
-    auto* TempValue = textureMap.Find(name);
-    return TempValue ? *TempValue : nullptr;
+    if (textureMap.Contains(name))
+    {
+        return textureMap[name];
+    }
+    
+    HRESULT hr = LoadTextureFromFile(device->Device, device->DeviceContext, name.c_str());
+
+    if (SUCCEEDED(hr))
+    {
+        return textureMap[name];
+    }
+    return nullptr;
 }
 
 HRESULT FResourceMgr::LoadTextureFromFile(ID3D11Device* device, ID3D11DeviceContext* context, const wchar_t* filename)
