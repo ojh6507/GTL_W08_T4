@@ -381,7 +381,7 @@ void FEditorRenderPass::CreateBuffers()
     }
 
     bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-    bufferDesc.ByteWidth = ConeIndices.Num() * sizeof(FVector);
+    bufferDesc.ByteWidth = ConeIndices.Num() * sizeof(uint32);
 
     initData.pSysMem = ConeIndices.GetData();
 

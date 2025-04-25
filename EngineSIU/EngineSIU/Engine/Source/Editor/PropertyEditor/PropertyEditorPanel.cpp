@@ -27,6 +27,8 @@
 #include "Renderer/Shadow/PointLightShadowMap.h"
 #include "Renderer/Shadow/DirectionalShadowMap.h"
 
+#include <filesystem>
+
 void PropertyEditorPanel::Render()
 {
     /* Pre Setup */
@@ -69,30 +71,155 @@ void PropertyEditorPanel::Render()
             Location = PickedActor->GetActorLocation();
             Rotation = PickedActor->GetActorRotation();
             Scale = PickedActor->GetActorScale();
-
             FImGuiWidget::DrawVec3Control("Location", Location, 0, 85);
             ImGui::Spacing();
-
             FImGuiWidget::DrawRot3Control("Rotation", Rotation, 0, 85);
             ImGui::Spacing();
-
             FImGuiWidget::DrawVec3Control("Scale", Scale, 0, 85);
             ImGui::Spacing();
-
             PickedActor->SetActorLocation(Location);
             PickedActor->SetActorRotation(Rotation);
             PickedActor->SetActorScale(Scale);
 
+            // 좌표 모드 버튼 라벨 설정 (중복 제거)
             std::string coordiButtonLabel;
             if (player->GetCoordMode() == ECoordMode::CDM_WORLD)
                 coordiButtonLabel = "World";
             else if (player->GetCoordMode() == ECoordMode::CDM_LOCAL)
                 coordiButtonLabel = "Local";
 
-            if (ImGui::Button(coordiButtonLabel.c_str(), ImVec2(ImGui::GetWindowContentRegionMax().x * 0.9f, 32)))
+            static char scriptNameBuffer[256] = { 0 };
+            // 버튼들의 전체 너비 계산
+            float windowWidth = ImGui::GetWindowContentRegionMax().x;
+            float buttonWidth = (windowWidth - ImGui::GetStyle().ItemSpacing.x) / 2.0f;
+
+            // 좌표 모드 버튼 (이전 중복 코드 제거)
+            if (ImGui::Button(coordiButtonLabel.c_str(), ImVec2(buttonWidth, 32)))
             {
                 player->AddCoordiMode();
             }
+
+#pragma region Generate Lua Script
+            // 같은 줄에 스크립트 생성 버튼
+            ImGui::SameLine();
+
+            // 스크립트 생성 버튼
+            if (ImGui::Button("Create Script", ImVec2(buttonWidth, 32)))
+            {
+                // 스크립트 이름 입력 팝업 열기
+                ImGui::OpenPopup("Create New Script");
+            }
+
+            // 스크립트 생성 모달
+            if (ImGui::BeginPopupModal("Create New Script", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+            {
+                ImGui::Text("Script Name:");
+                ImGui::InputText("##ScriptName", scriptNameBuffer, IM_ARRAYSIZE(scriptNameBuffer));
+
+                bool createSuccessful = false;
+                bool createFailed = false;
+
+                if (ImGui::Button("Create", ImVec2(120, 0)))
+                {
+                    if (strlen(scriptNameBuffer) > 0)
+                    {
+                        try {
+                            // 스크립트 생성 로직
+                            std::string sceneName = "TestScene";
+                            std::string actorName = "TestActor";
+                            std::string scriptName(scriptNameBuffer);
+                            std::string fileName = sceneName + "_" + actorName + "_" + scriptName + ".lua";
+
+                            // 파일 경로 생성 (std::filesystem 사용)
+                            std::filesystem::path outputDir = "Contents/LuaScript";
+
+                            // 디렉토리 없으면 생성
+                            if (!std::filesystem::exists(outputDir)) {
+                                std::filesystem::create_directories(outputDir);
+                            }
+
+                            std::filesystem::path outputFilePath = outputDir / fileName;
+                            std::filesystem::path templatePath = "Contents/LuaScript/template.lua";
+
+                            // 템플릿 파일 복사
+                            std::filesystem::copy(
+                                templatePath,
+                                outputFilePath,
+                                std::filesystem::copy_options::overwrite_existing
+                            );
+
+                            // 성공 처리
+                            std::cout << "Script created: " << outputFilePath.string() << std::endl;
+                            createSuccessful = true;
+                        }
+                        catch (const std::filesystem::filesystem_error& e) {
+                            // 오류 처리
+                            std::cerr << "Failed to create script: " << e.what() << std::endl;
+                            createFailed = true;
+                        }
+                    }
+                    else
+                    {
+                        // 이름 입력 안 했을 때
+                        ImGui::OpenPopup("Enter Script Name");
+                    }
+                }
+
+                ImGui::SameLine();
+                if (ImGui::Button("Cancel", ImVec2(120, 0)))
+                {
+                    ImGui::CloseCurrentPopup();
+                }
+
+                // 이름 미입력 팝업
+                if (ImGui::BeginPopupModal("Enter Script Name", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+                {
+                    ImGui::Text("Please enter a script name!");
+                    if (ImGui::Button("OK", ImVec2(120, 0)))
+                    {
+                        ImGui::CloseCurrentPopup();
+                    }
+                    ImGui::EndPopup();
+                }
+
+                // 스크립트 생성 성공 팝업
+                if (createSuccessful)
+                {
+                    ImGui::OpenPopup("Script Created");
+                }
+
+                if (ImGui::BeginPopupModal("Script Created", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+                {
+                    ImGui::Text("Script created successfully!");
+                    if (ImGui::Button("OK", ImVec2(120, 0)))
+                    {
+                        ImGui::CloseCurrentPopup();
+                        createSuccessful = false;
+                    }
+                    ImGui::EndPopup();
+                }
+
+                // 스크립트 생성 실패 팝업
+                if (createFailed)
+                {
+                    ImGui::OpenPopup("Script Creation Failed");
+                }
+
+                if (ImGui::BeginPopupModal("Script Creation Failed", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+                {
+                    ImGui::Text("Failed to create script!");
+                    if (ImGui::Button("OK", ImVec2(120, 0)))
+                    {
+                        ImGui::CloseCurrentPopup();
+                        createFailed = false;
+                    }
+                    ImGui::EndPopup();
+                }
+
+                ImGui::EndPopup();
+            }
+#pragma endregion
+
             ImGui::TreePop(); // 트리 닫기
         }
         ImGui::PopStyleColor();

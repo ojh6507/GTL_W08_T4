@@ -9,30 +9,16 @@
 #include "Engine/FLoaderOBJ.h"
 
 
-void FResourceMgr::Initialize(FRenderer* renderer, FGraphicsDevice* device)
+void FResourceMgr::Initialize(FRenderer* renderer, FGraphicsDevice* InDevice)
 {
-    //RegisterMesh(renderer, "Quad", quadVertices, sizeof(quadVertices) / sizeof(FVertexSimple), quadIndices, sizeof(quadIndices)/sizeof(uint32));
-
-    //FManagerOBJ::LoadObjStaticMeshAsset("Assets/AxisArrowX.obj");
-    //FManagerOBJ::LoadObjStaticMeshAsset("Assets/AxisArrowY.obj");
-    //FManagerOBJ::LoadObjStaticMeshAsset("Assets/AxisArrowZ.obj");
-    //FManagerOBJ::LoadObjStaticMeshAsset("Assets/AxisScaleArrowX.obj");
-    //FManagerOBJ::LoadObjStaticMeshAsset("Assets/AxisScaleArrowY.obj");
-    //FManagerOBJ::LoadObjStaticMeshAsset("Assets/AxisScaleArrowZ.obj");
-    //FManagerOBJ::LoadObjStaticMeshAsset("Assets//AxisCircleX.obj");
-    //FManagerOBJ::LoadObjStaticMeshAsset("Assets//AxisCircleY.obj");
-    //FManagerOBJ::LoadObjStaticMeshAsset("Assets//AxisCircleZ.obj");
-    // FManagerOBJ::LoadObjStaticMeshAsset("Assets/helloBlender.obj");
-
-    LoadTextureFromFile(device->Device, device->DeviceContext, L"Assets/Texture/ocean_sky.jpg");
+    device = InDevice;
     LoadTextureFromFile(device->Device, device->DeviceContext, L"Assets/Texture/font.png");
     LoadTextureFromDDS(device->Device, device->DeviceContext, L"Assets/Texture/font.dds");
-    LoadTextureFromFile(device->Device, device->DeviceContext, L"Assets/Texture/emart.png");
     LoadTextureFromFile(device->Device, device->DeviceContext, L"Assets/Texture/T_Explosion_SubUV.png");
     LoadTextureFromFile(device->Device, device->DeviceContext, L"Assets/Texture/UUID_Font.png");
     LoadTextureFromDDS(device->Device, device->DeviceContext, L"Assets/Texture/UUID_Font.dds");
     LoadTextureFromFile(device->Device, device->DeviceContext, L"Assets/Texture/Wooden Crate_Crate_BaseColor.png");
-    LoadTextureFromFile(device->Device, device->DeviceContext, L"Assets/Texture/spotLight.png");
+
     LoadTextureFromFile(device->Device, device->DeviceContext, L"Assets/Editor/Icon/SpotLight_64x.png");
     LoadTextureFromFile(device->Device, device->DeviceContext, L"Assets/Editor/Icon/PointLight_64x.png");
     LoadTextureFromFile(device->Device, device->DeviceContext, L"Assets/Editor/Icon/DirectionalLight_64x.png");
@@ -70,10 +56,20 @@ struct TupleHash {
     }
 };
 
-std::shared_ptr<FTexture> FResourceMgr::GetTexture(const FWString& name) const
+std::shared_ptr<FTexture> FResourceMgr::GetTexture(const FWString& name)
 {
-    auto* TempValue = textureMap.Find(name);
-    return TempValue ? *TempValue : nullptr;
+    if (textureMap.Contains(name))
+    {
+        return textureMap[name];
+    }
+    
+    HRESULT hr = LoadTextureFromFile(device->Device, device->DeviceContext, name.c_str());
+
+    if (SUCCEEDED(hr))
+    {
+        return textureMap[name];
+    }
+    return nullptr;
 }
 
 HRESULT FResourceMgr::LoadTextureFromFile(ID3D11Device* device, ID3D11DeviceContext* context, const wchar_t* filename)

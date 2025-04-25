@@ -29,6 +29,7 @@
 #include "Actors/DirectionalLightActor.h"
 #include "Actors/SpotLightActor.h"
 #include "Actors/AmbientLightActor.h"
+#include "../../../../../UScriptComponent.h"
 
 void ControlEditorPanel::Render()
 {
