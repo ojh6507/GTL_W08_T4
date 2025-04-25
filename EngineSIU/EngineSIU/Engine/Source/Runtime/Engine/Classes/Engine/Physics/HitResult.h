@@ -5,7 +5,7 @@
 class UPrimitiveComponent;
 class AActor;
 
-class FHitResult
+struct FHitResult
 {
     /**
      * Time

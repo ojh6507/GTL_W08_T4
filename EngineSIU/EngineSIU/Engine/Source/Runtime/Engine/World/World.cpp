@@ -10,6 +10,7 @@
 #include "Actors/HeightFogActor.h"
 #include "Engine/EditorEngine.h"
 #include "Engine/Engine.h"
+#include "Engine/Physics/PhysicsSystem.h"
 #include "UnrealEd/SceneManager.h"
 
 class UEditorEngine;
