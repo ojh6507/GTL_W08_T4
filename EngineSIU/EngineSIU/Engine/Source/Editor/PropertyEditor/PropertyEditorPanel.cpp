@@ -1,5 +1,7 @@
 #include "PropertyEditorPanel.h"
 
+#include <shellapi.h>
+
 #include "World/World.h"
 #include "Actors/Player.h"
 #include "Components/Light/LightComponent.h"
@@ -492,6 +494,79 @@ void PropertyEditorPanel::Render()
             }
             ImGui::PopStyleColor();
         }
+
+    if (PickedActor)
+    {
+        // @todo LuaScriptComponent가 있는 경우에만 추가하도록 수정
+        //if (ULuaScriptComponent* LuaScriptComponent = PickedActor->GetComponentByClass<ULuaScriptComponent>())
+        {
+            ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.1f, 0.1f, 0.1f, 1.0f));
+            if (ImGui::TreeNodeEx("Lua Script Component", ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_DefaultOpen)) // 트리 노드 생성
+            {
+                // @todo LuaScriptComponent의 GetFilePath()를 통해 LuaScriptPath를 가져오도록 수정
+                FString LuaScriptPath = "./Contents/Lua/MyLua.lua";//LuaScriptComponent->GetFilePath();
+
+                if (LuaScriptPath.IsEmpty() || std::filesystem::exists(std::filesystem::path(LuaScriptPath.ToWideString()))) // @todo Scene_Name_Actor_Name.lua가 있는지 확인
+                {
+                    if (ImGui::Button("Edit Script"))
+                    {
+                        // Open Editor
+                        ShellExecuteOpen(std::filesystem::absolute(std::filesystem::path(LuaScriptPath.ToWideString())));
+                    }
+                }
+                else
+                {
+                    if (ImGui::Button("Create Script"))
+                    {
+                        // Create Script and Open Editor
+                        std::filesystem::path TemplatePath = std::filesystem::path("./Contents/LuaTemplates/template.lua");
+                        if (std::filesystem::exists(TemplatePath))
+                        {
+                            std::filesystem::path DestDir = std::filesystem::path("./Contents/Lua/");
+                            if (!std::filesystem::exists(DestDir))
+                            {
+                                std::filesystem::create_directories(DestDir);
+                                UE_LOG(ELogLevel::Display, "Create Folder: %s", DestDir);
+                            }
+                            // @todo 적절한 이름으로 변경
+                            DestDir += "Scene_Name_Actor_Name.lua";
+                            //DestDir += FString::Printf("%s_%s.lua", GEngine->ActiveWorld->GetActiveLevel()->GetName(), PickedActor->GetActorLabel()).ToWideString();
+                            std::filesystem::copy_file(TemplatePath, DestDir);
+                            // @todo LuaScriptComponent의 FilePath를 설정하도록 수정
+                            ShellExecuteOpen(std::filesystem::absolute(std::filesystem::path(DestDir)));
+                        }
+                    }
+                }
+
+                const TMap<FName, FAssetInfo> Assets = UAssetManager::Get().GetAssetRegistry();
+
+                // @todo LuaScriptPath 대신 PreviewName을 표기하도록 수정
+                //FString PreviewName = StaticMeshComp->GetStaticMesh()->GetRenderData()->DisplayName;
+                if (ImGui::BeginCombo("##LuaScript", GetData(LuaScriptPath), ImGuiComboFlags_None))
+                {
+                    for (const auto& Asset : Assets)
+                    {
+                        if (Asset.Value.AssetType == EAssetType::LuaScript)
+                        {
+                            if (ImGui::Selectable(GetData(Asset.Value.AssetName.ToString()), false))
+                            {
+                                FString LuaScriptName = Asset.Value.PackagePath.ToString() + "/" + Asset.Value.AssetName.ToString();
+                                // @todo LuaScriptComponent의 FilePath를 변경하도록 수정
+                                //LuaScriptComponent->SetLuaScript(LuaScriptName);
+                            }
+                        }
+                    }
+                    ImGui::EndCombo();
+                }
+                ImGui::SameLine();
+                ImGui::Text("Script File");
+
+                ImGui::TreePop();
+            }
+            ImGui::PopStyleColor();
+        }
+    }
+
     ImGui::End();
 }
 
@@ -570,13 +645,16 @@ void PropertyEditorPanel::RenderForStaticMesh(UStaticMeshComponent* StaticMeshCo
         {
             for (const auto& Asset : Assets)
             {
-                if (ImGui::Selectable(GetData(Asset.Value.AssetName.ToString()), false))
+                if (Asset.Value.AssetType == EAssetType::StaticMesh)
                 {
-                    FString MeshName = Asset.Value.PackagePath.ToString() + "/" + Asset.Value.AssetName.ToString();
-                    UStaticMesh* StaticMesh = FManagerOBJ::GetStaticMesh(MeshName.ToWideString());
-                    if (StaticMesh)
+                    if (ImGui::Selectable(GetData(Asset.Value.AssetName.ToString()), false))
                     {
-                        StaticMeshComp->SetStaticMesh(StaticMesh);
+                        FString MeshName = Asset.Value.PackagePath.ToString() + "/" + Asset.Value.AssetName.ToString();
+                        UStaticMesh* StaticMesh = FManagerOBJ::GetStaticMesh(MeshName.ToWideString());
+                        if (StaticMesh)
+                        {
+                            StaticMeshComp->SetStaticMesh(StaticMesh);
+                        }
                     }
                 }
             }
@@ -899,6 +977,34 @@ void PropertyEditorPanel::RenderCreateMaterialView()
     }
 
     ImGui::End();
+}
+
+void PropertyEditorPanel::ShellExecuteOpen(const std::filesystem::path& FilePath)
+{
+    if (!std::filesystem::exists(FilePath))
+    {
+        MessageBox(nullptr, (L"존재하지 않는 파일."), (L"오류"), MB_OK | MB_ICONWARNING);
+        return;
+    }
+
+    // ShellExecute는 TCHAR* 를 인자로 받으므로, 프로젝트 설정에 따라 변환 필요
+    LPCTSTR lpPath = FilePath.c_str();
+
+    HINSTANCE hInst = ShellExecute(
+        nullptr,        // 부모 윈도우 핸들
+        L"open",        // 동작(verb.): ".lua" 확장자에 연결된 기본 프로그램으로 열기
+        lpPath,         // 열고자 하는 파일의 전체 경로
+        nullptr,        // 추가 실행 인자 (보통 필요 없음)
+        nullptr,        // 작업 디렉토리 (보통 NULL)
+        SW_SHOWNORMAL   // 창 표시 방법
+    );
+
+    // ShellExecute 반환 값 확인 (32 이하면 오류)
+    if (reinterpret_cast<INT_PTR>(hInst) <= 32)
+    {
+        // 오류 코드에 따라 더 자세한 메시지 표시 가능 (FormatMessage 등 사용)
+        MessageBox(nullptr, (L"파일을 여는 데 실패했습니다. 파일 경로와 기본 연결 프로그램을 확인하세요."), (L"오류"), MB_OK | MB_ICONERROR);
+    }
 }
 
 void PropertyEditorPanel::OnResize(HWND hWnd)
