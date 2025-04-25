@@ -64,6 +64,43 @@ void PropertyEditorPanel::Render()
     if (PickedActor)
     {
         ImGui::SetItemDefaultFocus();
+
+        // @todo Outliner 및 Detail 패널 개편하기
+        // @todo AddComponent 레이아웃 개편
+        ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.1f, 0.1f, 0.1f, 1.0f));
+        {
+            ImGui::Text("Add");
+            ImGui::SameLine();
+
+            TArray<UClass*> CompClasses;
+            GetChildOfClass(UActorComponent::StaticClass(), CompClasses);
+
+            if (ImGui::BeginCombo("##AddComponent", "Components", ImGuiComboFlags_None))
+            {
+                for (UClass* Class : CompClasses)
+                {
+                    if (ImGui::Selectable(GetData(Class->GetName()), false))
+                    {
+                        // TODO: 임시로 static uint32 NewCompIndex사용
+                        static uint32 NewCompIndex = 0;
+                        USceneComponent* NewComp = Cast<USceneComponent>(
+                            PickedActor->AddComponent(
+                                Class,
+                                FString::Printf(TEXT("%s_%d"), *Class->GetName(), NewCompIndex++)
+                            )
+                        );
+                        if (NewComp)
+                        {
+                            NewComp->SetupAttachment(PickedActor->GetRootComponent());
+                        }
+                        // 추후 Engine으로부터 SelectedComponent 받아서 선택된 Comp 아래로 붙일 수있으면 붙이기.
+                    }
+                }
+                ImGui::EndCombo();
+            }
+        }
+        ImGui::PopStyleColor();
+
         // TreeNode 배경색을 변경 (기본 상태)
         ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.1f, 0.1f, 0.1f, 1.0f));
         if (ImGui::TreeNodeEx("Transform", ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_DefaultOpen)) // 트리 노드 생성
@@ -783,43 +820,6 @@ void PropertyEditorPanel::RenderForStaticMesh(UStaticMeshComponent* StaticMeshCo
                             StaticMeshComp->SetStaticMesh(StaticMesh);
                         }
                     }
-                }
-            }
-            ImGui::EndCombo();
-        }
-
-        ImGui::TreePop();
-    }
-    ImGui::PopStyleColor();
-
-    ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.1f, 0.1f, 0.1f, 1.0f));
-    if (ImGui::TreeNodeEx("Component", ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_DefaultOpen)) // 트리 노드 생성
-    {
-        ImGui::Text("Add");
-        ImGui::SameLine();
-
-        TArray<UClass*> CompClasses;
-        GetChildOfClass(UActorComponent::StaticClass(), CompClasses);
-
-        if (ImGui::BeginCombo("##AddComponent", "Components", ImGuiComboFlags_None))
-        {
-            for (UClass* Class : CompClasses)
-            {
-                if (ImGui::Selectable(GetData(Class->GetName()), false))
-                {
-                    // TODO: 임시로 static uint32 NewCompIndex사용
-                    static uint32 NewCompIndex = 0;
-                    USceneComponent* NewComp = Cast<USceneComponent>(
-                        StaticMeshComp->GetOwner()->AddComponent(
-                            Class,
-                            FString::Printf(TEXT("%s_%d"), *Class->GetName(), NewCompIndex++)
-                        )
-                    );
-                    if (NewComp)
-                    {
-                        NewComp->SetupAttachment(StaticMeshComp);
-                    }
-                    // 추후 Engine으로부터 SelectedComponent 받아서 선택된 Comp 아래로 붙일 수있으면 붙이기.
                 }
             }
             ImGui::EndCombo();
