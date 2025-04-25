@@ -25,6 +25,10 @@ public:
     bool LoadScript(const std::string& scriptPath);
     void OnOverlap(AActor* OtherActor);
 
+    void SetScriptPath(const std::string& path) { scriptPath = path; }
+    // 스크립트 경로 반환
+    const std::string& GetScriptPath() const { return scriptPath; }
+
     // 스크립트에서 호출할 함수 등록
     void RegisterLuaFunctions();
 

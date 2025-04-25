@@ -2,11 +2,12 @@
 function BeginPlay()
     Log("BeginPlay 호출됨! Actor 초기화")
 end
-
+  local x = 0
 function Tick(dt)
     -- 간단한 움직임 예제
-     local x = 0
+    
     x = x + dt
+     x = x + dt
     SetActorLocation(obj, x, 0, 0)
 end
 

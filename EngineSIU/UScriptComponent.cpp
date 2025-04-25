@@ -100,7 +100,7 @@ void UScriptComponent::RegisterLuaFunctions()
 
         if (actor)
         {
-            actor->SetActorLocation(FVector(10, y, z));
+            actor->SetActorLocation(FVector(x, y, z));
         }
         return 0;
         });
