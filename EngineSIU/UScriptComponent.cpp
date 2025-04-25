@@ -54,16 +54,41 @@ bool UScriptComponent::LoadScript(const std::string& inScriptPath)
 {
     scriptPath = inScriptPath;
 
-    // LuaManager를 통해 스크립트 로드
     try {
-        // 스크립트 로드
+        // LuaManager를 통해 스크립트 로드
         sol::state& lua = GLuaManager.GetState();
 
         // 액터 참조를 Lua 글로벌 변수로 설정
         lua["obj"] = GetOwner();
 
-        // 스크립트 파일 실행
-        lua.script_file(scriptPath);
+        // 스크립트 파일 로드 및 컴파일
+        sol::protected_function_result result = lua.script_file(scriptPath,
+            [this](lua_State* L, sol::protected_function_result pfr) {
+                // 상세한 오류 로깅
+                if (!pfr.valid()) {
+                    sol::error err = pfr;
+                    std::cerr << "Lua Script Compile Error in " << scriptPath << ": "
+                        << err.what() << std::endl;
+
+                    // 추가 디버깅 정보
+                    int top = lua_gettop(L);
+                    if (top > 0) {
+                        const char* errorMsg = lua_tostring(L, top);
+                        if (errorMsg) {
+                            std::cerr << "Detailed Error: " << errorMsg << std::endl;
+                            lua_pop(L, 1);  // 오류 메시지 스택에서 제거
+                        }
+                    }
+                }
+                return pfr;
+            }
+        );
+
+        // 스크립트 로드 결과 명시적 확인
+        if (!result.valid()) {
+            std::cerr << "Failed to load script: " << scriptPath << std::endl;
+            return false;
+        }
 
         // 스크립트에서 사용할 함수 등록
         RegisterLuaFunctions(lua);
@@ -72,8 +97,22 @@ bool UScriptComponent::LoadScript(const std::string& inScriptPath)
         return true;
     }
     catch (const sol::error& e) {
+        // 일반적인 Sol2 예외 처리
         std::cerr << "스크립트 로드 실패: " << scriptPath
             << "\n오류: " << e.what() << std::endl;
+        isScriptLoaded = false;
+        return false;
+    }
+    catch (const std::exception& e) {
+        // 표준 예외 처리
+        std::cerr << "알 수 없는 오류 발생: " << e.what() << std::endl;
+        isScriptLoaded = false;
+        return false;
+    }
+    catch (...) {
+        // 모든 다른 예외 처리
+        std::cerr << "알 수 없는 치명적인 오류 발생" << std::endl;
+        isScriptLoaded = false;
         return false;
     }
 }
@@ -131,13 +170,27 @@ void UScriptComponent::CallScriptFunction(const char* functionName)
         sol::state& lua = GLuaManager.GetState();
         sol::function func = lua[functionName];
 
-        if (func.valid()) {
-            func();
+        if (!func.valid()) {
+            // 함수가 존재하지 않을 경우
+            std::cerr << "Lua 함수를 찾을 수 없음: " << functionName << std::endl;
+            return;
+        }
+
+        // 함수 호출 시 오류 처리
+        auto result = func.call();
+        if (!result.valid()) {
+            sol::error err = result;
+            std::cerr << "Lua 함수 호출 오류 (" << functionName << "): "
+                << err.what() << std::endl;
+
+            // 필요하다면 스크립트 비활성화
+            isScriptLoaded = false;
         }
     }
     catch (const sol::error& e) {
-        std::cerr << "Lua 함수 호출 오류 (" << functionName << "): "
+        std::cerr << "Lua 함수 호출 예외 (" << functionName << "): "
             << e.what() << std::endl;
+        isScriptLoaded = false;
     }
 }
 
@@ -147,13 +200,27 @@ void UScriptComponent::CallScriptFunction(const char* functionName, float value)
         sol::state& lua = GLuaManager.GetState();
         sol::function func = lua[functionName];
 
-        if (func.valid()) {
-            func(value);
+        if (!func.valid()) {
+            // 함수가 존재하지 않을 경우
+            std::cerr << "Lua 함수를 찾을 수 없음: " << functionName << std::endl;
+            return;
+        }
+
+        // 함수 호출 시 오류 처리
+        auto result = func.call(value);
+        if (!result.valid()) {
+            sol::error err = result;
+            std::cerr << "Lua 함수 호출 오류 (" << functionName << "): "
+                << err.what() << std::endl;
+
+            // 필요하다면 스크립트 비활성화
+            isScriptLoaded = false;
         }
     }
     catch (const sol::error& e) {
-        std::cerr << "Lua 함수 호출 오류 (" << functionName << "): "
+        std::cerr << "Lua 함수 호출 예외 (" << functionName << "): "
             << e.what() << std::endl;
+        isScriptLoaded = false;
     }
 }
 
@@ -163,12 +230,26 @@ void UScriptComponent::CallScriptFunction(const char* functionName, AActor* acto
         sol::state& lua = GLuaManager.GetState();
         sol::function func = lua[functionName];
 
-        if (func.valid()) {
-            func(actor);
+        if (!func.valid()) {
+            // 함수가 존재하지 않을 경우
+            std::cerr << "Lua 함수를 찾을 수 없음: " << functionName << std::endl;
+            return;
+        }
+
+        // 함수 호출 시 오류 처리
+        auto result = func.call(actor);
+        if (!result.valid()) {
+            sol::error err = result;
+            std::cerr << "Lua 함수 호출 오류 (" << functionName << "): "
+                << err.what() << std::endl;
+
+            // 필요하다면 스크립트 비활성화
+            isScriptLoaded = false;
         }
     }
     catch (const sol::error& e) {
-        std::cerr << "Lua 함수 호출 오류 (" << functionName << "): "
+        std::cerr << "Lua 함수 호출 예외 (" << functionName << "): "
             << e.what() << std::endl;
+        isScriptLoaded = false;
     }
 }

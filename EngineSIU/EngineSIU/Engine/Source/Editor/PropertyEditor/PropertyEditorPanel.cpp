@@ -156,12 +156,17 @@ void PropertyEditorPanel::Render()
                 bool createSuccessful = false;
                 bool createFailed = false;
 
+                std::filesystem::path outputFilePath;
+         
                 if (ImGui::Button("Create", ImVec2(120, 0)))
                 {
+                  
                     if (strlen(scriptNameBuffer) > 0)
                     {
+                       
                         try {
                             // 스크립트 생성 로직
+                            
                             std::string sceneName = "TestScene";
                             std::string actorName = "TestActor";
                             std::string scriptName(scriptNameBuffer);
@@ -175,7 +180,7 @@ void PropertyEditorPanel::Render()
                                 std::filesystem::create_directories(outputDir);
                             }
 
-                            std::filesystem::path outputFilePath = outputDir / fileName;
+                            outputFilePath = outputDir / fileName;
                             std::filesystem::path templatePath = "Contents/LuaScript/template.lua";
 
                             // 템플릿 파일 복사
@@ -223,6 +228,13 @@ void PropertyEditorPanel::Render()
                 if (createSuccessful)
                 {
                     ImGui::OpenPopup("Script Created");
+                    UScriptComponent* ScriptComp = PickedActor->AddComponent<UScriptComponent>(TEXT("UScriptComponent"));
+
+                    // 생성된 스크립트 경로 설정
+                    if (ScriptComp)
+                    {
+                        ScriptComp->SetScriptPath(outputFilePath.string().c_str());
+                    }
                 }
 
                 if (ImGui::BeginPopupModal("Script Created", NULL, ImGuiWindowFlags_AlwaysAutoResize))
