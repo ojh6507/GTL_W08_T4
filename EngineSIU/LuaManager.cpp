@@ -2,7 +2,7 @@
 #include <iostream>
 
 // 전역 인스턴스
-LuaManager gLuaManager;
+LuaManager GLuaManager;
 
 LuaManager::LuaManager() : L(nullptr), initialized(false) {}
 

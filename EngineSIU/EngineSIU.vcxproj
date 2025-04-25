@@ -304,6 +304,7 @@ xcopy /y /d "$(SolutionDir)$(ProjectName)\Engine\Source\ThirdParty\Lua\$(Configu
     <ClCompile Include="EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs\include\tinyfiledialogs.cpp" />
     <ClCompile Include="EngineSIU\LightGridGenerator.cpp" />
     <ClCompile Include="LuaManager.cpp" />
+    <ClCompile Include="UScriptComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompileData.h" />
@@ -491,6 +492,7 @@ xcopy /y /d "$(SolutionDir)$(ProjectName)\Engine\Source\ThirdParty\Lua\$(Configu
     <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs\include\tinyfiledialogs.h" />
     <ClInclude Include="EngineSIU\LightGridGenerator.h" />
     <ClInclude Include="LuaManager.h" />
+    <ClInclude Include="UScriptComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineSIU\Font\IconDefs.h" />
@@ -608,6 +610,7 @@ xcopy /y /d "$(SolutionDir)$(ProjectName)\Engine\Source\ThirdParty\Lua\$(Configu
   </ItemGroup>
   <ItemGroup>
     <None Include="DefaultPropertySheet.props" />
+    <None Include="EngineSIU\test.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

@@ -29,4 +29,4 @@ public:
 };
 
 // 전역 LuaManager 인스턴스
-extern LuaManager gLuaManager;
+extern LuaManager GLuaManager;
