@@ -8,6 +8,7 @@
 #include <sstream>
 
 #include <filesystem> 
+
 bool FLoaderOBJ::ParseOBJ(const FString& ObjFilePath, FObjInfo& OutObjInfo)
 {
     std::ifstream OBJ(ObjFilePath.ToWideString());
@@ -519,45 +520,73 @@ OBJ::FStaticMeshRenderData* FManagerOBJ::LoadObjStaticMeshAsset(const FString& P
         return *It;
     }
     FWString BinaryPath = GetBinaryPath(PathFileName.ToWideString());
-  
-    std::error_code ec;
 
-    bool bShouldParseObj = true; // Assume we need to parse unless proven otherwise
+
+    std::error_code ec;
+    bool bShouldParseObj = true;
     bool bBinaryExists = std::filesystem::exists(BinaryPath, ec);
+
     std::filesystem::file_time_type objTimestamp;
+    std::filesystem::file_time_type mtlTimestamp{};
     std::filesystem::file_time_type binTimestamp;
 
 
+
+    FString mtlFilename = ScanObjForMtllib(PathFileName.ToWideString());
+    
+    std::filesystem::path absoluteObjPath(PathFileName.ToWideString());
+
+    std::filesystem::path absoluteObjPathFs = std::filesystem::absolute(PathFileName.ToWideString(), ec);
+    std::filesystem::path objDirectoryFs = absoluteObjPathFs.parent_path();
+    std::filesystem::path mtlRelativePathFs(mtlFilename.ToWideString());
+
+    std::filesystem::path absoluteMtlPathFs= objDirectoryFs / mtlRelativePathFs;
+    absoluteMtlPathFs = absoluteMtlPathFs.lexically_normal();
+    absoluteMtlPathFs.make_preferred();
+   
+    bool bMtlFileActuallyExists = std::filesystem::exists(absoluteMtlPathFs, ec);
+    if(bMtlFileActuallyExists && !ec)
+    {
+        mtlTimestamp = std::filesystem::last_write_time(absoluteMtlPathFs.wstring(), ec);
+        if (ec) {
+            std::wcerr << L"[Error] last_write_time() 실패: " << ec.message().c_str() << L"\n";
+            ec.clear();
+        }
+    }
     objTimestamp = std::filesystem::last_write_time(PathFileName.ToWideString(), ec);
-    if (ec) 
+
+    if (ec)
     {
         bShouldParseObj = true;
         bBinaryExists = false;
         ec.clear();
     }
+    auto newestSource = std::max(objTimestamp, mtlTimestamp);
     if (bBinaryExists)
     {
         binTimestamp = std::filesystem::last_write_time(BinaryPath, ec);
-        if (ec) 
+        if (ec)
         {
             bShouldParseObj = true;
             ec.clear(); // Clear error code
         }
-        else if (binTimestamp >= objTimestamp) 
-        { 
+
+        else if (binTimestamp >= newestSource)
+        {
             OBJ::FStaticMeshRenderData* LoadedMesh = new OBJ::FStaticMeshRenderData();
-            if (LoadStaticMeshFromBinary(BinaryPath, *LoadedMesh)) {
+            if (LoadStaticMeshFromBinary(BinaryPath, *LoadedMesh)) 
+            {
                 ObjStaticMeshMap[PathFileName] = LoadedMesh;
-                bShouldParseObj = false; 
+                bShouldParseObj = false;
                 return LoadedMesh;
             }
-            else 
+            else
             {
                 delete LoadedMesh; // Clean up allocated memory
                 bShouldParseObj = true; // Force parsing
             }
         }
-        else 
+        else
         {
             bShouldParseObj = true; // Force parsing
         }
@@ -630,24 +659,22 @@ bool FManagerOBJ::SaveStaticMeshToBinary(const FWString& FilePath, const OBJ::FS
 
     std::filesystem::path directoryPath = binaryFilePath.parent_path();
 
-    if (!directoryPath.empty()) 
+    if (!directoryPath.empty())
     {
-        std::error_code ec; 
-        if (!std::filesystem::exists(directoryPath, ec)) 
+        std::error_code ec;
+        if (!std::filesystem::exists(directoryPath, ec))
         {
-            if (!std::filesystem::create_directories(directoryPath, ec)) 
+            if (!std::filesystem::create_directories(directoryPath, ec))
             {
-                std::wcerr << L"Error: Failed to create directory: " << directoryPath.wstring() << L" - " << ec.message().c_str() << std::endl;
                 return false;
             }
         }
-        else if (ec) 
+        else if (ec)
         {
-            std::wcerr << L"Error: Failed to check existence of directory: " << directoryPath.wstring() << L" - " << ec.message().c_str() << std::endl;
             return false;
         }
     }
-   
+
     std::ofstream File(FilePath, std::ios::binary);
     if (!File.is_open())
     {
@@ -877,6 +904,42 @@ UStaticMesh* FManagerOBJ::GetStaticMesh(const FWString& name)
     return StaticMeshMap[name];
 }
 
+FString FManagerOBJ::ScanObjForMtllib(const FWString& absoluteObjPathW)
+{
+    std::ifstream objFile(absoluteObjPathW);
+    if (!objFile)
+    {
+        return "";
+    }
+
+    std::string line;
+    std::string mtllibFilename;
+    while (std::getline(objFile, line))
+    {
+        if (line.empty() || line[0] == '#') 
+            continue;
+
+        std::istringstream lineStream(line);
+        std::string token;
+        lineStream >> token;
+
+        if (token == "mtllib")
+        {
+            if (lineStream >> mtllibFilename)
+            {
+                break;
+            }
+            else
+            {
+                mtllibFilename = "";
+            }
+        }
+    }
+    objFile.close();
+    return mtllibFilename; // Return std::string
+}
+
+
 FWString FManagerOBJ::GetBinaryPath(const FWString& ObjFilePathW)
 {
     std::filesystem::path objPath(ObjFilePathW);
@@ -887,7 +950,7 @@ FWString FManagerOBJ::GetBinaryPath(const FWString& ObjFilePathW)
         absoluteObjPath = objPath; // Fallback
     }
     objPath = absoluteObjPath;
-    
+
     if (!objPath.has_filename()) {
         return L"";
     }
@@ -917,9 +980,8 @@ FWString FManagerOBJ::GetBinaryPath(const FWString& ObjFilePathW)
         return L""; // Asset root marker not found
     }
 
-    // 3. Construct the Base Binary Path (e.g., "C:/Path/To/Contents/Binary")
     std::filesystem::path baseBinaryPath = assetRoot / L"Binary";
-   
+
     // 4. Get the OBJ file path relative to the asset root directory
     std::error_code ec_rel;
     // Use the absolute objPath here for reliable relative calculation
@@ -930,10 +992,10 @@ FWString FManagerOBJ::GetBinaryPath(const FWString& ObjFilePathW)
     if (relativeObjPath.empty()) {
         return L"";
     }
-    
+
     std::filesystem::path finalBinaryPath = baseBinaryPath / relativeObjPath;
-    
+
     finalBinaryPath += L".bin"; // Appends .bin, resulting in .obj.bin
-    
+
     return finalBinaryPath.wstring();
 }

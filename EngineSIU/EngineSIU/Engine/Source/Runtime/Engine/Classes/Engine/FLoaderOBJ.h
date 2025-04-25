@@ -55,6 +55,8 @@ public:
 
     static int GetStaticMeshNum() { return StaticMeshMap.Num(); }
 private:
+    static FString ScanObjForMtllib(const FWString& absoluteObjPathW);
+
     static FWString GetBinaryPath(const FWString& ObjFilePathW);
 private:
     inline static TMap<FString, OBJ::FStaticMeshRenderData*> ObjStaticMeshMap;
