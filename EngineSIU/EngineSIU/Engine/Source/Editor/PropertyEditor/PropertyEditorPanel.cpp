@@ -112,11 +112,14 @@ void PropertyEditorPanel::Render()
             int pointNum = 0;
             for (const auto iter : TObjectRange<UPointLightComponent>())
             {
-                if (iter != pointlightObj) {
-                    pointNum++;
-                }
-                else {
-                    break;
+                if (!Cast<UPointLightComponent>(iter) && iter->GetWorld() == GEngine->ActiveWorld)
+                {
+                    if (iter != pointlightObj) {
+                        pointNum++;
+                    }
+                    else {
+                        break;
+                    }
                 }
             }
 
@@ -172,11 +175,14 @@ void PropertyEditorPanel::Render()
             int spotNum = 0;
             for (const auto iter : TObjectRange<USpotLightComponent>())
             {
-                if (iter != SpotLightComp) {
-                    spotNum++;
-                }
-                else {
-                    break;
+                if (!Cast<USpotLightComponent>(iter) && iter->GetWorld() == GEngine->ActiveWorld)
+                {
+                    if (iter != SpotLightComp) {
+                        spotNum++;
+                    }
+                    else {
+                        break;
+                    }
                 }
             }
 
@@ -254,11 +260,14 @@ void PropertyEditorPanel::Render()
             int directionalNum = 0;
             for (const auto iter : TObjectRange<UDirectionalLightComponent>())
             {
-                if (iter != dirlightObj) {
-                    directionalNum++;
-                }
-                else {
-                    break;
+                if (!Cast<UDirectionalLightComponent>(iter) && iter->GetWorld() == GEngine->ActiveWorld)
+                {
+                    if (iter != dirlightObj) {
+                        directionalNum++;
+                    }
+                    else {
+                        break;
+                    }
                 }
             }
 
