@@ -5,9 +5,9 @@ end
 
 function Tick(dt)
     -- 간단한 움직임 예제
-    local pos = Vector3.new(0, 0, 0)
-    pos.x = pos.x + dt
-    SetActorLocation(obj, pos.x, pos.y, pos.z)
+     local x = 0
+    x = x + dt
+    SetActorLocation(obj, x, 0, 0)
 end
 
 function OnOverlap(other)

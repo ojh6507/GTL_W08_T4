@@ -309,7 +309,7 @@ void ControlEditorPanel::CreateModifyButton(ImVec2 ButtonSize, ImFont* IconFont)
                     UScriptComponent* scriptComp = SpawnedActor->AddComponent<UScriptComponent>("ScriptComponent");
                     if (scriptComp)
                     {
-                        bool success = scriptComp->LoadScript("Scripts/test.lua");
+                        bool success = scriptComp->LoadScript("test.lua");
                         std::cout << "스크립트 로드 " << (success ? "성공" : "실패") << std::endl;
                     }
 

@@ -3,6 +3,7 @@
 UScriptComponent::UScriptComponent()
     : isScriptLoaded(false)
 {
+   
 }
 
 UScriptComponent::~UScriptComponent()
@@ -38,6 +39,15 @@ void UScriptComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
     }
 
     Super::EndPlay(EndPlayReason);
+}
+
+UObject* UScriptComponent::Duplicate(UObject* InOuter)
+{
+    ThisClass* NewComponent = Cast<ThisClass>(Super::Duplicate(InOuter));
+
+    NewComponent->scriptPath = scriptPath;
+    NewComponent->isScriptLoaded = isScriptLoaded;
+    return NewComponent;
 }
 
 bool UScriptComponent::LoadScript(const std::string& inScriptPath)
@@ -86,9 +96,11 @@ void UScriptComponent::RegisterLuaFunctions()
         float y = (float)luaL_checknumber(L, 3);
         float z = (float)luaL_checknumber(L, 4);
 
+        std::cout << actor->GetUUID() << std::endl;
+
         if (actor)
         {
-            actor->SetActorLocation(FVector(x, y, z));
+            actor->SetActorLocation(FVector(10, y, z));
         }
         return 0;
         });

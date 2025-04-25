@@ -19,6 +19,7 @@ public:
     virtual void BeginPlay() override;
     virtual void TickComponent(float DeltaTime) override;  // 'Tick'이 아닌 'TickComponent'로 수정
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+    virtual UObject* Duplicate(UObject* InOuter) override;
 
     // 스크립트 관련 함수
     bool LoadScript(const std::string& scriptPath);
