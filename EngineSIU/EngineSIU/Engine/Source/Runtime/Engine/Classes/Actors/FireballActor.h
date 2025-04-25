@@ -3,7 +3,7 @@
 
 class UProjectileMovementComponent;
 class UPointLightComponent;
-class USphereComp;
+class UStaticMeshComponent;
 
 class AFireballActor : public AActor
 {
@@ -22,5 +22,5 @@ protected:
     (UPointLightComponent*, PointLightComponent, = nullptr);
 
     UPROPERTY
-    (USphereComp*, SphereComp, = nullptr);
+    (UStaticMeshComponent*, SphereComp, = nullptr);
 };

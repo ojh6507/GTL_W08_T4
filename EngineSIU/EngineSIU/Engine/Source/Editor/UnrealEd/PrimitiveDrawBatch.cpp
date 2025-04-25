@@ -223,6 +223,64 @@ void UPrimitiveDrawBatch::ReleaseOBBBuffers()
     }
 }
 
+void UPrimitiveDrawBatch::AddAABBToBatch(const FBoxSphereBounds& LocalAABB, const FVector& Center, const FMatrix& ModelMatrix)
+{
+    FBox localAABB = LocalAABB.GetBox();
+
+    FVector LocalVertices[8] = {
+        { localAABB.Min.X, localAABB.Min.Y, localAABB.Min.Z },
+        { localAABB.Max.X, localAABB.Min.Y, localAABB.Min.Z },
+        { localAABB.Min.X, localAABB.Max.Y, localAABB.Min.Z },
+        { localAABB.Max.X, localAABB.Max.Y, localAABB.Min.Z },
+        { localAABB.Min.X, localAABB.Min.Y, localAABB.Max.Z },
+        { localAABB.Max.X, localAABB.Min.Y, localAABB.Max.Z },
+        { localAABB.Min.X, localAABB.Max.Y, localAABB.Max.Z },
+        { localAABB.Max.X, localAABB.Max.Y, localAABB.Max.Z }
+    };
+
+    FVector WorldVertices[8];
+    WorldVertices[0] = Center + FMatrix::TransformVector(LocalVertices[0], ModelMatrix);
+
+    FVector Min = WorldVertices[0], Max = WorldVertices[0];
+
+    for (int i = 1; i < 8; ++i)
+    {
+        WorldVertices[i] = Center + FMatrix::TransformVector(LocalVertices[i], ModelMatrix);
+        Min.X = (WorldVertices[i].X < Min.X) ? WorldVertices[i].X : Min.X;
+        Min.Y = (WorldVertices[i].Y < Min.Y) ? WorldVertices[i].Y : Min.Y;
+        Min.Z = (WorldVertices[i].Z < Min.Z) ? WorldVertices[i].Z : Min.Z;
+        Max.X = (WorldVertices[i].X > Max.X) ? WorldVertices[i].X : Max.X;
+        Max.Y = (WorldVertices[i].Y > Max.Y) ? WorldVertices[i].Y : Max.Y;
+        Max.Z = (WorldVertices[i].Z > Max.Z) ? WorldVertices[i].Z : Max.Z;
+    }
+    FBox BoundingBox;
+    BoundingBox.Min = Min;
+    BoundingBox.Max = Max;
+    AABBs.Add(BoundingBox);
+}
+
+void UPrimitiveDrawBatch::AddOBBToBatch(const FBoxSphereBounds& LocalAABB, const FVector& Center, const FMatrix& ModelMatrix)
+{
+    FBox localAABB = LocalAABB.GetBox();
+    FVector LocalVertices[8] = {
+        { localAABB.Min.X, localAABB.Min.Y, localAABB.Min.Z },
+        { localAABB.Max.X, localAABB.Min.Y, localAABB.Min.Z },
+        { localAABB.Min.X, localAABB.Max.Y, localAABB.Min.Z },
+        { localAABB.Max.X, localAABB.Max.Y, localAABB.Min.Z },
+        { localAABB.Min.X, localAABB.Min.Y, localAABB.Max.Z },
+        { localAABB.Max.X, localAABB.Min.Y, localAABB.Max.Z },
+        { localAABB.Min.X, localAABB.Max.Y, localAABB.Max.Z },
+        { localAABB.Max.X, localAABB.Max.Y, localAABB.Max.Z }
+    };
+
+    // FBox OBB;
+    // for (int i = 0; i < 8; ++i)
+    // {
+    //     OBB.corners[i] = Center + FMatrix::TransformVector(LocalVertices[i], ModelMatrix);
+    // }
+    //OBBs.Add(OBB);
+}
+
 // 6. 프리미티브 렌더링 관련 함수
 void UPrimitiveDrawBatch::AddAABBToBatch(const FBoundingBox& LocalAABB, const FVector& Center, const FMatrix& ModelMatrix)
 {

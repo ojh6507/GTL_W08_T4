@@ -1,20 +1,18 @@
-#include "SphereComp.h"
+#include "SphereComponent.h"
 #include "Runtime/Core/Math/JungleMath.h"
 #include "UnrealEd/EditorViewportClient.h"
 
-USphereComp::USphereComp()
+USphereComponent::USphereComponent()
 {
     SetType(StaticClass()->GetName());
-    AABB.max = {1, 1, 1};
-    AABB.min = {-1, -1, -1};
 }
 
-void USphereComp::InitializeComponent()
+void USphereComponent::InitializeComponent()
 {
     Super::InitializeComponent();
 }
 
-void USphereComp::TickComponent(float DeltaTime)
+void USphereComponent::TickComponent(float DeltaTime)
 {
     Super::TickComponent(DeltaTime);
 }
