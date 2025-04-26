@@ -284,12 +284,20 @@ void PropertyEditorPanel::Render()
         UAssetManager::Get().InitAssetManager();
         const TMap<FName, FAssetInfo> Assets = UAssetManager::Get().GetAssetRegistry();
     
-        FString PreviewName = ScriptComp ? std::filesystem::path(*ScriptComp->GetScriptPath()).filename().string() : "";
+        FString PreviewName = ScriptComp ? std::filesystem::path(*ScriptComp->GetScriptPath()).filename().string() : " ";
         if (ImGui::BeginCombo("##LuaScript", GetData(PreviewName), ImGuiComboFlags_None))
         {
             // @todo UScriptComponent 유무에 따른 더 나은 레이아웃이 필요
             if (ScriptComp)
             {
+
+                if (ImGui::Selectable("None", false))
+                {
+                    // 빈 항목 선택 시 스크립트 경로를 비우거나 특별한 값으로 설정
+                    ScriptComp->SetScriptPath("");
+                }
+
+
                 for (const auto& Asset : Assets)
                 {
                     if (Asset.Value.AssetType == EAssetType::LuaScript)
@@ -302,6 +310,11 @@ void PropertyEditorPanel::Render()
                     }
                 }
             }
+            else
+                PickedActor->AddComponent<UScriptComponent>("ScriptComponent");
+
+
+
             ImGui::EndCombo();
         }
         ImGui::SameLine();
