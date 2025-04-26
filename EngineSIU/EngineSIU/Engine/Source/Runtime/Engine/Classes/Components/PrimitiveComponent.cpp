@@ -256,7 +256,9 @@ void UPrimitiveComponent::EndComponentOverlap(const FOverlapInfo& OtherOverlap, 
 
         AActor* const MyActor = GetOwner();
         const UWorld* World = GetWorld();
-        if (World && World->WorldType == EWorldType::PIE)
+        //if ((World && World->WorldType == EWorldType::PIE))
+        // TODO : 일단 테스트 용
+        if (World)
         {
             AActor* const OtherActor = OtherComp->GetOwner();
             if (OtherActor != nullptr)

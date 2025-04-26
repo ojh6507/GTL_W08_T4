@@ -26,8 +26,7 @@ public:
     bool CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult) override;
 
     void HandleBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, bool bFromSweep, const FHitResult& SweepResult);
-
-
+    void HandleEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp);
 public:
     FORCEINLINE FVector GetBoxExtent() const { return BoxExtent; }
     FORCEINLINE void SetBoxExtent(const FVector InExtent) { BoxExtent = InExtent; }

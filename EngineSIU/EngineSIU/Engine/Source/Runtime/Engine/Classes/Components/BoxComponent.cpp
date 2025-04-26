@@ -17,8 +17,6 @@ UBoxComponent::UBoxComponent()
     FVector LocalMax =  BoxExtent;  // ( +X, +Y, +Z)
     AABB.max = LocalMax;
     AABB.min = LocalMin;
-
-    
 }
 
 void UBoxComponent::InitializeComponent()
@@ -44,6 +42,7 @@ void UBoxComponent::BeginPlay()
 {
     Super::BeginPlay();
     OnComponentBeginOverlap.AddDynamic(this, &UBoxComponent::HandleBeginOverlap);
+    OnComponentEndOverlap.AddDynamic(this, &UBoxComponent::HandleEndOverlap);
 }
 
 void UBoxComponent::OnComponentDestroyed()
@@ -114,5 +113,11 @@ bool UBoxComponent::CheckOverlapComponent(UShapeComponent* Other, FHitResult& Ou
 void UBoxComponent::HandleBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, bool bFromSweep,
     const FHitResult& SweepResult)
 {
-    UE_LOG(ELogLevel::Display, TEXT("[Overlap] %s ↔ %s at %s"), *OverlappedComp->GetName(), *OtherActor->GetName(), *SweepResult.ImpactPoint.ToString());
+    UE_LOG(ELogLevel::Display, TEXT("[Overlap] %s ↔ %s at %s"), *OverlappedComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
+}
+
+void UBoxComponent::HandleEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp)
+{
+    UE_LOG(ELogLevel::Display, TEXT("[OverlapEnd] %s ↔ %s at %s"), *OverlappedComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
+
 }
