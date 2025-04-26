@@ -205,7 +205,9 @@ void UPrimitiveComponent::BeginComponentOverlap(const FOverlapInfo& OtherOverlap
         OtherComp->OverlappingComponents.Add(FOverlapInfo(this));
 
         const UWorld* World = GetWorld();
-        if ((World && World->WorldType == EWorldType::PIE))
+        //if ((World && World->WorldType == EWorldType::PIE))
+        // TODO : 일단 테스트 용
+        if (World)
         {
             if (this != nullptr)
             {

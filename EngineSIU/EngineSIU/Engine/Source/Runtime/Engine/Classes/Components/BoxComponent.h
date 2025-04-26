@@ -25,10 +25,14 @@ public:
     void SetProperties(const TMap<FString, FString>& InProperties) override;
     bool CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult) override;
 
+    void HandleBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, bool bFromSweep, const FHitResult& SweepResult);
+
+
 public:
     FORCEINLINE FVector GetBoxExtent() const { return BoxExtent; }
     FORCEINLINE void SetBoxExtent(const FVector InExtent) { BoxExtent = InExtent; }
 
 private:
+    // 반(half) 크기(half-extents)
     FVector BoxExtent;
 };

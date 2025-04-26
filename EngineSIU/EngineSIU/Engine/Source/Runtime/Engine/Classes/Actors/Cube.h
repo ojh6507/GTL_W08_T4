@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Classes/Engine/StaticMeshActor.h"
+#include "Components/BoxComponent.h"
 
 class ACube : public AStaticMeshActor
 {
@@ -10,8 +11,7 @@ public:
     ACube();
 
     virtual void Tick(float DeltaTime) override;
-
-    
-
+private:
+    UBoxComponent* BoxComponent;
 };
 

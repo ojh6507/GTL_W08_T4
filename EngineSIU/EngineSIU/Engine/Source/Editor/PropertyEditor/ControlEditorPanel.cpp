@@ -25,6 +25,7 @@
 #include "Actors/SpotLightActor.h"
 #include "Actors/AmbientLightActor.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/SphereComponent.h"
 
 void ControlEditorPanel::Render()
 {
@@ -301,6 +302,7 @@ void ControlEditorPanel::CreateModifyButton(ImVec2 ButtonSize, ImFont* IconFont)
                     UStaticMeshComponent* StaticMeshComp = SpawnedActor->AddComponent<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
                     StaticMeshComp->SetStaticMesh(FManagerOBJ::GetStaticMesh(L"Contents/Sphere.obj"));
                     StaticMeshComp->AABB =  FBoundingBox({1, 1, 1} , {-1,-1,-1});
+                    SpawnedActor->AddComponent<USphereComponent>(TEXT("SphereComponent"));
                     break;
                 }
                 case OBJ_CUBE:

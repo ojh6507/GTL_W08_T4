@@ -121,6 +121,7 @@ bool AActor::Destroy()
 
 UActorComponent* AActor::AddComponent(UClass* InClass, FName InName, bool bTryRootComponent)
 {
+
     if (!InClass)
     {
         UE_LOG(ELogLevel::Error, TEXT("UActorComponent failed: ComponentClass is null."));

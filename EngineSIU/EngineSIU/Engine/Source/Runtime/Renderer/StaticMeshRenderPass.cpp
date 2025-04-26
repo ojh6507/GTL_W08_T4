@@ -19,6 +19,7 @@
 #include "Components/StaticMeshComponent.h"
 
 #include "BaseGizmos/GizmoBaseComponent.h"
+#include "Components/BoxComponent.h"
 #include "Engine/EditorEngine.h"
 
 #include "PropertyEditor/ShowFlags.h"
@@ -212,6 +213,16 @@ void FStaticMeshRenderPass::PrepareRender()
         {
             StaticMeshComponents.Add(iter);
         }
+    }
+
+    for (const auto iter : TObjectRange<UBoxComponent>())
+    {
+        FVector LocalHalfExtents = iter->GetBoxExtent();  // 이미 반사이즈
+        FVector WorldPosition = iter->GetWorldLocation();
+        FVector LocalMin = -LocalHalfExtents;  // (-X, -Y, -Z)
+        FVector LocalMax =  LocalHalfExtents;  // ( +X, +Y, +Z)
+
+        FEngineLoop::PrimitiveDrawBatch.AddOBBToBatch(FBoundingBox(LocalMin, LocalMax), WorldPosition, iter->GetWorldMatrix());
     }
 }
 

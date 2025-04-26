@@ -4,13 +4,21 @@
 #include "SphereComponent.h"
 #include "Engine/Physics/CollisionDispatcher.h"
 #include "Engine/Physics/PhysicsSystem.h"
+#include "GameFramework/Actor.h"
 #include "Math/JungleMath.h"
 #include "UObject/Casts.h"
 
 UBoxComponent::UBoxComponent()
 {
     SetType(StaticClass()->GetName());
+    BoxExtent = FVector(1, 1, 1);
+    // Test용 하드 코딩
+    FVector LocalMin = -BoxExtent;  // (-X, -Y, -Z)
+    FVector LocalMax =  BoxExtent;  // ( +X, +Y, +Z)
+    AABB.max = LocalMax;
+    AABB.min = LocalMin;
 
+    
 }
 
 void UBoxComponent::InitializeComponent()
@@ -21,7 +29,6 @@ void UBoxComponent::InitializeComponent()
 void UBoxComponent::TickComponent(float DeltaTime)
 {
     Super::TickComponent(DeltaTime);
-
 }
 
 UBoxComponent::~UBoxComponent()
@@ -36,6 +43,7 @@ void UBoxComponent::UninitializeComponent()
 void UBoxComponent::BeginPlay()
 {
     Super::BeginPlay();
+    OnComponentBeginOverlap.AddDynamic(this, &UBoxComponent::HandleBeginOverlap);
 }
 
 void UBoxComponent::OnComponentDestroyed()
@@ -101,4 +109,10 @@ bool UBoxComponent::CheckOverlapComponent(UShapeComponent* Other, FHitResult& Ou
     }
 
     return false;
+}
+
+void UBoxComponent::HandleBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, bool bFromSweep,
+    const FHitResult& SweepResult)
+{
+    UE_LOG(ELogLevel::Display, TEXT("[Overlap] %s ↔ %s at %s"), *OverlappedComp->GetName(), *OtherActor->GetName(), *SweepResult.ImpactPoint.ToString());
 }

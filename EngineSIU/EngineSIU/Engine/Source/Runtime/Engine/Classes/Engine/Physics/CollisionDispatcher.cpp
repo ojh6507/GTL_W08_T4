@@ -8,7 +8,7 @@
 
 bool FCollisionDispatcher::OverlapBoxToBox(const UBoxComponent* LHSBox, UBoxComponent* RHSBox, FHitResult& OutHitResult)
 {
-        // --- 1) OBB 파라미터 추출 ---
+    // --- 1) OBB 파라미터 추출 ---
     // 로컬 half-extents 에 월드 스케일을 곱한 값
     const FVector LHSScale     = LHSBox->GetWorldScale3D();
 
