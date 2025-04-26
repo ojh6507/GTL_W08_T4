@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Delegate.h"
 
 
@@ -31,3 +31,4 @@
 #define DECLARE_DYNAMIC_DELEGATE_FiveParams(DelegateName, P1, P2, P3, P4, P5) FUNC_DECLARE_DELEGATE(DelegateName, void, P1, P2, P3, P4, P5)
 #define DECLARE_MULTICAST_DELEGATE_FiveParams(DelegateName, Param1Type, Param2Type, Param3Type, Param4Type, Param5Type) FUNC_DECLARE_MULTICAST_DELEGATE(DelegateName, void, Param1Type, Param2Type, Param3Type, Param4Type, Param5Type)
 #define DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(DelegateName, P1, P2, P3, P4, P5) FUNC_DECLARE_MULTICAST_DELEGATE(DelegateName, void, P1, P2, P3, P4, P5)
+#define DECLARE_DYNAMIC_MULTICAST_DELEGATE_SixParams(DelegateName, P1, P2, P3, P4, P5, P6) FUNC_DECLARE_MULTICAST_DELEGATE(DelegateName, void, P1, P2, P3, P4, P5, P6)

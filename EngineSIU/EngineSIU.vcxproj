@@ -231,6 +231,7 @@ xcopy /y /d "$(SolutionDir)$(ProjectName)\Engine\Source\ThirdParty\Lua\$(Configu
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ActorComponent.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BillboardComponent.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BoxComponent.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CapsuleComponent.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\HeightFogComponent.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\AmbientLightComponent.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\DirectionalLightComponent.cpp" />
@@ -331,6 +332,8 @@ xcopy /y /d "$(SolutionDir)$(ProjectName)\Engine\Source\ThirdParty\Lua\$(Configu
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapInfo.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\ResourceMgr.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\StaticMeshActor.cpp" />
@@ -458,6 +461,7 @@ xcopy /y /d "$(SolutionDir)$(ProjectName)\Engine\Source\ThirdParty\Lua\$(Configu
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ActorComponent.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BillboardComponent.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BoxComponent.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CapsuleComponent.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\HeightFogComponent.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\AmbientLightComponent.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\DirectionalLightComponent.h" />
@@ -484,6 +488,8 @@ xcopy /y /d "$(SolutionDir)$(ProjectName)\Engine\Source\ThirdParty\Lua\$(Configu
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\EngineTypes.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\FLoaderOBJ.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\HitResult.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapInfo.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\ResourceMgr.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\StaticMeshActor.h" />

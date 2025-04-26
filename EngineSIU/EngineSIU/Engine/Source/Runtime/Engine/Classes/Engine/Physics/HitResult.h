@@ -5,8 +5,12 @@
 class UPrimitiveComponent;
 class AActor;
 
+// 일단 Primitive에 대한 HitResult만 구현
 struct FHitResult
 {
+    /** Face index we hit (for complex hits with triangle meshes). */
+    int32 FaceIndex;
+
     /**
      * Time
      * 트레이스 방향을 따라 충돌이 발생한 시점을

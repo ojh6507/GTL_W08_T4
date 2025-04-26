@@ -27,24 +27,24 @@ void FPhysicsSystem::UpdateCollisions()
 
             // Narrow-phase: 간단 박스 vs 박스 검사  
             FHitResult Hit;  
-            if(A->TestOverlap(B, Hit))  
-            {  
-                // Overlap 이벤트  
-                if(A->GetGeneratedOverlapEvents() && B->GetGeneratedOverlapEvents())  
-                    A->OnComponentBeginOverlap.Broadcast(A, Hit.HitActor);  
-
-                // Block 이벤트  
-                if(A->bBlockComponent)  
-                    A->OnComponentHit.Broadcast(A, Hit.HitActor);  
-            }  
-            // 반대 방향도 체크  
-            if(B->TestOverlap(A, Hit))  
-            {  
-                if(B->GetGeneratedOverlapEvents() && A->GetGeneratedOverlapEvents())  
-                    B->OnComponentBeginOverlap.Broadcast(B, Hit.HitActor);  
-                if(B->bBlockComponent)  
-                    B->OnComponentHit.Broadcast(B, Hit.HitActor);  
-            }  
+            // if(A->TestOverlap(B, Hit))  
+            // {  
+            //     // Overlap 이벤트  
+            //     if(A->GetGenerateOverlapEvents() && B->GetGenerateOverlapEvents())  
+            //         A->OnComponentBeginOverlap.Broadcast(A, Hit.HitActor);  
+            //
+            //     // Block 이벤트  
+            //     if(A->IsBlockComponent())  
+            //         A->OnComponentHit.Broadcast(A, Hit.HitActor);  
+            // }  
+            // // 반대 방향도 체크  
+            // if(B->TestOverlap(A, Hit))  
+            // {  
+            //     if(B->GetGenerateOverlapEvents() && A->GetGenerateOverlapEvents())  
+            //         B->OnComponentBeginOverlap.Broadcast(B, Hit.HitActor);  
+            //     if(B->IsBlockComponent())  
+            //         B->OnComponentHit.Broadcast(B, Hit.HitActor);  
+            // }  
         }  
     
 }

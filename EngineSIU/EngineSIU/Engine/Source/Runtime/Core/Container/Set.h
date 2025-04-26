@@ -83,6 +83,15 @@ public:
 
     // IsEmpty
     bool IsEmpty() const { return ContainerPrivate.empty(); }
+    
+    
+    /**
+     * 내부 버킷 수 reserve
+     */
+    void Reserve(SizeType Number)
+    {
+        ContainerPrivate.reserve(Number);
+    }
 };
 
 template <typename ElementType, typename Hasher, class Allocator>
