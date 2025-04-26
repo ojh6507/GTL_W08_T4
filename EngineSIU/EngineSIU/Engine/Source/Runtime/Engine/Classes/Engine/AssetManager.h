@@ -4,10 +4,12 @@
 
 enum class EAssetType : uint8
 {
+    None,           // Default Enum
     StaticMesh,
     SkeletalMesh,
     Texture2D,
     Material,
+    LuaScript,
 };
 
 struct FAssetInfo
@@ -46,5 +48,5 @@ public:
     const TMap<FName, FAssetInfo>& GetAssetRegistry();
 
 private:
-    void LoadObjFiles();
+    void LoadAssetFiles() const;
 };

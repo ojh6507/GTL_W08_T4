@@ -32,7 +32,7 @@ void UAssetManager::InitAssetManager()
 {
     AssetRegistry = std::make_unique<FAssetRegistry>();
 
-    LoadObjFiles();
+    LoadAssetFiles();
 }
 
 const TMap<FName, FAssetInfo>& UAssetManager::GetAssetRegistry()
@@ -40,7 +40,7 @@ const TMap<FName, FAssetInfo>& UAssetManager::GetAssetRegistry()
     return AssetRegistry->PathNameToAssetInfo;
 }
 
-void UAssetManager::LoadObjFiles()
+void UAssetManager::LoadAssetFiles() const
 {
     const std::string BasePathName = "Contents/";
 
@@ -48,20 +48,29 @@ void UAssetManager::LoadObjFiles()
 	
     for (const auto& Entry : std::filesystem::recursive_directory_iterator(BasePathName))
     {
-        if (Entry.is_regular_file() && Entry.path().extension() == ".obj")
+        if (Entry.is_regular_file())
         {
             FAssetInfo NewAssetInfo;
             NewAssetInfo.AssetName = FName(Entry.path().filename().string());
             NewAssetInfo.PackagePath = FName(Entry.path().parent_path().string());
-            NewAssetInfo.AssetType = EAssetType::StaticMesh; // obj 파일은 무조건 StaticMesh
             NewAssetInfo.Size = static_cast<uint32>(std::filesystem::file_size(Entry.path()));
-            
+            NewAssetInfo.AssetType = EAssetType::None;  // 기본값
+
+            if (Entry.path().extension() == ".obj")
+            {
+                NewAssetInfo.AssetType = EAssetType::StaticMesh; // obj 파일은 무조건 StaticMesh
+
+                FString MeshName = NewAssetInfo.PackagePath.ToString() + "/" + NewAssetInfo.AssetName.ToString();
+                FManagerOBJ::CreateStaticMesh(MeshName);
+                // ObjFileNames.push_back(UGTLStringLibrary::StringToWString(Entry.path().string()));
+                // FObjManager::LoadObjStaticMeshAsset(UGTLStringLibrary::StringToWString(Entry.path().string()));
+            }
+            else if (Entry.path().extension() == ".lua")
+            {
+                NewAssetInfo.AssetType = EAssetType::LuaScript;
+            }
+
             AssetRegistry->PathNameToAssetInfo.Add(NewAssetInfo.AssetName, NewAssetInfo);
-            
-            FString MeshName = NewAssetInfo.PackagePath.ToString() + "/" + NewAssetInfo.AssetName.ToString();
-            FManagerOBJ::CreateStaticMesh(MeshName);
-            // ObjFileNames.push_back(UGTLStringLibrary::StringToWString(Entry.path().string()));
-            // FObjManager::LoadObjStaticMeshAsset(UGTLStringLibrary::StringToWString(Entry.path().string()));
         }
     }
 }

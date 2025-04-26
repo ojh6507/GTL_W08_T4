@@ -612,6 +612,7 @@ xcopy /y /d "$(SolutionDir)$(ProjectName)\Engine\Source\ThirdParty\Lua\$(Configu
   <ItemGroup>
     <None Include="DefaultPropertySheet.props" />
     <None Include="EngineSIU\test.lua" />
+    <None Include="EngineSIU\Contents\LuaTemplates\template.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

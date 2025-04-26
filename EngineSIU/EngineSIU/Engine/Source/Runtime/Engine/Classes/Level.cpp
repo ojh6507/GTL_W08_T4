@@ -39,7 +39,7 @@ UObject* ULevel::Duplicate(UObject* InOuter)
 
         UScriptComponent* OriginalScriptComp = Actor->GetComponentByClass<UScriptComponent>();
 
-        if (OriginalScriptComp && !OriginalScriptComp->GetScriptPath().empty())
+        if (OriginalScriptComp && !OriginalScriptComp->GetScriptPath().IsEmpty())
         {
             // 복제된 액터에서 스크립트 컴포넌트 찾기
             UScriptComponent* NewScriptComp = DuplicatedActor->GetComponentByClass<UScriptComponent>();
@@ -48,7 +48,7 @@ UObject* ULevel::Duplicate(UObject* InOuter)
                 // PIE 월드에서는 실제로 스크립트 로드 및 초기화
                 bool success = NewScriptComp->LoadScript(OriginalScriptComp->GetScriptPath());
                 std::cout << "PIE: 스크립트 로드 " << (success ? "성공" : "실패")
-                    << " - " << OriginalScriptComp->GetScriptPath() << std::endl;
+                    << " - " << *OriginalScriptComp->GetScriptPath() << std::endl;
             }
         }
         // 복제된 액터를 새 레벨에 추가
