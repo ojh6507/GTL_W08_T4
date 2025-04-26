@@ -1,4 +1,5 @@
 #include "UScriptComponent.h"
+#include "Engine/Script/LuaBinding.h"
 
 UScriptComponent::UScriptComponent()
     : isScriptLoaded(false)
@@ -56,10 +57,11 @@ bool UScriptComponent::LoadScript(const std::string& inScriptPath)
 
     try {
         // LuaManager를 통해 스크립트 로드
-        sol::state& lua = GLuaManager.GetState();
+        sol::state& lua = *GLuaManager.GetState();
+        LuaBindings::BindCoreTypesForLua(lua);
 
         // 액터 참조를 Lua 글로벌 변수로 설정
-        lua["obj"] = GetOwner();
+        lua["actor"] = GetOwner();
 
         // 스크립트 파일 로드 및 컴파일
         sol::protected_function_result result = lua.script_file(scriptPath,
@@ -127,47 +129,51 @@ void UScriptComponent::OnOverlap(AActor* OtherActor)
 
 void UScriptComponent::RegisterLuaFunctions(sol::state& lua)
 {
-    // 위치 설정 함수 (참조로 캡처)
-    lua["SetActorLocation"] = [&lua](AActor* actor, float x, float y, float z) {
-        if (actor)
-        {
-            actor->SetActorLocation(FVector(x, y, z));
-        }
-        };
+    
+    //// 위치 설정 함수 (참조로 캡처)
+    //lua["SetActorLocation"] = [&lua](AActor* actor, float x, float y, float z) {
+    //    if (actor)
+    //    {
+    //        actor->SetActorLocation(FVector(x, y, z));
+    //    }
+    //    };
 
-    // 위치 가져오기 함수 (참조로 캡처)
-    lua["GetActorLocation"] = [&lua](AActor* actor) -> sol::table {
-        if (actor)
-        {
-            FVector loc = actor->GetActorLocation();
-            sol::table result = lua.create_table();
-            result["x"] = loc.X;
-            result["y"] = loc.Y;
-            result["z"] = loc.Z;
-            return result;
-        }
-        return sol::nil;
-        };
+    //// 위치 가져오기 함수 (참조로 캡처)
+    //lua["GetActorLocation"] = [&lua](AActor* actor) -> sol::table {
+    //    if (actor)
+    //    {
+    //        FVector loc = actor->GetActorLocation();
+    //        sol::table result = lua.create_table();
+    //        result["x"] = loc.X;
+    //        result["y"] = loc.Y;
+    //        result["z"] = loc.Z;
+    //        return result;
+    //    }
+    //    return sol::nil;
+    //    };
 
-    // 회전 설정 함수 (참조로 캡처)
-    lua["SetActorRotation"] = [&lua](AActor* actor, float pitch, float yaw, float roll) {
-        if (actor)
-        {
-            actor->SetActorRotation(FRotator(pitch, yaw, roll));
-        }
-        };
+    //// 회전 설정 함수 (참조로 캡처)
+    //lua["SetActorRotation"] = [&lua](AActor* actor, float pitch, float yaw, float roll) {
+    //    if (actor)
+    //    {
+    //        actor->SetActorRotation(FRotator(pitch, yaw, roll));
+    //    }
+    //    };
 
-    // 컴포넌트 고유의 추가 함수들
-    // 예: 특정 함수나 현재 액터와 관련된 특별한 기능들
-    lua["GetComponentOwner"] = [this]() {
-        return GetOwner();
-        };
+    //// 컴포넌트 고유의 추가 함수들
+    //// 예: 특정 함수나 현재 액터와 관련된 특별한 기능들
+    //lua["GetComponentOwner"] = [this]() {
+    //    return GetOwner();
+    //    };
+
+
+
 }
 
 void UScriptComponent::CallScriptFunction(const char* functionName)
 {
     try {
-        sol::state& lua = GLuaManager.GetState();
+        sol::state& lua = *GLuaManager.GetState();
         sol::function func = lua[functionName];
 
         if (!func.valid()) {
@@ -197,7 +203,7 @@ void UScriptComponent::CallScriptFunction(const char* functionName)
 void UScriptComponent::CallScriptFunction(const char* functionName, float value)
 {
     try {
-        sol::state& lua = GLuaManager.GetState();
+        sol::state& lua = *GLuaManager.GetState();
         sol::function func = lua[functionName];
 
         if (!func.valid()) {
@@ -227,7 +233,7 @@ void UScriptComponent::CallScriptFunction(const char* functionName, float value)
 void UScriptComponent::CallScriptFunction(const char* functionName, AActor* actor)
 {
     try {
-        sol::state& lua = GLuaManager.GetState();
+        sol::state& lua = *GLuaManager.GetState();
         sol::function func = lua[functionName];
 
         if (!func.valid()) {

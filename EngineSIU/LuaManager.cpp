@@ -7,23 +7,23 @@ LuaManager GLuaManager;
 LuaManager::LuaManager() : initialized(false) {}
 
 LuaManager::~LuaManager() {
-    Cleanup();
+    //Cleanup();
 }
 
-sol::state& LuaManager::GetState()
+sol::state* LuaManager::GetState()
 {
     if (!initialized) {
         throw std::runtime_error("Lua 상태가 초기화되지 않았습니다.");
     }
-    return lua;
+    return lua.get();
 }
 
 bool LuaManager::Initialize() {
-    if (initialized) return true;
 
+    lua = std::make_unique<sol::state>();
     try {
         // 기본 라이브러리 로드
-        lua.open_libraries(
+        lua->open_libraries(
             sol::lib::base,
             sol::lib::package,
             sol::lib::string,
@@ -44,16 +44,22 @@ bool LuaManager::Initialize() {
     }
 }
 
-void LuaManager::Cleanup() {
+void LuaManager::Cleanup() 
+{
     // sol::state는 자동으로 정리됨
     initialized = false;
+    if (lua)
+    {
+        lua.release();
+        lua = nullptr;
+    }
 }
 
 bool LuaManager::RunString(const std::string& code) {
     if (!initialized) return false;
 
     try {
-        lua.script(code);
+        lua->script(code);
         return true;
     }
     catch (const sol::error& e) {
@@ -66,7 +72,7 @@ bool LuaManager::RunFile(const std::string& filename) {
     if (!initialized) return false;
 
     try {
-        lua.script_file(filename);
+        lua->script_file(filename);
         return true;
     }
     catch (const sol::error& e) {
@@ -77,7 +83,7 @@ bool LuaManager::RunFile(const std::string& filename) {
 
 void LuaManager::RegisterEngineAPI() {
     // 로그 함수 등록 (람다 사용)
-    lua["Log"] = [](const std::string& message) {
+    (*lua)["Log"] = [](const std::string& message) {
         std::cout << "Lua: " << message << std::endl;
         };
 
