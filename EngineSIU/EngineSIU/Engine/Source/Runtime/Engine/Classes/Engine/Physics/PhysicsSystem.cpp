@@ -1,7 +1,7 @@
 #include "PhysicsSystem.h"
 
 #include "HitResult.h"
-#include "Components/UShapeComponent.h"
+#include "Components/ShapeComponent.h"
 
 TArray<UShapeComponent*> FPhysicsSystem::ShapeComponents = {};
 

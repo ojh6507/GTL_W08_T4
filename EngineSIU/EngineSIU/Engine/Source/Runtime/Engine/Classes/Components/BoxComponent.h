@@ -1,5 +1,8 @@
 #pragma once
-#include "UShapeComponent.h"
+#include "ShapeComponent.h"
+
+class UCapsuleComponent;
+class USphereComponent;
 
 class UBoxComponent : public UShapeComponent
 {
@@ -22,4 +25,15 @@ public:
     void GetProperties(TMap<FString, FString>& OutProperties) const override;
     void SetProperties(const TMap<FString, FString>& InProperties) override;
     bool CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult) override;
+private:
+    bool OverlapBoxToBox(UBoxComponent* OtherBox, FHitResult& OutHitResult);
+    bool OverlapBoxToSphere(USphereComponent* OtherSphere, FHitResult& OutHitResult);
+    bool OverlapBoxToCapsule(UCapsuleComponent* OtherCaps, FHitResult& OutHitResult);
+
+public:
+    FORCEINLINE FVector GetBoxExtent() const { return BoxExtent; }
+    FORCEINLINE void SetBoxExtent(const FVector InExtent) { BoxExtent = InExtent; }
+
+private:
+    FVector BoxExtent;
 };

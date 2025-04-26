@@ -1,4 +1,4 @@
-#include "UShapeComponent.h"
+#include "ShapeComponent.h"
 
 UShapeComponent::UShapeComponent()
 {

@@ -67,3 +67,18 @@ bool UCapsuleComponent::CheckOverlapComponent(UShapeComponent* Other, FHitResult
 {
     return UShapeComponent::CheckOverlapComponent(Other, OutHitResult);
 }
+
+bool UCapsuleComponent::OverlapCapsuleToBox(UBoxComponent* Other, FHitResult& OutHitResult)
+{
+    return false;
+}
+
+bool UCapsuleComponent::OverlapCapsuleToSphere(USphereComponent* Other, FHitResult& OutHitResult)
+{
+    return false;
+}
+
+bool UCapsuleComponent::OverlapCapsuleToCapsule(UCapsuleComponent* Other, FHitResult& OutHitResult)
+{
+    return false;
+}
