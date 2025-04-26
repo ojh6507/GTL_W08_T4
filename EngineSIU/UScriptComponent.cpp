@@ -52,6 +52,28 @@ UObject* UScriptComponent::Duplicate(UObject* InOuter)
 	return NewComponent;
 }
 
+void UScriptComponent::GetProperties(TMap<FString, FString>& OutProperties) const
+{
+	Super::GetProperties(OutProperties);
+	OutProperties.Add(TEXT("ScriptPath"), ScriptPath);
+	OutProperties.Add(TEXT("bIsScriptLoaded"), bIsScriptLoaded ? TEXT("true") : TEXT("false"));
+}
+
+void UScriptComponent::SetProperties(const TMap<FString, FString>& Properties)
+{
+	Super::SetProperties(Properties);
+	const FString* TempStr = nullptr;
+
+
+	// --- StaticMesh 설정 ---
+	TempStr = Properties.Find(TEXT("ScriptPath"));
+
+	if (TempStr)
+	{
+		SetScriptPath(*TempStr);
+	}
+}
+
 bool UScriptComponent::LoadScript(const FString& InScriptPath)
 {
 	ScriptPath = InScriptPath;

@@ -20,7 +20,8 @@ public:
     virtual void TickComponent(float DeltaTime) override;  // 'Tick'이 아닌 'TickComponent'로 수정
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual UObject* Duplicate(UObject* InOuter) override;
-
+    virtual void GetProperties(TMap<FString, FString>& OutProperties) const override;
+    void SetProperties(const TMap<FString, FString>& Properties) override;
     // 스크립트 관련 함수
     bool LoadScript(const FString& InScriptPath);
     void OnOverlap(AActor* OtherActor);
