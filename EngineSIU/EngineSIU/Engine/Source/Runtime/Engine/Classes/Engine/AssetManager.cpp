@@ -32,7 +32,7 @@ void UAssetManager::InitAssetManager()
 {
     AssetRegistry = std::make_unique<FAssetRegistry>();
 
-    LoadObjFiles();
+    LoadAssetFiles();
 }
 
 const TMap<FName, FAssetInfo>& UAssetManager::GetAssetRegistry()
@@ -40,7 +40,7 @@ const TMap<FName, FAssetInfo>& UAssetManager::GetAssetRegistry()
     return AssetRegistry->PathNameToAssetInfo;
 }
 
-void UAssetManager::LoadObjFiles()
+void UAssetManager::LoadAssetFiles() const
 {
     const std::string BasePathName = "Contents/";
 

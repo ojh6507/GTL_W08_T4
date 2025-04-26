@@ -1,5 +1,6 @@
 #include "PropertyEditorPanel.h"
 
+#include <filesystem>
 #include <shellapi.h>
 
 #include "World/World.h"
@@ -26,8 +27,6 @@
 #include "Renderer/Shadow/SpotLightShadowMap.h"
 #include "Renderer/Shadow/PointLightShadowMap.h"
 #include "Renderer/Shadow/DirectionalShadowMap.h"
-
-#include <filesystem>
 
 void PropertyEditorPanel::Render()
 {
@@ -69,6 +68,8 @@ void PropertyEditorPanel::Render()
         // @todo AddComponent 레이아웃 개편
         ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.1f, 0.1f, 0.1f, 1.0f));
         {
+            ImGui::SeparatorText("Add Component");
+
             ImGui::Text("Add");
             ImGui::SameLine();
 
@@ -100,7 +101,213 @@ void PropertyEditorPanel::Render()
             }
         }
         ImGui::PopStyleColor();
+    }
 
+#pragma region Generate Lua Script
+    if (PickedActor)
+    {
+        ImGui::SeparatorText("Lua Scripting"); // 섹션 구분
+
+        UScriptComponent* ScriptComp = PickedActor->GetComponentByClass<UScriptComponent>();
+
+        float windowWidth = ImGui::GetContentRegionAvail().x;
+        if (ScriptComp && !ScriptComp->GetScriptPath().IsEmpty())    // && 연산 순서에 유의 (ScriptPath가 nullptr일 수 있음
+        {
+            // Case 1: Has ScriptComponent and ScriptPath
+            // => Edit Button (Open Script)
+            if (ImGui::Button("Edit Script", ImVec2(windowWidth, 0))) // 높이 0은 자동 높이
+            {
+                ShellExecuteOpen(std::filesystem::absolute(*ScriptComp->GetScriptPath()));
+            }
+        }
+        else
+        {
+            // Case 2: No ScriptComponent or ScriptPath
+            // => Add Button (Create and Open Script)
+            if (ImGui::Button("Create Script", ImVec2(windowWidth, 0))) // 높이 0은 자동 높이
+            {
+                // 스크립트 이름 입력 팝업 열기
+                ImGui::OpenPopup("Create New Lua Script");
+            }
+
+            // --- 스크립트 생성 모달 ---
+            // 모달 창의 상태를 관리하기 위한 변수들
+            static char scriptNameBuffer[256] = { 0 };
+            static std::string createErrorMsg = ""; // 오류 메시지 저장
+
+            // 모달 창 정의
+            if (ImGui::BeginPopupModal("Create New Lua Script", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+            {
+                ImGui::Text("Enter a name for the new Lua script:");
+                ImGui::Spacing();
+
+                // 스크립트 이름 입력 필드
+                ImGui::PushItemWidth(300); // 입력 필드 너비 조절
+                if (ImGui::InputText("##ScriptName", scriptNameBuffer, IM_ARRAYSIZE(scriptNameBuffer), ImGuiInputTextFlags_EnterReturnsTrue))
+                {
+                    // 엔터 키로도 생성 시도 가능하게 하려면 여기에 'Create' 버튼 로직 복제 또는 함수화
+                    ImGui::SetKeyboardFocusHere(-1); // 포커스 유지 방지
+                }
+                ImGui::PopItemWidth();
+                ImGui::SameLine();
+                ImGui::TextDisabled("(e.g., PlayerLogic, EnemyAI)");
+
+                ImGui::Spacing();
+                ImGui::Separator();
+                ImGui::Spacing();
+
+                // 오류 메시지 표시 영역
+                if (!createErrorMsg.empty())
+                {
+                    ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "Error: %s", createErrorMsg.c_str());
+                    ImGui::Spacing();
+                }
+
+                // 버튼들
+                if (ImGui::Button("Create", ImVec2(120, 0)))
+                {
+                    createErrorMsg = ""; // 이전 오류 메시지 초기화
+                    if (strlen(scriptNameBuffer) == 0)
+                    {
+                        createErrorMsg = "Script name cannot be empty.";
+                    }
+                    else
+                    {
+                        try {
+                            // 1. 파일명 및 경로 생성 (동적으로)
+                            FString sceneName = GEngine->ActiveWorld->GetWorldName(); // 실제 씬 이름 가져오기
+                            // 액터 이름 또는 고유 ID 사용 (고유 ID가 더 안전)
+                            // std::string actorIdentifier = PickedActor->GetName(); // 이름 사용 시
+                            FString actorIdentifier = std::to_string(PickedActor->GetUUID()); // ID 사용 시
+                            FString scriptName(scriptNameBuffer);
+
+                            // 파일명 규칙: Scene_ActorID_ScriptName.lua (예시)
+                            FString fileName = sceneName + "_" + actorIdentifier + "_" + scriptName + ".lua";
+
+                            // 경로 설정 (엔진 설정이나 프로젝트 구조에 따라 달라져야 함)
+                            std::filesystem::path outputDir = "Contents/LuaScript"; // 예시 경로
+                            std::filesystem::path templatePath = "Contents/LuaScript/template.lua"; // 예시 경로
+
+                            // 대상 파일 전체 경로s
+                            std::filesystem::path outputFilePath = (FString(outputDir) + "/" + fileName).ToWideString();
+
+                            // 2. 템플릿 파일 존재 확인
+                            if (!std::filesystem::exists(templatePath)) {
+                                throw std::runtime_error("Template file 'template.lua' not found at expected location.");
+                            }
+
+                            // 3. 출력 디렉토리 생성 (필요시)
+                            if (!std::filesystem::exists(outputDir)) {
+                                if (!std::filesystem::create_directories(outputDir)) {
+                                    throw std::runtime_error("Failed to create output directory.");
+                                }
+                            }
+
+                            // 4. 대상 파일이 이미 존재하는지 확인 (덮어쓰기 방지)
+                            if (std::filesystem::exists(outputFilePath)) {
+                                throw std::runtime_error("A script with this name already exists for this actor/scene.");
+                            }
+
+                            // 5. 템플릿 파일 복사
+                            std::filesystem::copy_file(templatePath, outputFilePath); // copy_options 기본값은 덮어쓰기 안함
+
+                            // 6. 성공 처리: 컴포넌트 추가 및 경로 설정
+                            if (ScriptComp)
+                            {
+                                ScriptComp->SetScriptPath(outputFilePath.string().c_str());
+                                std::cout << "Successfully linked script: " << outputFilePath.string() << '\n';
+                                // 성공 후 모달 닫기 및 버퍼 초기화
+                                ImGui::CloseCurrentPopup();
+                                scriptNameBuffer[0] = '\0';
+                                createErrorMsg = "";
+
+                                // Edit Script
+                                ShellExecuteOpen(std::filesystem::absolute(*ScriptComp->GetScriptPath()));
+                            }
+                            else
+                            {
+                                UScriptComponent* NewScriptComp = PickedActor->AddComponent<UScriptComponent>("ScriptComponent"); // 컴포넌트 이름 설정
+                                if (NewScriptComp)
+                                {
+                                    NewScriptComp->SetScriptPath(outputFilePath.string().c_str());
+                                    std::cout << "Successfully created and linked script: " << outputFilePath.string() << '\n';
+
+                                    // 성공 후 모달 닫기 및 버퍼 초기화
+                                    ImGui::CloseCurrentPopup();
+                                    scriptNameBuffer[0] = '\0';
+                                    createErrorMsg = "";
+
+                                    // Edit Script
+                                    ShellExecuteOpen(std::filesystem::absolute(*NewScriptComp->GetScriptPath()));
+                                }
+                                else
+                                {
+                                    // 컴포넌트 추가 실패 시 파일은 생성되었으므로 롤백 또는 경고 필요
+                                    std::filesystem::remove(outputFilePath); // 생성된 파일 삭제 (롤백)
+                                    throw std::runtime_error("Script file created, but failed to add UScriptComponent to the actor.");
+                                }
+                            }
+                        }
+                        catch (const std::filesystem::filesystem_error& fs_err) {
+                            // 파일 시스템 오류 처리
+                            createErrorMsg = "Filesystem error: ";
+                            createErrorMsg += fs_err.what();
+                            std::cerr << createErrorMsg << '\n';
+                        }
+                        catch (const std::exception& e) {
+                            // 일반 예외 처리
+                            createErrorMsg = e.what();
+                            std::cerr << "Error: " << createErrorMsg << '\n';
+                        }
+                    }
+                } // Button Create
+
+                ImGui::SameLine();
+
+                if (ImGui::Button("Cancel", ImVec2(120, 0)))
+                {
+                    // 취소 시 모달 닫기 및 버퍼/오류 초기화
+                    ImGui::CloseCurrentPopup();
+                    scriptNameBuffer[0] = '\0';
+                    createErrorMsg = "";
+                }
+
+                ImGui::EndPopup();
+            } // if BeginPopupModal
+        }
+
+        // @todo AssetManager 갱신 로직 필요
+        UAssetManager::Get().InitAssetManager();
+        const TMap<FName, FAssetInfo> Assets = UAssetManager::Get().GetAssetRegistry();
+    
+        FString PreviewName = ScriptComp ? std::filesystem::path(*ScriptComp->GetScriptPath()).filename().string() : "";
+        if (ImGui::BeginCombo("##LuaScript", GetData(PreviewName), ImGuiComboFlags_None))
+        {
+            // @todo UScriptComponent 유무에 따른 더 나은 레이아웃이 필요
+            if (ScriptComp)
+            {
+                for (const auto& Asset : Assets)
+                {
+                    if (Asset.Value.AssetType == EAssetType::LuaScript)
+                    {
+                        if (ImGui::Selectable(GetData(Asset.Value.AssetName.ToString()), false))
+                        {
+                            FString LuaScriptName = Asset.Value.PackagePath.ToString() + "/" + Asset.Value.AssetName.ToString();
+                            ScriptComp->SetScriptPath(LuaScriptName);
+                        }
+                    }
+                }
+            }
+            ImGui::EndCombo();
+        }
+        ImGui::SameLine();
+        ImGui::Text("Script File");
+    }
+#pragma endregion
+
+#pragma region Transform
+    if (PickedActor)
+    {
         // TreeNode 배경색을 변경 (기본 상태)
         ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.1f, 0.1f, 0.1f, 1.0f));
         if (ImGui::TreeNodeEx("Transform", ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_DefaultOpen)) // 트리 노드 생성
@@ -121,168 +328,26 @@ void PropertyEditorPanel::Render()
             // 좌표 모드 버튼 라벨 설정 (중복 제거)
             std::string coordiButtonLabel;
             if (player->GetCoordMode() == ECoordMode::CDM_WORLD)
+            {
                 coordiButtonLabel = "World";
+            }
             else if (player->GetCoordMode() == ECoordMode::CDM_LOCAL)
+            {
                 coordiButtonLabel = "Local";
+            }
 
-            static char scriptNameBuffer[256] = { 0 };
-            // 버튼들의 전체 너비 계산
-            float windowWidth = ImGui::GetWindowContentRegionMax().x;
-            float buttonWidth = (windowWidth - ImGui::GetStyle().ItemSpacing.x) / 2.0f;
-
+            float windowWidth = ImGui::GetContentRegionAvail().x;
             // 좌표 모드 버튼 (이전 중복 코드 제거)
-            if (ImGui::Button(coordiButtonLabel.c_str(), ImVec2(buttonWidth, 32)))
+            if (ImGui::Button(coordiButtonLabel.c_str(), ImVec2(windowWidth, 32)))
             {
                 player->AddCoordiMode();
             }
 
-#pragma region Generate Lua Script
-            // 같은 줄에 스크립트 생성 버튼
-            ImGui::SameLine();
-
-            // 스크립트 생성 버튼
-            if (ImGui::Button("Create Script", ImVec2(buttonWidth, 32)))
-            {
-                // 스크립트 이름 입력 팝업 열기
-                ImGui::OpenPopup("Create New Script");
-            }
-
-            // 스크립트 생성 모달
-            if (ImGui::BeginPopupModal("Create New Script", NULL, ImGuiWindowFlags_AlwaysAutoResize))
-            {
-                ImGui::Text("Script Name:");
-                ImGui::InputText("##ScriptName", scriptNameBuffer, IM_ARRAYSIZE(scriptNameBuffer));
-
-                bool createSuccessful = false;
-                bool createFailed = false;
-
-                std::filesystem::path outputFilePath;
-         
-                if (ImGui::Button("Create", ImVec2(120, 0)))
-                {
-                  
-                    if (strlen(scriptNameBuffer) > 0)
-                    {
-                       
-                        try {
-                            // 스크립트 생성 로직
-                            
-                            std::string sceneName = "TestScene";
-                            std::string actorName = "TestActor";
-                            std::string scriptName(scriptNameBuffer);
-                            std::string fileName = sceneName + "_" + actorName + "_" + scriptName + ".lua";
-
-                            // 파일 경로 생성 (std::filesystem 사용)
-                            std::filesystem::path outputDir = "Contents/LuaScript";
-
-                            // 디렉토리 없으면 생성
-                            if (!std::filesystem::exists(outputDir)) {
-                                std::filesystem::create_directories(outputDir);
-                            }
-
-                            outputFilePath = outputDir / fileName;
-                            std::filesystem::path templatePath = "Contents/LuaScript/template.lua";
-
-                            // 템플릿 파일 복사
-                            std::filesystem::copy(
-                                templatePath,
-                                outputFilePath,
-                                std::filesystem::copy_options::overwrite_existing
-                            );
-
-                            // 성공 처리
-                            std::cout << "Script created: " << outputFilePath.string() << std::endl;
-                            createSuccessful = true;
-                        }
-                        catch (const std::filesystem::filesystem_error& e) {
-                            // 오류 처리
-                            std::cerr << "Failed to create script: " << e.what() << std::endl;
-                            createFailed = true;
-                        }
-                    }
-                    else
-                    {
-                        // 이름 입력 안 했을 때
-                        ImGui::OpenPopup("Enter Script Name");
-                    }
-                }
-
-                ImGui::SameLine();
-                if (ImGui::Button("Cancel", ImVec2(120, 0)))
-                {
-                    ImGui::CloseCurrentPopup();
-                }
-
-                // 이름 미입력 팝업
-                if (ImGui::BeginPopupModal("Enter Script Name", NULL, ImGuiWindowFlags_AlwaysAutoResize))
-                {
-                    ImGui::Text("Please enter a script name!");
-                    if (ImGui::Button("OK", ImVec2(120, 0)))
-                    {
-                        ImGui::CloseCurrentPopup();
-                    }
-                    ImGui::EndPopup();
-                }
-
-                // 스크립트 생성 성공 팝업
-                if (createSuccessful)
-                {
-                    ImGui::OpenPopup("Script Created");
-                    UScriptComponent* ScriptComp = PickedActor->AddComponent<UScriptComponent>(TEXT("UScriptComponent"));
-
-                    // 생성된 스크립트 경로 설정
-                    if (ScriptComp)
-                    {
-                        ScriptComp->SetScriptPath(outputFilePath.string().c_str());
-                    }
-                }
-
-                if (ImGui::BeginPopupModal("Script Created", NULL, ImGuiWindowFlags_AlwaysAutoResize))
-                {
-                    ImGui::Text("Script created successfully!");
-                    if (ImGui::Button("OK", ImVec2(120, 0)))
-                    {
-                        ImGui::CloseCurrentPopup();
-                        createSuccessful = false;
-                    }
-                    ImGui::EndPopup();
-                }
-
-                // 스크립트 생성 실패 팝업
-                if (createFailed)
-                {
-                    ImGui::OpenPopup("Script Creation Failed");
-                }
-
-                if (ImGui::BeginPopupModal("Script Creation Failed", NULL, ImGuiWindowFlags_AlwaysAutoResize))
-                {
-                    ImGui::Text("Failed to create script!");
-                    if (ImGui::Button("OK", ImVec2(120, 0)))
-                    {
-                        ImGui::CloseCurrentPopup();
-                        createFailed = false;
-                    }
-                    ImGui::EndPopup();
-                }
-
-                ImGui::EndPopup();
-            }
-#pragma endregion
-
-            ImGui::TreePop(); // 트리 닫기
+            ImGui::TreePop();
         }
         ImGui::PopStyleColor();
     }
-
-    if (PickedActor)
-    {
-        if (ImGui::Button("Duplicate"))
-        {
-            UEditorEngine* Engine = Cast<UEditorEngine>(GEngine);
-            AActor* NewActor = Engine->ActiveWorld->DuplicateActor(Engine->GetSelectedActor());
-            Engine->SelectActor(NewActor);
-        }
-    }
+#pragma endregion
 
     if(PickedActor)
         if (UPointLightComponent* pointlightObj = PickedActor->GetComponentByClass<UPointLightComponent>())
@@ -670,78 +735,6 @@ void PropertyEditorPanel::Render()
             }
             ImGui::PopStyleColor();
         }
-
-    if (PickedActor)
-    {
-        // @todo LuaScriptComponent가 있는 경우에만 추가하도록 수정
-        //if (ULuaScriptComponent* LuaScriptComponent = PickedActor->GetComponentByClass<ULuaScriptComponent>())
-        {
-            ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.1f, 0.1f, 0.1f, 1.0f));
-            if (ImGui::TreeNodeEx("Lua Script Component", ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_DefaultOpen)) // 트리 노드 생성
-            {
-                // @todo LuaScriptComponent의 GetFilePath()를 통해 LuaScriptPath를 가져오도록 수정
-                FString LuaScriptPath = "./Contents/Lua/MyLua.lua";//LuaScriptComponent->GetFilePath();
-
-                if (LuaScriptPath.IsEmpty() || std::filesystem::exists(std::filesystem::path(LuaScriptPath.ToWideString()))) // @todo Scene_Name_Actor_Name.lua가 있는지 확인
-                {
-                    if (ImGui::Button("Edit Script"))
-                    {
-                        // Open Editor
-                        ShellExecuteOpen(std::filesystem::absolute(std::filesystem::path(LuaScriptPath.ToWideString())));
-                    }
-                }
-                else
-                {
-                    if (ImGui::Button("Create Script"))
-                    {
-                        // Create Script and Open Editor
-                        std::filesystem::path TemplatePath = std::filesystem::path("./Contents/LuaTemplates/template.lua");
-                        if (std::filesystem::exists(TemplatePath))
-                        {
-                            std::filesystem::path DestDir = std::filesystem::path("./Contents/Lua/");
-                            if (!std::filesystem::exists(DestDir))
-                            {
-                                std::filesystem::create_directories(DestDir);
-                                UE_LOG(ELogLevel::Display, "Create Folder: %s", DestDir);
-                            }
-                            // @todo 적절한 이름으로 변경
-                            DestDir += "Scene_Name_Actor_Name.lua";
-                            //DestDir += FString::Printf("%s_%s.lua", GEngine->ActiveWorld->GetActiveLevel()->GetName(), PickedActor->GetActorLabel()).ToWideString();
-                            std::filesystem::copy_file(TemplatePath, DestDir);
-                            // @todo LuaScriptComponent의 FilePath를 설정하도록 수정
-                            ShellExecuteOpen(std::filesystem::absolute(std::filesystem::path(DestDir)));
-                        }
-                    }
-                }
-
-                const TMap<FName, FAssetInfo> Assets = UAssetManager::Get().GetAssetRegistry();
-
-                // @todo LuaScriptPath 대신 PreviewName을 표기하도록 수정
-                //FString PreviewName = StaticMeshComp->GetStaticMesh()->GetRenderData()->DisplayName;
-                if (ImGui::BeginCombo("##LuaScript", GetData(LuaScriptPath), ImGuiComboFlags_None))
-                {
-                    for (const auto& Asset : Assets)
-                    {
-                        if (Asset.Value.AssetType == EAssetType::LuaScript)
-                        {
-                            if (ImGui::Selectable(GetData(Asset.Value.AssetName.ToString()), false))
-                            {
-                                FString LuaScriptName = Asset.Value.PackagePath.ToString() + "/" + Asset.Value.AssetName.ToString();
-                                // @todo LuaScriptComponent의 FilePath를 변경하도록 수정
-                                //LuaScriptComponent->SetLuaScript(LuaScriptName);
-                            }
-                        }
-                    }
-                    ImGui::EndCombo();
-                }
-                ImGui::SameLine();
-                ImGui::Text("Script File");
-
-                ImGui::TreePop();
-            }
-            ImGui::PopStyleColor();
-        }
-    }
 
     ImGui::End();
 }
