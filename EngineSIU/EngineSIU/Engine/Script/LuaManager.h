@@ -11,7 +11,8 @@ extern "C" {
 #include <memory>
 #include <string>
 
-class LuaManager {
+class FLuaManager 
+{
 private:
     std::unique_ptr<sol::state> lua;
     bool initialized;
@@ -19,8 +20,8 @@ private:
     void RegisterEngineAPI();
 
 public:
-    LuaManager();
-    ~LuaManager();
+    FLuaManager();
+    ~FLuaManager();
 
     sol::state* GetState();
 
@@ -30,4 +31,4 @@ public:
     bool RunFile(const std::string& filename);
 };
 
-extern LuaManager GLuaManager;
+extern FLuaManager GLuaManager;
