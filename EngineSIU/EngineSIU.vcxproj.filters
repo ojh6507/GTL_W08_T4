@@ -1260,6 +1260,8 @@
     <ClInclude Include="EngineSIU\Font\RawFonts.h">
       <Filter>EngineSIU\Font</Filter>
     </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Script\LuaManager.cpp" />
+    <ClCompile Include="UScriptComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="EngineSIU\EngineSIU.natvis" />
@@ -1307,10 +1309,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DefaultPropertySheet.props" />
+    <None Include="EngineSIU\test.lua" />
+    <None Include="EngineSIU\Contents\LuaTemplates\template.lua" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\SimpleMath.inl">
       <Filter>EngineSIU\Shaders</Filter>
     </ClInclude>
+    <ClInclude Include="EngineSIU\Engine\Script\LuaBinding.h" />
+    <ClInclude Include="EngineSIU\Engine\Script\LuaManager.h" />
+    <ClInclude Include="UScriptComponent.h" />
   </ItemGroup>
 </Project>

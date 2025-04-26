@@ -1,7 +1,7 @@
 #pragma once
 #include "Engine/Classes/Components/ActorComponent.h"
 #include <string>
-#include "LuaManager.h"
+#include "Engine/Script/LuaManager.h"
 #include "Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h"
 
 // 전방 선언
