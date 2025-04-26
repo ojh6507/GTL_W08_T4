@@ -10,18 +10,31 @@ class USphereComponent : public UShapeComponent
 
 public:
     USphereComponent();
+    ~USphereComponent() override;
+    void Serialize(FArchive& Ar) override;
+    void UninitializeComponent() override;
+    void BeginPlay() override;
+    void OnComponentDestroyed() override;
+    void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+    void DestroyComponent() override;
+    UObject* Duplicate(UObject* InOuter) override;
+    int CheckRayIntersection(FVector& rayOrigin, FVector& rayDirection, float& pfNearHitDistance) override;
+    void GetProperties(TMap<FString, FString>& OutProperties) const override;
+    void SetProperties(const TMap<FString, FString>& InProperties) override;
+    bool CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult) override;
 
     virtual void InitializeComponent() override;
     virtual void TickComponent(float DeltaTime) override;
 
 private:
-    bool OverlapSphereToBox(UBoxComponent* Other, FHitResult& OutHitResult);
-    bool OverlapSphereToSphere(USphereComponent* Other, FHitResult& OutHitResult);
-    bool OverlapSphereToCapsule(UCapsuleComponent* Other, FHitResult& OutHitResult);
+    bool OverlapSphereToBox(UBoxComponent* OtherBox, FHitResult& OutHitResult) const;
+    bool OverlapSphereToSphere(USphereComponent* OtherSphere, FHitResult& OutHitResult) const;
+    bool OverlapSphereToCapsule(UCapsuleComponent* OtherCapsule, FHitResult& OutHitResult) const;
 
 public:
     FORCEINLINE float GetRadius() const { return SphereRadius; }
     FORCEINLINE void SetRadius(const float InRadius) { SphereRadius = InRadius; }
+
 
 private:
     float SphereRadius;

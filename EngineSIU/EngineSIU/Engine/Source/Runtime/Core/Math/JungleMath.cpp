@@ -178,6 +178,21 @@ FVector JungleMath::QuaternionToEuler(const FQuat& quat)
     euler.X = FMath::RadiansToDegrees(atan2(sinRoll, cosRoll));
     return euler;
 }
+
+FVector JungleMath::ClosestPointOnSegment(const FVector& Point, const FVector& A, const FVector& B)
+{
+    const FVector AB = B - A;
+    const float AB2 = AB | AB;                              // Dot(AB, AB)
+    if (AB2 <= KINDA_SMALL_NUMBER)                    // A와 B가 거의 동일한 경우
+    {
+        return A;
+    }
+    float t = (Point - A) | AB;                       // Dot(Point-A, AB)
+    t = t / AB2;                                      // 무한 직선 상의 파라메터
+    t = FMath::Clamp(t, 0.0f, 1.0f);                  // 선분 범위에 한정
+    return A + AB * t;                                // 선분 위 점
+}
+
 FVector JungleMath::FVectorRotate(FVector& origin, const FRotator& InRotation)
 {
     return InRotation.ToQuaternion().RotateVector(origin);

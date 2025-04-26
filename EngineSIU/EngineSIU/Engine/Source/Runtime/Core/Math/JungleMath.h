@@ -20,4 +20,6 @@ public:
     static FMatrix CreateRotationMatrix(const FVector& rotation);
     static FQuat EulerToQuaternion(const FVector& eulerDegrees);
     static FVector QuaternionToEuler(const FQuat& quat);
+
+    static FVector ClosestPointOnSegment(const FVector& Point, const FVector& A, const FVector& B);
 };
