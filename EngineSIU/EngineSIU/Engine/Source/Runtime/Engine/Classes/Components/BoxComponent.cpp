@@ -1,10 +1,9 @@
 #include "BoxComponent.h"
 
-#include <set>
-
 #include "CapsuleComponent.h"
 #include "SphereComponent.h"
 #include "Engine/Physics/CollisionDispatcher.h"
+#include "Engine/Physics/PhysicsSystem.h"
 #include "Math/JungleMath.h"
 #include "UObject/Casts.h"
 
@@ -31,52 +30,52 @@ UBoxComponent::~UBoxComponent()
 
 void UBoxComponent::Serialize(FArchive& Ar)
 {
-    UShapeComponent::Serialize(Ar);
+    Super::Serialize(Ar);
 }
 
 void UBoxComponent::UninitializeComponent()
 {
-    UShapeComponent::UninitializeComponent();
+    Super::UninitializeComponent();
 }
 
 void UBoxComponent::BeginPlay()
 {
-    UShapeComponent::BeginPlay();
+    Super::BeginPlay();
 }
 
 void UBoxComponent::OnComponentDestroyed()
 {
-    UShapeComponent::OnComponentDestroyed();
+    Super::OnComponentDestroyed();
 }
 
 void UBoxComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-    UShapeComponent::EndPlay(EndPlayReason);
+    Super::EndPlay(EndPlayReason);
 }
 
 void UBoxComponent::DestroyComponent()
 {
-    UShapeComponent::DestroyComponent();
+    Super::DestroyComponent();
 }
 
 UObject* UBoxComponent::Duplicate(UObject* InOuter)
 {
-    return UShapeComponent::Duplicate(InOuter);
+    return Super::Duplicate(InOuter);
 }
 
 int UBoxComponent::CheckRayIntersection(FVector& rayOrigin, FVector& rayDirection, float& pfNearHitDistance)
 {
-    return UShapeComponent::CheckRayIntersection(rayOrigin, rayDirection, pfNearHitDistance);
+    return Super::CheckRayIntersection(rayOrigin, rayDirection, pfNearHitDistance);
 }
 
 void UBoxComponent::GetProperties(TMap<FString, FString>& OutProperties) const
 {
-    UShapeComponent::GetProperties(OutProperties);
+    Super::GetProperties(OutProperties);
 }
 
 void UBoxComponent::SetProperties(const TMap<FString, FString>& InProperties)
 {
-    UShapeComponent::SetProperties(InProperties);
+    Super::SetProperties(InProperties);
 }
 
 bool UBoxComponent::CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult)

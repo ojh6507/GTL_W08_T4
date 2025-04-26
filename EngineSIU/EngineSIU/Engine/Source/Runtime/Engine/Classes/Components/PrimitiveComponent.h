@@ -5,8 +5,7 @@
 #include "Engine/Physics/OverlapInfo.h"
 
 struct FOverlapInfo;
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(FComponentHitSignature, UPrimitiveComponent*, AActor*, UPrimitiveComponent*, FVector,
-                                              const FHitResult&);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(FComponentHitSignature, UPrimitiveComponent*, AActor*, UPrimitiveComponent*, FVector, const FHitResult&);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(FComponentBeginOverlapSignature, UPrimitiveComponent*, AActor*, UPrimitiveComponent*, bool,  const FHitResult&);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FComponentEndOverlapSignature, UPrimitiveComponent*, AActor*, UPrimitiveComponent*);
 

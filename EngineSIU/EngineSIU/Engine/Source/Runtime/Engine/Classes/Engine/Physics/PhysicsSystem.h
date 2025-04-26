@@ -1,28 +1,54 @@
 #pragma once
 
+#include "HitResult.h"
+#include "OverlapInfo.h"
 #include "Container/Array.h"
 #include "World/World.h"
 
+class UPrimitiveComponent;
 class UShapeComponent;
 
 class FPhysicsSystem
 {
 public:
-    static void RegisterComponent(UShapeComponent* InShapeComponent);
-    static void UnRegisterComponent(UShapeComponent* InShapeComponent);
+    static FPhysicsSystem& Get()
+    {
+        static FPhysicsSystem Instance;
+        return Instance;
+    }
+    
+    void RegisterComponent(UShapeComponent* InShapeComponent);
+    void UnRegisterComponent(UShapeComponent* InShapeComponent);
 
-    static void UpdateCollisions();
+    void UpdateCollisions();
 
 private:
-    
     // 1) Broad-phase 후보 추출
-    static void BroadPhase(std::vector<std::pair<UShapeComponent*,UShapeComponent*>>& OutPairs);
+    void BroadPhase(TArray<TPair<UShapeComponent*, UShapeComponent*>>& OutPairs);
 
     // 2) Narrow-phase 검사
-    static void NarrowPhase(const std::vector<std::pair<UShapeComponent*,UShapeComponent*>>& Pairs);
+    void NarrowPhase(TArray<TPair<UShapeComponent*, UShapeComponent*>>& Pairs);
 
     // 3) 이벤트 브로드캐스트
-    static void DispatchEvents();
+    void DispatchEvents();
 private:
-    static TArray<UShapeComponent*> ShapeComponents;
+    FPhysicsSystem() = default;
+    ~FPhysicsSystem() = default;
+
+    // 복사/대입 금지
+    FPhysicsSystem(const FPhysicsSystem&) = delete;
+    FPhysicsSystem& operator=(const FPhysicsSystem&) = delete;
+
+    // (원하면 이동 금지도 추가)
+    FPhysicsSystem(FPhysicsSystem&&) = delete;
+    FPhysicsSystem& operator=(FPhysicsSystem&&) = delete;
+
+    // 충돌 체크할 ShapeComponent들
+    TArray<UShapeComponent*> ShapeComponents;
+    // 충돌 히트 이벤트
+    TArray<TPair<UPrimitiveComponent*, FHitResult>> PendingHitEvents;
+    // BeginOverlap 이벤트
+    TArray<TPair<UPrimitiveComponent*, FOverlapInfo>> PendingBeginOverlap;
+    // EndOverlap 이벤트
+    TArray<TPair<UPrimitiveComponent*, FOverlapInfo>> PendingEndOverlap;
 };

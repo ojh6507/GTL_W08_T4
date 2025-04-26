@@ -18,52 +18,52 @@ USphereComponent::~USphereComponent()
 
 void USphereComponent::Serialize(FArchive& Ar)
 {
-    UShapeComponent::Serialize(Ar);
+    Super::Serialize(Ar);
 }
 
 void USphereComponent::UninitializeComponent()
 {
-    UShapeComponent::UninitializeComponent();
+    Super::UninitializeComponent();
 }
 
 void USphereComponent::BeginPlay()
 {
-    UShapeComponent::BeginPlay();
+    Super::BeginPlay();
 }
 
 void USphereComponent::OnComponentDestroyed()
 {
-    UShapeComponent::OnComponentDestroyed();
+    Super::OnComponentDestroyed();
 }
 
 void USphereComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-    UShapeComponent::EndPlay(EndPlayReason);
+    Super::EndPlay(EndPlayReason);
 }
 
 void USphereComponent::DestroyComponent()
 {
-    UShapeComponent::DestroyComponent();
+    Super::DestroyComponent();
 }
 
 UObject* USphereComponent::Duplicate(UObject* InOuter)
 {
-    return UShapeComponent::Duplicate(InOuter);
+    return Super::Duplicate(InOuter);
 }
 
 int USphereComponent::CheckRayIntersection(FVector& rayOrigin, FVector& rayDirection, float& pfNearHitDistance)
 {
-    return UShapeComponent::CheckRayIntersection(rayOrigin, rayDirection, pfNearHitDistance);
+    return Super::CheckRayIntersection(rayOrigin, rayDirection, pfNearHitDistance);
 }
 
 void USphereComponent::GetProperties(TMap<FString, FString>& OutProperties) const
 {
-    UShapeComponent::GetProperties(OutProperties);
+    Super::GetProperties(OutProperties);
 }
 
 void USphereComponent::SetProperties(const TMap<FString, FString>& InProperties)
 {
-    UShapeComponent::SetProperties(InProperties);
+    Super::SetProperties(InProperties);
 }
 
 bool USphereComponent::CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult)

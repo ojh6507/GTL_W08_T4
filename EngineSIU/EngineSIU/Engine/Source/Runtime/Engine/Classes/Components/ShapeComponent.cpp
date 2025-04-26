@@ -1,5 +1,7 @@
 #include "ShapeComponent.h"
 
+#include "Engine/Physics/PhysicsSystem.h"
+
 UShapeComponent::UShapeComponent()
 {
 }
@@ -10,62 +12,66 @@ UShapeComponent::~UShapeComponent()
 
 void UShapeComponent::Serialize(FArchive& Ar)
 {
-    UPrimitiveComponent::Serialize(Ar);
+    Super::Serialize(Ar);
 }
 
 void UShapeComponent::UninitializeComponent()
 {
-    UPrimitiveComponent::UninitializeComponent();
+    Super::UninitializeComponent();
 }
 
 void UShapeComponent::InitializeComponent()
 {
-    UPrimitiveComponent::InitializeComponent();
+    Super::InitializeComponent();
+    // TODO : 일단 테스트용 나중에 빼기
+    FPhysicsSystem::Get().RegisterComponent(this);
 }
 
 void UShapeComponent::BeginPlay()
 {
-    UPrimitiveComponent::BeginPlay();
+    Super::BeginPlay();
+    FPhysicsSystem::Get().RegisterComponent(this);
 }
 
 void UShapeComponent::TickComponent(float DeltaTime)
 {
-    UPrimitiveComponent::TickComponent(DeltaTime);
+    Super::TickComponent(DeltaTime);
 }
 
 void UShapeComponent::OnComponentDestroyed()
 {
-    UPrimitiveComponent::OnComponentDestroyed();
+    Super::OnComponentDestroyed();
 }
 
 void UShapeComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-    UPrimitiveComponent::EndPlay(EndPlayReason);
+    Super::EndPlay(EndPlayReason);
+    FPhysicsSystem::Get().UnRegisterComponent(this);
 }
 
 void UShapeComponent::DestroyComponent()
 {
-    UPrimitiveComponent::DestroyComponent();
+    Super::DestroyComponent();
 }
 
 UObject* UShapeComponent::Duplicate(UObject* InOuter)
 {
-    return UPrimitiveComponent::Duplicate(InOuter);
+    return Super::Duplicate(InOuter);
 }
 
 int UShapeComponent::CheckRayIntersection(FVector& rayOrigin, FVector& rayDirection, float& pfNearHitDistance)
 {
-    return UPrimitiveComponent::CheckRayIntersection(rayOrigin, rayDirection, pfNearHitDistance);
+    return Super::CheckRayIntersection(rayOrigin, rayDirection, pfNearHitDistance);
 }
 
 void UShapeComponent::GetProperties(TMap<FString, FString>& OutProperties) const
 {
-    UPrimitiveComponent::GetProperties(OutProperties);
+    Super::GetProperties(OutProperties);
 }
 
 void UShapeComponent::SetProperties(const TMap<FString, FString>& InProperties)
 {
-    UPrimitiveComponent::SetProperties(InProperties);
+    Super::SetProperties(InProperties);
 }
 
 bool UShapeComponent::CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult)

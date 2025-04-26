@@ -15,57 +15,57 @@ UCapsuleComponent::~UCapsuleComponent()
 
 void UCapsuleComponent::Serialize(FArchive& Ar)
 {
-    UShapeComponent::Serialize(Ar);
+    Super::Serialize(Ar);
 }
 
 void UCapsuleComponent::UninitializeComponent()
 {
-    UShapeComponent::UninitializeComponent();
+    Super::UninitializeComponent();
 }
 
 void UCapsuleComponent::InitializeComponent()
 {
-    UShapeComponent::InitializeComponent();
+    Super::InitializeComponent();
 }
 
 void UCapsuleComponent::BeginPlay()
 {
-    UShapeComponent::BeginPlay();
+    Super::BeginPlay();
 }
 
 void UCapsuleComponent::TickComponent(float DeltaTime)
 {
-    UShapeComponent::TickComponent(DeltaTime);
+    Super::TickComponent(DeltaTime);
 }
 
 void UCapsuleComponent::OnComponentDestroyed()
 {
-    UShapeComponent::OnComponentDestroyed();
+    Super::OnComponentDestroyed();
 }
 
 void UCapsuleComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-    UShapeComponent::EndPlay(EndPlayReason);
+    Super::EndPlay(EndPlayReason);
 }
 
 void UCapsuleComponent::DestroyComponent()
 {
-    UShapeComponent::DestroyComponent();
+    Super::DestroyComponent();
 }
 
 UObject* UCapsuleComponent::Duplicate(UObject* InOuter)
 {
-    return UShapeComponent::Duplicate(InOuter);
+    return Super::Duplicate(InOuter);
 }
 
 void UCapsuleComponent::GetProperties(TMap<FString, FString>& OutProperties) const
 {
-    UShapeComponent::GetProperties(OutProperties);
+    Super::GetProperties(OutProperties);
 }
 
 void UCapsuleComponent::SetProperties(const TMap<FString, FString>& InProperties)
 {
-    UShapeComponent::SetProperties(InProperties);
+    Super::SetProperties(InProperties);
 }
 
 bool UCapsuleComponent::CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult)

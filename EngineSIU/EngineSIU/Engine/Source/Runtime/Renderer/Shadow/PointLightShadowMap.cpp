@@ -1,4 +1,6 @@
 #include "PointLightShadowMap.h"
+
+#include "ShadowDefine.h"
 #include "UObject/UObjectIterator.h"
 #include "Engine/Classes/Components/Light/PointLightComponent.h"
 #include "D3D11RHI/DXDBufferManager.h"
