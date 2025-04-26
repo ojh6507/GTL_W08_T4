@@ -13,11 +13,6 @@ UCapsuleComponent::~UCapsuleComponent()
 {
 }
 
-void UCapsuleComponent::Serialize(FArchive& Ar)
-{
-    Super::Serialize(Ar);
-}
-
 void UCapsuleComponent::UninitializeComponent()
 {
     Super::UninitializeComponent();
@@ -55,17 +50,34 @@ void UCapsuleComponent::DestroyComponent()
 
 UObject* UCapsuleComponent::Duplicate(UObject* InOuter)
 {
-    return Super::Duplicate(InOuter);
+    ThisClass* NewComponent = Cast<ThisClass>(Super::Duplicate(InOuter));
+    CapsuleHalfHeight = NewComponent->CapsuleHalfHeight;
+    CapsuleRadius = NewComponent->CapsuleRadius;
+    
+    return NewComponent;
 }
 
 void UCapsuleComponent::GetProperties(TMap<FString, FString>& OutProperties) const
 {
     Super::GetProperties(OutProperties);
+    OutProperties.Add(TEXT("CapsuleHalfHeight"), FString::Printf(TEXT("%f"), CapsuleHalfHeight));
+    OutProperties.Add(TEXT("CapsuleRadius"), FString::Printf(TEXT("%f"), CapsuleRadius));
 }
 
 void UCapsuleComponent::SetProperties(const TMap<FString, FString>& InProperties)
 {
     Super::SetProperties(InProperties);
+    const FString* TempStr = nullptr;
+    TempStr = InProperties.Find(TEXT("CapsuleHalfHeight"));
+    if (TempStr)
+    {
+        CapsuleHalfHeight = FString::ToFloat(*TempStr);
+    }
+    TempStr = InProperties.Find(TEXT("CapsuleRadius"));
+    if (TempStr)
+    {
+        CapsuleRadius = FString::ToFloat(*TempStr);
+    }
 }
 
 bool UCapsuleComponent::CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult)

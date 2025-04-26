@@ -1,6 +1,7 @@
 #include "ShapeComponent.h"
 
 #include "Engine/Physics/PhysicsSystem.h"
+#include "UObject/Casts.h"
 
 UShapeComponent::UShapeComponent()
 {
@@ -8,11 +9,6 @@ UShapeComponent::UShapeComponent()
 
 UShapeComponent::~UShapeComponent()
 {
-}
-
-void UShapeComponent::Serialize(FArchive& Ar)
-{
-    Super::Serialize(Ar);
 }
 
 void UShapeComponent::UninitializeComponent()
@@ -56,7 +52,11 @@ void UShapeComponent::DestroyComponent()
 
 UObject* UShapeComponent::Duplicate(UObject* InOuter)
 {
-    return Super::Duplicate(InOuter);
+    ThisClass* NewComponent = Cast<ThisClass>(Super::Duplicate(InOuter));
+    ShapeColor = NewComponent->ShapeColor;
+    bDrawOnlyIfSelected = NewComponent->bDrawOnlyIfSelected;
+
+    return NewComponent;
 }
 
 int UShapeComponent::CheckRayIntersection(FVector& rayOrigin, FVector& rayDirection, float& pfNearHitDistance)
@@ -67,11 +67,29 @@ int UShapeComponent::CheckRayIntersection(FVector& rayOrigin, FVector& rayDirect
 void UShapeComponent::GetProperties(TMap<FString, FString>& OutProperties) const
 {
     Super::GetProperties(OutProperties);
+    OutProperties.Add(TEXT("ShapeColor"), ShapeColor.ToString());
+    OutProperties.Add(TEXT("bDrawOnlyIfSelected"), bDrawOnlyIfSelected ? TEXT("true") : TEXT("false"));
 }
 
 void UShapeComponent::SetProperties(const TMap<FString, FString>& InProperties)
 {
     Super::SetProperties(InProperties);
+    const FString* TempStr = nullptr;
+    TempStr = InProperties.Find(TEXT("bIsLoop"));
+    if (TempStr)
+    {
+        bDrawOnlyIfSelected = (*TempStr == TEXT("true"));
+    }
+
+    auto SetPropertyHelper = [&InProperties] <typename T, typename Fn>(const FString& Key, T& MemberVariable, const Fn& ConversionFunc)
+    {
+        if (const FString* TempStr = InProperties.Find(Key))
+        {
+            MemberVariable = ConversionFunc(*TempStr);
+        }
+    };
+
+    SetPropertyHelper(TEXT("ShapeColor"), ShapeColor, [](const FString& Str) { FLinearColor Color; Color.InitFromString(Str); return Color; });
 }
 
 bool UShapeComponent::CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult)

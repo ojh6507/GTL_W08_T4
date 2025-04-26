@@ -14,7 +14,6 @@ public:
     virtual void InitializeComponent() override;
     virtual void TickComponent(float DeltaTime) override;
     ~UBoxComponent() override;
-    void Serialize(FArchive& Ar) override;
     void UninitializeComponent() override;
     void BeginPlay() override;
     void OnComponentDestroyed() override;

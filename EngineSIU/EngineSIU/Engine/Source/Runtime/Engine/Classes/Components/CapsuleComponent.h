@@ -10,7 +10,6 @@ class UCapsuleComponent : public UShapeComponent
 public:
     UCapsuleComponent();
     ~UCapsuleComponent() override;
-    void Serialize(FArchive& Ar) override;
     void UninitializeComponent() override;
     void InitializeComponent() override;
     void BeginPlay() override;

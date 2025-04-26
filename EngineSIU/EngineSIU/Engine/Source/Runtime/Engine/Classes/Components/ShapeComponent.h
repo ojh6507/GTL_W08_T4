@@ -8,7 +8,6 @@ class UShapeComponent : public UPrimitiveComponent
 public:
     UShapeComponent();
     ~UShapeComponent() override;
-    void Serialize(FArchive& Ar) override;
     void UninitializeComponent() override;
 
     void InitializeComponent() override;
@@ -32,6 +31,6 @@ public:
     virtual bool CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult);
     
 public:
-    FColor ShapeColor;
+    FLinearColor ShapeColor;
     bool bDrawOnlyIfSelected;
 };

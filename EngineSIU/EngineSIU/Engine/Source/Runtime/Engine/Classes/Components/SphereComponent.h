@@ -11,7 +11,6 @@ class USphereComponent : public UShapeComponent
 public:
     USphereComponent();
     ~USphereComponent() override;
-    void Serialize(FArchive& Ar) override;
     void UninitializeComponent() override;
     void BeginPlay() override;
     void OnComponentDestroyed() override;

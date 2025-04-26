@@ -16,11 +16,6 @@ USphereComponent::~USphereComponent()
 {
 }
 
-void USphereComponent::Serialize(FArchive& Ar)
-{
-    Super::Serialize(Ar);
-}
-
 void USphereComponent::UninitializeComponent()
 {
     Super::UninitializeComponent();
@@ -48,7 +43,10 @@ void USphereComponent::DestroyComponent()
 
 UObject* USphereComponent::Duplicate(UObject* InOuter)
 {
-    return Super::Duplicate(InOuter);
+    ThisClass* NewComponent = Cast<ThisClass>(Super::Duplicate(InOuter));
+    SphereRadius = NewComponent->SphereRadius;
+    
+    return NewComponent;
 }
 
 int USphereComponent::CheckRayIntersection(FVector& rayOrigin, FVector& rayDirection, float& pfNearHitDistance)
@@ -59,11 +57,18 @@ int USphereComponent::CheckRayIntersection(FVector& rayOrigin, FVector& rayDirec
 void USphereComponent::GetProperties(TMap<FString, FString>& OutProperties) const
 {
     Super::GetProperties(OutProperties);
+    OutProperties.Add(TEXT("SphereRadius"), FString::Printf(TEXT("%f"), SphereRadius));
 }
 
 void USphereComponent::SetProperties(const TMap<FString, FString>& InProperties)
 {
     Super::SetProperties(InProperties);
+    const FString* TempStr = nullptr;
+    TempStr = InProperties.Find(TEXT("SphereRadius"));
+    if (TempStr)
+    {
+        SphereRadius = FString::ToFloat(*TempStr);
+    }
 }
 
 bool USphereComponent::CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult)

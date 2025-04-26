@@ -28,11 +28,6 @@ UBoxComponent::~UBoxComponent()
 {
 }
 
-void UBoxComponent::Serialize(FArchive& Ar)
-{
-    Super::Serialize(Ar);
-}
-
 void UBoxComponent::UninitializeComponent()
 {
     Super::UninitializeComponent();
@@ -60,7 +55,10 @@ void UBoxComponent::DestroyComponent()
 
 UObject* UBoxComponent::Duplicate(UObject* InOuter)
 {
-    return Super::Duplicate(InOuter);
+    ThisClass* NewComponent = Cast<ThisClass>(Super::Duplicate(InOuter));
+    BoxExtent = NewComponent->BoxExtent;
+
+    return NewComponent;
 }
 
 int UBoxComponent::CheckRayIntersection(FVector& rayOrigin, FVector& rayDirection, float& pfNearHitDistance)
@@ -71,11 +69,18 @@ int UBoxComponent::CheckRayIntersection(FVector& rayOrigin, FVector& rayDirectio
 void UBoxComponent::GetProperties(TMap<FString, FString>& OutProperties) const
 {
     Super::GetProperties(OutProperties);
+    OutProperties.Add(TEXT("BoxExtent"), BoxExtent.ToString());
 }
 
 void UBoxComponent::SetProperties(const TMap<FString, FString>& InProperties)
 {
     Super::SetProperties(InProperties);
+    const FString* TempStr = nullptr;
+    TempStr = InProperties.Find(TEXT("BoxExtent"));
+    if (TempStr)
+    {
+        BoxExtent.InitFromString(*TempStr);
+    }
 }
 
 bool UBoxComponent::CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult)
