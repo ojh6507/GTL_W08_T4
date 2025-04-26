@@ -1,4 +1,6 @@
 Texture2D FogTexture : register(t103);
+Texture2D SceneTexture : register(t100);
+
 // PostProcessing 추가 시 Texture 추가 (EShaderSRVSlot)
 
 SamplerState CompositingSampler : register(s0);
@@ -35,10 +37,16 @@ PS_Input mainVS(uint VertexID : SV_VertexID)
 
 float4 mainPS(PS_Input input) : SV_Target
 {
-    float2 UV = input.UV;
-    float4 FogColor = FogTexture.Sample(CompositingSampler, UV);
+    float2 uv = input.UV;
+    float2 coord = (floor(input.UV * 500) + 0.5) / 500;
+    float4 c = SceneTexture.Sample(CompositingSampler, uv);
+    float4 final = c; //* float4(0.01f, 0.01, 0.01, 0.5);
+    
+    
+    float3 col = SceneTexture.Sample(CompositingSampler, coord).rgb;
 
-    // PostProcessing Texture 추가
-    float4 FinalColor = FogColor;
-    return FinalColor;
+    col = floor(col * 5) / 5;
+    
+    return final; // float4(col, 1);
+
 }

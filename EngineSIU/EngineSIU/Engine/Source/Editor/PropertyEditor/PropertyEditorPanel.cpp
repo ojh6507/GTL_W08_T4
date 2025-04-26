@@ -426,13 +426,16 @@ void PropertyEditorPanel::Render()
             int NumSpotLights = 0;
             for (const auto iter : TObjectRange<USpotLightComponent>())
             {
-                if (iter != SpotLightComp)
+                if (iter->GetWorld() == GEngine->ActiveWorld)
                 {
-                    NumSpotLights++;
-                }
-                else
-                {
-                    break;
+                    if (iter != SpotLightComp)
+                    {
+                        NumSpotLights++;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -511,13 +514,16 @@ void PropertyEditorPanel::Render()
             int NumDirectionalLight = 0;
             for (const auto iter : TObjectRange<UDirectionalLightComponent>())
             {
-                if (iter != DirectionalLightComp)
+                if (iter->GetWorld() == GEngine->ActiveWorld)
                 {
-                    NumDirectionalLight++;
-                }
-                else
-                {
-                    break;
+                    if (iter != DirectionalLightComp)
+                    {
+                        NumDirectionalLight++;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
 

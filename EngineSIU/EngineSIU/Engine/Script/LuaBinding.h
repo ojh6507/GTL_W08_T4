@@ -137,7 +137,7 @@ namespace LuaBindings
     void BindFName(sol::state& lua)
     {
         lua.new_usertype<FName>("FName",
-            // 생성자
+            sol::call_constructor,
             sol::constructors<
             FName(),              // FName.new() - None 상태
             FName(const char*),   // FName.new("MyName")
@@ -181,6 +181,7 @@ namespace LuaBindings
     void BindFVector2D(sol::state& lua)
     {
         lua.new_usertype<FVector2D>("FVector2D",
+            sol::call_constructor,
             sol::constructors<FVector2D(), FVector2D(float, float), FVector2D(float)>(),
             "X", &FVector2D::X, "Y", &FVector2D::Y,
             "ZeroVector", sol::var(FVector2D::ZeroVector), "OneVector", sol::var(FVector2D::OneVector),
@@ -215,6 +216,7 @@ namespace LuaBindings
     void BindFVector(sol::state& lua)
     {
         lua.new_usertype<FVector>("FVector",
+            sol::call_constructor,
             sol::constructors<FVector(), FVector(float, float, float), FVector(float), FVector(const FRotator&)>(), // FRotator 바인딩 필요
             "X", &FVector::X, "Y", &FVector::Y, "Z", &FVector::Z,
             // 정적 멤버들
