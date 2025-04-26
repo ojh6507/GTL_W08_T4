@@ -1,5 +1,10 @@
 #include "CapsuleComponent.h"
 
+#include "BoxComponent.h"
+#include "SphereComponent.h"
+#include "Engine/Physics/CollisionDispatcher.h"
+#include "UObject/Casts.h"
+
 UCapsuleComponent::UCapsuleComponent()
 {
 }
@@ -65,20 +70,20 @@ void UCapsuleComponent::SetProperties(const TMap<FString, FString>& InProperties
 
 bool UCapsuleComponent::CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult)
 {
-    return UShapeComponent::CheckOverlapComponent(Other, OutHitResult);
-}
+    if (UBoxComponent* OtherBox = Cast<UBoxComponent>(Other))
+    {
+        return FCollisionDispatcher::OverlapCapsuleToBox(this, OtherBox, OutHitResult);
+    }
 
-bool UCapsuleComponent::OverlapCapsuleToBox(UBoxComponent* Other, FHitResult& OutHitResult)
-{
-    return false;
-}
+    if (USphereComponent* OtherSphere = Cast<USphereComponent>(Other))
+    {
+        return FCollisionDispatcher::OverlapCapsuleToSphere(this, OtherSphere, OutHitResult);
+    }
 
-bool UCapsuleComponent::OverlapCapsuleToSphere(USphereComponent* Other, FHitResult& OutHitResult)
-{
-    return false;
-}
+    if (UCapsuleComponent* OtherCapsule = Cast<UCapsuleComponent>(Other))
+    {
+        return FCollisionDispatcher::OverlapCapsuleToCapsule(this, OtherCapsule, OutHitResult);
+    }
 
-bool UCapsuleComponent::OverlapCapsuleToCapsule(UCapsuleComponent* Other, FHitResult& OutHitResult)
-{
     return false;
 }

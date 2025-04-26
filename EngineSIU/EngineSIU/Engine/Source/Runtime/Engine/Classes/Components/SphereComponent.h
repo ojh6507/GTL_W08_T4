@@ -26,15 +26,9 @@ public:
     virtual void InitializeComponent() override;
     virtual void TickComponent(float DeltaTime) override;
 
-private:
-    bool OverlapSphereToBox(UBoxComponent* OtherBox, FHitResult& OutHitResult) const;
-    bool OverlapSphereToSphere(USphereComponent* OtherSphere, FHitResult& OutHitResult) const;
-    bool OverlapSphereToCapsule(UCapsuleComponent* OtherCapsule, FHitResult& OutHitResult) const;
-
 public:
     FORCEINLINE float GetRadius() const { return SphereRadius; }
     FORCEINLINE void SetRadius(const float InRadius) { SphereRadius = InRadius; }
-
 
 private:
     float SphereRadius;

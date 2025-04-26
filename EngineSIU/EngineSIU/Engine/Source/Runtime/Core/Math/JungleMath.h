@@ -22,4 +22,5 @@ public:
     static FVector QuaternionToEuler(const FQuat& quat);
 
     static FVector ClosestPointOnSegment(const FVector& Point, const FVector& A, const FVector& B);
+    static float SegmentDistToSegment(const FVector& P1, const FVector& P2, const FVector& Q1, const FVector& Q2, FVector& ClosestPoint1, FVector& ClosestPoint2);
 };

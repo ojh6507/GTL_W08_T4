@@ -22,11 +22,6 @@ public:
     void GetProperties(TMap<FString, FString>& OutProperties) const override;
     void SetProperties(const TMap<FString, FString>& InProperties) override;
     bool CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult) override;
-
-private:
-    bool OverlapCapsuleToBox(UBoxComponent* Other, FHitResult& OutHitResult);
-    bool OverlapCapsuleToSphere(USphereComponent* Other, FHitResult& OutHitResult);
-    bool OverlapCapsuleToCapsule(UCapsuleComponent* Other, FHitResult& OutHitResult);
     
 public:
     FORCEINLINE float GetCapsuleRadius() const { return CapsuleRadius; }
