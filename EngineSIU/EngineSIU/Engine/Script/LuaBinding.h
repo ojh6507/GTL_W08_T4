@@ -28,7 +28,6 @@
 // BindCoreTypesForLua 함수에서 올바른 순서로 호출하는 것이 매우 중요합니다.
 // 또한, 아래 플레이스홀더 함수들은 실제 바인딩 코드로 구현되어야 합니다.
 // ------------------------------------
-
 namespace LuaBindings
 {
 
@@ -406,9 +405,17 @@ namespace LuaBindings
             "SetOwner", &AActor::SetOwner,
 
             // 트랜스폼 관련
-            "GetActorLocation", &AActor::GetActorLocation, "GetActorRotation", &AActor::GetActorRotation, "GetActorScale", &AActor::GetActorScale,
-            "SetActorLocation", &AActor::SetActorLocation, "SetActorRotation", &AActor::SetActorRotation, "SetActorScale", &AActor::SetActorScale,
-            "GetActorForwardVector", &AActor::GetActorForwardVector, "GetActorRightVector", &AActor::GetActorRightVector, "GetActorUpVector", &AActor::GetActorUpVector,
+            "GetActorLocation", &AActor::GetActorLocation,
+            "GetActorRotation", &AActor::GetActorRotation, 
+            "GetActorScale", &AActor::GetActorScale,
+            
+            "SetActorLocation", &AActor::SetActorLocation,
+            "SetActorRotation", &AActor::SetActorRotation, 
+            "SetActorScale", &AActor::SetActorScale,
+
+            "GetActorForwardVector", &AActor::GetActorForwardVector, 
+            "GetActorRightVector", &AActor::GetActorRightVector, 
+            "GetActorUpVector", &AActor::GetActorUpVector,
 
             // 에디터 관련
             "GetActorLabel", &AActor::GetActorLabel, // FString 바인딩 필요
@@ -431,6 +438,24 @@ namespace LuaBindings
             },
             "GetClass", &AActor::GetClass // UClass 바인딩 필요
         );
+    }
+
+   void BindInputForLua(sol::state& lua)
+    {
+        // 키 상태 확인 함수 (Windows API 사용)
+        lua["IsKeyDown"] = [](int32 VirtualKey) -> bool {
+            return (GetKeyState(VirtualKey) & 0x8000) != 0;
+            };
+
+        lua["KEY_LEFT"] = VK_LEFT;
+        lua["KEY_UP"] = VK_UP;
+        lua["KEY_RIGHT"] = VK_RIGHT;
+        lua["KEY_DOWN"] = VK_DOWN;
+
+        for (int i = 'A'; i <= 'Z'; i++) {
+            std::string keyName = "KEY_" + std::string(1, (char)i);
+            lua[keyName.c_str()] = i;
+        }
     }
 
     // --- 코어 타입 전체 바인딩 호출 함수 ---
@@ -465,5 +490,5 @@ namespace LuaBindings
         // --- UWorld 등 다른 필요한 타입 바인딩 ---
         // BindUWorld_Placeholder(lua); // SpawnActor 등 사용 시 필요
     }
-
+    
 } // namespace LuaBindings

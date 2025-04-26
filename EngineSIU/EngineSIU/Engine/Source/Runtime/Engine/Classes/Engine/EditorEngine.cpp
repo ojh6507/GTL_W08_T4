@@ -7,7 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "Classes/Engine/AssetManager.h"
 #include "Components/Light/DirectionalLightComponent.h"
-
+#include "Engine/Script/LuaBinding.h"
 namespace PrivateEditorSelection
 {
     static AActor* GActorSelected = nullptr;
@@ -109,6 +109,8 @@ void UEditorEngine::StartPIE()
     {
         std::cerr << "Lua 초기화 실패!" << std::endl;
     }
+    LuaBindings::BindCoreTypesForLua(*GLuaManager.GetState());
+    LuaBindings::BindInputForLua(*GLuaManager.GetState());
 
     FWorldContext& PIEWorldContext = CreateNewWorldContext(EWorldType::PIE);
 
