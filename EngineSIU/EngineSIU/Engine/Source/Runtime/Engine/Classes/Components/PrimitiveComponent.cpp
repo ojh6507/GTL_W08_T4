@@ -220,7 +220,6 @@ void UPrimitiveComponent::BeginComponentOverlap(const FOverlapInfo& OtherOverlap
 
             if (bNotifyActorTouch)
             {
-                // TODO : Actor
                 if (MyActor != nullptr)
                 {
                     MyActor->OnActorBeginOverlap.Broadcast(MyActor, OtherActor);

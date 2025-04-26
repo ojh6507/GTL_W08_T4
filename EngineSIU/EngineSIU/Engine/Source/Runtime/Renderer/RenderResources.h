@@ -78,6 +78,7 @@ struct FRenderResourcesDebug
         TArray<class UStaticMeshComponent*> StaticMesh;
         TArray<class ULightComponentBase*> Light;
         TArray<class UHeightFogComponent*> Fog;
+        TArray<class USphereComponent*> Sphere;
     } Components;
 
     struct FShaderResourceContainer

@@ -11,7 +11,7 @@ USphereComponent::USphereComponent()
 {
     SetType(StaticClass()->GetName());
     // Test용 하드 코딩
-    SphereRadius = 1;
+    SphereRadius = 2;
 }
 
 USphereComponent::~USphereComponent()

@@ -7,6 +7,7 @@
 
 #include "UnrealClient.h"
 #include "BaseGizmos/GizmoBaseComponent.h"
+#include "Components/SphereComponent.h"
 #include "D3D11RHI/GraphicDevice.h"
 #include "Engine/FLoaderOBJ.h"
 #include "Engine/Classes/Actors/Player.h"
@@ -449,6 +450,11 @@ void FEditorRenderPass::PrepareRender()
                 }
             }
 
+            if (USphereComponent* sphere = Cast<USphereComponent>(comp))
+            {
+                Resources.Components.Sphere.Add(sphere);
+            }
+
             // light
             if (ULightComponentBase* light = Cast<ULightComponentBase>(comp))
             {
@@ -601,7 +607,14 @@ void FEditorRenderPass::RenderPointlightInstanced()
             b.Radius = PointLightComp->GetRadius();
             BufferAll.Add(b);
         }
+    }
 
+    for (USphereComponent* SphereComp : Resources.Components.Sphere)
+    {
+        FConstantBufferDebugSphere b;
+        b.Position = SphereComp->GetWorldLocation();
+        b.Radius = SphereComp->GetRadius();
+        BufferAll.Add(b);
     }
 
     PrepareConstantbufferPointlight();
