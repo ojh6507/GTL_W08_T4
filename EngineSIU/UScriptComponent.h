@@ -31,7 +31,7 @@ public:
 
     // 스크립트에서 호출할 함수 등록
     void RegisterLuaFunctions(sol::state& lua);
-
+    void RegisterLuaInputFunction(sol::state& lua);
 private:
     FString ScriptPath;
     bool bIsScriptLoaded;

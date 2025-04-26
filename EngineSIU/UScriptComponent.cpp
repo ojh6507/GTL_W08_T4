@@ -162,6 +162,26 @@ void UScriptComponent::RegisterLuaFunctions(sol::state& lua)
     lua["GetComponentOwner"] = [this]() {
         return GetOwner();
         };
+
+    RegisterLuaInputFunction(lua);
+}
+
+void UScriptComponent::RegisterLuaInputFunction(sol::state& lua)
+{
+    // 키 상태 확인 함수 (Windows API 사용)
+    lua["IsKeyDown"] = [](int32 VirtualKey) -> bool {
+        return (GetKeyState(VirtualKey) & 0x8000) != 0;
+        };
+
+    lua["KEY_LEFT"] = VK_LEFT;
+    lua["KEY_UP"] = VK_UP;
+    lua["KEY_RIGHT"] = VK_RIGHT;
+    lua["KEY_DOWN"] = VK_DOWN;
+
+    for (int i = 'A'; i <= 'Z'; i++) {
+        std::string keyName = "KEY_" + std::string(1, (char)i);
+        lua[keyName.c_str()] = i;
+    }
 }
 
 void UScriptComponent::CallScriptFunction(const char* functionName)
