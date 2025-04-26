@@ -22,19 +22,19 @@ public:
     virtual UObject* Duplicate(UObject* InOuter) override;
 
     // 스크립트 관련 함수
-    bool LoadScript(const std::string& scriptPath);
+    bool LoadScript(const FString& InScriptPath);
     void OnOverlap(AActor* OtherActor);
 
-    void SetScriptPath(const std::string& path) { scriptPath = path; }
+    void SetScriptPath(const FString& Path) { ScriptPath = Path; }
     // 스크립트 경로 반환
-    const std::string& GetScriptPath() const { return scriptPath; }
+    const FString& GetScriptPath() const { return ScriptPath; }
 
     // 스크립트에서 호출할 함수 등록
     void RegisterLuaFunctions(sol::state& lua);
     void RegisterLuaInputFunction(sol::state& lua);
 private:
-    std::string scriptPath;
-    bool isScriptLoaded;
+    FString ScriptPath;
+    bool bIsScriptLoaded;
 
     // 스크립트 함수 호출 유틸리티
     void CallScriptFunction(const char* functionName);
