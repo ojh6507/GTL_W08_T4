@@ -29,13 +29,10 @@ public:
     // 스크립트 경로 반환
     const FString& GetScriptPath() const { return ScriptPath; }
 
-    // 스크립트에서 호출할 함수 등록
-    void RegisterLuaFunctions(sol::state& lua);
-    void RegisterLuaInputFunction(sol::state& lua);
 private:
     FString ScriptPath;
     bool bIsScriptLoaded;
-
+    sol::environment LuaScriptEnv;
     // 스크립트 함수 호출 유틸리티
     void CallScriptFunction(const char* functionName);
     void CallScriptFunction(const char* functionName, float value);

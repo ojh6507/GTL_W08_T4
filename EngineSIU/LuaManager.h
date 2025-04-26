@@ -13,7 +13,7 @@ extern "C" {
 
 class LuaManager {
 private:
-    sol::state lua;
+    std::unique_ptr<sol::state> lua;
     bool initialized;
 
     void RegisterEngineAPI();
@@ -22,7 +22,7 @@ public:
     LuaManager();
     ~LuaManager();
 
-    sol::state& GetState();
+    sol::state* GetState();
 
     bool Initialize();
     void Cleanup();

@@ -3,7 +3,6 @@
 #include "UObject/Casts.h"
 
 
-
 void ULevel::InitLevel(UWorld* InOwningWorld)
 {
     OwningWorld = InOwningWorld;
@@ -49,6 +48,7 @@ UObject* ULevel::Duplicate(UObject* InOuter)
                 bool success = NewScriptComp->LoadScript(OriginalScriptComp->GetScriptPath());
                 std::cout << "PIE: 스크립트 로드 " << (success ? "성공" : "실패")
                     << " - " << *OriginalScriptComp->GetScriptPath() << std::endl;
+
             }
         }
         // 복제된 액터를 새 레벨에 추가
