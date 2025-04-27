@@ -35,7 +35,7 @@ private:
     bool bIsScriptLoaded;
     sol::environment LuaScriptEnv;
     // 스크립트 함수 호출 유틸리티
-    void CallScriptFunction(const char* functionName);
-    void CallScriptFunction(const char* functionName, float value);
-    void CallScriptFunction(const char* functionName, AActor* actor);
+    void CallScriptFunction(const char* FunctionName);
+    void CallScriptFunction(const char* FunctionName, float Value);
+    void CallScriptFunction(const char* FunctionName, AActor* OtherActor);
 };

@@ -47,7 +47,6 @@ void UStaticMeshComponent::SetProperties(const TMap<FString, FString>& InPropert
     Super::SetProperties(InProperties);
     const FString* TempStr = nullptr;
 
-    
     // --- StaticMesh 설정 ---
     TempStr = InProperties.Find(TEXT("StaticMeshPath"));
     if (TempStr) // 키가 존재하는지 확인
@@ -55,7 +54,6 @@ void UStaticMeshComponent::SetProperties(const TMap<FString, FString>& InPropert
         if (*TempStr != TEXT("None")) // 값이 "None"이 아닌지 확인
         {
             // 경로 문자열로 UStaticMesh 에셋 로드 시도
-           
             if (UStaticMesh* MeshToSet = FManagerOBJ::CreateStaticMesh(*TempStr))
             {
                 SetStaticMesh(MeshToSet); // 성공 시 메시 설정

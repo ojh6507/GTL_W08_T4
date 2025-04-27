@@ -22,8 +22,10 @@ public:
     // Iterator를 사용하기 위함
     auto begin() noexcept { return ContainerPrivate.begin(); }
     auto end() noexcept { return ContainerPrivate.end(); }
+    auto back() noexcept { return ContainerPrivate.back(); }
     auto begin() const noexcept { return ContainerPrivate.begin(); }
     auto end() const noexcept { return ContainerPrivate.end(); }
+    auto back() const noexcept { return ContainerPrivate.back(); }
     auto rbegin() noexcept { return ContainerPrivate.rbegin(); }
     auto rend() noexcept { return ContainerPrivate.rend(); }
     auto rbegin() const noexcept { return ContainerPrivate.rbegin(); }
