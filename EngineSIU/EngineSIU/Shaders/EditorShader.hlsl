@@ -268,57 +268,6 @@ static const float3 XZQuadPos[12] =
     float3(1, 0, -1), float3(-1, 0, 1), float3(-1, 0, -1),
 };
 
-/*
-PS_INPUT_GRID gridVS(uint vertexID : SV_VertexID)
-{
-    // 상수버퍼의 CaemerLookAt : (screenWidth, screenHeight, ViewMode)
-    
-    PS_INPUT_GRID output;
-    float viewMode = CameraLookAt.z;
-    float gridScale = 1000000.0f; // 최종 그리드 크기
-    float3 pos;
-    if (viewMode <= 2.0)
-    {
-        pos = XYQuadPos[vertexID];
-    }
-    else if (viewMode <= 4.0)
-    {
-        pos = XZQuadPos[vertexID];
-    }
-    else
-    {
-        pos = YZQuadPos[vertexID];
-    }
-    float3 vPos3 = pos * gridScale; // 정점 정의 거꾸로 되있었음..
-    
-    // 뷰모드에 따라 다른 카메라 오프셋 적용
-    float3 offset = float3(0.0, 0.0, 0.0);
-    if (viewMode <= 2.0)
-    {
-        offset = float3(ViewWorldLocation.x, ViewWorldLocation.y, 0.0);
-    }
-    else if (viewMode <= 4.0)
-    {
-        offset = float3(0.0, ViewWorldLocation.x, ViewWorldLocation.z);
-    }
-    else
-    {
-        offset = float3(ViewWorldLocation.y, 0.0, ViewWorldLocation.z);
-    }
-    vPos3 += offset;
-    
-    float4 vPos4 = float4(vPos3, 1.0f);
-    vPos4 = mul(vPos4, ViewMatrix);
-    vPos4 = mul(vPos4, ProjectionMatrix);
-    output.Position = vPos4;
-    output.WorldPos = vPos3;
-    output.Deriv = 2.0 / CameraLookAt.xy;
-    output.ViewMode = viewMode;
-    
-    return output;
-}
-*/
-
 float log10f(float x)
 {
     return log(x) / log(10.0);
@@ -365,74 +314,6 @@ struct PS_OUTPUT
     float4 Color : SV_Target;
     float Depth : SV_Depth;
 };
-
-/*
-PS_OUTPUT gridPS(PS_INPUT_GRID input)
-{
-    PS_OUTPUT output;
-    
-    // 기본 상수 값들
-    const float gGridSize = 5.0;
-    const float gGridMinPixelsBetweenCells = 0.5;
-    const float gGridCellSize = 1.0;
-    const float4 gGridColorThick = float4(0.3, 0.3, 0.3, 1.0);
-    const float4 gGridColorThin = float4(0.2, 0.2, 0.2, 1.0);
-    
-    // 뷰모드에 따라 사용할 평면 좌표
-    float2 planeCoords = GetPlaneCoords(input.WorldPos, input.ViewMode);
-    float2 dvx = float2(ddx(planeCoords.x), ddy(planeCoords.x));
-    float2 dvy = float2(ddx(planeCoords.y), ddy(planeCoords.y));
-    
-    // 최소값 클램핑 - 한 픽셀에서의 변화량이 미미할 때 떨림 현상 방지용 (효과는 없음)
-    float epsilon = 1e-3;
-    float lx = max(length(dvx), epsilon);
-    float ly = max(length(dvy), epsilon);
-    float2 dudv = float2(lx, ly);
-    float l = length(dudv);
-
-    // LOD 계산 (log10 기반)
-    float LOD = max(0.0, log10f(l * gGridMinPixelsBetweenCells / gGridCellSize) + 1.0);
-
-    float GridCellSizeLod0 = gGridCellSize * pow(10.0, floor(LOD));
-    float GridCellSizeLod1 = GridCellSizeLod0 * 10.0;
-    float GridCellSizeLod2 = GridCellSizeLod1 * 10.0;
-
-    dudv *= 4.0;
-
-    // 뷰모드에 따라 모듈러 연산에 전달할 2D 성분 결정
-    float Lod0a = ComputeLODAlpha(input.WorldPos, GridCellSizeLod0, dudv, input.ViewMode);
-    float Lod1a = ComputeLODAlpha(input.WorldPos, GridCellSizeLod1, dudv, input.ViewMode);
-    float Lod2a = ComputeLODAlpha(input.WorldPos, GridCellSizeLod2, dudv, input.ViewMode);
-    
-    // LOD 페이드 (LOD의 소수 부분)
-    float LODFade = frac(LOD);
-    float4 Color;
-    if (Lod2a > 0.0)
-    {
-        Color = gGridColorThick;
-        Color.a *= Lod2a;
-    }
-    else if (Lod1a > 0.0)
-    {
-        Color = lerp(gGridColorThick, gGridColorThin, LODFade);
-        Color.a *= Lod1a;
-    }
-    else
-    {
-        Color = gGridColorThin;
-        Color.a *= (Lod0a * LODFade);
-    }
-
-    // 카메라와의 거리 기반 페이드아웃 ( TOFIX: 여기선 XY 평면을 기준으로함)
-    float OpacityFalloff = (1.0 - saturate(length(input.WorldPos.xy - ViewWorldLocation.xy) / gGridSize));
-    Color.a *= OpacityFalloff;
-
-    output.Color = Color;
-    output.Depth = 0.9999999; // 월드 그리드는 강제로 먼 깊이값 부여 (Forced to be Occluded ALL THE TIME)
-    return output;
-}
-*/
-
 
 
 /////////////////////////////////////////////
@@ -533,6 +414,27 @@ PS_INPUT arrowVS(VS_INPUT input)
 }
 
 float4 arrowPS(PS_INPUT input) : SV_Target
+{
+    return input.color;
+}
+
+PS_INPUT capsuleVS(VS_INPUT_POS_ONLY input, uint instanceID : SV_InstanceID)
+{
+    PS_INPUT output;
+    
+    float4 pos;
+    pos = mul(input.position, DataCapsule[instanceID].WorldMatrix);
+    pos = mul(pos, ViewMatrix);
+    pos = mul(pos, ProjectionMatrix);
+    
+    output.position = pos;
+    
+    output.color = float4(1.0, 0.7, 0.7, 1.0);
+
+    return output;
+}
+
+float4 capsulePS(PS_INPUT input) : SV_Target
 {
     return input.color;
 }

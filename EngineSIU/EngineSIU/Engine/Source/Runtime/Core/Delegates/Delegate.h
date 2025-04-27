@@ -80,7 +80,17 @@ public:
 	        return Func(std::forward<ParamTypes>(Params)...);
 	    };
 	}
-
+    
+    // 객체 멤버 함수 바인딩 (raw 포인터)
+    template <typename UserClass>
+    void BindRaw(UserClass* Obj, ReturnType(UserClass::*FuncPtr)(ParamTypes...))
+	{
+	    Func = [Obj, FuncPtr](ParamTypes... Args)
+	    {
+	        return (Obj->*FuncPtr)(std::forward<ParamTypes>(Args)...);
+	    };
+	}
+    
 	void UnBind()
 	{
 		Func = nullptr;
@@ -131,6 +141,16 @@ public:
             }
         );
 		return DelegateHandle;
+	}
+
+    // 새로 추가된 멤버 함수 바인딩
+    template <typename UserClass>
+    FDelegateHandle AddDynamic(UserClass* Obj, void (UserClass::*Func)(ParamTypes...))
+	{
+	    // 람다로 감싸서 내부적으로 저장
+	    return AddLambda([Obj, Func](ParamTypes... Params) {
+            (Obj->*Func)(std::forward<ParamTypes>(Params)...);
+        });
 	}
 
 	bool Remove(FDelegateHandle Handle)

@@ -7,7 +7,6 @@
 
 #include "RendererHelpers.h"
 #include "UnrealClient.h"
-#include "Math/JungleMath.h"
 
 #include "UObject/UObjectIterator.h"
 #include "UObject/Casts.h"
@@ -19,6 +18,7 @@
 #include "Components/StaticMeshComponent.h"
 
 #include "BaseGizmos/GizmoBaseComponent.h"
+#include "Components/BoxComponent.h"
 #include "Engine/EditorEngine.h"
 
 #include "PropertyEditor/ShowFlags.h"
@@ -29,6 +29,8 @@
 #include "Renderer/Shadow/SpotLightShadowMap.h"
 #include "Renderer/Shadow/PointLightShadowMap.h"
 
+#include "Components/SphereComponent.h"
+#include "Components/CapsuleComponent.h"
 
 FStaticMeshRenderPass::FStaticMeshRenderPass()
     : VertexShader(nullptr)
@@ -212,6 +214,29 @@ void FStaticMeshRenderPass::PrepareRender()
         {
             StaticMeshComponents.Add(iter);
         }
+    }
+
+    for (const auto iter : TObjectRange<UBoxComponent>())
+    {
+        FVector LocalHalfExtents = iter->GetBoxExtent();  // 이미 반사이즈
+        FVector WorldPosition = iter->GetWorldLocation();
+        FVector LocalMin = -LocalHalfExtents;  // (-X, -Y, -Z)
+        FVector LocalMax =  LocalHalfExtents;  // ( +X, +Y, +Z)
+
+        FEngineLoop::PrimitiveDrawBatch.AddAABBToBatch(iter->GetBoundingBox(), iter->GetWorldMatrix());
+        FEngineLoop::PrimitiveDrawBatch.AddOBBToBatch(FBoundingBox(LocalMin, LocalMax), iter->GetWorldMatrix());
+    }
+
+    for (const auto iter : TObjectRange<USphereComponent>())
+    {
+        FVector WorldPosition = iter->GetWorldLocation();
+        FEngineLoop::PrimitiveDrawBatch.AddAABBToBatch(iter->GetBoundingBox(), iter->GetWorldMatrix());
+    }
+
+    for (const auto iter : TObjectRange<UCapsuleComponent>())
+    {
+        FVector WorldPosition = iter->GetWorldLocation();
+        FEngineLoop::PrimitiveDrawBatch.AddAABBToBatch(iter->GetBoundingBox(), iter->GetWorldMatrix());
     }
 }
 

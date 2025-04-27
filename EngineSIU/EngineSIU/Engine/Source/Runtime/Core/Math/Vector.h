@@ -157,6 +157,11 @@ public:
     bool operator==(const FVector& Other) const;
     bool operator!=(const FVector& Other) const;
 
+    FORCEINLINE bool operator>(const FVector& Other) const
+    {
+        return X > Other.X && Y > Other.Y && Z > Other.Z;
+    }
+
     float& operator[](int Index);
     const float& operator[](int Index) const;
 

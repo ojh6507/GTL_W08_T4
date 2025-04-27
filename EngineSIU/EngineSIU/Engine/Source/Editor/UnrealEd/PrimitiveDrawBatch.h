@@ -6,6 +6,9 @@
 #include "Define.h"
 #include <d3d11.h>
 
+#include "Math/BoxSphereBounds.h"
+
+struct FBoxSphereBounds;
 class FGraphicsDevice;
 
 class UPrimitiveDrawBatch
@@ -39,6 +42,9 @@ public:
     void ReleaseOBBBuffers();
 
     // 프리미티브 렌더링 관련
+    void AddAABBToBatch(const FBoxSphereBounds& LocalAABB, const FVector& Center, const FMatrix& ModelMatrix);
+    void AddOBBToBatch(const FBoxSphereBounds& LocalAABB, const FVector& Center, const FMatrix& ModelMatrix);
+    
     void AddAABBToBatch(const FBoundingBox& LocalAABB, const FMatrix& ModelMatrix);
     void AddOBBToBatch(const FBoundingBox& LocalAABB, const FMatrix& ModelMatrix);
     void AddConeToBatch(const FVector& Center, float Radius, float Height, int Segments, const FVector4& Color, const FMatrix& ModelMatrix);
@@ -89,6 +95,8 @@ private:
     size_t AllocatedOBBCapacity = 0;
 
     // 프리미티브 데이터 컨테이너
+    TArray<FBox> AABBs;
+    TArray<FBox> OBBs;
     TArray<FBoundingBox> BoundingBoxes;
     TArray<FOBB> OrientedBoundingBoxes;
     TArray<FCone> Cones;

@@ -2,10 +2,15 @@
 #include "Components/SceneComponent.h"
 #include "Container/Set.h"
 #include "Engine/EngineTypes.h"
+#include "Engine/Physics/HitResult.h"
 #include "UObject/Casts.h"
 #include "UObject/Object.h"
 #include "UObject/ObjectFactory.h"
 #include "UObject/ObjectMacros.h"
+
+DECLARE_MULTICAST_DELEGATE_TwoParams( FActorBeginOverlapSignature, AActor*, AActor*);
+DECLARE_MULTICAST_DELEGATE_TwoParams( FActorEndOverlapSignature, AActor*, AActor*);
+DECLARE_MULTICAST_DELEGATE_FourParams( FActorHitSignature, AActor*, AActor*, FVector, const FHitResult&);
 
 
 class UActorComponent;
@@ -130,6 +135,12 @@ public:
 private:
     bool bTickInEditor = false;
 
+public:
+    bool IsOverlappingActor(const AActor* Other) const;
+
+    FActorBeginOverlapSignature OnActorBeginOverlap;
+    FActorEndOverlapSignature OnActorEndOverlap;
+    FActorHitSignature OnActorHit;
 };
 
 template <typename T>

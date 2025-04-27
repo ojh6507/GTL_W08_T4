@@ -79,6 +79,8 @@ public:
 	/** 특정 위치에 있는 요소를 제거합니다. */
     void RemoveAt(SizeType Index);
 
+    void RemoveAtSwap(SizeType Index, bool bAllowShrinking = false);
+    
 	/** Predicate에 부합하는 모든 요소를 제거합니다. */
     template <typename Predicate>
         requires std::is_invocable_r_v<bool, Predicate, const T&>
@@ -97,6 +99,9 @@ public:
 
     /** 요소가 존재하는지 확인합니다. */
     bool Contains(const T& Item) const;
+
+    template <typename Predicate>
+    SizeType IndexOfByPredicate(Predicate Pred) const;
 
     /** Array Size를 가져옵니다. */
     SizeType Num() const;
@@ -266,6 +271,16 @@ void TArray<T, Allocator>::RemoveAt(SizeType Index)
 }
 
 template <typename T, typename Allocator>
+void TArray<T, Allocator>::RemoveAtSwap(SizeType Index, bool bAllowShrinking)
+{
+    SizeType Last = Num() - 1;
+    if (Index < 0 || Index > Last) return;
+    if (Index != Last) std::swap(ContainerPrivate[Index], ContainerPrivate[Last]);
+    ContainerPrivate.pop_back();
+    if (bAllowShrinking) ContainerPrivate.shrink_to_fit();
+}
+
+template <typename T, typename Allocator>
 template <typename Predicate>
     requires std::is_invocable_r_v<bool, Predicate, const T&>
 typename TArray<T, Allocator>::SizeType TArray<T, Allocator>::RemoveAll(const Predicate& Pred)
@@ -312,6 +327,21 @@ bool TArray<T, Allocator>::Contains(const T& Item) const
         }
     }
     return false;
+}
+
+template <typename T, typename Allocator>
+template <typename Predicate>
+typename TArray<T, Allocator>::SizeType TArray<T, Allocator>::IndexOfByPredicate(Predicate Pred) const
+{
+    const T* Data = GetData();
+    for (SizeType i = 0, n = Num(); i < n; ++i)
+    {
+        if (Pred(Data[i]))
+        {
+            return i;
+        }
+    }
+    return INDEX_NONE;
 }
 
 template <typename T, typename Allocator>

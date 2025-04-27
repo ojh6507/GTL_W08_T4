@@ -1,5 +1,7 @@
 #pragma once
 #include "Define.h"
+#include "LightDefine.h"
+#include "ShadowDefine.h"
 #include "Math/Matrix.h"
 #include "UnrealEd/EditorViewportClient.h"
 

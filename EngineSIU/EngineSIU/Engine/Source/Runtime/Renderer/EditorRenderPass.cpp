@@ -7,6 +7,8 @@
 
 #include "UnrealClient.h"
 #include "BaseGizmos/GizmoBaseComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "Components/SphereComponent.h"
 #include "D3D11RHI/GraphicDevice.h"
 #include "Engine/FLoaderOBJ.h"
 #include "Engine/Classes/Actors/Player.h"
@@ -16,6 +18,7 @@
 #include "Engine/Classes/Components/Light/LightComponent.h"
 #include "Engine/Classes/Components/Light/PointLightComponent.h"
 #include "Engine/Classes/Components/Light/SpotLightComponent.h"
+#include "Math/JungleMath.h"
 #include "Runtime/Engine/World/World.h"
 #include "UnrealEd/EditorViewportClient.h"
 #include "UObject/UObjectIterator.h"
@@ -77,6 +80,9 @@ void FEditorRenderPass::CreateShaders()
         D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST, Resources.Shaders.Icon);
     Resources.Shaders.Icon.Layout = nullptr;
 
+    AddShaderSet(L"Capsule", "capsuleVS", "capsulePS", layoutPosOnly, ARRAYSIZE(layoutPosOnly), D3D11_PRIMITIVE_TOPOLOGY_LINELIST,
+                 Resources.Shaders.Capsule);
+
     // Arrow (기즈모 layout 재사용)
     ShaderManager->AddVertexShaderAndInputLayout(L"ArrowVS", L"Shaders/EditorShader.hlsl", "arrowVS", layoutGizmo, ARRAYSIZE(layoutGizmo));
     ShaderManager->AddPixelShader(L"ArrowPS", L"Shaders/EditorShader.hlsl", "arrowPS");
@@ -98,6 +104,107 @@ void FEditorRenderPass::ReleaseShaders()
 {
 
 
+}
+
+void FEditorRenderPass::GenerateCapsuleFrame(const float InRadius, const float InHalfHeight, const int32 InRadialSeg, const int32 InHeightSeg, TArray<FVector>& OutVerts, TArray<uint32>& OutIndices)
+{
+    OutVerts.Empty();
+    OutIndices.Empty();
+
+    const int32 numMeridians = 4;
+    // ─── 1) 반구 머리디언(arcs) ─────────────────────────────
+    for (int mid = 0; mid < numMeridians; ++mid)
+    {
+        const float lambda = PI * 0.5f * mid;      // 0, 90°, 180°, 270°
+        const int32 baseIdx = OutVerts.Num();
+
+        // 1-1) 아래 반구 φ: -90° → 0°
+        for (int32 i = 0; i <= InHeightSeg; ++i)
+        {
+            const float t   = static_cast<float>(i) / InHeightSeg;
+            const float phi = FMath::Lerp(-PI * 0.5f, 0.f, t);
+            const float c = FMath::Cos(phi);
+            const float s = FMath::Sin(phi);
+            const float x = c * InRadius * FMath::Cos(lambda);
+            const float y = c * InRadius * FMath::Sin(lambda);
+            const float z = -InHalfHeight + s * InRadius;
+            OutVerts.Add(FVector(x, y, z));
+        }
+        const int32 botCount = InHeightSeg + 1;
+        // 아래 반구 선 연결
+        for (int32 i = 0; i < botCount-1; ++i)
+        {
+            OutIndices.Add(baseIdx + i);
+            OutIndices.Add(baseIdx + i + 1);
+        }
+
+        // 1-2) 위 반구 φ: 0° → +90°
+        const int32 topBase = OutVerts.Num();
+        for (int32 i = 0; i <= InHeightSeg; ++i)
+        {
+            const float t   = static_cast<float>(i) / InHeightSeg;
+            const float phi = FMath::Lerp(0.f, PI*0.5f, t);
+            const float c = FMath::Cos(phi);
+            const float s = FMath::Sin(phi);
+            const float x = c * InRadius * FMath::Cos(lambda);
+            const float y = c * InRadius * FMath::Sin(lambda);
+            const float z =  InHalfHeight + s * InRadius;
+            OutVerts.Add(FVector(x, y, z));
+        }
+        const int32 topCount = InHeightSeg + 1;
+        // 위 반구 선 연결
+        for (int32 i = 0; i < topCount-1; ++i)
+        {
+            OutIndices.Add(topBase + i);
+            OutIndices.Add(topBase + i + 1);
+        }
+    }
+
+    // ─── 2) 실린더 조인트에 링(circle) ───────────────────────
+    // 2-1) 아래 링 (z = -halfHeight)
+    const int32 botRingStart = OutVerts.Num();
+    for (int32 i = 0; i <= InRadialSeg; ++i)
+    {
+        const float theta = 2.f*PI * i / InRadialSeg;
+        const float x = FMath::Cos(theta) * InRadius;
+        const float y = FMath::Sin(theta) * InRadius;
+        const float z = -InHalfHeight;
+        OutVerts.Add(FVector(x,y,z));
+    }
+    for (int32 i = 0; i < InRadialSeg; ++i)
+    {
+        OutIndices.Add(botRingStart + i);
+        OutIndices.Add(botRingStart + i + 1);
+    }
+
+    // 2-2) 위 링 (z = +halfHeight)
+    const int32 topRingStart = OutVerts.Num();
+    for (int32 i = 0; i <= InRadialSeg; ++i)
+    {
+        const float theta = 2.f*PI * i / InRadialSeg;
+        const float x = FMath::Cos(theta) * InRadius;
+        const float y = FMath::Sin(theta) * InRadius;
+        const float z =  InHalfHeight;
+        OutVerts.Add(FVector(x,y,z));
+    }
+    for (int32 i = 0; i < InRadialSeg; ++i)
+    {
+        OutIndices.Add(topRingStart + i);
+        OutIndices.Add(topRingStart + i + 1);
+    }
+
+    // ─── 3) 링 간 높이선 4개만 연결 ─────────────────────────────
+    // botRingStart, topRingStart 는 앞에서 링을 만들고 나서 저장해 두었던 인덱스 시작점입니다.
+    // ringSeg 는 한 링당 분할 수
+    for (int mid = 0; mid < 4; ++mid)
+    {
+        // i = 0, ringSeg/4, ringSeg/2, 3*ringSeg/4
+        const int i = (InRadialSeg / 4) * mid;
+        const int botIdx = botRingStart + i;
+        const int topIdx = topRingStart + i;
+        OutIndices.Add(botIdx);
+        OutIndices.Add(topIdx);
+    }
 }
 
 void FEditorRenderPass::CreateBuffers()
@@ -269,7 +376,7 @@ void FEditorRenderPass::CreateBuffers()
         81, 81, 82, 82, 83, 83, 84, 84, 85, 85, 86, 86, 87, 87, 88, 88, 89, 89, 90, 90,
         91, 91, 92, 92, 93, 93, 94, 94, 95
     };
-
+    
     // 버텍스 버퍼 생성
     bufferDesc = {};
     bufferDesc.Usage = D3D11_USAGE_IMMUTABLE; // will never be updated 
@@ -395,6 +502,41 @@ void FEditorRenderPass::CreateBuffers()
     Resources.Primitives.Cone.VertexStride = sizeof(FVector);
     Resources.Primitives.Cone.NumIndices = ConeIndices.Num();
 
+    TArray<FVector> CapsuleFrameVertices;
+    TArray<uint32> CapsuleFrameIndices;
+    GenerateCapsuleFrame(1, 1, 16, 16, CapsuleFrameVertices, CapsuleFrameIndices);
+
+    // 버텍스 버퍼 생성
+    bufferDesc = {};
+    bufferDesc.Usage = D3D11_USAGE_IMMUTABLE; // will never be updated 
+    bufferDesc.ByteWidth = CapsuleFrameVertices.Num() * sizeof(FVector);
+    bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    bufferDesc.CPUAccessFlags = 0;
+
+    initData = {};
+    initData.pSysMem = CapsuleFrameVertices.GetData();
+
+    hr = Graphics->Device->CreateBuffer(&bufferDesc, &initData, &Resources.Primitives.Capsule.Vertex);
+    if (FAILED(hr))
+    {
+        return;
+    }
+
+    bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    bufferDesc.ByteWidth = CapsuleFrameIndices.Num() * sizeof(uint32);
+
+    initData.pSysMem = CapsuleFrameIndices.GetData();
+            
+    hr = Graphics->Device->CreateBuffer(&bufferDesc, &initData, &Resources.Primitives.Capsule.Index);
+    if (FAILED(hr))
+    {
+        return;
+    }
+
+    Resources.Primitives.Capsule.NumVertices = CapsuleFrameVertices.Num();
+    Resources.Primitives.Capsule.VertexStride = sizeof(FVector);
+    Resources.Primitives.Capsule.NumIndices = CapsuleFrameIndices.Num();
+
 }
 void FEditorRenderPass::CreateConstantBuffers()
 {
@@ -415,6 +557,7 @@ void FEditorRenderPass::CreateConstantBuffers()
     CreateCB(sizeof(FConstantBufferDebugGrid), &Resources.ConstantBuffers.Grid11);
     CreateCB(sizeof(FConstantBufferDebugIcon), &Resources.ConstantBuffers.Icon11);
     CreateCB(sizeof(FConstantBufferDebugArrow), &Resources.ConstantBuffers.Arrow11);
+    CreateCB(sizeof(FConstantBufferDebugCapsule) * ConstantBufferSizeCapsule, &Resources.ConstantBuffers.Capsule11);
 }
 
 void FEditorRenderPass::PrepareRendertarget(const std::shared_ptr<FEditorViewportClient>& Viewport)
@@ -449,6 +592,16 @@ void FEditorRenderPass::PrepareRender()
                 }
             }
 
+            if (USphereComponent* sphere = Cast<USphereComponent>(comp))
+            {
+                Resources.Components.Sphere.Add(sphere);
+            }
+
+            if (UCapsuleComponent* cap = Cast<UCapsuleComponent>(comp))
+            {
+                Resources.Components.Capsule.Add(cap);
+            }
+
             // light
             if (ULightComponentBase* light = Cast<ULightComponentBase>(comp))
             {
@@ -469,6 +622,8 @@ void FEditorRenderPass::ClearRenderArr()
     Resources.Components.StaticMesh.Empty();
     Resources.Components.Light.Empty();
     Resources.Components.Fog.Empty();
+    Resources.Components.Sphere.Empty();
+    Resources.Components.Capsule.Empty();
 }
 
 void FEditorRenderPass::ReloadShader()
@@ -483,6 +638,7 @@ void FEditorRenderPass::ReloadShader()
     ReloadShader(L"Cone", Resources.Shaders.Cone);
     ReloadShader(L"Icon", Resources.Shaders.Icon);
     ReloadShader(L"Arrow", Resources.Shaders.Arrow);
+    ReloadShader(L"Capsule", Resources.Shaders.Capsule);
 }
 
 void FEditorRenderPass::PrepareConstantbufferGlobal()
@@ -530,6 +686,7 @@ void FEditorRenderPass::Render(const std::shared_ptr<FEditorViewportClient>& Vie
 
     RenderPointlightInstanced();
     RenderSpotlightInstanced();
+    RenderCapsuleInstnaced();
     RenderArrows();    // Directional Light Arrow : Depth Test Enabled
     //RenderIcons(World, ActiveViewport); // 기존 렌더패스에서 아이콘 렌더하고 있으므로 제거
 
@@ -601,7 +758,14 @@ void FEditorRenderPass::RenderPointlightInstanced()
             b.Radius = PointLightComp->GetRadius();
             BufferAll.Add(b);
         }
+    }
 
+    for (USphereComponent* SphereComp : Resources.Components.Sphere)
+    {
+        FConstantBufferDebugSphere b;
+        b.Position = SphereComp->GetWorldLocation();
+        b.Radius = SphereComp->GetRadius();
+        BufferAll.Add(b);
     }
 
     PrepareConstantbufferPointlight();
@@ -609,7 +773,7 @@ void FEditorRenderPass::RenderPointlightInstanced()
     for (int i = 0; i < (1 + BufferAll.Num() / ConstantBufferSizeSphere) * ConstantBufferSizeSphere; ++i)
     {
         TArray<FConstantBufferDebugSphere> SubBuffer;
-        for (int j = 0; j < ConstantBufferSizeAABB; ++j)
+        for (int j = 0; j < ConstantBufferSizeSphere; ++j)
         {
             if (BufferIndex < BufferAll.Num())
             {
@@ -890,5 +1054,99 @@ void FEditorRenderPass::UdpateConstantbufferArrow(const FConstantBufferDebugArro
         Graphics->DeviceContext->Map(Resources.ConstantBuffers.Arrow11, 0, D3D11_MAP_WRITE_DISCARD, 0, &ConstantBufferMSR); // update constant buffer every frame
         memcpy(ConstantBufferMSR.pData, &Buffer, sizeof(FConstantBufferDebugArrow)); // TArray이니까 실제 값을 받아와야함
         Graphics->DeviceContext->Unmap(Resources.ConstantBuffers.Arrow11, 0); // GPU�� �ٽ� ��밡���ϰ� �����
+    }
+}
+
+void FEditorRenderPass::RenderCapsuleInstnaced()
+{
+    PrepareShader(Resources.Shaders.Capsule);
+    UINT offset = 0;
+    Graphics->DeviceContext->IASetVertexBuffers(0, 1, &Resources.Primitives.Capsule.Vertex, &Resources.Primitives.Capsule.VertexStride, &offset);
+    Graphics->DeviceContext->IASetIndexBuffer(Resources.Primitives.Capsule.Index, DXGI_FORMAT_R32_UINT, 0);
+
+    // 위치랑 bounding box 크기 정보 가져오기
+    TArray<FConstantBufferDebugCapsule> BufferAll;
+
+    for (UCapsuleComponent* CapsuleComp : Resources.Components.Capsule)
+    {
+        FConstantBufferDebugCapsule b;
+        // 1) 캡슐 반지름·반높이
+        float r = CapsuleComp->GetCapsuleRadius();
+        float h = CapsuleComp->GetCapsuleHalfHeight();
+
+        // 2) 컴포넌트 전체 스케일
+        FVector compScale = CapsuleComp->GetWorldScale3D();
+
+        float minScaleXY = FMath::Min(compScale.X, compScale.Y);
+        // 3) unit 캡슐 → 실제 r,h 크기 스케일
+        FVector capsuleScale = FVector(r * minScaleXY, r * minScaleXY,  h * compScale.Z);
+
+        // 5) 회전·위치
+        FRotator compRot = CapsuleComp->GetWorldRotation();
+        FVector compLoc  = CapsuleComp->GetWorldLocation();
+
+        FMatrix ScaleMat = FMatrix::GetScaleMatrix(capsuleScale);
+        FMatrix RotationMat = FMatrix::GetRotationMatrix(compRot);
+        FMatrix TranslationMat = FMatrix::GetTranslationMatrix(compLoc);
+
+        FMatrix RTMat = RotationMat * TranslationMat;
+        
+        b.WorldMatrix = ScaleMat * RTMat;
+        b.CapsulePosition = CapsuleComp->GetWorldLocation();
+        b.CapsuleRadius = CapsuleComp->GetCapsuleRadius();
+        b.CapsuleHeight = CapsuleComp->GetCapsuleHalfHeight();
+        BufferAll.Add(b);
+    }
+
+    PrepareConstantbufferCapsule();
+    int BufferIndex = 0;
+    for (int i = 0; i < (1 + BufferAll.Num() / ConstantBufferSizeCapsule) * ConstantBufferSizeCapsule; ++i)
+    {
+        TArray<FConstantBufferDebugCapsule> SubBuffer;
+        for (int j = 0; j < ConstantBufferSizeCapsule; ++j)
+        {
+            if (BufferIndex < BufferAll.Num())
+            {
+                SubBuffer.Add(BufferAll[BufferIndex]);
+                ++BufferIndex;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        if (SubBuffer.Num() > 0)
+        {
+            UdpateConstantbufferCapsule(SubBuffer);
+            Graphics->DeviceContext->DrawIndexedInstanced(Resources.Primitives.Capsule.NumIndices, SubBuffer.Num(), 0, 0, 0);
+        }
+    }
+}
+
+void FEditorRenderPass::PrepareConstantbufferCapsule()
+{
+    if (Resources.ConstantBuffers.Capsule11)
+    {
+        Graphics->DeviceContext->VSSetConstantBuffers(11, 1, &Resources.ConstantBuffers.Capsule11);
+    }
+}
+
+void FEditorRenderPass::UdpateConstantbufferCapsule(TArray<FConstantBufferDebugCapsule> Buffer)
+{
+    if (Buffer.Num() > ConstantBufferSizeCapsule)
+    {
+        // 최대개수 초과
+        // 코드 잘못짠거 아니면 오면안됨
+        UE_LOG(ELogLevel::Error, "Invalid Buffer Num");
+        return;
+    }
+    if (Resources.ConstantBuffers.Capsule11)
+    {
+        D3D11_MAPPED_SUBRESOURCE ConstantBufferMSR; // GPU�� �޸� �ּ� ����
+
+        Graphics->DeviceContext->Map(Resources.ConstantBuffers.Capsule11, 0, D3D11_MAP_WRITE_DISCARD, 0, &ConstantBufferMSR); // update constant buffer every frame
+        memcpy(ConstantBufferMSR.pData, Buffer.GetData(), sizeof(FConstantBufferDebugCapsule) * Buffer.Num()); // TArray이니까 실제 값을 받아와야함
+        Graphics->DeviceContext->Unmap(Resources.ConstantBuffers.Capsule11, 0); // GPU�� �ٽ� ��밡���ϰ� �����
     }
 }

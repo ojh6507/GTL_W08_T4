@@ -78,6 +78,8 @@ struct FRenderResourcesDebug
         TArray<class UStaticMeshComponent*> StaticMesh;
         TArray<class ULightComponentBase*> Light;
         TArray<class UHeightFogComponent*> Fog;
+        TArray<class USphereComponent*> Sphere;
+        TArray<class UCapsuleComponent*> Capsule;
     } Components;
 
     struct FShaderResourceContainer
@@ -90,6 +92,7 @@ struct FRenderResourcesDebug
         FShaderResource Cone;
         FShaderResource Icon;
         FShaderResource Arrow;
+        FShaderResource Capsule;
     } Shaders;
 
     struct FConstantBuffers
@@ -101,6 +104,7 @@ struct FRenderResourcesDebug
         ID3D11Buffer* Grid11;
         ID3D11Buffer* Icon11;
         ID3D11Buffer* Arrow11;
+        ID3D11Buffer* Capsule11;
     } ConstantBuffers;
 
     struct FPrimitiveResourceContainer
@@ -109,6 +113,7 @@ struct FRenderResourcesDebug
         FDebugPrimitiveData Sphere;
         FDebugPrimitiveData Cone;
         FDebugPrimitiveData Arrow;
+        FDebugPrimitiveData Capsule;
     } Primitives;
 
     TMap<IconType, std::shared_ptr<FTexture>> IconTextures;

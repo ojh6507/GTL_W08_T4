@@ -178,6 +178,101 @@ FVector JungleMath::QuaternionToEuler(const FQuat& quat)
     euler.X = FMath::RadiansToDegrees(atan2(sinRoll, cosRoll));
     return euler;
 }
+
+FVector JungleMath::ClosestPointOnSegment(const FVector& Point, const FVector& A, const FVector& B)
+{
+    const FVector AB = B - A;
+    const float AB2 = AB | AB;                              // Dot(AB, AB)
+    if (AB2 <= KINDA_SMALL_NUMBER)                    // A와 B가 거의 동일한 경우
+    {
+        return A;
+    }
+    float t = (Point - A) | AB;                       // Dot(Point-A, AB)
+    t = t / AB2;                                      // 무한 직선 상의 파라메터
+    t = FMath::Clamp(t, 0.0f, 1.0f);                  // 선분 범위에 한정
+    return A + AB * t;                                // 선분 위 점
+}
+
+float JungleMath::SegmentDistToSegment(const FVector& P1, const FVector& P2, const FVector& Q1, const FVector& Q2, FVector& ClosestPoint1,
+    FVector& ClosestPoint2)
+{
+    const FVector   u = P2 - P1;
+    const FVector   v = Q2 - Q1;
+    const FVector   w = P1 - Q1;
+    const float    a = u | u;         // dot(u,u)
+    const float    b = u | v;         // dot(u,v)
+    const float    c = v | v;         // dot(v,v)
+    const float    d = u | w;         // dot(u,w)
+    const float    e = v | w;         // dot(v,w)
+    const float    D = a*c - b*b;     // 항상 ≥ 0
+    float    sc, sN, sD = D;    // sc = sN / sD
+    float    tc, tN, tD = D;    // tc = tN / tD
+
+    // 두 선분이 거의 평행한 경우
+    if (D < KINDA_SMALL_NUMBER)
+    {
+        sN = 0.0f;    // P1 쪽 고정
+        sD = 1.0f;
+        tN = e;
+        tD = c;
+    }
+    else
+    {
+        // 무한 직선상 최단점 파라미터
+        sN =  (b*e - c*d);
+        tN =  (a*e - b*d);
+        // s 범위 밖 체크
+        if (sN < 0.0f)
+        {
+            sN = 0.0f;
+            tN = e;
+            tD = c;
+        }
+        else if (sN > sD)
+        {
+            sN = sD;
+            tN = e + b;
+            tD = c;
+        }
+    }
+
+    // t 범위 밖 체크
+    if (tN < 0.0f)
+    {
+        tN = 0.0f;
+        if (-d < 0.0f)       sN = 0.0f;
+        else if (-d > a)     sN = sD;
+        else
+        {
+            sN = -d;
+            sD = a;
+        }
+    }
+    else if (tN > tD)
+    {
+        tN = tD;
+        if ((-d + b) < 0.0f)         sN = 0.0f;
+        else if ((-d + b) > a)       sN = sD;
+        else
+        {
+            sN = (-d + b);
+            sD = a;
+        }
+    }
+
+    // 파라미터 sc, tc 계산
+    sc = (FMath::Abs(sN) < KINDA_SMALL_NUMBER) ? 0.0f : sN / sD;
+    tc = (FMath::Abs(tN) < KINDA_SMALL_NUMBER) ? 0.0f : tN / tD;
+
+    // 최단 점들 계산
+    ClosestPoint1 = P1 + u * sc;
+    ClosestPoint2 = Q1 + v * tc;
+
+    // 두 점 사이 거리 반환
+    const FVector dP = ClosestPoint1 - ClosestPoint2;
+    return dP.Length();
+}
+
 FVector JungleMath::FVectorRotate(FVector& origin, const FRotator& InRotation)
 {
     return InRotation.ToQuaternion().RotateVector(origin);

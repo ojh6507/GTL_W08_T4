@@ -1,4 +1,7 @@
 #include "Cube.h"
+
+#include "Components/BoxComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
 
 #include "Engine/FLoaderOBJ.h"
@@ -10,6 +13,13 @@ ACube::ACube()
     // Begin Test
     StaticMeshComponent->SetStaticMesh(FManagerOBJ::GetStaticMesh(L"Contents/helloBlender.obj"));
     //StaticMeshComponent->SetStaticMesh(FManagerOBJ::GetStaticMesh(L"Contents/Reference/Reference.obj"));
+    BoxComponent = AddComponent<UBoxComponent>(TEXT("BoxComponent"));
+    BoxComponent->SetupAttachment(RootComponent);
+    BoxComponent->SetRelativeLocation(FVector(5, 0, 0));
+    //CapsuleComponent = AddComponent<UCapsuleComponent>(TEXT("CapsuleComponent"));
+    //CapsuleComponent->SetupAttachment(RootComponent);
+    // CapsuleComponent->SetRelativeLocation(FVector(5, 0, 0));
+    
     // End Test
 }
 

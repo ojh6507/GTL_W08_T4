@@ -7,6 +7,8 @@
 #include "GameFramework/Actor.h"
 #include "Classes/Engine/AssetManager.h"
 #include "Components/Light/DirectionalLightComponent.h"
+#include "Physics/PhysicsSystem.h"
+
 #include "Engine/Script/LuaBinding.h"
 namespace PrivateEditorSelection
 {
@@ -62,6 +64,9 @@ void UEditorEngine::Tick(float DeltaTime)
                 World->Tick(DeltaTime);
                 EditorPlayer->Tick(DeltaTime);
                 ULevel* Level = World->GetActiveLevel();
+                
+                // TODO : Test용 코드임 나중에 여기서 하면 안됨
+                FPhysicsSystem::Get().UpdateCollisions();
                 TArray CachedActors = Level->Actors;
                 if (Level)
                 {
@@ -81,6 +86,14 @@ void UEditorEngine::Tick(float DeltaTime)
             {
                 World->Tick(DeltaTime);
                 ULevel* Level = World->GetActiveLevel();
+
+                // TODO :PrePhysics 에서 이동
+                // TODO : DuringPhysics 에서 충돌 검사
+                // TODO : PostPhysics 에서 반응
+
+                // 지금은 그냥 충돌 검사 후 Actor Tick
+                FPhysicsSystem::Get().UpdateCollisions();
+                
                 TArray CachedActors = Level->Actors;
                 if (Level)
                 {

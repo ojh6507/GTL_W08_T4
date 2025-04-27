@@ -228,3 +228,11 @@ struct FConstantBufferDebugArrow
     float ArrowScaleZ;
 };
 
+struct FConstantBufferDebugCapsule
+{
+    FMatrix WorldMatrix;
+    FVector CapsulePosition;
+    float CapsuleRadius;
+    float CapsuleHeight;
+    FVector Padding;
+};
