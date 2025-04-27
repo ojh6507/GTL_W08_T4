@@ -10,6 +10,9 @@ extern "C" {
 #include <sol/sol.hpp>
 #include <memory>
 #include <string>
+#include "Core/Container/String.h"
+#include "Core/Container/Map.h"
+#include <mutex>   
 
 class FLuaManager 
 {
@@ -18,7 +21,10 @@ private:
     bool initialized;
 
     void RegisterEngineAPI();
+    TMap<FString, sol::protected_function> ScriptChunkCache;
 
+    TMap<FString, FString> ScriptSourceCache;
+    std::mutex CacheMutex;
 public:
     FLuaManager();
     ~FLuaManager();
@@ -27,8 +33,9 @@ public:
 
     bool Initialize();
     void Cleanup();
-    bool RunString(const std::string& code);
-    bool RunFile(const std::string& filename);
+    sol::protected_function GetOrLoadScriptChunk(const FString& ScriptPath);
+    const FString GetOrLoadScriptSource(const FString& Path);
+    void ClearScriptCache();
 };
 
 extern FLuaManager GLuaManager;
