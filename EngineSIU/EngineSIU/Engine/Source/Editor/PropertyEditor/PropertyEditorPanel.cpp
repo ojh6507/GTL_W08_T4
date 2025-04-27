@@ -563,7 +563,7 @@ void PropertyEditorPanel::Render()
         }
 
         // Shadow Depth Map 시각화
-        ID3D11ShaderResourceView* ShaderSRV = FEngineLoop::Renderer.DirectionalShadowMap->GetShadowViewSRV(NumDirectionalLight);
+        ID3D11ShaderResourceView* ShaderSRV = FEngineLoop::Renderer.DirectionalShadowMap->GetShadowViewSRV(0);
 
         ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.1f, 0.1f, 0.1f, 1.0f));
         if (ImGui::TreeNodeEx("DirectionalLight Component", ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_DefaultOpen))

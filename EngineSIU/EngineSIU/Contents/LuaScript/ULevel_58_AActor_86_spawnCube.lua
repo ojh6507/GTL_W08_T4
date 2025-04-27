@@ -39,9 +39,9 @@ function BeginPlay()
     LogMessage("UClass for ACube found.")
 
     -- --- 3D 그리드 형태로 Cube 스폰 ---
-    local gridWidth = 5      -- 그리드 X축 개수 (오른쪽 방향)
-    local gridDepth = 5       -- 그리드 Y축 개수 (앞쪽 방향) - 이름 변경 (Depth)
-    local gridHeight = 5      -- 그리드 Z축 개수 (위쪽 방향) - 이름 변경 (Height)
+    local gridWidth = 2      -- 그리드 X축 개수 (오른쪽 방향)
+    local gridDepth = 2       -- 그리드 Y축 개수 (앞쪽 방향) - 이름 변경 (Depth)
+    local gridHeight = 2      -- 그리드 Z축 개수 (위쪽 방향) - 이름 변경 (Height)
     local spacingX = 5.0    -- X축 간격
     local spacingY = 5.0    -- Y축 간격 (앞뒤)
     local spacingZ = 5.0    -- Z축 간격 (위아래)
@@ -105,7 +105,7 @@ function EndPlay()
     if world then
         for i = #spawnedCubes, 1, -1 do
             local cube = spawnedCubes[i]
-            if cube and cube:IsValid() and not cube:IsActorBeingDestroyed() then
+            if cube  and not cube:IsActorBeingDestroyed() then
                 world:DestroyActor(cube)
             end
             table.remove(spawnedCubes, i)
@@ -127,7 +127,7 @@ function Tick(dt)
     local rotationSpeed = 90.0 -- 초당 회전 각도
 
     for i, cube in ipairs(spawnedCubes) do
-        if cube and cube:IsValid() then
+        if cube then
             local rot = cube:GetActorRotation()
             rot.Yaw = rot.Yaw + (rotationSpeed * dt) -- Yaw 축(Z축 기준 회전) 변경
             -- 필요하다면 다른 축도 변경: rot.Pitch = ..., rot.Roll = ...
