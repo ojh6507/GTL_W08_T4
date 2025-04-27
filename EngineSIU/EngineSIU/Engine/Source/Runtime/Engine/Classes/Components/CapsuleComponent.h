@@ -22,6 +22,8 @@ public:
     void SetProperties(const TMap<FString, FString>& InProperties) override;
     bool CheckOverlapComponent(UShapeComponent* Other, FHitResult& OutHitResult) override;
     
+    void HandleBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, bool bFromSweep, const FHitResult& SweepResult);
+    void HandleEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp);
 public:
     FORCEINLINE float GetCapsuleRadius() const { return CapsuleRadius; }
     FORCEINLINE void SetCapsuleRadius(const float InRadius) { CapsuleRadius = InRadius; }

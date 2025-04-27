@@ -3,6 +3,7 @@
 #include "BoxComponent.h"
 #include "SphereComponent.h"
 #include "Engine/Physics/CollisionDispatcher.h"
+#include "GameFramework/Actor.h"
 #include "UObject/Casts.h"
 
 UCapsuleComponent::UCapsuleComponent()
@@ -41,6 +42,8 @@ void UCapsuleComponent::InitializeComponent()
 void UCapsuleComponent::BeginPlay()
 {
     Super::BeginPlay();
+    OnComponentBeginOverlap.AddDynamic(this, &UCapsuleComponent::HandleBeginOverlap);
+    OnComponentEndOverlap.AddDynamic(this, &UCapsuleComponent::HandleEndOverlap);
 }
 
 void UCapsuleComponent::TickComponent(float DeltaTime)
@@ -113,4 +116,15 @@ bool UCapsuleComponent::CheckOverlapComponent(UShapeComponent* Other, FHitResult
     }
 
     return false;
+}
+
+void UCapsuleComponent::HandleBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, bool bFromSweep,
+    const FHitResult& SweepResult)
+{
+    UE_LOG(ELogLevel::Display, TEXT("[Overlap] %s ↔ %s at %s"), *OverlappedComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
+}
+
+void UCapsuleComponent::HandleEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp)
+{
+    UE_LOG(ELogLevel::Display, TEXT("[OverlapEnd] %s ↔ %s at %s"), *OverlappedComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
 }

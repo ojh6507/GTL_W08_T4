@@ -109,20 +109,25 @@ bool FCollisionDispatcher::OverlapBoxToSphere(const UBoxComponent* LHSBox, USphe
     const FVector LocalCenter = WorldToBox.TransformPosition(WorldCenter);
 
     // 2) Box half-extent 내부로 클램프
-    FVector Clamped = LocalCenter;
-    const FVector BoxExtent = LHSBox->GetBoxExtent();
-    Clamped.X = FMath::Clamp(LocalCenter.X, -BoxExtent.X, BoxExtent.X);
-    Clamped.Y = FMath::Clamp(LocalCenter.Y, -BoxExtent.Y, BoxExtent.Y);
-    Clamped.Z = FMath::Clamp(LocalCenter.Z, -BoxExtent.Z, BoxExtent.Z);
+    const FVector LHSScale = LHSBox->GetWorldScale3D();
+    const FVector BoxExtent = LHSBox->GetBoxExtent(); 
 
-    // 3) 다시 월드 공간 ClosestPoint 계산
+    FVector Clamped = LocalCenter;
+    Clamped.X = FMath::Clamp(Clamped.X, -BoxExtent.X * LHSScale.X, BoxExtent.X * LHSScale.X);
+    Clamped.Y = FMath::Clamp(Clamped.Y, -BoxExtent.Y * LHSScale.Y, BoxExtent.Y * LHSScale.Y);
+    Clamped.Z = FMath::Clamp(Clamped.Z, -BoxExtent.Z * LHSScale.Z, BoxExtent.Z * LHSScale.Z);
+
+    // 3) 클램프된 지점을 다시 월드 공간으로 변환
     const FVector ClosestPoint = BoxTM.TransformPosition(Clamped);
 
-    // 4) Sphere 반지름과 비교
-    const FVector Delta = WorldCenter - ClosestPoint;
-    const float Dist2 = Delta.LengthSquared();
-    const float R = RHSSphere->GetRadius();
-    if (Dist2 <= R * R)
+    // 4) 구 중심과 가장 가까운 점 사이 거리 비교
+    const float  SphereRadius = RHSSphere->GetRadius();
+    const FVector RHSScale = RHSSphere->GetWorldScale3D();
+    const float ScaledRadius = SphereRadius * FMath::Min(RHSScale.X, FMath::Min(RHSScale.Y, RHSScale.Z));
+    
+    const FVector Delta        = WorldCenter - ClosestPoint;
+    const float  Dist2         = Delta.LengthSquared();
+    if (Dist2 <= ScaledRadius * ScaledRadius)
     {
         const float Dist = FMath::Sqrt(Dist2);
         OutHitResult.bBlockingHit = true;

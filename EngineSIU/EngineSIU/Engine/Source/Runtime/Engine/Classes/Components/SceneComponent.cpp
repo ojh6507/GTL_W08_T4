@@ -209,22 +209,18 @@ FMatrix USceneComponent::GetTranslationMatrix() const
 
 FMatrix USceneComponent::GetWorldMatrix() const
 {
+    // 1) 부모 월드 매트릭스 가져오기 (없으면 단위행렬)
+    FMatrix ParentWorld = AttachParent 
+        ? AttachParent->GetWorldMatrix() 
+        : FMatrix::Identity;
+    
     FMatrix ScaleMat = FMatrix::GetScaleMatrix(RelativeScale3D);
     FMatrix RotationMat = FMatrix::GetRotationMatrix(RelativeRotation);
     FMatrix TranslationMat = FMatrix::GetTranslationMatrix(RelativeLocation);
 
-    FMatrix RTMat = RotationMat * TranslationMat;
-    if (AttachParent)
-    {
-        FMatrix ParentScaleMat = AttachParent->GetScaleMatrix();
-        FMatrix ParentRotationMat = AttachParent->GetRotationMatrix();
-        FMatrix ParentTranslationMat = AttachParent->GetTranslationMatrix();
-        
-        ScaleMat = ScaleMat * ParentScaleMat;
-        FMatrix ParentRTMat = ParentRotationMat * ParentTranslationMat;
-        RTMat = RTMat * ParentRTMat;
-    }
-    return ScaleMat * RTMat;
+    FMatrix LocalTRS = ScaleMat * RotationMat * TranslationMat;
+    
+    return LocalTRS * ParentWorld;
 }
 
 void USceneComponent::SetupAttachment(USceneComponent* InParent)
