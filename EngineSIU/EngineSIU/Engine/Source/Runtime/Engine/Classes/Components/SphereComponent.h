@@ -25,6 +25,8 @@ public:
     virtual void InitializeComponent() override;
     virtual void TickComponent(float DeltaTime) override;
 
+    void HandleBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, bool bFromSweep, const FHitResult& SweepResult);
+    void HandleEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp);
 public:
     FORCEINLINE float GetRadius() const { return SphereRadius; }
     FORCEINLINE void SetRadius(const float InRadius) { SphereRadius = InRadius; }

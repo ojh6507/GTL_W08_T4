@@ -88,7 +88,6 @@ bool FCollisionDispatcher::OverlapBoxToBox(const UBoxComponent* LHSBox, UBoxComp
     // --- 4) 충돌 보정 및 HitResult 채우기 ---
     // 충돌 지점: 두 중심의 중간에서 법선 방향으로 약간 보정
     const FVector contactPoint = (C1 + C2) * 0.5f;
-    // 또는 C1 + smallestAxis * (r1 - minOverlap * 0.5f);
 
     OutHitResult.bBlockingHit   = true;
     OutHitResult.Location       = contactPoint;
@@ -145,9 +144,7 @@ bool FCollisionDispatcher::OverlapBoxToCapsule(const UBoxComponent* LHSBox, UCap
     // 박스 half-extents 에 월드 스케일 적용
     const FVector boxScale = LHSBox->GetWorldScale3D();
     const FVector BoxExtent = LHSBox->GetBoxExtent();
-    const FVector halfExtents = FVector(BoxExtent.X * boxScale.X,
-                                  BoxExtent.Y * boxScale.Y,
-                                  BoxExtent.Z * boxScale.Z);
+    const FVector halfExtents = FVector(BoxExtent.X * boxScale.X, BoxExtent.Y * boxScale.Y, BoxExtent.Z * boxScale.Z);
 
     // 박스 변환 행렬
     const FMatrix boxToWorld  = LHSBox->GetWorldMatrix();
@@ -161,7 +158,7 @@ bool FCollisionDispatcher::OverlapBoxToCapsule(const UBoxComponent* LHSBox, UCap
     const FVector capAxis    = FMatrix::TransformVector(FVector(0,0,1), capRotMat).GetSafeNormal();
     const FVector capScale   = RHSCapsule->GetWorldScale3D();
     const float   halfHeight = RHSCapsule->GetCapsuleHalfHeight() * capScale.Z;
-    const float   radius     = RHSCapsule->GetCapsuleRadius() * FMath::Max(capScale.X, FMath::Max(capScale.Y, capScale.Z));
+    const float   radius     = RHSCapsule->GetCapsuleRadius() * FMath::Min(capScale.X,capScale.Y);
 
     // 세그먼트 양 끝점 (월드 공간)
     const FVector P1 = capCenter + capAxis * halfHeight;
@@ -277,8 +274,12 @@ bool FCollisionDispatcher::OverlapSphereToSphere(const USphereComponent* LHSSphe
 {
     const FVector C1 = LHSSphere->GetWorldLocation();
     const FVector C2 = RHSSphere->GetWorldLocation();
-    const float R1 = LHSSphere->GetRadius();
-    const float R2 = RHSSphere->GetRadius();
+    
+    const FVector C1Scale = LHSSphere->GetWorldScale3D();
+    const FVector C2Scale = RHSSphere->GetWorldScale3D();
+    
+    const float R1 = LHSSphere->GetRadius() * FMath::Min(C1Scale.X, FMath::Min(C1Scale.Y, C1Scale.Z));
+    const float R2 = RHSSphere->GetRadius() * FMath::Min(C2Scale.X, FMath::Min(C2Scale.Y, C2Scale.Z));
 
     const FVector Delta = C2 - C1;
     const float Dist2 = Delta.LengthSquared();
@@ -304,7 +305,8 @@ bool FCollisionDispatcher::OverlapSphereToCapsule(const USphereComponent* LHSSph
     // 캡슐 중심선(segment) 두 끝점 계산
     const FVector Dir     = RHSCapsule->GetUpVector();
     const FVector C       = RHSCapsule->GetWorldLocation();
-    const float H         = RHSCapsule->GetCapsuleHalfHeight();
+    const FVector CapScale = RHSCapsule->GetWorldScale3D();
+    const float H         = RHSCapsule->GetCapsuleHalfHeight() * CapScale.Z;
     const FVector P1 = C + Dir * H;
     const FVector P2 = C - Dir * H;
 
@@ -315,7 +317,9 @@ bool FCollisionDispatcher::OverlapSphereToCapsule(const USphereComponent* LHSSph
     // Sphere 반지름과 Capsule 반지름 합으로 비교
     const FVector Delta = SC - Closest;
     const float Dist2   = Delta.LengthSquared();
-    const float Rsum    = LHSSphere->GetRadius() + RHSCapsule->GetCapsuleRadius();
+
+    const FVector capScale   = RHSCapsule->GetWorldScale3D();
+    const float Rsum    = LHSSphere->GetRadius() + RHSCapsule->GetCapsuleRadius() * FMath::Min(capScale.X, capScale.Y);
     if (Dist2 <= Rsum*Rsum)
     {
         const float Dist       = FMath::Sqrt(Dist2);
@@ -352,7 +356,7 @@ bool FCollisionDispatcher::OverlapCapsuleToBox(const UCapsuleComponent* LHSCapsu
     const FVector capAxis    = FMatrix::TransformVector(FVector(0,0,1), capRotMat).GetSafeNormal();
     const FVector capScale   = LHSCapsule->GetWorldScale3D();
     const float   halfHeight = LHSCapsule->GetCapsuleHalfHeight() * capScale.Z;
-    const float   radius     = LHSCapsule->GetCapsuleRadius() * FMath::Max(capScale.X, FMath::Max(capScale.Y, capScale.Z));
+    const float   radius     = LHSCapsule->GetCapsuleRadius() * FMath::Min(capScale.X, capScale.Y);
 
     // 세그먼트 양 끝점 (월드 공간)
     const FVector P1 = capCenter + capAxis * halfHeight;
@@ -430,7 +434,8 @@ bool FCollisionDispatcher::OverlapCapsuleToSphere(UCapsuleComponent* LHSCapsule,
     // 캡슐 중심선(segment) 두 끝점 계산
     const FVector Dir     = LHSCapsule->GetUpVector();
     const FVector C       = LHSCapsule->GetWorldLocation();
-    const float H         = LHSCapsule->GetCapsuleHalfHeight();
+    const FVector capScale   = LHSCapsule->GetWorldScale3D();
+    const float H         = LHSCapsule->GetCapsuleHalfHeight() * capScale.Z;
     const FVector P1 = C + Dir * H;
     const FVector P2 = C - Dir * H;
 
@@ -441,8 +446,8 @@ bool FCollisionDispatcher::OverlapCapsuleToSphere(UCapsuleComponent* LHSCapsule,
     // Sphere 반지름과 Capsule 반지름 합으로 비교
     const FVector Delta = SC - Closest;
     const float Dist2   = Delta.LengthSquared();
-    const float Rsum    = RHSSphere->GetRadius() + LHSCapsule->GetCapsuleRadius();
-    if (Dist2 <= Rsum*Rsum)
+    const float Rsum    = RHSSphere->GetRadius() + LHSCapsule->GetCapsuleRadius() * FMath::Min(capScale.X, capScale.Y);
+    if (Dist2 <= Rsum * Rsum)
     {
         const float Dist       = FMath::Sqrt(Dist2);
         OutHitResult.bBlockingHit = true;
@@ -465,7 +470,7 @@ bool FCollisionDispatcher::OverlapCapsuleToCapsule(UCapsuleComponent* LHSCapsule
 
     const FVector scaleA      = LHSCapsule->GetWorldScale3D();
     const float   halfHeightA = LHSCapsule->GetCapsuleHalfHeight() * scaleA.Z;
-    float   radiusA     = LHSCapsule->GetCapsuleRadius() * FMath::Max(scaleA.X, FMath::Max(scaleA.Y, scaleA.Z));
+    const float   radiusA     = LHSCapsule->GetCapsuleRadius() * FMath::Min(scaleA.X, scaleA.Y);
     // 내 월드 중심과 Z축 방향
 
     const FVector centerA     = LHSCapsule->GetWorldLocation();
@@ -479,7 +484,7 @@ bool FCollisionDispatcher::OverlapCapsuleToCapsule(UCapsuleComponent* LHSCapsule
     // --- 2) 상대 캡슐 Q1, Q2 계산 ---
     const FVector scaleB      = RHSCapsule->GetWorldScale3D();
     const float   halfHeightB = RHSCapsule->GetCapsuleHalfHeight() * scaleB.Z;
-    float   radiusB     = RHSCapsule->GetCapsuleRadius() * FMath::Max(scaleB.X, FMath::Max(scaleB.Y, scaleB.Z));
+    const float radiusB     = RHSCapsule->GetCapsuleRadius() * FMath::Min(scaleB.X, scaleB.Y);
     const FVector centerB     = RHSCapsule->GetWorldLocation();
     const FMatrix rotB        = RHSCapsule->GetRotationMatrix();
     const FVector axisB       = FMatrix::TransformVector(FVector(0,0,1), rotB).GetSafeNormal();
@@ -488,8 +493,8 @@ bool FCollisionDispatcher::OverlapCapsuleToCapsule(UCapsuleComponent* LHSCapsule
 
     // --- 3) 두 세그먼트 간 최단 거리 & 점 계산 ---
     FVector ClosestA, ClosestB;
-    const float Dist = JungleMath::SegmentDistToSegment(P1, P2, Q1,Q2, ClosestA, ClosestB);
-    const float Rsum = LHSCapsule->GetCapsuleRadius() + RHSCapsule->GetCapsuleRadius();
+    const float Dist = JungleMath::SegmentDistToSegment(P1, P2, Q1, Q2, ClosestA, ClosestB);
+    const float Rsum = radiusA + radiusB;
     if (Dist <= Rsum)
     {
         OutHitResult.bBlockingHit = true;

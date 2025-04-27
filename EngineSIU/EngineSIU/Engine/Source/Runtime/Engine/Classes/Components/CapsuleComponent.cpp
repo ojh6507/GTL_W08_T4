@@ -8,7 +8,20 @@
 UCapsuleComponent::UCapsuleComponent()
 {
     CapsuleHalfHeight = 1.f;
-    CapsuleRadius = 1.f;
+    CapsuleRadius = 0.5f;
+
+    // TODO : Test용 하드 코딩 나중에 바꾸기
+    // 1) 월드 중심, 축(direction), 스케일 적용된 반높이·반지름
+    FVector Center   = GetWorldLocation();
+    FVector Axis     = GetUpVector().GetSafeNormal();
+
+    // 2) 각 축별 half-extent = halfHeight * |axis[i]| + radius
+    FVector AbsA = FVector(FMath::Abs(Axis.X), FMath::Abs(Axis.Y), FMath::Abs(Axis.Z));
+    FVector Extents = AbsA * CapsuleHalfHeight + FVector(CapsuleRadius);
+
+    // 3) Min/Max
+    AABB.min = Center - Extents;
+    AABB.max = Center + Extents;
 }
 
 UCapsuleComponent::~UCapsuleComponent()

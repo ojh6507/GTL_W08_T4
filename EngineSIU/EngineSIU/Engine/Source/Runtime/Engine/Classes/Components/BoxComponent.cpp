@@ -12,7 +12,7 @@ UBoxComponent::UBoxComponent()
 {
     SetType(StaticClass()->GetName());
     BoxExtent = FVector(1, 1, 1);
-    // Test용 하드 코딩
+    // TODO : Test용 하드 코딩 나중에 바꾸기
     FVector LocalMin = -BoxExtent;  // (-X, -Y, -Z)
     FVector LocalMax =  BoxExtent;  // ( +X, +Y, +Z)
     AABB.max = LocalMax;

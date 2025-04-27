@@ -84,7 +84,7 @@ private:
     void UdpateConstantbufferArrow(const FConstantBufferDebugArrow& Buffer);
 
     // Capsule
-    void GenerateCapsuleFrame(float radius, float halfHeight, int32 radialSeg, int32 heightSeg, TArray<FVector>& OutVerts, TArray<uint32_t>&
+    void GenerateCapsuleFrame(float InRadius, float InHalfHeight, int32 InRadialSeg, int32 InHeightSeg, TArray<FVector>& OutVerts, TArray<uint32_t>&
                               OutIndices);
     void RenderCapsuleInstnaced();
     void PrepareConstantbufferCapsule();

@@ -302,8 +302,8 @@ void ControlEditorPanel::CreateModifyButton(ImVec2 ButtonSize, ImFont* IconFont)
                     UStaticMeshComponent* StaticMeshComp = SpawnedActor->AddComponent<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
                     StaticMeshComp->SetStaticMesh(FManagerOBJ::GetStaticMesh(L"Contents/Sphere.obj"));
                     StaticMeshComp->AABB =  FBoundingBox({1, 1, 1} , {-1,-1,-1});
-                    USphereComponent* SphererComponent = SpawnedActor->AddComponent<USphereComponent>(TEXT("SphereComponent"));
-                    SphererComponent->SetupAttachment(SpawnedActor->GetRootComponent());
+                    USphereComponent* SphereComponent = SpawnedActor->AddComponent<USphereComponent>(TEXT("SphereComponent"));
+                    SphereComponent->SetupAttachment(SpawnedActor->GetRootComponent());
                     break;
                 }
                 case OBJ_CUBE:

@@ -106,48 +106,55 @@ void FEditorRenderPass::ReleaseShaders()
 
 }
 
-void FEditorRenderPass::GenerateCapsuleFrame(float radius, float halfHeight, int32 radialSeg, int32 heightSeg, TArray<FVector>& OutVerts, TArray<uint32>& OutIndices)
+void FEditorRenderPass::GenerateCapsuleFrame(const float InRadius, const float InHalfHeight, const int32 InRadialSeg, const int32 InHeightSeg, TArray<FVector>& OutVerts, TArray<uint32>& OutIndices)
 {
     OutVerts.Empty();
     OutIndices.Empty();
 
     const int32 numMeridians = 4;
     // ─── 1) 반구 머리디언(arcs) ─────────────────────────────
-    for (int mid = 0; mid < numMeridians; ++mid) {
-        float lambda = PI * 0.5f * mid;      // 0, 90°,180°,270°
-        int32 baseIdx = OutVerts.Num();
+    for (int mid = 0; mid < numMeridians; ++mid)
+    {
+        const float lambda = PI * 0.5f * mid;      // 0, 90°, 180°, 270°
+        const int32 baseIdx = OutVerts.Num();
 
         // 1-1) 아래 반구 φ: -90° → 0°
-        for (int32 i = 0; i <= heightSeg; ++i) {
-            float t   = float(i) / heightSeg;
-            float phi = FMath::Lerp(-PI*0.5f, 0.f, t);
-            float c = FMath::Cos(phi), s = FMath::Sin(phi);
-            float x = c * radius * FMath::Cos(lambda);
-            float y = c * radius * FMath::Sin(lambda);
-            float z = -halfHeight + s * radius;
-            OutVerts.Add(FVector(x,y,z));
+        for (int32 i = 0; i <= InHeightSeg; ++i)
+        {
+            const float t   = static_cast<float>(i) / InHeightSeg;
+            const float phi = FMath::Lerp(-PI * 0.5f, 0.f, t);
+            const float c = FMath::Cos(phi);
+            const float s = FMath::Sin(phi);
+            const float x = c * InRadius * FMath::Cos(lambda);
+            const float y = c * InRadius * FMath::Sin(lambda);
+            const float z = -InHalfHeight + s * InRadius;
+            OutVerts.Add(FVector(x, y, z));
         }
-        int32 botCount = heightSeg + 1;
+        const int32 botCount = InHeightSeg + 1;
         // 아래 반구 선 연결
-        for (int32 i = 0; i < botCount-1; ++i) {
+        for (int32 i = 0; i < botCount-1; ++i)
+        {
             OutIndices.Add(baseIdx + i);
             OutIndices.Add(baseIdx + i + 1);
         }
 
         // 1-2) 위 반구 φ: 0° → +90°
-        int32 topBase = OutVerts.Num();
-        for (int32 i = 0; i <= heightSeg; ++i) {
-            float t   = float(i) / heightSeg;
-            float phi = FMath::Lerp(0.f, PI*0.5f, t);
-            float c = FMath::Cos(phi), s = FMath::Sin(phi);
-            float x = c * radius * FMath::Cos(lambda);
-            float y = c * radius * FMath::Sin(lambda);
-            float z =  halfHeight + s * radius;
-            OutVerts.Add(FVector(x,y,z));
+        const int32 topBase = OutVerts.Num();
+        for (int32 i = 0; i <= InHeightSeg; ++i)
+        {
+            const float t   = static_cast<float>(i) / InHeightSeg;
+            const float phi = FMath::Lerp(0.f, PI*0.5f, t);
+            const float c = FMath::Cos(phi);
+            const float s = FMath::Sin(phi);
+            const float x = c * InRadius * FMath::Cos(lambda);
+            const float y = c * InRadius * FMath::Sin(lambda);
+            const float z =  InHalfHeight + s * InRadius;
+            OutVerts.Add(FVector(x, y, z));
         }
-        int32 topCount = heightSeg + 1;
+        const int32 topCount = InHeightSeg + 1;
         // 위 반구 선 연결
-        for (int32 i = 0; i < topCount-1; ++i) {
+        for (int32 i = 0; i < topCount-1; ++i)
+        {
             OutIndices.Add(topBase + i);
             OutIndices.Add(topBase + i + 1);
         }
@@ -155,29 +162,33 @@ void FEditorRenderPass::GenerateCapsuleFrame(float radius, float halfHeight, int
 
     // ─── 2) 실린더 조인트에 링(circle) ───────────────────────
     // 2-1) 아래 링 (z = -halfHeight)
-    int32 botRingStart = OutVerts.Num();
-    for (int32 i = 0; i <= radialSeg; ++i) {
-        float theta = 2.f*PI * i / radialSeg;
-        float x = FMath::Cos(theta) * radius;
-        float y = FMath::Sin(theta) * radius;
-        float z = -halfHeight;
+    const int32 botRingStart = OutVerts.Num();
+    for (int32 i = 0; i <= InRadialSeg; ++i)
+    {
+        const float theta = 2.f*PI * i / InRadialSeg;
+        const float x = FMath::Cos(theta) * InRadius;
+        const float y = FMath::Sin(theta) * InRadius;
+        const float z = -InHalfHeight;
         OutVerts.Add(FVector(x,y,z));
     }
-    for (int32 i = 0; i < radialSeg; ++i) {
+    for (int32 i = 0; i < InRadialSeg; ++i)
+    {
         OutIndices.Add(botRingStart + i);
         OutIndices.Add(botRingStart + i + 1);
     }
 
     // 2-2) 위 링 (z = +halfHeight)
-    int32 topRingStart = OutVerts.Num();
-    for (int32 i = 0; i <= radialSeg; ++i) {
-        float theta = 2.f*PI * i / radialSeg;
-        float x = FMath::Cos(theta) * radius;
-        float y = FMath::Sin(theta) * radius;
-        float z =  halfHeight;
+    const int32 topRingStart = OutVerts.Num();
+    for (int32 i = 0; i <= InRadialSeg; ++i)
+    {
+        const float theta = 2.f*PI * i / InRadialSeg;
+        const float x = FMath::Cos(theta) * InRadius;
+        const float y = FMath::Sin(theta) * InRadius;
+        const float z =  InHalfHeight;
         OutVerts.Add(FVector(x,y,z));
     }
-    for (int32 i = 0; i < radialSeg; ++i) {
+    for (int32 i = 0; i < InRadialSeg; ++i)
+    {
         OutIndices.Add(topRingStart + i);
         OutIndices.Add(topRingStart + i + 1);
     }
@@ -185,11 +196,12 @@ void FEditorRenderPass::GenerateCapsuleFrame(float radius, float halfHeight, int
     // ─── 3) 링 간 높이선 4개만 연결 ─────────────────────────────
     // botRingStart, topRingStart 는 앞에서 링을 만들고 나서 저장해 두었던 인덱스 시작점입니다.
     // ringSeg 는 한 링당 분할 수
-    for (int mid = 0; mid < 4; ++mid) {
+    for (int mid = 0; mid < 4; ++mid)
+    {
         // i = 0, ringSeg/4, ringSeg/2, 3*ringSeg/4
-        int i = (radialSeg / 4) * mid;
-        int botIdx = botRingStart + i;
-        int topIdx = topRingStart + i;
+        const int i = (InRadialSeg / 4) * mid;
+        const int botIdx = botRingStart + i;
+        const int topIdx = topRingStart + i;
         OutIndices.Add(botIdx);
         OutIndices.Add(topIdx);
     }
@@ -1065,17 +1077,15 @@ void FEditorRenderPass::RenderCapsuleInstnaced()
         // 2) 컴포넌트 전체 스케일
         FVector compScale = CapsuleComp->GetWorldScale3D();
 
+        float minScaleXY = FMath::Min(compScale.X, compScale.Y);
         // 3) unit 캡슐 → 실제 r,h 크기 스케일
-        FVector capsuleScale = FVector(r, r, h * 2.0f + 2.0f * r);
-
-        // 4) 최종 스케일: 캡슐 크기 * 컴포넌트 스케일
-        FVector finalScale = capsuleScale * compScale;
+        FVector capsuleScale = FVector(r * minScaleXY, r * minScaleXY,  h * compScale.Z);
 
         // 5) 회전·위치
         FRotator compRot = CapsuleComp->GetWorldRotation();
         FVector compLoc  = CapsuleComp->GetWorldLocation();
 
-        FMatrix ScaleMat = FMatrix::GetScaleMatrix(finalScale);
+        FMatrix ScaleMat = FMatrix::GetScaleMatrix(capsuleScale);
         FMatrix RotationMat = FMatrix::GetRotationMatrix(compRot);
         FMatrix TranslationMat = FMatrix::GetTranslationMatrix(compLoc);
 

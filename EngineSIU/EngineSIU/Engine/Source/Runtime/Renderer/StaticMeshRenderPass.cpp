@@ -7,7 +7,6 @@
 
 #include "RendererHelpers.h"
 #include "UnrealClient.h"
-#include "Math/JungleMath.h"
 
 #include "UObject/UObjectIterator.h"
 #include "UObject/Casts.h"
@@ -30,6 +29,8 @@
 #include "Renderer/Shadow/SpotLightShadowMap.h"
 #include "Renderer/Shadow/PointLightShadowMap.h"
 
+#include "Components/SphereComponent.h"
+#include "Components/CapsuleComponent.h"
 
 FStaticMeshRenderPass::FStaticMeshRenderPass()
     : VertexShader(nullptr)
@@ -222,7 +223,20 @@ void FStaticMeshRenderPass::PrepareRender()
         FVector LocalMin = -LocalHalfExtents;  // (-X, -Y, -Z)
         FVector LocalMax =  LocalHalfExtents;  // ( +X, +Y, +Z)
 
+        FEngineLoop::PrimitiveDrawBatch.AddAABBToBatch(iter->GetBoundingBox(), WorldPosition, iter->GetWorldMatrix());
         FEngineLoop::PrimitiveDrawBatch.AddOBBToBatch(FBoundingBox(LocalMin, LocalMax), WorldPosition, iter->GetWorldMatrix());
+    }
+
+    for (const auto iter : TObjectRange<USphereComponent>())
+    {
+        FVector WorldPosition = iter->GetWorldLocation();
+        FEngineLoop::PrimitiveDrawBatch.AddAABBToBatch(iter->GetBoundingBox(), WorldPosition, iter->GetWorldMatrix());
+    }
+
+    for (const auto iter : TObjectRange<UCapsuleComponent>())
+    {
+        FVector WorldPosition = iter->GetWorldLocation();
+        FEngineLoop::PrimitiveDrawBatch.AddAABBToBatch(iter->GetBoundingBox(), WorldPosition, iter->GetWorldMatrix());
     }
 }
 
