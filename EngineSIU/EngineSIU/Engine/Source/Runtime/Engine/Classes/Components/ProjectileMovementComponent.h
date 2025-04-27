@@ -1,9 +1,9 @@
 #pragma once
 #include"Components/SceneComponent.h"
 
-class UProjectileMovementComponent : public USceneComponent
+class UProjectileMovementComponent : public UActorComponent
 {
-    DECLARE_CLASS(UProjectileMovementComponent, USceneComponent)
+    DECLARE_CLASS(UProjectileMovementComponent, UActorComponent)
 public:
     UProjectileMovementComponent();
     virtual ~UProjectileMovementComponent();

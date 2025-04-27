@@ -59,8 +59,7 @@ public:
     template <typename T>
         requires std::derived_from<T, UActorComponent>
     T* AddComponent(FName InName);
-    UActorComponent* AddComponent(UClass* InClass, FName InName, bool bTryRootComponent = true);
-
+    UActorComponent* AddComponent(UClass* InClass, FName InName);
 
     /** Actor가 가지고 있는 Component를 제거합니다. */
     void RemoveOwnedComponent(UActorComponent* Component);
@@ -106,7 +105,6 @@ private:
 
     /** 본인이 소유하고 있는 컴포넌트들의 정보 */
     TSet<UActorComponent*> OwnedComponents;
-
 
     /** 현재 Actor가 삭제 처리중인지 여부 */
     uint8 bActorIsBeingDestroyed : 1 = false;

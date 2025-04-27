@@ -27,6 +27,43 @@ void DrawColorProperty(const char* label, Getter get, Setter set)
     ImGui::PopItemWidth();
 }
 
+struct ActorComponentNode
+{
+    FString Name;
+    FString Type;
+    UActorComponent* Component;
+
+    TArray<ActorComponentNode*> Children;
+
+    ActorComponentNode(const FString& Name, const FString& Type, UActorComponent* Component)
+        : Name(Name), Type(Type), Component(Component) {}
+
+    ~ActorComponentNode()
+    {
+        for (const ActorComponentNode* Child : Children)
+        {
+            delete Child; // 동적 할당된 메모리 해제
+        }
+        Children.Empty();
+    }
+
+    ActorComponentNode* AddChild(FString Name, const FString& Type, UActorComponent* Component)
+    {
+        ActorComponentNode* Child = new ActorComponentNode(Name, Type, Component);
+        Children.Add(Child);
+        return Child;
+    }
+
+    void ClearChildren()
+    {
+        for (const ActorComponentNode* Child : Children)
+        {
+            delete Child; // 동적 할당된 메모리 해제
+        }
+        Children.Empty();
+    }
+};
+
 
 class PropertyEditorPanel : public UEditorPanel
 {
@@ -34,6 +71,10 @@ public:
     virtual void Render() override;
     virtual void OnResize(HWND hWnd) override;
 
+private:
+    void RenderActorComponentTreeNode(ActorComponentNode* Node);
+    void RenderActorComponentTreeNodeTable(const char* TableID, ActorComponentNode* RootNode);
+    void ShowActorComponents(const char* TableID);
 
 private:
     void RGBToHSV(float r, float g, float b, float& h, float& s, float& v) const;
@@ -61,4 +102,11 @@ private:
     UStaticMeshComponent* SelectedStaticMeshComp = nullptr;
     FObjMaterialInfo tempMaterialInfo;
     bool IsCreateMaterial;
+
+    AActor* SelectedActor = nullptr;
+    AActor* SelectedActorPrev = nullptr;
+    UActorComponent* SelectedComponent = nullptr;
+    UActorComponent* SelectedComponentPrev = nullptr;
+    bool bActorComponentNodeDirty;
+    ActorComponentNode* RootActorNode;
 };

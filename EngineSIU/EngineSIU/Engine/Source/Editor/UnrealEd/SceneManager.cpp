@@ -311,7 +311,7 @@ bool SceneManager::LoadWorldFromData(const FSceneData& sceneData, UWorld* target
             // 기존 컴포넌트가 없으면 새로 생성
             if (TargetComponent == nullptr)
             {
-                TargetComponent = SpawnedActor->AddComponent(ComponentClass, FName(componentData.ComponentID), false);
+                TargetComponent = SpawnedActor->AddComponent(ComponentClass, FName(componentData.ComponentID));
                 
                 // if (!actorData.RootComponentID.IsEmpty())
                 // {
@@ -360,7 +360,7 @@ bool SceneManager::LoadWorldFromData(const FSceneData& sceneData, UWorld* target
             {
                 // 1.4. 컴포넌트 속성 설정 (공통 로직)
                 //ApplyComponentProperties(TargetComponent, componentData.Properties);
-                TargetComponent->SetProperties( componentData.Properties); // 태그 설정 (ID로 사용)
+                TargetComponent->SetProperties(componentData.Properties); // 태그 설정 (ID로 사용)
 
                 // 1.5. *** 수정: 복합 키를 사용하여 컴포넌트 맵에 추가 ***
                 //FString CompositeKey = actorData.ActorID + TEXT("::") + componentData.ComponentID; // 예: "MyActor1::MeshComponent"

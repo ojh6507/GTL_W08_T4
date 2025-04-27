@@ -12,7 +12,6 @@ public:
 
     virtual UObject* Duplicate(UObject* InOuter) override;
 
-
     virtual void GetProperties(TMap<FString, FString>& OutProperties) const override;
     virtual void SetProperties(const TMap<FString, FString>& InProperties) override;
 
@@ -67,7 +66,6 @@ protected:
     /** 부모 컴포넌트로부터 상대적인 크기 */
     UPROPERTY
     (FVector, RelativeScale3D);
-
 
     UPROPERTY
     (USceneComponent*, AttachParent, = nullptr);

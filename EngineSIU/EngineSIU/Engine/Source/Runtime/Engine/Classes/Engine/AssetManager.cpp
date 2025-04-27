@@ -58,12 +58,10 @@ void UAssetManager::LoadAssetFiles() const
 
             if (Entry.path().extension() == ".obj")
             {
-                NewAssetInfo.AssetType = EAssetType::StaticMesh; // obj 파일은 무조건 StaticMesh
+                NewAssetInfo.AssetType = EAssetType::StaticMesh;
 
                 FString MeshName = NewAssetInfo.PackagePath.ToString() + "/" + NewAssetInfo.AssetName.ToString();
-                FManagerOBJ::CreateStaticMesh(MeshName);
-                // ObjFileNames.push_back(UGTLStringLibrary::StringToWString(Entry.path().string()));
-                // FObjManager::LoadObjStaticMeshAsset(UGTLStringLibrary::StringToWString(Entry.path().string()));
+                 FManagerOBJ::CreateStaticMesh(MeshName);
             }
             else if (Entry.path().extension() == ".lua")
             {
