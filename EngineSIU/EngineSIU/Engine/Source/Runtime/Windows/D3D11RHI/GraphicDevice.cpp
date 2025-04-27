@@ -30,11 +30,14 @@ void FGraphicsDevice::CreateDeviceAndSwapChain(HWND hWindow)
     SwapchainDesc.OutputWindow = hWindow;                         // 렌더링할 창 핸들
     SwapchainDesc.Windowed = TRUE;                                // 창 모드
     SwapchainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;     // 스왑 방식
-
+    UINT Flags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
+#if _DEBUG
+    Flags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
     // 디바이스와 스왑 체인 생성
     HRESULT hr = D3D11CreateDeviceAndSwapChain(
         nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr,
-        D3D11_CREATE_DEVICE_BGRA_SUPPORT | D3D11_CREATE_DEVICE_DEBUG,
+        Flags,
         FeatureLevels, ARRAYSIZE(FeatureLevels), D3D11_SDK_VERSION,
         &SwapchainDesc, &SwapChain, &Device, nullptr, &DeviceContext
     );
@@ -63,15 +66,15 @@ ID3D11Texture2D* FGraphicsDevice::CreateTexture2D(const D3D11_TEXTURE2D_DESC& De
     D3D11_SUBRESOURCE_DATA Data = {};
     Data.pSysMem = InitialData;
     Data.SysMemPitch = Description.Width * 4;
-    
+
     ID3D11Texture2D* Texture2D;
     HRESULT hr = Device->CreateTexture2D(&Description, InitialData ? &Data : nullptr, &Texture2D);
-    
+
     if (FAILED(hr))
     {
         return nullptr;
     }
-    
+
     return Texture2D;
 }
 

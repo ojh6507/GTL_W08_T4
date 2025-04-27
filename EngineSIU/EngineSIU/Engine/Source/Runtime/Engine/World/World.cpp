@@ -49,7 +49,8 @@ void UWorld::Tick(float DeltaTime)
 
 void UWorld::BeginPlay()
 {
-    for (AActor* Actor : ActiveLevel->Actors)
+    TArray <AActor*> CpyActors = ActiveLevel->Actors;
+    for (AActor* Actor : CpyActors)
     {
         if (Actor->GetWorld() == this)
         {
