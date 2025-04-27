@@ -9,6 +9,7 @@
 #include "UnrealEd/EditorViewportClient.h"
 #include "UnrealEd/UnrealEd.h"
 #include "World/World.h"
+#include "Engine/Script/LuaManager.h"
 
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -53,6 +54,7 @@ int32 FEngineLoop::Init(HINSTANCE hInstance)
     UIMgr->Initialize(AppWnd, GraphicDevice.Device, GraphicDevice.DeviceContext);
     ResourceManager.Initialize(&Renderer, &GraphicDevice);
     
+
     uint32 ClientWidth = 0;
     uint32 ClientHeight = 0;
     GetClientSize(ClientWidth, ClientHeight);

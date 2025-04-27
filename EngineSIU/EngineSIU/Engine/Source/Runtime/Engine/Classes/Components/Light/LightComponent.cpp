@@ -3,8 +3,8 @@
 
 ULightComponentBase::ULightComponentBase()
 {
-    AABB.max = { 1.f,1.f,0.1f };
-    AABB.min = { -1.f,-1.f,-0.1f };
+    AABB.max = { 1.f,1.f,1.f };
+    AABB.min = { -1.f,-1.f,-1.f };
 }
 
 UObject* ULightComponentBase::Duplicate(UObject* InOuter)

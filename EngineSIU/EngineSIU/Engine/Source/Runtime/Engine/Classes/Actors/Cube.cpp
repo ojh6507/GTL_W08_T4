@@ -11,8 +11,8 @@
 ACube::ACube()
 {
     // Begin Test
-    //StaticMeshComponent->SetStaticMesh(FManagerOBJ::GetStaticMesh(L"Contents/helloBlender.obj"));
-    StaticMeshComponent->SetStaticMesh(FManagerOBJ::GetStaticMesh(L"Contents/Reference/Reference.obj"));
+    StaticMeshComponent->SetStaticMesh(FManagerOBJ::GetStaticMesh(L"Contents/helloBlender.obj"));
+    //StaticMeshComponent->SetStaticMesh(FManagerOBJ::GetStaticMesh(L"Contents/Reference/Reference.obj"));
     //BoxComponent = AddComponent<UBoxComponent>(TEXT("BoxComponent"));
     //BoxComponent->SetupAttachment(RootComponent);
     CapsuleComponent = AddComponent<UCapsuleComponent>(TEXT("CapsuleComponent"));

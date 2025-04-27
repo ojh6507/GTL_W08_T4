@@ -9,12 +9,13 @@ class FResourceMgr
 {
 
 public:
-    void Initialize(FRenderer* renderer, FGraphicsDevice* device);
+    void Initialize(FRenderer* renderer, FGraphicsDevice* InDevice);
     void Release(FRenderer* renderer);
     HRESULT LoadTextureFromFile(ID3D11Device* device, ID3D11DeviceContext* context, const wchar_t* filename);
     HRESULT LoadTextureFromDDS(ID3D11Device* device, ID3D11DeviceContext* context, const wchar_t* filename);
 
-    std::shared_ptr<FTexture> GetTexture(const FWString& name) const;
+    std::shared_ptr<FTexture> GetTexture(const FWString& name);
 private:
     TMap<FWString, std::shared_ptr<FTexture>> textureMap;
+    FGraphicsDevice* device;
 };
