@@ -55,3 +55,17 @@ cbuffer ConstantBufferDebugArrow : register(b11)
     float3 ArrowDirection;
     float ArrowScaleZ;
 }
+
+struct CapsuleData
+{
+    row_major float4x4 WorldMatrix;
+    float3 CapsulePosition;
+    float CapsuleRadius;
+    float CapsuleHeight;
+    float3 padding;
+};
+
+cbuffer ConstantBufferDebugCapsule : register(b11)
+{
+    CapsuleData DataCapsule[100];
+}

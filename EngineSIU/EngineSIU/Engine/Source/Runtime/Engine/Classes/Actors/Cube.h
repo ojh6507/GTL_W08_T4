@@ -13,5 +13,6 @@ public:
     virtual void Tick(float DeltaTime) override;
 private:
     UBoxComponent* BoxComponent;
+    UCapsuleComponent* CapsuleComponent;
 };
 

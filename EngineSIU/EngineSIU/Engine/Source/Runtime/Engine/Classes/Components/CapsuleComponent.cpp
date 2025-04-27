@@ -7,6 +7,8 @@
 
 UCapsuleComponent::UCapsuleComponent()
 {
+    CapsuleHalfHeight = 1.f;
+    CapsuleRadius = 1.f;
 }
 
 UCapsuleComponent::~UCapsuleComponent()

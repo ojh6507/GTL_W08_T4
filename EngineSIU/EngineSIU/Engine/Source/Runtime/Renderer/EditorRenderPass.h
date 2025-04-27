@@ -83,8 +83,15 @@ private:
     void PrepareConstantbufferArrow();
     void UdpateConstantbufferArrow(const FConstantBufferDebugArrow& Buffer);
 
+    // Capsule
+    void GenerateCapsuleFrame(float radius, float halfHeight, int32 radialSeg, int32 heightSeg, TArray<FVector>& OutVerts, TArray<uint32_t>&
+                              OutIndices);
+    void RenderCapsuleInstnaced();
+    void PrepareConstantbufferCapsule();
+    void UdpateConstantbufferCapsule(TArray<FConstantBufferDebugCapsule> Buffer);
+
     const UINT32 ConstantBufferSizeAABB = 8;
     const UINT32 ConstantBufferSizeSphere = 8;
     const UINT32 ConstantBufferSizeCone = 100; // 최대
+    const uint32 ConstantBufferSizeCapsule = 100;
 };
-
