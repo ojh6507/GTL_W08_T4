@@ -13,6 +13,7 @@ UObject* UStaticMeshComponent::Duplicate(UObject* InOuter)
 
     NewComponent->staticMesh = staticMesh;
     NewComponent->selectedSubMeshIndex = selectedSubMeshIndex;
+    NewComponent->Visibility = Visibility;
 
     return NewComponent;
 }

@@ -56,6 +56,7 @@ public:
 
 private:
     TArray<UStaticMeshComponent*> StaticMeshComponents;
+    TArray<UStaticMeshComponent*> ToggleActors;
 
     ID3D11VertexShader* VertexShader;
     ID3D11InputLayout* InputLayout;

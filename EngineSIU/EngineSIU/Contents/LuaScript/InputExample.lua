@@ -8,7 +8,7 @@ function BeginPlay()
     velocity = FVector(0,0,0)
     maxSpeed = 100
     accelerationRate = 100
-    friction = 10
+    friction = 60
 end
 
 function EndPlay()
