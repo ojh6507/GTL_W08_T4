@@ -10,8 +10,6 @@ ACameraActor::ACameraActor()
     StaticMeshComponent = AddComponent<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
     StaticMeshComponent->SetStaticMesh(FManagerOBJ::GetStaticMesh(L"Contents/Camera.obj"));
     CameraComponent = AddComponent<UCameraComponent>(TEXT("CameraComponent"));
-
-    SetActorScale(FVector(0.05f));
 }
 
 ACameraActor::~ACameraActor()
