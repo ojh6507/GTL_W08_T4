@@ -1,22 +1,19 @@
 local soundManager
 
-function BeginPlay()
+function Initialize()
     soundManager = GetSoundManager()
 
-    -- 초기화
     soundManager:Initialize() 
-  
-
     soundManager:LoadSound("Main", "Main.mp3", true) 
+end
 
-
+function PlayBGM()
     soundManager:PlaySound("Main")
 end
 
 
 
 function EndPlay()
-    Log("End")
     soundManager:ShutDown()
 end
 

@@ -6,7 +6,6 @@
 #include <algorithm> // std::ranges::transform 등 사용 (C++ 코드 내)
 #include <cctype>    // std::tolower, std::toupper 등 사용 (C++ 코드 내)
 
-
 #include "UObject/NameTypes.h"         // FName
 #include "Container/String.h"        // FString
 #include "Math/Vector.h"           // FVector, FVector2D
@@ -22,6 +21,9 @@
 #include "Engine/EngineTypes.h"      // EEndPlayReason
 #include "Container/Set.h"           // TSet
 #include "../../../SoundManager.h"
+#include "../../../Timer.h"
+#include "../../../GameUI.h"
+#include "UnrealEd/UnrealEd.h"
 
 // --- !!! 중요: 선행 바인딩 필요 !!! ---
 // 이 파일 내의 바인딩 함수들은 서로 의존성을 가집니다.
@@ -704,10 +706,64 @@ namespace LuaBindings
            "LoadSound", &SoundManager::LoadSound,
            "PlaySound", &SoundManager::PlaySound,
            "Update", &SoundManager::Update,
-           "LoadSoundFiles", &SoundManager::LoadSoundFiles
-        
+           "LoadSoundFiles", &SoundManager::LoadSoundFiles,
+            "Stop", &SoundManager::Stop
        );
+
+       lua["SoundManager"] = &SoundManager::GetInstance();
    }
+
+   // LuaBindings.cpp 파일에 추가
+   void BindUI(sol::state& lua)
+   {
+       lua.new_usertype<Timer>("Timer",
+           // 생성자
+           sol::constructors<Timer()>(),
+
+           // 타이머 제어 함수
+           "Start", &Timer::Start,
+           "Stop", &Timer::Stop,
+           "Reset", &Timer::Reset,
+           "Pause", &Timer::Pause,
+           "Resume", &Timer::Resume,
+
+           // 타이머 상태 확인 함수
+           "IsRunning", &Timer::IsRunning,
+           "IsPaused", &Timer::IsPaused,
+           "GetTime", &Timer::GetTime,
+
+           // 타이머 업데이트
+           "Update", &Timer::Update
+
+       );
+
+       lua.new_usertype<GameUI>("GameUI",
+           sol::no_constructor, // 직접 생성 방지 (엔진에서 관리)
+           "Initialize", &GameUI::Initialize,
+           "Shutdown", &GameUI::Shutdown,
+           "Update", &GameUI::Update,
+           "RenderTimerUI", &GameUI::RenderTimerUI,
+           "GetTimer", &GameUI::GetTimer,  // 타이머 객체 접근자
+
+           "SetStartButtonCallback", &GameUI::SetStartButtonCallback,
+
+           "SetPauseButtonCallback", & GameUI::SetPauseButtonCallback,
+
+           "SetResumeButtonCallback", & GameUI::SetResumeButtonCallback,
+
+           "SetResetButtonCallback", & GameUI::SetResetButtonCallback
+
+       );
+
+       // 전역 GameUI 인스턴스 제공 (엔진에서 관리하는 인스턴스 주소)
+       auto gameUIPanel = UnrealEd::GetEditorPanel("GameUI");
+       auto gameUI = std::dynamic_pointer_cast<GameUI>(gameUIPanel);
+       lua["gameUI"] = gameUI;
+       lua["Timer"] = gameUI->GetTimer();
+   }
+
+   // LuaBindings.cpp 파일 또는 해당하는 파일에 추가
+
 
     // --- 코어 타입 전체 바인딩 호출 함수 ---
     void BindCoreTypesForLua(sol::state& lua)
@@ -733,6 +789,7 @@ namespace LuaBindings
         lua["FindClass"] = &LuaFindClass;
 
         BindSoundManager(lua);
+        BindUI(lua);
     }
 
   
