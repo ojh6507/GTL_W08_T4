@@ -39,8 +39,8 @@ function BeginPlay()
     LogMessage("UClass for ACube found.")
 
     -- --- 3D 그리드 형태로 Cube 스폰 ---
-    local gridWidth = 2      -- 그리드 X축 개수 (오른쪽 방향)
-    local gridDepth = 2       -- 그리드 Y축 개수 (앞쪽 방향) - 이름 변경 (Depth)
+    local gridWidth = 20      -- 그리드 X축 개수 (오른쪽 방향)
+    local gridDepth = 20      -- 그리드 Y축 개수 (앞쪽 방향) - 이름 변경 (Depth)
     local gridHeight = 2      -- 그리드 Z축 개수 (위쪽 방향) - 이름 변경 (Height)
     local spacingX = 5.0    -- X축 간격
     local spacingY = 5.0    -- Y축 간격 (앞뒤)
@@ -51,7 +51,7 @@ function BeginPlay()
     local upVec = self:GetActorUpVector()           -- 스크립트 액터의 위쪽 방향 (Z축 오프셋에 사용)
 
     -- 기본 스폰 위치 (그리드의 중심 근처)
-    local baseSpawnLocation = initialLocation + (forwardVec * 300.0) -- 좀 더 앞쪽에 배치
+    local baseSpawnLocation = initialLocation + (forwardVec * 1.0) -- 좀 더 앞쪽에 배치
 
     -- 그리드 중심을 baseSpawnLocation으로 맞추기 위한 오프셋 계산
     local offsetX = -(gridWidth - 1) * spacingX / 2.0
@@ -129,9 +129,12 @@ function Tick(dt)
     for i, cube in ipairs(spawnedCubes) do
         if cube then
             local rot = cube:GetActorRotation()
+            local loc = cube:GetActorLocation()
+            loc.X = loc.X - 4 * dt;
             rot.Yaw = rot.Yaw + (rotationSpeed * dt) -- Yaw 축(Z축 기준 회전) 변경
             -- 필요하다면 다른 축도 변경: rot.Pitch = ..., rot.Roll = ...
             cube:SetActorRotation(rot)
+            cube:SetActorLocation(loc)
         end
     end
 

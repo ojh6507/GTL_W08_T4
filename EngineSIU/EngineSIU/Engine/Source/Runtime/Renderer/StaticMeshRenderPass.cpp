@@ -409,11 +409,15 @@ void FStaticMeshRenderPass::Render(const std::shared_ptr<FEditorViewportClient>&
         AAnimPlayerActor* AnimOwner = nullptr;
         for (UStaticMeshComponent* Comp : ToggleActors)
         {
-            if (!Comp) continue;
+            if (!Comp)
+            {
+                continue;
+            }
+
             if (auto* Owner = Cast<AAnimPlayerActor>(Comp->GetOwner()))
             {
                 AnimOwner = Owner;
-                break;  // “플레이어 액터는 하나” 이므로 첫 발견만으로 OK
+                break;
             }
         }
 
