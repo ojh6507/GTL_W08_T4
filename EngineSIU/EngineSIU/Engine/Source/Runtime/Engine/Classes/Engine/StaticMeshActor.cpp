@@ -14,20 +14,20 @@ UStaticMeshComponent* AStaticMeshActor::GetStaticMeshComponent() const
     return StaticMeshComponent;
 }
 
-UObject* AStaticMeshActor::Duplicate(UObject* InOuter)
-{
-    ThisClass* NewActor = Cast<ThisClass>(Super::Duplicate(InOuter));
-
-    for (UActorComponent* component : NewActor->GetComponents())
-    {
-        UStaticMeshComponent* staticMeshComponent = Cast<UStaticMeshComponent>(component);
-        if (staticMeshComponent)
-        {
-            NewActor->StaticMeshComponent->DestroyComponent();
-            NewActor->StaticMeshComponent = staticMeshComponent;
-        }
-    }
-
-    return NewActor;
-}
-
+//UObject* AStaticMeshActor::Duplicate(UObject* InOuter)
+//{
+//    ThisClass* NewActor = Cast<ThisClass>(Super::Duplicate(InOuter));
+//
+//    for (UActorComponent* component : NewActor->GetComponents())
+//    {
+//        UStaticMeshComponent* staticMeshComponent = Cast<UStaticMeshComponent>(component);
+//        if (staticMeshComponent)
+//        {
+//            NewActor->StaticMeshComponent->DestroyComponent();
+//            NewActor->StaticMeshComponent = staticMeshComponent;
+//        }
+//    }
+//
+//    return NewActor;
+//}
+//
