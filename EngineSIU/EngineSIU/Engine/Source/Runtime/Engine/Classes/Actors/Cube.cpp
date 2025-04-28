@@ -25,8 +25,6 @@ ACube::ACube()
 void ACube::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-
-    SetActorLocation(GetActorLocation() + GetActorForwardVector() * DeltaTime);
 }
 
 UObject* ACube::Duplicate(UObject* InOuter)

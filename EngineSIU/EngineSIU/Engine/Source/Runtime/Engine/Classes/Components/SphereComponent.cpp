@@ -114,10 +114,10 @@ void USphereComponent::TickComponent(float DeltaTime)
 
 void USphereComponent::HandleBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, bool bFromSweep, const FHitResult& SweepResult)
 {
-    UE_LOG(ELogLevel::Display, TEXT("[Overlap] %s at %s ↔ %s at %s"), *OverlappedComp->GetOwner()->GetName(),  *OverlappedComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
+    UE_LOG(ELogLevel::Warning, TEXT("[Overlap] %s at %s ↔ %s at %s"), *OverlappedComp->GetOwner()->GetName(),  *OverlappedComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
 }
 
 void USphereComponent::HandleEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp)
 {
-    UE_LOG(ELogLevel::Display, TEXT("[OverlapEnd] %s at %s ↔ %s at %s"), *OverlappedComp->GetOwner()->GetName(), *OverlappedComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
+    UE_LOG(ELogLevel::Warning, TEXT("[OverlapEnd] %s at %s ↔ %s at %s"), *OverlappedComp->GetOwner()->GetName(), *OverlappedComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
 }
