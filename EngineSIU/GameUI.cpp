@@ -74,49 +74,53 @@ void GameUI::RenderTimerUI()
         return;
     if (ImGui::Begin("Game Timer"))
     {
-        // 시간 표시
-        std::string timeStr = FormatTime(gameTimer->GetTime());
-        ImGui::Text("Time: %s", timeStr.c_str());
-
-        // 목숨 표시 추가
-        ImGui::Text("Lives: %d", lives);
-
-        // 상태에 따른 버튼 렌더링
-        if (!gameTimer->IsRunning())
+        // 상태에 따른 UI 렌더링
+        if (lives <= 0)
         {
-            // 게임 시작 전 또는 게임 종료 후
-            if (ImGui::Button("Start", ImVec2(200, 30)))
-            {
-                if (startButtonCallback)
-                {
-                    startButtonCallback();
-                }
-            }
+            // 게임 오버 상태
+            std::string timeStr = FormatTime(gameTimer->GetTime());
+            ImGui::Text("Game Over!");
+            ImGui::Text("Score Time: %s", timeStr.c_str());
 
-        }
-        else
-        {
-            // 게임 진행 중에는 버튼 숨김
-            ImGui::Text("Game in Progress...");
-
-
-            if (ImGui::Button("Damage", ImVec2(200, 30)))
-            {
-                if (damageEventCallback)
-                {
-                    damageEventCallback();
-                }
-            }
-        }
-
-        // 게임 종료 여부를 확인하는 로직
-        if (gameTimer->GetTime() >= 10.f)
-        {
             if (ImGui::Button("Restart", ImVec2(200, 30)))
             {
                 if (resetButtonCallback)
                 {
                     resetButtonCallback();
+                }
+            }
+        }
+        else
+        {
+            // 시간 표시
+            std::string timeStr = FormatTime(gameTimer->GetTime());
+            ImGui::Text("Time: %s", timeStr.c_str());
+
+            // 목숨 표시 추가
+            ImGui::Text("Lives: %d", lives);
+
+            // 상태에 따른 버튼 렌더링
+            if (!gameTimer->IsRunning())
+            {
+                // 게임 시작 전
+                if (ImGui::Button("Start", ImVec2(200, 30)))
+                {
+                    if (startButtonCallback)
+                    {
+                        startButtonCallback();
+                    }
+                }
+            }
+            else
+            {
+                // 게임 진행 중
+                ImGui::Text("Game in Progress...");
+                if (ImGui::Button("Damage", ImVec2(200, 30)))
+                {
+                    if (damageEventCallback)
+                    {
+                        damageEventCallback();
+                    }
                 }
             }
         }
