@@ -185,4 +185,14 @@ struct FMath
 		}
 		return A;
 	}
+
+    static FORCEINLINE bool IsNearlyZero(const float Value, const float Tolerance = KINDA_SMALL_NUMBER)
+	{
+	    return Value > - Tolerance && Value <  Tolerance;
+	}
+
+    static bool FORCEINLINE IsNearlyEqual(const float A, const float B, const float Tolerance = KINDA_SMALL_NUMBER)
+	{
+	    return IsNearlyZero(A - B, Tolerance);
+	}
 };

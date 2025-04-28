@@ -15,7 +15,6 @@ ACube::ACube()
     StaticMeshComponent->SetStaticMesh(FManagerOBJ::GetStaticMesh(MeshName.ToWideString()));
     //StaticMeshComponent->SetStaticMesh(FManagerOBJ::GetStaticMesh(L"Contents/Reference/Reference.obj"));
     BoxComponent = AddComponent<UBoxComponent>(TEXT("BoxComponent"));
-    BoxComponent->SetupAttachment(RootComponent);
     //CapsuleComponent = AddComponent<UCapsuleComponent>(TEXT("CapsuleComponent"));
     //CapsuleComponent->SetupAttachment(RootComponent);
     // CapsuleComponent->SetRelativeLocation(FVector(5, 0, 0));
@@ -27,6 +26,21 @@ void ACube::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    //SetActorRotation(GetActorRotation() + FRotator(0, 0, 1));
+    SetActorLocation(GetActorLocation() + GetActorForwardVector() * DeltaTime);
+}
 
+UObject* ACube::Duplicate(UObject* InOuter)
+{
+    ThisClass* NewActor = Cast<ThisClass>(Super::Duplicate(InOuter));
+    for (UActorComponent* component : NewActor->GetComponents())
+    {
+        UBoxComponent* boxComponent = Cast<UBoxComponent>(component);
+        if (boxComponent)
+        {
+            NewActor->BoxComponent->DestroyComponent();
+            NewActor->BoxComponent = boxComponent;
+        }
+    }
+
+    return NewActor;
 }

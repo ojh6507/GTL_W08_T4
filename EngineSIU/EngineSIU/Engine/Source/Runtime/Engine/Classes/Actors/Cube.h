@@ -13,6 +13,8 @@ public:
     ACube();
 
     virtual void Tick(float DeltaTime) override;
+    UObject* Duplicate(UObject* InOuter) override;
+
 private:
     UBoxComponent* BoxComponent;
     //UCapsuleComponent* CapsuleComponent;

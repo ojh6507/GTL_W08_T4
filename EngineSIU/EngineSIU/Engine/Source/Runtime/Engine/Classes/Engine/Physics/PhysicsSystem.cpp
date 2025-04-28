@@ -30,22 +30,45 @@ void FPhysicsSystem::UpdateCollisions()
 void FPhysicsSystem::BroadPhase(TArray<TPair<UShapeComponent*, UShapeComponent*>>& OutPairs)
 {
     OutPairs.Empty();
-    const int num = ShapeComponents.Num();
-    for (int i = 0; i < num; ++i)
+    const int Num = ShapeComponents.Num();
+    TArray<FBoundingBox> WorldAABBs;
+    WorldAABBs.SetNum(Num);
+    for (int32 i = 0; i < Num; ++i)
     {
-        UShapeComponent* A = ShapeComponents[i];
-        FBoundingBox BoundingBoxA = A->GetBoundingBox();
-        for (int j = i + 1; j < num; ++j)
-        {
-            UShapeComponent* B = ShapeComponents[j];
-            FBoundingBox BoundingBoxB = A->GetBoundingBox();
+        UShapeComponent* Comp = ShapeComponents[i];
+        FBoundingBox LocalBox = Comp->GetBoundingBox();
+        WorldAABBs[i] = LocalBox.TransformWorld(Comp->GetWorldMatrix());
+    }
 
-            if (BoundingBoxA.Intersect(BoundingBoxB))
+    // 2) O(n²) 검사
+    TArray<TPair<UShapeComponent*, UShapeComponent*>> CurrPairs;
+    for (int32 i = 0; i < Num; ++i)
+    {
+        for (int32 j = i + 1; j < Num; ++j)
+        {
+            if (WorldAABBs[i].Intersect(WorldAABBs[j]))
             {
-                OutPairs.Add({ A, B });
+                TPair<UShapeComponent*, UShapeComponent*> P = { ShapeComponents[i], ShapeComponents[j] };
+                CurrPairs.Add(P);
+                OutPairs.Add(P);
             }
         }
     }
+
+    // 3) 이전 프레임에 겹쳤지만, 이제 걸러지지 않은(=떨어진) 쌍에 EndOverlap 예약
+    for (auto PrevP : PrevBroadPhasePairs)
+    {
+        if (!CurrPairs.Contains(PrevP))
+        {
+            UPrimitiveComponent* A = Cast<UPrimitiveComponent>(PrevP.Key);
+            UPrimitiveComponent* B = Cast<UPrimitiveComponent>(PrevP.Value);
+            // EndOverlap 예약
+            PendingEndOverlap.Add({ A, FOverlapInfo(B) });
+            PendingEndOverlap.Add({ B, FOverlapInfo(A) });
+        }
+    }
+
+    PrevBroadPhasePairs = CurrPairs;
 }
 
 void FPhysicsSystem::NarrowPhase(TArray<TPair<UShapeComponent*, UShapeComponent*>>& Pairs)
@@ -58,10 +81,9 @@ void FPhysicsSystem::NarrowPhase(TArray<TPair<UShapeComponent*, UShapeComponent*
         UPrimitiveComponent* PrimB = Cast<UPrimitiveComponent>(B);
 
         const bool bPrev = A->IsOverlappingComponent(B);
-
         FHitResult HitAB;
         const bool bCurr = A->CheckOverlapComponent(B, HitAB);
-
+        
         FHitResult HitBA = FHitResult::GetReversedHit(HitAB);
         HitBA.HitComponent = PrimA;
         HitBA.HitActor = PrimA->GetOwner();
@@ -79,9 +101,8 @@ void FPhysicsSystem::NarrowPhase(TArray<TPair<UShapeComponent*, UShapeComponent*
             PendingHitEvents.Add({ PrimA, HitAB });
             PendingHitEvents.Add({ PrimB, HitBA });
         }
-        else if (bPrev)
+        else if (!bCurr && bPrev)
         {
-            // 이전에는 겹쳤는데, 지금은 안 겹치네 → EndOverlap
             PendingEndOverlap.Add({ PrimA, FOverlapInfo(B) });
             PendingEndOverlap.Add({ PrimB, FOverlapInfo(A) });
         }

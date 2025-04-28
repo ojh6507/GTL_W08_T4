@@ -51,4 +51,6 @@ private:
     TArray<TPair<UPrimitiveComponent*, FOverlapInfo>> PendingBeginOverlap;
     // EndOverlap 이벤트
     TArray<TPair<UPrimitiveComponent*, FOverlapInfo>> PendingEndOverlap;
+
+    TArray<TPair<UShapeComponent*, UShapeComponent*>> PrevBroadPhasePairs;
 };
