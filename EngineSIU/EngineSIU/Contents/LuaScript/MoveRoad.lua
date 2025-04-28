@@ -55,5 +55,8 @@ function Tick(dt)
    
     -- 5) 위치 갱신
     local newLoc = self:GetActorLocation() + inputDir * 10 * dt
+    if newLoc.X < -100 then
+        newLoc.X = 0
+    end
     self:SetActorLocation(newLoc)
 end
