@@ -10,6 +10,9 @@
 #include "Physics/PhysicsSystem.h"
 
 #include "Engine/Script/LuaBinding.h"
+#include "LevelEditor/SLevelEditor.h"
+#include "UnrealEd/EditorViewportClient.h"
+
 namespace PrivateEditorSelection
 {
     static AActor* GActorSelected = nullptr;
@@ -66,8 +69,6 @@ void UEditorEngine::Tick(float DeltaTime)
         {
             if (UWorld* World = WorldContext->World())
             {
-                // TODO: World에서 EditorPlayer 제거 후 Tick 호출 제거 필요.
-                World->Tick(DeltaTime);
                 EditorPlayer->Tick(DeltaTime);
                 ULevel* Level = World->GetActiveLevel();
                 
@@ -93,9 +94,9 @@ void UEditorEngine::Tick(float DeltaTime)
                 World->Tick(DeltaTime);
                 ULevel* Level = World->GetActiveLevel();
 
-                // TODO :PrePhysics 에서 이동
-                // TODO : DuringPhysics 에서 충돌 검사
-                // TODO : PostPhysics 에서 반응
+                // TODO : PrePhysics 에서 이동하면 좋음
+                // TODO : DuringPhysics 에서 충돌 검사하면 좋음
+                // TODO : PostPhysics 에서 반응하면 좋음
 
                 // 지금은 그냥 충돌 검사 후 Actor Tick
                 FPhysicsSystem::Get().UpdateCollisions();
