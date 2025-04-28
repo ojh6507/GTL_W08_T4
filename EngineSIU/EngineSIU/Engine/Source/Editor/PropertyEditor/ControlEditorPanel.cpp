@@ -506,7 +506,7 @@ void ControlEditorPanel::CreateFlagButton() const
     }
 }
 
-void ControlEditorPanel::CreatePIEButton(ImVec2 ButtonSize, ImFont* IconFont) const
+void ControlEditorPanel::CreatePIEButton(ImVec2 ButtonSize, ImFont* IconFont) 
 {
     UEditorEngine* Engine = Cast<UEditorEngine>(GEngine);
     if (!Engine)
@@ -521,17 +521,30 @@ void ControlEditorPanel::CreatePIEButton(ImVec2 ButtonSize, ImFont* IconFont) co
     if (ImGui::Button("\ue9a8", ButtonSize)) // Play
     {
         UE_LOG(ELogLevel::Display, TEXT("PIE Button Clicked"));
-        Engine->StartPIE();
+        StartPIE();
     }
 
     ImGui::SetCursorScreenPos(ImVec2(CenterX - 10.0f, 10.0f));
     if (ImGui::Button("\ue9e4", ButtonSize)) // Stop
     {
         UE_LOG(ELogLevel::Display, TEXT("Stop Button Clicked"));
-        Engine->EndPIE();
+        EndPIE();
     }
 
 }
+
+void ControlEditorPanel::StartPIE() 
+{
+    UEditorEngine* Engine = Cast<UEditorEngine>(GEngine);
+    Engine->StartPIE();
+}
+
+void ControlEditorPanel::EndPIE()
+{
+    UEditorEngine* Engine = Cast<UEditorEngine>(GEngine);
+    Engine->EndPIE();
+}
+
 
 // code is so dirty / Please refactor
 void ControlEditorPanel::CreateSRTButton(ImVec2 ButtonSize) const
@@ -603,6 +616,7 @@ uint64 ControlEditorPanel::ConvertSelectionToFlags(const bool selected[]) const
         flags |= static_cast<uint64>(EEngineShowFlags::SF_Fog);
     return flags;
 }
+
 
 
 void ControlEditorPanel::OnResize(HWND hWnd)

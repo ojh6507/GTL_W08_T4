@@ -66,6 +66,10 @@ function Tick(dt)
     if not self then
         return
     end
+
+    if not Timer or not Timer:IsRunning() then
+        return
+    end
     
     local world = self:GetWorld()
     tickCounter = tickCounter + 1

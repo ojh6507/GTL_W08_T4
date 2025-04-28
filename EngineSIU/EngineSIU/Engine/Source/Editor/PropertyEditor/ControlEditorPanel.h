@@ -8,17 +8,19 @@ class ControlEditorPanel : public UEditorPanel
 public:
     virtual void Render() override;
     virtual void OnResize(HWND hWnd) override;
-
+    void StartPIE();
+    void EndPIE();
 
 private:
     void CreateMenuButton(ImVec2 ButtonSize, ImFont* IconFont);
     void CreateModifyButton(ImVec2 ButtonSize, ImFont* IconFont);
     void CreateFlagButton() const;
-    void CreatePIEButton(ImVec2 ButtonSize, ImFont* IconFont) const;
+    void CreatePIEButton(ImVec2 ButtonSize, ImFont* IconFont) ;
     void CreateSRTButton(ImVec2 ButtonSize) const;
     void CreateLightSpawnButton(ImVec2 ButtonSize, ImFont* IconFont);
     uint64 ConvertSelectionToFlags(const bool selected[]) const;
-    
+   
+
 private:
     float Width = 300, Height = 100;
     bool bOpenMenu = false;

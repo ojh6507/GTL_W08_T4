@@ -3,12 +3,15 @@ local maxSpeed
 local accelerationRate
 local friction
 
+local GameManager = require("Contents.LuaScript.GameManager")
 
 function BeginPlay()
     velocity = FVector(0,0,0)
     maxSpeed = 5
     accelerationRate = 1
     friction = 1000
+
+
 end
 
 function EndPlay()
@@ -21,6 +24,12 @@ end
 
 
 function Tick(dt)
+
+
+    if not Timer or not Timer:IsRunning() then
+        return
+    end
+
     -- 1) 입력 방향 구하기
     local inputDir = FVector(0, 0, 0)
     -- if IsKeyDown(KEY_W) then inputDir = inputDir + self:GetActorForwardVector() end

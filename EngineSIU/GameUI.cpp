@@ -111,18 +111,7 @@ void GameUI::RenderTimerUI()
                     }
                 }
             }
-            else
-            {
-                // 게임 진행 중
-                ImGui::Text("Game in Progress...");
-                if (ImGui::Button("Damage", ImVec2(200, 30)))
-                {
-                    if (damageEventCallback)
-                    {
-                        damageEventCallback();
-                    }
-                }
-            }
+        
         }
     }
     ImGui::End();

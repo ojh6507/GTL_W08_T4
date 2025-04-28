@@ -48,6 +48,7 @@ end
 -- dt: Delta Time (time elapsed since the last frame in seconds)
 ---------------------------------------------------------------------
 function Tick(dt)
+
     -- 1) Update total time
     totalTime = totalTime + dt
 

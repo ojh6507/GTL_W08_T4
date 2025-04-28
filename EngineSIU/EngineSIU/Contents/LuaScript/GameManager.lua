@@ -1,6 +1,11 @@
 local GameManager = {}
 local isGameStarted = false
-local MAX_LIFE =10
+local MAX_LIFE =2
+
+
+function GameManager.IsGameStarted()
+    return isGameStarted
+end
 
 function GameManager.StartGame()
     isGameStarted = true
@@ -20,15 +25,7 @@ function GameManager.ResumeGame()
     end
 end
 
-function GameManager.LoseLife()
-    if isGameStarted then
-        gameUI:LoseLife()
-        
-        if gameUI:GetLives() <= 0 then
-            Timer:Pause()
-        end
-    end
-end
+
 
 function GameManager.ResetGame()
     if isGameStarted then
@@ -37,6 +34,9 @@ function GameManager.ResetGame()
         SoundManager:Stop("Main")
         gameUI:ResetLives(MAX_LIFE)
         isGameStarted = false
+        ControlEditorPanelInstance:EndPIE()
+        ControlEditorPanelInstance:StartPIE()
+
     end
 end
 
@@ -56,13 +56,21 @@ function BeginPlay()
         gameUI:SetPauseButtonCallback(GameManager.PauseGame)
         gameUI:SetResumeButtonCallback(GameManager.ResumeGame)
         gameUI:SetResetButtonCallback(GameManager.ResetGame)
-        gameUI:SetDamageEventCallback(GameManager.LoseLife)
     end
 end
 
 function Tick(dt)
+
+
     if isGameStarted and gameUI then
         gameUI:Update(dt)
         
     end
+
+     if gameUI:GetLives() <= 0 then
+            Timer:Pause()
+     end
 end
+
+return GameManager
+

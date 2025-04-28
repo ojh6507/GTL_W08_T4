@@ -27,11 +27,13 @@ end
 
 function OnOverlap(OtherActor)
     Log("[Lua] OnOverlap called!")
+    gameUI:LoseLife()
     if OtherActor then
         Log("[Lua] Overlapped with self: " .. Otherself:GetName():ToString())
          local otherLoc = Otherself:GetActorLocation()
-         Log(string.format("[Lua] Other Actor Location: x=%.2f, y=%.2f, z=%.2f", otherLoc.X, otherLoc.Y, otherLoc.Z))
+ 
     else
+       
         Log("[Lua] Overlapped with nil Actor?")
     end
 end
@@ -39,6 +41,11 @@ end
 local tickCounter = 0
 -- C++에서 전달하는 인자 순서에 맞게 파라미터 수정: (액터 객체, 델타 타임)
 function Tick(dt)
+
+    if not Timer or not Timer:IsRunning() then
+        return
+    end
+
     tickCounter = tickCounter + 1
     -- dt는 이제 두 번째 파라미터로 올바르게 float 값을 받음
     -- Log(string.format("[Lua] Tick called! DeltaTime: %.4f", dt)) -- 필요하다면 로그 출력

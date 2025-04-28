@@ -50,7 +50,7 @@ public:
 
 
     void SetLives(int newLives) {
-        lives = newLives;
+        lives = newLives; 
     }
 
     int GetLives() const {
