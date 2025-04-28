@@ -22,6 +22,8 @@ public:
 
     void UpdateCollisions();
 
+    void Clear();
+
 private:
     // 1) Broad-phase 후보 추출
     void BroadPhase(TArray<TPair<UShapeComponent*, UShapeComponent*>>& OutPairs);

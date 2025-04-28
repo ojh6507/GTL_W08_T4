@@ -27,6 +27,15 @@ void FPhysicsSystem::UpdateCollisions()
     DispatchEvents();
 }
 
+void FPhysicsSystem::Clear()
+{
+    ShapeComponents.Empty();
+    PrevBroadPhasePairs.Empty();
+    PendingEndOverlap.Empty();
+    PendingBeginOverlap.Empty();
+    PendingHitEvents.Empty();
+}
+
 void FPhysicsSystem::BroadPhase(TArray<TPair<UShapeComponent*, UShapeComponent*>>& OutPairs)
 {
     OutPairs.Empty();
