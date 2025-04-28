@@ -54,7 +54,7 @@ bool SoundManager::LoadSound(const std::string& name, const std::string& filePat
     FMOD::Sound* sound = nullptr;
     FMOD_MODE mode = loop ? FMOD_LOOP_NORMAL : FMOD_DEFAULT;
 
-    if (system->createSound(("Assets/Sound/" + filePath).c_str(), mode, nullptr, &sound) != FMOD_OK) {
+    if (system->createSound(filePath.c_str(), mode, nullptr, &sound) != FMOD_OK) {
         std::cerr << "Failed to load sound: " << filePath << std::endl;
         return false;
     }
@@ -63,12 +63,34 @@ bool SoundManager::LoadSound(const std::string& name, const std::string& filePat
     return true;
 }
 
+void SoundManager::Stop(const std::string& name) {
+    auto it = soundMap.find(name);
+    if (it != soundMap.end()) {
+        // 해당 사운드가 재생 중인 모든 채널 정지
+        for (auto channelIt = activeChannels.begin(); channelIt != activeChannels.end(); ) {
+            FMOD::Sound* currentSound = nullptr;
+            (*channelIt)->getCurrentSound(&currentSound);
+
+            if (currentSound == it->second) {
+                (*channelIt)->stop();
+                channelIt = activeChannels.erase(channelIt);
+            }
+            else {
+                ++channelIt;
+            }
+        }
+    }
+}
+
 void SoundManager::PlaySound(const std::string& name) {
     auto it = soundMap.find(name);
     if (it != soundMap.end()) {
+        // 같은 사운드 먼저 정지
+        Stop(name);
+
+        // 새로 재생
         FMOD::Channel* newChannel = nullptr;
         system->playSound(it->second, nullptr, false, &newChannel);
-
         if (newChannel) {
             activeChannels.push_back(newChannel);
         }
@@ -97,6 +119,6 @@ void SoundManager::LoadSoundFiles()
     for (auto name : SoundFileNames)
     {
         std::string FileName;
-        bool ret = SoundManager::GetInstance().LoadSound(name, "Assets/Sound/"+name+".mp3", true);
+        bool ret = LoadSound(name, "Assets/Sound/"+name+".mp3", true);
     }
 }

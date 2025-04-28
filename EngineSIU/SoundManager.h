@@ -14,6 +14,7 @@ public:
     bool Initialize();
     void ShutDown();
     bool LoadSound(const std::string& name, const std::string& filePath, bool loop = false);
+    void Stop(const std::string& name);
     void PlaySound(const std::string& name);
     void Update();
     void LoadSoundFiles();
