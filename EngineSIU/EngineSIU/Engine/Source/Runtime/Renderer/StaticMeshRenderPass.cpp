@@ -7,6 +7,7 @@
 
 #include "RendererHelpers.h"
 #include "UnrealClient.h"
+#include "Actors/CameraActor.h"
 
 #include "UObject/UObjectIterator.h"
 #include "UObject/Casts.h"
@@ -212,6 +213,9 @@ void FStaticMeshRenderPass::PrepareRender()
     {
         if (!Cast<UGizmoBaseComponent>(iter) && iter->GetWorld() == GEngine->ActiveWorld)
         {
+            if (iter->GetWorld()->WorldType == EWorldType::PIE && Cast<ACameraActor>(iter->GetOwner()))
+                continue;
+            
             StaticMeshComponents.Add(iter);
         }
     }

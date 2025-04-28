@@ -27,6 +27,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
 #include "../../../../../UScriptComponent.h"
+#include "Actors/CameraActor.h"
 
 void ControlEditorPanel::Render()
 {
@@ -284,7 +285,8 @@ void ControlEditorPanel::CreateModifyButton(ImVec2 ButtonSize, ImFont* IconFont)
             { .label= "Particle",  .obj= OBJ_PARTICLE },
             { .label= "Text",      .obj= OBJ_TEXT },
             { .label= "Fireball",  .obj = OBJ_FIREBALL},
-            { .label= "Fog",       .obj= OBJ_FOG }
+            { .label= "Fog",       .obj= OBJ_FOG },
+            {.label = "Camera", .obj= OBJ_CAMERA }
         };
 
         for (const auto& primitive : primitives)
@@ -377,6 +379,11 @@ void ControlEditorPanel::CreateModifyButton(ImVec2 ButtonSize, ImFont* IconFont)
                 }
                 case OBJ_TRIANGLE:
                 case OBJ_CAMERA:
+                {
+                    SpawnedActor = World->SpawnActor<ACameraActor>();
+                    SpawnedActor->SetActorLabel(TEXT("OBJ_CAMERA"));
+                    break;
+                }
                 case OBJ_PLAYER:
                 case OBJ_END:
                     break;

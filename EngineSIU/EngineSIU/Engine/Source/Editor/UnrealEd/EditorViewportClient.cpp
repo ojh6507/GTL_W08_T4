@@ -11,6 +11,7 @@
 
 #include "UObject/ObjectFactory.h"
 #include "BaseGizmos/TransformGizmo.h"
+#include "Camera/CameraComponent.h"
 #include "LevelEditor/SLevelEditor.h"
 #include "SlateCore/Input/Events.h"
 
@@ -319,8 +320,17 @@ void FEditorViewportClient::DeprojectFVector2D(const FVector2D& ScreenPos, FVect
     FVector RayOrigin = { NDC_Pos.X, NDC_Pos.Y, 0.0f };
     FVector RayEnd = { NDC_Pos.X, NDC_Pos.Y, 1.0f };
 
+    FMatrix InvProjView;
     // 스크린 좌표계에서 월드 좌표계로 변환
-    const FMatrix InvProjView = FMatrix::Inverse(Projection) * FMatrix::Inverse(View);
+    if (CameraComponent)
+    {
+        InvProjView = FMatrix::Inverse(CameraComponent->GetProjectionMatrix()) * FMatrix::Inverse(CameraComponent->GetViewMatrix());
+    }
+    else
+    {
+        InvProjView = FMatrix::Inverse(Projection) * FMatrix::Inverse(View);
+    }
+    
     RayOrigin = InvProjView.TransformPosition(RayOrigin);
     RayEnd = InvProjView.TransformPosition(RayEnd);
 
@@ -330,13 +340,21 @@ void FEditorViewportClient::DeprojectFVector2D(const FVector2D& ScreenPos, FVect
 
 TArray<FVector> FEditorViewportClient::GetFrustumCorners()
 {
-
     TArray<FVector> FrustumCorners;
     FrustumCorners.Empty();
     FrustumCorners.Reserve(8);
 
-    const FMatrix InvViewProj = FMatrix::Inverse(View) * FMatrix::Inverse(Projection);
+    FMatrix InvViewProj;
 
+    if (CameraComponent)
+    {
+        InvViewProj = FMatrix::Inverse(CameraComponent->GetViewMatrix()) * FMatrix::Inverse(CameraComponent->GetProjectionMatrix());
+    }
+    else
+    {
+        InvViewProj = FMatrix::Inverse(View) * FMatrix::Inverse(Projection);
+    }
+    
     // 3) NDC 8코너를 homogeneous 4D로 만든 뒤 변환·분할
     for (int ix = -1; ix <= 1; ix += 2)
     {
@@ -436,6 +454,24 @@ void FEditorViewportClient::PivotMoveUp(float InValue)
     Pivot = Pivot + OrthogonalCamera.GetUpVector() * InValue * 0.05f;
 }
 
+FMatrix FEditorViewportClient::GetViewMatrix() const
+{
+    if (CameraComponent)
+    {
+        return CameraComponent->GetViewMatrix();
+    }
+    return View;
+}
+
+FMatrix FEditorViewportClient::GetProjectionMatrix() const
+{
+    if (CameraComponent)
+    {
+        return CameraComponent->GetProjectionMatrix();
+    }
+    return Projection;
+}
+
 void FEditorViewportClient::UpdateViewMatrix()
 {
     if (IsPerspective())
@@ -505,18 +541,30 @@ FVector FEditorViewportClient::GetCameraLocation() const
 {
     if (IsPerspective())
     {
+        if (CameraComponent)
+        {
+            return CameraComponent->GetWorldLocation();
+        }
         return PerspectiveCamera.GetLocation();
     }
     return OrthogonalCamera.GetLocation();
 }
 
-float FEditorViewportClient::GetCameraLearClip() const
+float FEditorViewportClient::GetCameraNearClip() const
 {
+    if (CameraComponent)
+    {
+        return CameraComponent->GetNearClip();
+    }
     return NearClip;
 }
 
 float FEditorViewportClient::GetCameraFarClip() const
 {
+    if (CameraComponent)
+    {
+        return CameraComponent->GetFarClip();
+    }
     return FarClip;
 }
 
