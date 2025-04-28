@@ -287,18 +287,7 @@ void ControlEditorPanel::CreateModifyButton(ImVec2 ButtonSize, ImFont* IconFont)
             {.label = "Text",      .obj = OBJ_TEXT },
             {.label = "Fireball",  .obj = OBJ_FIREBALL},
             {.label = "Fog",       .obj = OBJ_FOG },
-            {.label = "Player",       .obj = OBJ_PLAYER
- }
-            { .label= "Cube",      .obj= OBJ_CUBE },
-            { .label= "Sphere",    .obj= OBJ_SPHERE },
-            { .label= "PointLight", .obj= OBJ_POINTLIGHT },
-            { .label= "SpotLight", .obj= OBJ_SPOTLIGHT },
-            { .label= "DirectionalLight", .obj= OBJ_DIRECTIONALLGIHT },
-            { .label= "AmbientLight", .obj= OBJ_AMBIENTLIGHT },
-            { .label= "Particle",  .obj= OBJ_PARTICLE },
-            { .label= "Text",      .obj= OBJ_TEXT },
-            { .label= "Fireball",  .obj = OBJ_FIREBALL},
-            { .label= "Fog",       .obj= OBJ_FOG },
+            {.label = "Player",       .obj = OBJ_PLAYER},
             {.label = "Camera", .obj= OBJ_CAMERA }
         };
 
