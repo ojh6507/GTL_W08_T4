@@ -91,7 +91,7 @@ function Tick(dt)
                 if spawnedActor then
                     table.insert(spawnedObjs, spawnedActor)
                     spawnCount = spawnCount + 1
-                    if spawnInterval > 0.5 then
+                    if spawnInterval > 0.25 then
                         spawnInterval = spawnInterval - 0.02 -- 스폰 간격 줄이기
                     end
                 end
