@@ -213,10 +213,10 @@ void UPrimitiveComponent::BeginComponentOverlap(const FOverlapInfo& OtherOverlap
             {
                 OnComponentBeginOverlap.Broadcast(this, OtherActor, OtherComp, OtherOverlap.bFromSweep, OtherOverlap.OverlapInfo);
             }
-            if (OtherComp != nullptr)
-            {
-                OtherComp->OnComponentBeginOverlap.Broadcast(OtherComp, MyActor, this, OtherOverlap.bFromSweep, OtherOverlap.bFromSweep ? FHitResult::GetReversedHit(OtherOverlap.OverlapInfo) : OtherOverlap.OverlapInfo);
-            }
+            // if (OtherComp != nullptr)
+            // {
+            //     OtherComp->OnComponentBeginOverlap.Broadcast(OtherComp, MyActor, this, OtherOverlap.bFromSweep, OtherOverlap.bFromSweep ? FHitResult::GetReversedHit(OtherOverlap.OverlapInfo) : OtherOverlap.OverlapInfo);
+            // }
 
             if (bNotifyActorTouch)
             {
@@ -225,10 +225,10 @@ void UPrimitiveComponent::BeginComponentOverlap(const FOverlapInfo& OtherOverlap
                     MyActor->OnActorBeginOverlap.Broadcast(MyActor, OtherActor);
                 }
                 
-                if (OtherActor != nullptr)
-                {
-                    OtherActor->OnActorBeginOverlap.Broadcast(OtherActor, MyActor);
-                }
+                // if (OtherActor != nullptr)
+                // {
+                //     OtherActor->OnActorBeginOverlap.Broadcast(OtherActor, MyActor);
+                // }
             }
         }        
     }
@@ -265,10 +265,10 @@ void UPrimitiveComponent::EndComponentOverlap(const FOverlapInfo& OtherOverlap, 
                 OnComponentEndOverlap.Broadcast(this, OtherActor, OtherComp);
             }
 
-            if (OtherComp != nullptr)
-            {
-                OtherComp->OnComponentEndOverlap.Broadcast(OtherComp, MyActor, this);
-            }
+            // if (OtherComp != nullptr)
+            // {
+            //     OtherComp->OnComponentEndOverlap.Broadcast(OtherComp, MyActor, this);
+            // }
 
             const bool bSameActor = (MyActor == OtherActor);
 
@@ -279,10 +279,10 @@ void UPrimitiveComponent::EndComponentOverlap(const FOverlapInfo& OtherOverlap, 
                     MyActor->OnActorEndOverlap.Broadcast(MyActor, OtherActor);
                 }
 
-                if (OtherActor != nullptr)
-                {
-                    OtherActor->OnActorEndOverlap.Broadcast(OtherActor, MyActor);
-                }
+                // if (OtherActor != nullptr)
+                // {
+                //     OtherActor->OnActorEndOverlap.Broadcast(OtherActor, MyActor);
+                // }
             }
         }
     }
