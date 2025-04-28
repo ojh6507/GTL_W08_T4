@@ -72,12 +72,14 @@ void GameUI::RenderTimerUI()
 {
     if (!gameTimer)
         return;
-
     if (ImGui::Begin("Game Timer"))
     {
         // 시간 표시
         std::string timeStr = FormatTime(gameTimer->GetTime());
         ImGui::Text("Time: %s", timeStr.c_str());
+
+        // 목숨 표시 추가
+        ImGui::Text("Lives: %d", lives);
 
         // 상태에 따른 버튼 렌더링
         if (!gameTimer->IsRunning())
@@ -90,15 +92,24 @@ void GameUI::RenderTimerUI()
                     startButtonCallback();
                 }
             }
+
         }
         else
         {
             // 게임 진행 중에는 버튼 숨김
             ImGui::Text("Game in Progress...");
+
+
+            if (ImGui::Button("Damage", ImVec2(200, 30)))
+            {
+                if (damageEventCallback)
+                {
+                    damageEventCallback();
+                }
+            }
         }
 
-        // 게임 종료 여부를 확인하는 로직 필요 (예: 타이머의 최대 시간 도달 등)
-        // 예시로 60초 지나면 게임 종료로 간주
+        // 게임 종료 여부를 확인하는 로직
         if (gameTimer->GetTime() >= 10.f)
         {
             if (ImGui::Button("Restart", ImVec2(200, 30)))

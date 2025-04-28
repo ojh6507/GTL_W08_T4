@@ -751,7 +751,17 @@ namespace LuaBindings
 
            "SetResumeButtonCallback", & GameUI::SetResumeButtonCallback,
 
-           "SetResetButtonCallback", & GameUI::SetResetButtonCallback
+           "SetResetButtonCallback", & GameUI::SetResetButtonCallback,
+           "SetDamageEventCallback", & GameUI::SetDamageEventCallback,
+           
+
+           "SetLives", & GameUI::SetLives,
+
+           "GetLives", & GameUI::GetLives,
+
+           "LoseLife", & GameUI::LoseLife,
+
+           "ResetLives", & GameUI::ResetLives
 
        );
 

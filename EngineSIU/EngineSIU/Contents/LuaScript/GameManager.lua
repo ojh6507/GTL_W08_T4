@@ -1,43 +1,53 @@
 local GameManager = {}
+local isGameStarted = false
+local MAX_LIFE =10
 
 function GameManager.StartGame()
-   
+    isGameStarted = true
     Timer:Start()
-
     SoundManager:PlaySound("Main")
-   
 end
 
 function GameManager.PauseGame()
-    Timer:Pause()
+    if isGameStarted then
+        Timer:Pause()
+    end
 end
 
 function GameManager.ResumeGame()
     if isGameStarted then
-        if gameUI then
-            local timer = gameUI:GetTimer()
-            if timer then
-                timer:Resume()
-            end
-            
-            -- 필요한 경우 사운드 재개
+        Timer:Resume()
+    end
+end
+
+function GameManager.LoseLife()
+    if isGameStarted then
+        gameUI:LoseLife()
+        
+        if gameUI:GetLives() <= 0 then
+            GameManager.ResetGame()
         end
     end
 end
 
 function GameManager.ResetGame()
-  
-    Timer:Stop()
-    Timer:Reset()
-    SoundManager:Stop("Main")
-  
+    if isGameStarted then
+        Timer:Stop()
+        Timer:Reset()
+        SoundManager:Stop("Main")
+        gameUI:ResetLives(MAX_LIFE)
+        isGameStarted = false
+    end
 end
 
 function EndPlay()
-    SoundManager:ShutDown()
+    if SoundManager then
+        SoundManager:ShutDown()
+    end
 end
 
 function BeginPlay()
+    gameUI:ResetLives(MAX_LIFE)
     SoundManager:Initialize()
     SoundManager:LoadSoundFiles()
     if gameUI then
@@ -45,11 +55,13 @@ function BeginPlay()
         gameUI:SetPauseButtonCallback(GameManager.PauseGame)
         gameUI:SetResumeButtonCallback(GameManager.ResumeGame)
         gameUI:SetResetButtonCallback(GameManager.ResetGame)
+        gameUI:SetDamageEventCallback(GameManager.LoseLife)
     end
 end
 
 function Tick(dt)
+    if isGameStarted and gameUI then
         gameUI:Update(dt)
+        
+    end
 end
-
-return GameManager

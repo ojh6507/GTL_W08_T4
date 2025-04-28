@@ -44,7 +44,28 @@ public:
         resetButtonCallback = callback;
     }
 
+    void SetDamageEventCallback(std::function<void()> callback) {
+        damageEventCallback = callback;
+    }
 
+
+    void SetLives(int newLives) {
+        lives = newLives;
+    }
+
+    int GetLives() const {
+        return lives;
+    }
+
+    void LoseLife() {
+        if (lives > 0) {
+            lives--;
+        }
+    }
+
+    void ResetLives(int live) {
+        lives = live;
+    }
 private:
     // 타이머 객체
     std::unique_ptr<Timer> gameTimer;
@@ -59,4 +80,6 @@ private:
     std::function<void()> pauseButtonCallback;
     std::function<void()> resumeButtonCallback;
     std::function<void()> resetButtonCallback;
+    std::function<void()> damageEventCallback;
+    int lives;
 };
