@@ -27,11 +27,12 @@ end
 
 function OnOverlap(OtherActor)
     Log("[Lua] OnOverlap called!")
-    gameUI:LoseLife()
+
     if OtherActor then
+        gameUI:LoseLife()
+        SoundManager:PlaySound("Hit")
         Log("[Lua] Overlapped with self: " .. Otherself:GetName():ToString())
          local otherLoc = Otherself:GetActorLocation()
- 
     else
        
         Log("[Lua] Overlapped with nil Actor?")

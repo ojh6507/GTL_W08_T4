@@ -1,7 +1,7 @@
 #include "SoundManager.h"
 #include <iostream>
 
-std::vector<std::string> SoundFileNames = { "Main" };
+std::vector<std::string> SoundFileNames = { "Main","Win","Hit"};
 
 SoundManager& SoundManager::GetInstance() {
     static SoundManager instance;
@@ -119,6 +119,6 @@ void SoundManager::LoadSoundFiles()
     for (auto name : SoundFileNames)
     {
         std::string FileName;
-        bool ret = LoadSound(name, "Assets/Sound/"+name+".mp3", true);
+        bool ret = LoadSound(name, "Assets/Sound/" + name + ".mp3", (name=="Main")?true:false);
     }
 }
