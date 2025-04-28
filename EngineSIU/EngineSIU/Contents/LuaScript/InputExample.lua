@@ -7,7 +7,7 @@ local friction
 function BeginPlay()
     velocity = FVector(0,0,0)
     maxSpeed = 100
-    accelerationRate = 100
+    accelerationRate = 0.2
     friction = 60
 end
 
@@ -23,8 +23,6 @@ end
 function Tick(dt)
     -- 1) 입력 방향 구하기
     local inputDir = FVector(0, 0, 0)
-    if IsKeyDown(KEY_W) then inputDir = inputDir + self:GetActorForwardVector() end
-    if IsKeyDown(KEY_S) then inputDir = inputDir - self:GetActorForwardVector() end
     if IsKeyDown(KEY_D) then inputDir = inputDir + self:GetActorRightVector() end
     if IsKeyDown(KEY_A) then inputDir = inputDir - self:GetActorRightVector() end
 
@@ -45,5 +43,7 @@ function Tick(dt)
    
     -- 5) 위치 갱신
     local newLoc = self:GetActorLocation() + velocity * dt
+    newLoc.Y = math.max(newLoc.Y, -3)
+    newLoc.Y = math.min(newLoc.Y, 3)
     self:SetActorLocation(newLoc)
 end
