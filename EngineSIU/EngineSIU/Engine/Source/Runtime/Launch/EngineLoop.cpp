@@ -10,7 +10,7 @@
 #include "UnrealEd/UnrealEd.h"
 #include "World/World.h"
 #include "Engine/Script/LuaManager.h"
-
+#include "../../../../../SoundManager.h"
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -45,6 +45,15 @@ int32 FEngineLoop::Init(HINSTANCE hInstance)
     UIMgr = new UImGuiManager;
     AppMessageHandler = std::make_unique<FSlateAppMessageHandler>();
     LevelEditor = new SLevelEditor();
+
+    bool result =SoundManager::GetInstance().Initialize();
+
+#ifdef _DEBUG
+    std::cout << (result ? "SoundManager Initialized" : "SoundManager Initialization Failed") << std::endl;
+#endif
+
+    SoundManager::GetInstance().LoadSoundFiles();
+
 
     UnrealEditor->Initialize();
     GraphicDevice.Initialize(AppWnd);
