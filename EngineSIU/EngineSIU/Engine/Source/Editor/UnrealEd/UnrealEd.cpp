@@ -1,9 +1,13 @@
-﻿#include "UnrealEd.h"
+#include "UnrealEd.h"
 #include "EditorPanel.h"
 
 #include "PropertyEditor/ControlEditorPanel.h"
 #include "PropertyEditor/OutlinerEditorPanel.h"
 #include "PropertyEditor/PropertyEditorPanel.h"
+#include "../../../../../GameUI.h"
+
+TMap<FString, std::shared_ptr<UEditorPanel>> UnrealEd::Panels;
+
 
 void UnrealEd::Initialize()
 {
@@ -15,6 +19,9 @@ void UnrealEd::Initialize()
     
     auto PropertyPanel = std::make_shared<PropertyEditorPanel>();
     Panels["PropertyPanel"] = PropertyPanel;
+
+    auto GaemUI = std::make_shared<GameUI>();
+    Panels["GameUI"] = GaemUI;
 }
 
 void UnrealEd::Render() const
