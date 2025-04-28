@@ -19,6 +19,8 @@ void UScriptComponent::BeginPlay()
 	{
 		CallScriptFunction("BeginPlay");
 	}
+
+	GetOwner()->OnActorBeginOverlap.AddDynamic(this, &UScriptComponent::OnOverlap);
 }
 
 void UScriptComponent::TickComponent(const float DeltaTime)
@@ -142,7 +144,7 @@ bool UScriptComponent::LoadScript(const FString& InScriptPath)
 	}
 }
 
-void UScriptComponent::OnOverlap(AActor* OtherActor)
+void UScriptComponent::OnOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
 	if (bIsScriptLoaded)
 	{

@@ -24,7 +24,7 @@ public:
     void SetProperties(const TMap<FString, FString>& Properties) override;
     // 스크립트 관련 함수
     bool LoadScript(const FString& InScriptPath);
-    void OnOverlap(AActor* OtherActor);
+    void OnOverlap(AActor* OverlappedActor, AActor* OtherActor);
 
     void SetScriptPath(const FString& Path) { ScriptPath = Path; }
     // 스크립트 경로 반환
