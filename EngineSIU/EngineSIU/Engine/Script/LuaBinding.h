@@ -464,6 +464,7 @@ namespace LuaBindings
     void BindFRotator(sol::state& lua)
     {
         lua.new_usertype<FRotator>("FRotator",
+            sol::call_constructor,
             sol::constructors<FRotator(), FRotator(float, float, float), FRotator(const FRotator&), FRotator(const FVector&), FRotator(const FQuat&)>(), // FVector, FQuat 바인딩 필요
             "Pitch", &FRotator::Pitch, "Yaw", &FRotator::Yaw, "Roll", &FRotator::Roll,
             sol::meta_function::addition, sol::resolve<FRotator(const FRotator&) const>(&FRotator::operator+),
@@ -648,7 +649,42 @@ namespace LuaBindings
             lua[keyName.c_str()] = i;
         }
     }
+   void BindUScriptComponent(sol::state& lua)
+   {
+       // Ensure UActorComponent is bound first
+       auto ut = lua.new_usertype<UScriptComponent>("ScriptComponent", // Lua name can be shorter
+           sol::no_constructor,
+           sol::base_classes, sol::bases<UActorComponent, UObject>(), // Specify inheritance
 
+           // Bind relevant public methods
+           "LoadScript", [](UScriptComponent& self, const std::string& luaPath) -> bool {
+               // Convert std::string from Lua to FString for C++ function
+               return self.LoadScript(FString(luaPath.c_str()));
+           },
+           "SetScriptPath", [](UScriptComponent& self, const std::string& luaPath) {
+               // Convert std::string from Lua to FString
+               self.SetScriptPath(FString(luaPath.c_str()));
+           },
+           "GetScriptPath", [](const UScriptComponent& self) -> std::string {
+               // Convert FString return value to std::string for Lua
+               const FString& path = self.GetScriptPath();
+#if USE_WIDECHAR
+               return path.ToAnsiString(); // Or other appropriate conversion
+#else
+               return static_cast<std::string>(path);
+#endif
+           }
+
+           // Note: BeginPlay, TickComponent, EndPlay, OnOverlap are typically called *by* the
+           // engine or C++ code, which then call Lua functions. They usually aren't called *from* Lua.
+           // So, we don't bind them here for Lua to call.
+
+           // Note: GetProperties/SetProperties are often for editor/serialization,
+           // maybe not needed for direct Lua gameplay scripting. Omitted for now.
+
+           // Note: Duplicate is also less common for direct Lua gameplay. Omitted.
+       );
+   }
     // --- 코어 타입 전체 바인딩 호출 함수 ---
     void BindCoreTypesForLua(sol::state& lua)
     {
