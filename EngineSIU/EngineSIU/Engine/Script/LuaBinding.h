@@ -31,6 +31,196 @@
 namespace LuaBindings
 {
 
+    void BindEWorldType(sol::state& lua) 
+    {
+        lua.new_enum("EWorldType",
+            "None", EWorldType::None,
+            "Game", EWorldType::Game,
+            "Editor", EWorldType::Editor,
+            "PIE", EWorldType::PIE, // Play In Editor
+            "EditorPreview", EWorldType::EditorPreview,
+            "GamePreview", EWorldType::GamePreview,
+            "Inactive", EWorldType::Inactive
+        );
+    }
+    void BindUObject(sol::state& lua) {
+        auto ut = lua.new_usertype<UObject>("UObject", sol::no_constructor);
+
+        // 멤버 함수
+        ut["Duplicate"] = &UObject::Duplicate;
+        ut["GetOuter"] = &UObject::GetOuter;
+        ut["GetWorld"] = &UObject::GetWorld;
+        ut["GetFName"] = &UObject::GetFName;
+
+        ut["GetName"] = [](const UObject& self) {
+            FString fstr = self.GetName();
+#if USE_WIDECHAR
+            return fstr.ToAnsiString();
+#else
+            return static_cast<std::string>(fstr);
+#endif
+            };
+
+        ut["GetUUID"] = &UObject::GetUUID;
+        ut["GetInternalIndex"] = &UObject::GetInternalIndex;
+        ut["GetClass"] = &UObject::GetClass;
+        ut["IsA"] = static_cast<bool (UObject::*)(const UClass*) const>(&UObject::IsA);
+
+        ut["EncodeUUID"] = &UObject::EncodeUUID;
+
+        // 정적 함수
+        sol::table tbl = lua["UObject"];
+        tbl["StaticClass"] = &UObject::StaticClass;
+    }
+    AActor* SpawnActorWrapper(UWorld* world, UClass* actorClass, const FVector& location, const FRotator& rotation, FName actorName)
+    {
+        if (!world) {
+            throw sol::error("UWorld::SpawnActor called on a nil world");
+        }
+        if (!actorClass) {
+            throw sol::error("UWorld::SpawnActor called with a nil class");
+        }
+
+        // C++ UWorld::SpawnActor(UClass*, FName)는 위치/회전을 직접 받지 않으므로,
+        // 먼저 스폰하고 나서 위치/회전을 설정합니다.
+        AActor* spawnedActor = world->SpawnActor(actorClass, actorName);
+
+        if (spawnedActor) {
+            // 스폰 성공 시 위치와 회전 설정
+            // AActor에 SetActorLocationAndRotation 같은 함수가 있다고 가정합니다.
+            // 실제 엔진의 함수 이름에 맞춰야 할 수 있습니다.
+            if (!location.IsZero() || !rotation.IsZero()) // 기본값(0,0,0)이 아니면 설정
+            {
+                // 실제 엔진에 맞는 함수 사용 (예시)
+                spawnedActor->SetActorLocation(location);
+                spawnedActor->SetActorRotation(rotation);
+            }
+        }
+        return spawnedActor;
+    }
+
+    UClass* LuaFindClass(const std::string& className)
+    {
+        FName classFName(className.c_str());
+
+        return UClass::FindClass(classFName);
+    }
+
+
+    void BindUClass(sol::state& lua) {
+        // UObject와 FName이 먼저 바인딩되어야 함
+
+        sol::usertype<UClass> ut = lua.new_usertype<UClass>("UClass",
+            sol::no_constructor,
+            sol::base_classes, sol::bases<UObject>(),
+
+            // --- 멤버 함수 바인딩 ---
+            "GetClassSize", &UClass::GetClassSize,
+            "GetClassAlignment", &UClass::GetClassAlignment,
+            "IsChildOf", static_cast<bool (UClass::*)(const UClass*) const>(&UClass::IsChildOf),
+            "GetSuperClass", &UClass::GetSuperClass,
+            "GetDefaultObject", static_cast<UObject * (UClass::*)() const>(&UClass::GetDefaultObject),
+            "GetName", [](const UClass& self) {
+                FName nm = self.GetName();
+                FString fstr = nm.ToString();
+#if USE_WIDECHAR
+                return fstr.ToAnsiString();
+#else
+                return static_cast<std::string>(fstr);
+#endif
+            }
+        );
+
+        // --- 정적 함수 바인딩 ---
+        // UClass 테이블 가져오기
+        sol::table uclass_table = lua["UClass"];
+        // FindClass 바인딩은 여기서 제거하고 전역으로 이동
+        // tbl["FindClass"] = &LuaFindClass; // <<< 이 줄 제거 또는 주석 처리
+    }
+
+    // --- UWorld 바인딩 함수 ---
+    void BindUWorld(sol::state& lua)
+    {
+      
+        // UWorld usertype 정의
+        lua.new_usertype<UWorld>("UWorld",
+            sol::no_constructor, // Lua에서 직접 생성 금지
+            sol::base_classes, sol::bases<UObject>(), // UObject 상속 (UObject 바인딩 필요)
+
+            // --- 멤버 함수 바인딩 ---
+
+            // SpawnActor (래퍼 함수 사용)
+            // Lua: world:SpawnActor(class, location, rotation, name)
+            // FName 기본값을 NAME_None으로 설정하기 위해 오버로드 사용
+            "SpawnActor", sol::overload(
+                // 이름만 받는 경우 (위치/회전은 기본값 0 사용)
+                [](UWorld* world, UClass* actorClass, FName actorName) {
+                    return SpawnActorWrapper(world, actorClass, FVector::ZeroVector, FRotator(), actorName);
+                },
+                // 이름 없이 위치/회전만 받는 경우
+                [](UWorld* world, UClass* actorClass, const FVector& location, const FRotator& rotation) {
+                    return SpawnActorWrapper(world, actorClass, location, rotation, NAME_None);
+                },
+                // 모든 인자를 받는 경우
+                &SpawnActorWrapper,
+                // 클래스만 받는 경우 (위치/회전/이름 모두 기본값)
+                [](UWorld* world, UClass* actorClass) {
+                    return SpawnActorWrapper(world, actorClass, FVector::ZeroVector, FRotator(), NAME_None);
+                }
+            ),
+
+            // DestroyActor
+            // Lua: world:DestroyActor(actor_instance)
+            "DestroyActor", &UWorld::DestroyActor,
+
+            // GetWorld (UObject의 가상 함수 오버라이드)
+            // Lua: world:GetWorld() -> world (자기 자신 반환)
+            "GetWorld", &UWorld::GetWorld,
+
+            // GetActiveLevel (ULevel 바인딩이 필요함)
+            // Lua: local level = world:GetActiveLevel()
+            "GetActiveLevel", &UWorld::GetActiveLevel, // ULevel* 반환
+
+            // GetWorldName
+            // Lua: local name_str = world:GetWorldName()
+            "GetWorldName", [](const UWorld& self) -> std::string {
+                // FString을 std::string으로 변환 (FString 바인딩 방식에 따라 달라질 수 있음)
+                FString worldName = self.GetWorldName();
+#if USE_WIDECHAR
+                return worldName.ToAnsiString(); // 예시: UTF-8 std::string 반환 가정
+#else
+                return static_cast<std::string>(worldName); // 예시: UTF-8 std::string 반환 가정
+#endif
+                // TODO: FString -> std::string 변환 로직 확인/수정 필요
+            },
+
+            // --- 멤버 변수 바인딩 ---
+
+            // WorldType (읽기 전용으로 노출하는 것이 안전할 수 있음)
+            // Lua: local type_enum = world.WorldType
+            "WorldType", sol::readonly(&UWorld::WorldType) // EWorldType 반환
+
+            // 참고: Tick, BeginPlay, Release 등은 보통 엔진 내부에서 호출되므로
+            //       Lua에서 직접 호출할 필요가 없는 경우가 많아 바인딩에서 제외했습니다.
+            //       필요하다면 추가할 수 있습니다.
+
+            // 참고: DuplicateActor 템플릿 함수도 필요하다면 SpawnActor와 유사하게
+            //       래퍼 함수를 만들어 바인딩해야 합니다.
+        );
+
+        // Lua에서 현재 World 인스턴스를 얻는 방법 제공 (예시 - 전역 변수)
+        // 주의: GEngine->GetWorld()는 상황에 따라 null일 수 있으므로 사용 시 주의
+        if (GEngine) // GEngine 유효성 검사
+        {
+            lua["GWorld"] = GEngine->GetWorld(); // 현재 월드를 GWorld 전역 변수로 제공
+        }
+        else
+        {
+            lua["GWorld"] = sol::nil; // GEngine 없으면 nil 설정
+        }
+        // 또는 함수 형태로 제공하는 것이 더 안전할 수 있습니다.
+        // lua["GetWorld"] = [](){ return GEngine ? GEngine->GetWorld() : nullptr; };
+    }
     // 검색 시 대소문자 구분 옵션 Enum 바인딩
     void BindESearchCase(sol::state& lua) {
         lua.new_enum("ESearchCase",
@@ -384,8 +574,7 @@ namespace LuaBindings
     // --- AActor 바인딩 ---
     void BindAActor(sol::state& lua)
     {
-        // 필요한 선행 바인딩들이 BindCoreTypesForLua에서 호출되었다고 가정
-
+      
         lua.new_usertype<AActor>("AActor",
             sol::no_constructor, // Lua에서 직접 생성 금지
             sol::base_classes, sol::bases<UObject>(), // UObject 상속 (UObject 바인딩 필요)
@@ -395,8 +584,8 @@ namespace LuaBindings
             "IsActorBeingDestroyed", &AActor::IsActorBeingDestroyed,
 
             // 컴포넌트 관련
-            "AddComponent", sol::resolve<UActorComponent * (UClass*, FName, bool)>( // UClass, FName 바인딩 필요
-                static_cast<UActorComponent * (AActor::*)(UClass*, FName, bool)>(&AActor::AddComponent)
+            "AddComponent", sol::resolve<UActorComponent * (UClass*, FName)>( // UClass, FName 바인딩 필요
+                static_cast<UActorComponent * (AActor::*)(UClass*, FName)>(&AActor::AddComponent)
             ),
           
             "GetRootComponent", &AActor::GetRootComponent, // USceneComponent 바인딩 필요
@@ -464,11 +653,7 @@ namespace LuaBindings
     void BindCoreTypesForLua(sol::state& lua)
     {
         // --- 바인딩 순서 정의 ---
-
-        // 0. 기본 Enum 타입들
-        // BindESearchCase(lua); // BindFString 내부에서 호출됨
-        // BindESearchDir(lua);  // BindFString 내부에서 호출됨
-        // BindEEndPlayReason_Placeholder(lua); // 실제 구현 필요
+        BindEWorldType(lua);
 
         // 1. 기본 문자열 및 이름 타입
         BindFString(lua); // Enum들에 의존
@@ -477,20 +662,16 @@ namespace LuaBindings
         // 2. 수학 타입 (다른 타입들에서 광범위하게 사용됨)
         BindMathTypes(lua); // FVector4 실제 구현 필요
 
-        //// 3. UObject 및 기본 클래스 계층 (AActor, 컴포넌트 등의 기반)
-        //BindUObject_Placeholder(lua);         // 실제 구현 필요
-        //BindUClass_Placeholder(lua);          // 실제 구현 필요
-        //BindUActorComponent_Placeholder(lua); // 실제 구현 필요
-        //BindUSceneComponent_Placeholder(lua); // 실제 구현 필요
-
+        BindUObject(lua);
+        BindUClass(lua);
+     
         // 4. 주요 게임플레이 클래스
-        BindAActor(lua); // 수학 타입, UObject, 컴포넌트 등에 의존
+        BindUWorld(lua);
+        BindAActor(lua);
 
         // 5. 컨테이너 관련 (필요한 경우)
-        // TSet 등 컨테이너 바인딩 (또는 테이블 변환 헬퍼 사용)
+        lua["FindClass"] = &LuaFindClass;
 
-        // --- UWorld 등 다른 필요한 타입 바인딩 ---
-        // BindUWorld_Placeholder(lua); // SpawnActor 등 사용 시 필요
     }
     
 } // namespace LuaBindings

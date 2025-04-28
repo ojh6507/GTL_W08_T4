@@ -11,7 +11,6 @@ AFireballActor::AFireballActor()
 {
     FManagerOBJ::CreateStaticMesh("Contents/Sphere.obj");
 
-
     SphereComp = AddComponent<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
     
     SphereComp->SetStaticMesh(FManagerOBJ::GetStaticMesh(L"Contents/Sphere.obj"));

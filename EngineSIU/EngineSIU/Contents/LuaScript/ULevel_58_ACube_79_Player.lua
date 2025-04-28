@@ -39,7 +39,6 @@ local tickCounter = 0
 -- C++에서 전달하는 인자 순서에 맞게 파라미터 수정: (액터 객체, 델타 타임)
 function Tick(dt)
     tickCounter = tickCounter + 1
-
     -- dt는 이제 두 번째 파라미터로 올바르게 float 값을 받음
     -- Log(string.format("[Lua] Tick called! DeltaTime: %.4f", dt)) -- 필요하다면 로그 출력
 
@@ -47,13 +46,13 @@ function Tick(dt)
     if self then
         -- self 변수가 이제 유효하므로 메서드 호출 가능
         local loc = self:GetActorLocation()
-        if loc then -- GetActorLocation이 유효한 FVector를 반환했는지 확인 (선택적이지만 안전)
+        if loc then -- GetActorLocation 이 유효한 FVector를 반환했는지 확인 (선택적이지만 안전)
             loc.X = loc.X + (1 * dt)
             self:SetActorLocation(loc) -- 수정된 위치 설정
         end
 
         local rot = self:GetActorRotation()
-        if rot then -- GetActorRotation이 유효한 FRotator를 반환했는지 확인
+        if rot then -- GetActorRotation 이 유효한 FRotator를 반환했는지 확인
             rot.Yaw = rot.Yaw + (100 * dt)
             self:SetActorRotation(rot) -- 수정된 회전 설정
         end

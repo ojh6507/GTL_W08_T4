@@ -369,14 +369,14 @@ float GetLightFromShadowMap(int idx, float3 WorldPos, float3 WorldNorm)
 {
     float NdotL = dot(normalize(WorldNorm), DirectionalLights[idx].Direction);
     
-    float slopeScale = 0.5f;
+    float slopeScale = 100.f;
     float minBias = 0.0001f;
     float maxBias = 0.001f;
     float bias = saturate(slopeScale * (1 - NdotL));
     bias = clamp(bias, minBias, maxBias);
 
-    float angle = acos(NdotL);
-    bias *= pow(angle / (0.5f * 3.14159265f), 2.0f);
+    //float angle = acos(NdotL);
+    //bias *= pow(angle / (0.5f * 3.14159265f), 2.0f);
     
 
     float4 lp = mul(float4(WorldPos, 1), DirectionalLights[idx].LightView);

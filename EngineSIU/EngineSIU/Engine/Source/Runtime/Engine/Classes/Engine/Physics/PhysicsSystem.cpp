@@ -54,43 +54,36 @@ void FPhysicsSystem::NarrowPhase(TArray<TPair<UShapeComponent*, UShapeComponent*
     {
         UShapeComponent* A = Pair.Key;
         UShapeComponent* B = Pair.Value;
+        UPrimitiveComponent* PrimA = Cast<UPrimitiveComponent>(A);
+        UPrimitiveComponent* PrimB = Cast<UPrimitiveComponent>(B);
 
-        const bool bPrevAB = A->IsOverlappingComponent(B);
+        const bool bPrev = A->IsOverlappingComponent(B);
 
         FHitResult HitAB;
-        const bool bCurrAB = A->CheckOverlapComponent(B, HitAB);
+        const bool bCurr = A->CheckOverlapComponent(B, HitAB);
+
+        FHitResult HitBA = FHitResult::GetReversedHit(HitAB);
+        HitBA.HitComponent = PrimA;
+        HitBA.HitActor = PrimA->GetOwner();
         
-        if (bCurrAB)
+        if (bCurr)
         {
             // 지금 겹치는데, 이전에는 겹치지 않았다 → BeginOverlap
-            if (!bPrevAB)
+            if (!bPrev)
             {
-                PendingBeginOverlap.Add({ Cast<UPrimitiveComponent>(A), FOverlapInfo(HitAB) });
+                PendingBeginOverlap.Add({ PrimA, FOverlapInfo(HitAB) });
+                PendingBeginOverlap.Add({ PrimB, FOverlapInfo(HitBA) });
+
             }
             // 충돌 히트 이벤트(매 프레임마다 발생해도 된다면)
-            PendingHitEvents.Add({ Cast<UPrimitiveComponent>(A), HitAB });
+            PendingHitEvents.Add({ PrimA, HitAB });
+            PendingHitEvents.Add({ PrimB, HitBA });
         }
-        else if (bPrevAB)
+        else if (bPrev)
         {
             // 이전에는 겹쳤는데, 지금은 안 겹치네 → EndOverlap
-            PendingEndOverlap.Add({ Cast<UPrimitiveComponent>(A), FOverlapInfo(B) });
-        }
-        
-        bool bPrevBA = B->IsOverlappingComponent(A);
-        FHitResult HitBA;
-        bool bCurrBA = B->CheckOverlapComponent(A, HitBA);
-
-        if (bCurrBA)
-        {
-            if (!bPrevBA)
-            {
-                PendingBeginOverlap.Add({ Cast<UPrimitiveComponent>(B), FOverlapInfo(HitBA) });
-            }
-            PendingHitEvents.Add({ Cast<UPrimitiveComponent>(B), HitBA });
-        }
-        else if (bPrevBA)
-        {
-            PendingEndOverlap.Add({ Cast<UPrimitiveComponent>(B), FOverlapInfo(A) });
+            PendingEndOverlap.Add({ PrimA, FOverlapInfo(B) });
+            PendingEndOverlap.Add({ PrimB, FOverlapInfo(A) });
         }
     }
 }

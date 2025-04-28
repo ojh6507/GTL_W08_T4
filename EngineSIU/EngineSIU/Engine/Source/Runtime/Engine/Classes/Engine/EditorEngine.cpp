@@ -15,8 +15,8 @@ namespace PrivateEditorSelection
     static AActor* GActorSelected = nullptr;
     static AActor* GActorHovered = nullptr;
 
-    static USceneComponent* GComponentSelected = nullptr;
-    static USceneComponent* GComponentHovered = nullptr;
+    static UActorComponent* GComponentSelected = nullptr;
+    static UActorComponent* GComponentHovered = nullptr;
 }
 
 void UEditorEngine::Init()
@@ -41,14 +41,20 @@ void UEditorEngine::Init()
         assert(AssetManager);
         AssetManager->InitAssetManager();
     }
+    if (!GLuaManager.Initialize())
+    {
+        std::cerr << "Lua 초기화 실패!" << std::endl;
+    }
+    LuaBindings::BindCoreTypesForLua(*GLuaManager.GetState());
+    LuaBindings::BindInputForLua(*GLuaManager.GetState());
 
 #ifdef _DEBUG
-    AActor* Actor = EditorWorld->SpawnActor<ACube>();
-    
-    ADirectionalLight* DirLight = EditorWorld->SpawnActor<ADirectionalLight>();
-    DirLight->SetActorRotation(FRotator(20, -61, 11));
-    DirLight->SetActorLocation(FVector(0, 0, 20));
-    DirLight->SetIntensity(2.f);
+    //AActor* Actor = EditorWorld->SpawnActor<ACube>();
+    //
+    //ADirectionalLight* DirLight = EditorWorld->SpawnActor<ADirectionalLight>();
+    //DirLight->SetActorRotation(FRotator(20, -61, 11));
+    //DirLight->SetActorLocation(FVector(0, 0, 20));
+    //DirLight->SetIntensity(2.f);
 #endif
 }
 
@@ -118,13 +124,6 @@ void UEditorEngine::StartPIE()
         return;
     }
 
-    if (!GLuaManager.Initialize())
-    {
-        std::cerr << "Lua 초기화 실패!" << std::endl;
-    }
-    LuaBindings::BindCoreTypesForLua(*GLuaManager.GetState());
-    LuaBindings::BindInputForLua(*GLuaManager.GetState());
-
     FWorldContext& PIEWorldContext = CreateNewWorldContext(EWorldType::PIE);
 
     PIEWorld = Cast<UWorld>(EditorWorld->Duplicate(this));
@@ -151,7 +150,6 @@ void UEditorEngine::EndPIE()
         // TODO: PIE에서 EditorWorld로 돌아올 때, 기존 선택된 Picking이 유지되어야 함. 현재는 에러를 막기위해 임시조치.
         SelectActor(nullptr);
         SelectComponent(nullptr);
-        GLuaManager.Cleanup();
     }
     // 다시 EditorWorld로 돌아옴.
     ActiveWorld = EditorWorld;
@@ -183,13 +181,16 @@ FWorldContext* UEditorEngine::GetPIEWorldContext(/*int32 WorldPIEInstance*/)
 
 void UEditorEngine::SelectActor(AActor* InActor) const
 {
+    // 선택된 Actor 변경 시, 선택된 Component를 Actor의 RootComponent로 변경
     if (InActor && CanSelectActor(InActor))
     {
         PrivateEditorSelection::GActorSelected = InActor;
+        PrivateEditorSelection::GComponentSelected = InActor->GetRootComponent();
     }
     else if (InActor == nullptr)
     {
         PrivateEditorSelection::GActorSelected = nullptr;
+        PrivateEditorSelection::GComponentSelected = nullptr;
     }
 }
 
@@ -226,7 +227,7 @@ void UEditorEngine::NewWorld()
     }
 }
 
-void UEditorEngine::SelectComponent(USceneComponent* InComponent) const
+void UEditorEngine::SelectComponent(UActorComponent* InComponent) const
 {
     if (InComponent && CanSelectComponent(InComponent))
     {
@@ -238,17 +239,17 @@ void UEditorEngine::SelectComponent(USceneComponent* InComponent) const
     }
 }
 
-bool UEditorEngine::CanSelectComponent(const USceneComponent* InComponent) const
+bool UEditorEngine::CanSelectComponent(const UActorComponent* InComponent) const
 {
     return InComponent != nullptr && InComponent->GetOwner() && InComponent->GetOwner()->GetWorld() == ActiveWorld && !InComponent->GetOwner()->IsActorBeingDestroyed();
 }
 
-USceneComponent* UEditorEngine::GetSelectedComponent() const
+UActorComponent* UEditorEngine::GetSelectedComponent() const
 {
     return PrivateEditorSelection::GComponentSelected;
 }
 
-void UEditorEngine::HoverComponent(USceneComponent* InComponent) const
+void UEditorEngine::HoverComponent(UActorComponent* InComponent) const
 {
     if (InComponent)
     {

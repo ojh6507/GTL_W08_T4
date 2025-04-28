@@ -3,7 +3,6 @@
 UScriptComponent::UScriptComponent()
 	: bIsScriptLoaded(false)
 {
-
 }
 
 UScriptComponent::~UScriptComponent()
@@ -51,6 +50,7 @@ UObject* UScriptComponent::Duplicate(UObject* InOuter)
 
 	NewComponent->ScriptPath = ScriptPath;
 	NewComponent->bIsScriptLoaded = bIsScriptLoaded;
+
 	return NewComponent;
 }
 
@@ -66,8 +66,6 @@ void UScriptComponent::SetProperties(const TMap<FString, FString>& Properties)
 	Super::SetProperties(Properties);
 	const FString* TempStr = nullptr;
 
-
-	// --- StaticMesh 설정 ---
 	TempStr = Properties.Find(TEXT("ScriptPath"));
 
 	if (TempStr)
@@ -82,27 +80,32 @@ bool UScriptComponent::LoadScript(const FString& InScriptPath)
 	bIsScriptLoaded = false; // 초기화
 	LuaScriptEnv = sol::nil; // 초기화
 
-	try {
+	try
+	{
 		sol::state& Lua = *GLuaManager.GetState(); // 전역 상태
 
 		// 1. 환경 생성
 		LuaScriptEnv = sol::environment(Lua, sol::create, Lua.globals());
-		if (!LuaScriptEnv.valid()) {
-			std::cerr << "Failed to create Lua environment for script: " << *ScriptPath << std::endl;
+		if (!LuaScriptEnv.valid())
+		{
+			std::cerr << "Failed to create Lua environment for script: " << *ScriptPath << '\n';
 			return false;
 		}
 		LuaScriptEnv["self"] = GetOwner();
 
 		// 2. 환경 내에서 스크립트 실행 (script_file 사용)
-		sol::protected_function_result result = Lua.script_file(
+		const sol::protected_function_result Result = Lua.script_file(
 			*ScriptPath,
 			LuaScriptEnv, // 실행 환경 지정
-			[this](lua_State* L, sol::protected_function_result pfr) { // 오류 핸들러
-				if (!pfr.valid()) {
-					sol::error err = pfr;
-					std::cerr << "Lua Script Error in " << *ScriptPath << " (env): " << err.what() << std::endl;
-					if (lua_gettop(L) > 0 && lua_isstring(L, -1)) {
-						std::cerr << "Detailed Error: " << lua_tostring(L, -1) << std::endl;
+			[this](lua_State* L, sol::protected_function_result pfr)
+			{ // 오류 핸들러
+				if (!pfr.valid())
+				{
+					sol::error e = pfr;
+					std::cerr << "Lua Script Error in " << *ScriptPath << " (env): " << e.what() << '\n';
+					if (lua_gettop(L) > 0 && lua_isstring(L, -1))
+					{
+						std::cerr << "Detailed Error: " << lua_tostring(L, -1) << '\n';
 						lua_pop(L, 1);
 					}
 				}
@@ -111,8 +114,9 @@ bool UScriptComponent::LoadScript(const FString& InScriptPath)
 			sol::load_mode::text
 		);
 
-		if (!result.valid()) {
-			std::cerr << "Failed to execute script in environment: " << *ScriptPath << std::endl;
+		if (!Result.valid())
+		{
+			std::cerr << "Failed to execute script in environment: " << *ScriptPath << '\n';
 			LuaScriptEnv = sol::nil;
 			return false;
 		}
@@ -121,24 +125,27 @@ bool UScriptComponent::LoadScript(const FString& InScriptPath)
 		// RegisterLuaFunctions(Lua); // 제거! 전역 바인딩은 초기화 시 한 번만!
 
 		bIsScriptLoaded = true;
-		std::cout << "Successfully loaded script in environment: " << *ScriptPath << std::endl;
+		std::cout << "Successfully loaded script in environment: " << *ScriptPath << '\n';
 
 		return true;
 	}
-	catch (const sol::error& e) {
-		std::cerr << "Lua Error during script loading: " << *ScriptPath << "\nError: " << e.what() << std::endl;
+	catch (const sol::error& e)
+	{
+		std::cerr << "Lua Error during script loading: " << *ScriptPath << "\nError: " << e.what() << '\n';
 		LuaScriptEnv = sol::nil;
 		return false;
 	}
-	catch (const std::exception& e) {
+	catch (const std::exception& e)
+	{
 		// 표준 예외 처리
-		std::cerr << "알 수 없는 오류 발생: " << e.what() << std::endl;
+		std::cerr << "알 수 없는 오류 발생: " << e.what() << '\n';
 		bIsScriptLoaded = false;
 		return false;
 	}
-	catch (...) {
+	catch (...)
+	{
 		// 모든 다른 예외 처리
-		std::cerr << "알 수 없는 치명적인 오류 발생" << std::endl;
+		std::cerr << "알 수 없는 치명적인 오류 발생" << '\n';
 		bIsScriptLoaded = false;
 		return false;
 	}
@@ -152,57 +159,87 @@ void UScriptComponent::OnOverlap(AActor* OverlappedActor, AActor* OtherActor)
 	}
 }
 
-
-void UScriptComponent::CallScriptFunction(const char* functionName)
+void UScriptComponent::CallScriptFunction(const char* FunctionName)
 {
-	if (!bIsScriptLoaded || !LuaScriptEnv.valid()) return;
-	try {
-		sol::protected_function func = LuaScriptEnv[functionName]; // 환경에서 함수 찾기
-		if (!func.valid()) {
-			std::cerr << "Lua function not found in env: " << functionName << std::endl;
+	if (!bIsScriptLoaded || !LuaScriptEnv.valid())
+	{
+		return;
+	}
+
+	try
+	{
+		const sol::protected_function Func = LuaScriptEnv[FunctionName];
+		if (!Func.valid())
+		{
+			std::cerr << "Lua function not found in env: " << FunctionName << '\n';
 			return;
 		}
-		auto result = func();
-		if (!result.valid()) {
-			sol::error err = result;
-			std::cerr << "Lua function call error (" << functionName << "): " << err.what() << std::endl;
+
+		const auto Result = Func();
+		if (!Result.valid())
+		{
+			sol::error e = Result;
+			std::cerr << "Lua function call error (" << FunctionName << "): " << e.what() << '\n';
 		}
 	}
-	catch (const sol::error& e) {
-		std::cerr << "Lua function call exception (" << functionName << "): " << e.what() << std::endl;
+	catch (const sol::error& e)
+	{
+		std::cerr << "Lua function call exception (" << FunctionName << "): " << e.what() << '\n';
 	}
 }
 
-void UScriptComponent::CallScriptFunction(const char* functionName, float value)
+void UScriptComponent::CallScriptFunction(const char* FunctionName, float Value)
 {
-	if (!bIsScriptLoaded || !LuaScriptEnv.valid()) return;
-	try {
-		sol::protected_function func = LuaScriptEnv[functionName]; // 환경에서 함수 찾기
-		if (!func.valid()) return;
-		auto result = func(value);
-		if (!result.valid()) {
-			sol::error err = result;
-			std::cerr << "Lua function call error (" << functionName << "): " << err.what() << std::endl;
+	if (!bIsScriptLoaded || !LuaScriptEnv.valid())
+	{
+		return;
+	}
+
+	try
+	{
+		const sol::protected_function Func = LuaScriptEnv[FunctionName];
+		if (!Func.valid())
+		{
+			return;
+		}
+
+		const auto Result = Func(Value);
+		if (!Result.valid())
+		{
+			const sol::error e = Result;
+			std::cerr << "Lua function call error (" << FunctionName << "): " << e.what() << '\n';
 		}
 	}
-	catch (const sol::error& e) {
-		std::cerr << "Lua function call exception (" << functionName << "): " << e.what() << std::endl;
+	catch (const sol::error& e)
+	{
+		std::cerr << "Lua function call exception (" << FunctionName << "): " << e.what() << '\n';
 	}
 }
 
-void UScriptComponent::CallScriptFunction(const char* functionName, AActor* otherActor)
+void UScriptComponent::CallScriptFunction(const char* FunctionName, AActor* OtherActor)
 {
-	if (!bIsScriptLoaded || !LuaScriptEnv.valid()) return;
-	try {
-		sol::protected_function func = LuaScriptEnv[functionName]; // 환경에서 함수 찾기
-		if (!func.valid()) return;
-		auto result = func(otherActor);
-		if (!result.valid()) {
-			sol::error err = result;
-			std::cerr << "Lua function call error (" << functionName << "): " << err.what() << std::endl;
+	if (!bIsScriptLoaded || !LuaScriptEnv.valid())
+	{
+		return;
+	}
+
+	try
+	{
+		const sol::protected_function Func = LuaScriptEnv[FunctionName];
+		if (!Func.valid())
+		{
+			return;
+		}
+
+		const auto Result = Func(OtherActor);
+		if (!Result.valid())
+		{
+			const sol::error e = Result;
+			std::cerr << "Lua function call error (" << FunctionName << "): " << e.what() << '\n';
 		}
 	}
-	catch (const sol::error& e) {
-		std::cerr << "Lua function call exception (" << functionName << "): " << e.what() << std::endl;
+	catch (const sol::error& e)
+	{
+		std::cerr << "Lua function call exception (" << FunctionName << "): " << e.what() << '\n';
 	}
 }

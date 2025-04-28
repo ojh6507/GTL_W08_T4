@@ -119,9 +119,8 @@ bool AActor::Destroy()
     return IsActorBeingDestroyed();
 }
 
-UActorComponent* AActor::AddComponent(UClass* InClass, FName InName, bool bTryRootComponent)
+UActorComponent* AActor::AddComponent(UClass* InClass, FName InName)
 {
-
     if (!InClass)
     {
         UE_LOG(ELogLevel::Error, TEXT("UActorComponent failed: ComponentClass is null."));
@@ -130,7 +129,7 @@ UActorComponent* AActor::AddComponent(UClass* InClass, FName InName, bool bTryRo
     
     if (InClass->IsChildOf<UActorComponent>())
     {
-        UActorComponent* Component = static_cast<UActorComponent*>(FObjectFactory::ConstructObject(InClass, this, InName));
+        UActorComponent* Component = dynamic_cast<UActorComponent*>(FObjectFactory::ConstructObject(InClass, this, InName));
 
         if (!Component)
         {
@@ -142,24 +141,18 @@ UActorComponent* AActor::AddComponent(UClass* InClass, FName InName, bool bTryRo
         Component->OwnerPrivate = this;
 
         // 만약 SceneComponent를 상속 받았다면
-
-        if (bTryRootComponent)
+        if (USceneComponent* SceneComp = Cast<USceneComponent>(Component))
         {
-            if (USceneComponent* SceneComp = Cast<USceneComponent>(Component))
+            if (RootComponent == nullptr)
             {
-                if (RootComponent == nullptr)
-                {
-                    RootComponent = SceneComp;
-                }
-            // TODO: 나중에 RegisterComponent() 생기면 주석 해제
-                // else
-                // {
-                //     SceneComp->SetupAttachment(RootComponent);
-                // }
+                RootComponent = SceneComp;
+            }
+            else
+            {
+                SceneComp->SetupAttachment(RootComponent);
             }
         }
 
-        // TODO: RegisterComponent() 생기면 제거
         Component->InitializeComponent();
 
         return Component;
