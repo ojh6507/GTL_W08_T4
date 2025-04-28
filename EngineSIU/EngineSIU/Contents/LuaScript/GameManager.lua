@@ -25,7 +25,7 @@ function GameManager.LoseLife()
         gameUI:LoseLife()
         
         if gameUI:GetLives() <= 0 then
-            GameManager.ResetGame()
+            Timer:Pause()
         end
     end
 end
@@ -42,6 +42,7 @@ end
 
 function EndPlay()
     if SoundManager then
+        isGameStarted = false
         SoundManager:ShutDown()
     end
 end
