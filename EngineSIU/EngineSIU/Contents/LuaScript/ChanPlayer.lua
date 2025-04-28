@@ -55,12 +55,16 @@ function Tick(dt)
     if self then
         local currentLocation = self:GetActorLocation()
         local moveDelta = FVector(0, 0, 0) -- FVector 생성자 사용
+        local rotDelta = FRotator(0, 0, 0)
     
+        rotDelta.Yaw = 0 -- Yaw 회전 초기화
         if IsKeyDown(KEY_RIGHT) then
             moveDelta.Y = moveDelta.Y + moveSpeed * dt
+            rotDelta.Yaw = rotDelta.Yaw + 1000 * dt
         end
         if IsKeyDown(KEY_LEFT) then
             moveDelta.Y = moveDelta.Y - moveSpeed * dt
+            rotDelta.Yaw = rotDelta.Yaw - 1000 * dt
         end
 
         if moveDelta:LengthSquared() > 0 then
@@ -73,6 +77,7 @@ function Tick(dt)
             end
             self:SetActorLocation(tempLocation)
        end
+       self:SetActorRotation(rotDelta)
     else
         -- self가 nil인 경우는 C++ 호출부에서 문제가 없는 한 발생하기 어려움
         Log("[Lua] Error: self is nil in Tick!")
