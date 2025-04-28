@@ -33,6 +33,8 @@ void Timer::Pause()
 {
     if (running)
         paused = true;
+
+    running = false;
 }
 
 void Timer::Resume()

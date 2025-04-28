@@ -24,6 +24,7 @@
 #include "../../../Timer.h"
 #include "../../../GameUI.h"
 #include "UnrealEd/UnrealEd.h"
+#include <PropertyEditor/ControlEditorPanel.h>
 
 // --- !!! 중요: 선행 바인딩 필요 !!! ---
 // 이 파일 내의 바인딩 함수들은 서로 의존성을 가집니다.
@@ -774,6 +775,18 @@ namespace LuaBindings
 
    // LuaBindings.cpp 파일 또는 해당하는 파일에 추가
 
+   void BindMagicButton(sol::state& lua)
+   {
+       lua.new_usertype<ControlEditorPanel>("ControlEditorPanel",
+           "StartPIE", &ControlEditorPanel::StartPIE,
+           "EndPIE", &ControlEditorPanel::EndPIE
+       );
+
+     auto controlPanel = UnrealEd::GetEditorPanel("ControlPanel");
+     auto control = std::dynamic_pointer_cast<ControlEditorPanel>(controlPanel);
+    
+     lua["ControlEditorPanelInstance"] = control;
+   }
 
     // --- 코어 타입 전체 바인딩 호출 함수 ---
     void BindCoreTypesForLua(sol::state& lua)
@@ -800,6 +813,7 @@ namespace LuaBindings
 
         BindSoundManager(lua);
         BindUI(lua);
+        BindMagicButton(lua);
     }
 
   
