@@ -12,7 +12,7 @@ SoundManager::SoundManager() : system(nullptr) {
 }
 
 SoundManager::~SoundManager() {
-    Shutdown();
+    ShutDown();
 }
 
 bool SoundManager::Initialize() {
@@ -32,7 +32,7 @@ bool SoundManager::Initialize() {
     return true;
 }
 
-void SoundManager::Shutdown() {
+void SoundManager::ShutDown() {
     for (auto& pair : soundMap) {
         pair.second->release();
     }
@@ -54,7 +54,7 @@ bool SoundManager::LoadSound(const std::string& name, const std::string& filePat
     FMOD::Sound* sound = nullptr;
     FMOD_MODE mode = loop ? FMOD_LOOP_NORMAL : FMOD_DEFAULT;
 
-    if (system->createSound(filePath.c_str(), mode, nullptr, &sound) != FMOD_OK) {
+    if (system->createSound(("Assets/Sound/" + filePath).c_str(), mode, nullptr, &sound) != FMOD_OK) {
         std::cerr << "Failed to load sound: " << filePath << std::endl;
         return false;
     }

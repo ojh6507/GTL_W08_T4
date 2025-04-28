@@ -46,15 +46,6 @@ int32 FEngineLoop::Init(HINSTANCE hInstance)
     AppMessageHandler = std::make_unique<FSlateAppMessageHandler>();
     LevelEditor = new SLevelEditor();
 
-    bool result =SoundManager::GetInstance().Initialize();
-
-#ifdef _DEBUG
-    std::cout << (result ? "SoundManager Initialized" : "SoundManager Initialization Failed") << std::endl;
-#endif
-
-    SoundManager::GetInstance().LoadSoundFiles();
-
-
     UnrealEditor->Initialize();
     GraphicDevice.Initialize(AppWnd);
     BufferManager->Initialize(GraphicDevice.Device, GraphicDevice.DeviceContext);

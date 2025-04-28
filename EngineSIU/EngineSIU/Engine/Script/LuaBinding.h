@@ -21,6 +21,7 @@
 #include "UObject/Class.h"           // UClass
 #include "Engine/EngineTypes.h"      // EEndPlayReason
 #include "Container/Set.h"           // TSet
+#include "../../../SoundManager.h"
 
 // --- !!! 중요: 선행 바인딩 필요 !!! ---
 // 이 파일 내의 바인딩 함수들은 서로 의존성을 가집니다.
@@ -685,6 +686,29 @@ namespace LuaBindings
            // Note: Duplicate is also less common for direct Lua gameplay. Omitted.
        );
    }
+
+   void BindSoundManager(sol::state& lua)
+   {
+       // SoundManager 싱글톤을 위한 함수 바인딩
+       lua.set_function("GetSoundManager", []() -> SoundManager& {
+           return SoundManager::GetInstance();
+           });
+
+       // SoundManager 클래스 바인딩
+       lua.new_usertype<SoundManager>("SoundManager",
+           sol::no_constructor, // 생성자 없음 (싱글톤)
+
+           // 멤버 함수들 바인딩
+           "Initialize", &SoundManager::Initialize,
+           "ShutDown", &SoundManager::ShutDown,
+           "LoadSound", &SoundManager::LoadSound,
+           "PlaySound", &SoundManager::PlaySound,
+           "Update", &SoundManager::Update,
+           "LoadSoundFiles", &SoundManager::LoadSoundFiles
+        
+       );
+   }
+
     // --- 코어 타입 전체 바인딩 호출 함수 ---
     void BindCoreTypesForLua(sol::state& lua)
     {
@@ -708,6 +732,8 @@ namespace LuaBindings
         // 5. 컨테이너 관련 (필요한 경우)
         lua["FindClass"] = &LuaFindClass;
 
+        BindSoundManager(lua);
     }
-    
+
+  
 } // namespace LuaBindings

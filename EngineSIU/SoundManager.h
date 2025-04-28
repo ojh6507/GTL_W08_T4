@@ -12,7 +12,7 @@ class SoundManager {
 public:
     static SoundManager& GetInstance();
     bool Initialize();
-    void Shutdown();
+    void ShutDown();
     bool LoadSound(const std::string& name, const std::string& filePath, bool loop = false);
     void PlaySound(const std::string& name);
     void Update();
