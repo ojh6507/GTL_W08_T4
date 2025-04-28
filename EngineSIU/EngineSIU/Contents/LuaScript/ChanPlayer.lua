@@ -1,5 +1,5 @@
 local initialLocation = nil
-local moveSpeed = 10.0
+local moveSpeed = 5.0
 
 function BeginPlay()
     Log("[Lua] BeginPlay called!")
@@ -58,10 +58,10 @@ function Tick(dt)
         if moveDelta:LengthSquared() > 0 then
             local tempLocation = currentLocation + moveDelta
             -- Y 축 이동 제한 (-20 ~ 20)
-            if tempLocation.Y < -20 then
-                tempLocation.Y = -20
-            elseif tempLocation.Y > 20 then
-                tempLocation.Y = 20
+            if tempLocation.Y < -5 then
+                tempLocation.Y = -5
+            elseif tempLocation.Y > 5 then
+                tempLocation.Y = 5
             end
             self:SetActorLocation(tempLocation)
        end

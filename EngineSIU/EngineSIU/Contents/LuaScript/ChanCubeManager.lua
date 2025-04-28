@@ -76,7 +76,7 @@ function Tick(dt)
     if spawnedDeltaTime >= spawnInterval then
         spawnedDeltaTime = 0.0 -- 리셋
         if world then
-            local spawnLocation = initialLocation + FVector(0, math.random(-20, 20), 0) -- Y축 방향으로 랜덤 스폰
+            local spawnLocation = initialLocation + FVector(0, math.random(-5, 5), 0) -- Y축 방향으로 랜덤 스폰
             local spawnRotation = FRotator(0, 0, 0) -- 회전 없음
             local spawnName = FName(string.format("MyLuaCube_%d", spawnCount))
 
