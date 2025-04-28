@@ -17,6 +17,7 @@
 #include "tinyfiledialogs.h"
 
 #include "Actors/Cube.h"
+#include "Actors/AnimPlayerActor.h"
 
 #include "Engine/EditorEngine.h"
 #include <Actors/HeightFogActor.h>
@@ -275,16 +276,18 @@ void ControlEditorPanel::CreateModifyButton(ImVec2 ButtonSize, ImFont* IconFont)
         };
 
         static const Primitive primitives[] = {
-            { .label= "Cube",      .obj= OBJ_CUBE },
-            { .label= "Sphere",    .obj= OBJ_SPHERE },
-            { .label= "PointLight", .obj= OBJ_POINTLIGHT },
-            { .label= "SpotLight", .obj= OBJ_SPOTLIGHT },
-            { .label= "DirectionalLight", .obj= OBJ_DIRECTIONALLGIHT },
-            { .label= "AmbientLight", .obj= OBJ_AMBIENTLIGHT },
-            { .label= "Particle",  .obj= OBJ_PARTICLE },
-            { .label= "Text",      .obj= OBJ_TEXT },
-            { .label= "Fireball",  .obj = OBJ_FIREBALL},
-            { .label= "Fog",       .obj= OBJ_FOG }
+            {.label = "Cube",      .obj = OBJ_CUBE },
+            {.label = "Sphere",    .obj = OBJ_SPHERE },
+            {.label = "PointLight", .obj = OBJ_POINTLIGHT },
+            {.label = "SpotLight", .obj = OBJ_SPOTLIGHT },
+            {.label = "DirectionalLight", .obj = OBJ_DIRECTIONALLGIHT },
+            {.label = "AmbientLight", .obj = OBJ_AMBIENTLIGHT },
+            {.label = "Particle",  .obj = OBJ_PARTICLE },
+            {.label = "Text",      .obj = OBJ_TEXT },
+            {.label = "Fireball",  .obj = OBJ_FIREBALL},
+            {.label = "Fog",       .obj = OBJ_FOG },
+            {.label = "Player",       .obj = OBJ_PLAYER
+ }
         };
 
         for (const auto& primitive : primitives)
@@ -302,7 +305,7 @@ void ControlEditorPanel::CreateModifyButton(ImVec2 ButtonSize, ImFont* IconFont)
                     SpawnedActor->SetActorLabel(TEXT("OBJ_SPHERE"));
                     UStaticMeshComponent* StaticMeshComp = SpawnedActor->AddComponent<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
                     StaticMeshComp->SetStaticMesh(FManagerOBJ::GetStaticMesh(L"Contents/Sphere.obj"));
-                    StaticMeshComp->AABB =  FBoundingBox({1, 1, 1} , {-1,-1,-1});
+                    StaticMeshComp->AABB = FBoundingBox({ 1, 1, 1 }, { -1,-1,-1 });
                     USphereComponent* SphereComponent = SpawnedActor->AddComponent<USphereComponent>(TEXT("SphereComponent"));
                     SphereComponent->SetupAttachment(SpawnedActor->GetRootComponent());
                     break;
@@ -359,7 +362,7 @@ void ControlEditorPanel::CreateModifyButton(ImVec2 ButtonSize, ImFont* IconFont)
                     TextComponent->SetTexture(L"Assets/Texture/font.png");
                     TextComponent->SetRowColumnCount(106, 106);
                     TextComponent->SetText(L"안녕하세요 Jungle 1");
-                    
+
                     break;
                 }
                 case OBJ_FIREBALL:
@@ -375,9 +378,15 @@ void ControlEditorPanel::CreateModifyButton(ImVec2 ButtonSize, ImFont* IconFont)
                     SpawnedActor->SetActorLabel(TEXT("OBJ_FOG"));
                     break;
                 }
+                case OBJ_PLAYER:
+                {
+                    SpawnedActor = World->SpawnActor<AAnimPlayerActor>();
+                    SpawnedActor->SetActorLabel(TEXT("OBJ_Player"));
+                    break;
+                }
                 case OBJ_TRIANGLE:
                 case OBJ_CAMERA:
-                case OBJ_PLAYER:
+
                 case OBJ_END:
                     break;
                 }
@@ -427,12 +436,12 @@ void ControlEditorPanel::CreateFlagButton() const
 
     ImGui::SameLine();
 
-    const char* ViewModeNames[] = { 
-        "Lit_Gouraud", "Lit_Lambert", "Lit_Phong", 
+    const char* ViewModeNames[] = {
+        "Lit_Gouraud", "Lit_Lambert", "Lit_Phong",
         "Unlit", "Wireframe", "Scene Depth", "World Normal"
     };
     uint32 ViewModeCount = sizeof(ViewModeNames) / sizeof(ViewModeNames[0]);
-    
+
     int RawViewMode = (int)ActiveViewport->GetViewMode();
     int SafeIndex = (RawViewMode >= 0) ? (RawViewMode % ViewModeCount) : 0;
     FString ViewModeControl = ViewModeNames[SafeIndex];
@@ -469,7 +478,7 @@ void ControlEditorPanel::CreateFlagButton() const
         ImGui::OpenPopup("ShowControl");
     }
 
-    const char* items[] = { "AABB", "Primitive", "BillBoard", "UUID", "Fog"};
+    const char* items[] = { "AABB", "Primitive", "BillBoard", "UUID", "Fog" };
     uint64 ActiveViewportFlags = ActiveViewport->GetShowFlag();
 
     if (ImGui::BeginPopup("ShowControl"))
@@ -480,7 +489,7 @@ void ControlEditorPanel::CreateFlagButton() const
             (ActiveViewportFlags & static_cast<uint64>(EEngineShowFlags::SF_Primitives)) != 0,
             (ActiveViewportFlags & static_cast<uint64>(EEngineShowFlags::SF_BillboardText)) != 0,
             (ActiveViewportFlags & static_cast<uint64>(EEngineShowFlags::SF_UUIDText)) != 0,
-            (ActiveViewportFlags & static_cast<uint64>(EEngineShowFlags::SF_Fog)) !=0
+            (ActiveViewportFlags & static_cast<uint64>(EEngineShowFlags::SF_Fog)) != 0
         };  // 각 항목의 체크 상태 저장
 
         for (int i = 0; i < IM_ARRAYSIZE(items); i++)
@@ -503,7 +512,7 @@ void ControlEditorPanel::CreatePIEButton(ImVec2 ButtonSize, ImFont* IconFont) co
     float CenterX = (WindowSize.x - ButtonSize.x) / 2.5f;
 
     ImGui::SetCursorScreenPos(ImVec2(CenterX - 40.0f, 10.0f));
-    
+
     if (ImGui::Button("\ue9a8", ButtonSize)) // Play
     {
         UE_LOG(ELogLevel::Display, TEXT("PIE Button Clicked"));
@@ -516,7 +525,7 @@ void ControlEditorPanel::CreatePIEButton(ImVec2 ButtonSize, ImFont* IconFont) co
         UE_LOG(ELogLevel::Display, TEXT("Stop Button Clicked"));
         Engine->EndPIE();
     }
-    
+
 }
 
 // code is so dirty / Please refactor

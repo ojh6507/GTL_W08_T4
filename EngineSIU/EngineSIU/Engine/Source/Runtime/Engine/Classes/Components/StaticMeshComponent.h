@@ -32,8 +32,10 @@ public:
         OverrideMaterials.SetNum(value->GetMaterials().Num());
         AABB = FBoundingBox(staticMesh->GetRenderData()->BoundingBoxMin, staticMesh->GetRenderData()->BoundingBoxMax);
     }
-
+    bool IsVisibility() const { return Visibility; }
+    void SetVisibility(bool visibility) { Visibility = visibility; }
 protected:
+    bool Visibility = true;
     UStaticMesh* staticMesh = nullptr;
     int selectedSubMeshIndex = -1;
 };

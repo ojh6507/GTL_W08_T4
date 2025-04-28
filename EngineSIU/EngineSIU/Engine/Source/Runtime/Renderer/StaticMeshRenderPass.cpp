@@ -31,6 +31,7 @@
 
 #include "Components/SphereComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Actors/AnimPlayerActor.h"
 
 FStaticMeshRenderPass::FStaticMeshRenderPass()
     : VertexShader(nullptr)
@@ -155,31 +156,31 @@ void FStaticMeshRenderPass::ReloadShader()
 {
     switch (ViewModeIndex)
     {
-        case EViewModeIndex::VMI_Lit_Gouraud:
-            VertexShader = ShaderManager->GetVertexShaderByKey(L"GOURAUD_StaticMeshVertexShader");
-            PixelShader = ShaderManager->GetPixelShaderByKey(L"GOURAUD_StaticMeshPixelShader");
-            break;
-        case EViewModeIndex::VMI_Lit_Lambert:
-            VertexShader = ShaderManager->GetVertexShaderByKey(L"StaticMeshVertexShader");
-            PixelShader = ShaderManager->GetPixelShaderByKey(L"LAMBERT_StaticMeshPixelShader");
-            break;
-        case EViewModeIndex::VMI_Lit_BlinnPhong:
-        case EViewModeIndex::VMI_Wireframe:
-        case EViewModeIndex::VMI_Unlit:
-            VertexShader = ShaderManager->GetVertexShaderByKey(L"StaticMeshVertexShader");
-            PixelShader = ShaderManager->GetPixelShaderByKey(L"PHONG_StaticMeshPixelShader");
-            break;
-        case EViewModeIndex::VMI_SceneDepth:
-        case EViewModeIndex::VMI_WorldNormal:
-        case EViewModeIndex::VMI_MAX:
-            break;
-        default:
-            assert(0); // Invalid ViewModeIndex
-            break;
+    case EViewModeIndex::VMI_Lit_Gouraud:
+        VertexShader = ShaderManager->GetVertexShaderByKey(L"GOURAUD_StaticMeshVertexShader");
+        PixelShader = ShaderManager->GetPixelShaderByKey(L"GOURAUD_StaticMeshPixelShader");
+        break;
+    case EViewModeIndex::VMI_Lit_Lambert:
+        VertexShader = ShaderManager->GetVertexShaderByKey(L"StaticMeshVertexShader");
+        PixelShader = ShaderManager->GetPixelShaderByKey(L"LAMBERT_StaticMeshPixelShader");
+        break;
+    case EViewModeIndex::VMI_Lit_BlinnPhong:
+    case EViewModeIndex::VMI_Wireframe:
+    case EViewModeIndex::VMI_Unlit:
+        VertexShader = ShaderManager->GetVertexShaderByKey(L"StaticMeshVertexShader");
+        PixelShader = ShaderManager->GetPixelShaderByKey(L"PHONG_StaticMeshPixelShader");
+        break;
+    case EViewModeIndex::VMI_SceneDepth:
+    case EViewModeIndex::VMI_WorldNormal:
+    case EViewModeIndex::VMI_MAX:
+        break;
+    default:
+        assert(0); // Invalid ViewModeIndex
+        break;
     }
     DebugDepthShader = ShaderManager->GetPixelShaderByKey(L"StaticMeshPixelShaderDepth");
     DebugWorldNormalShader = ShaderManager->GetPixelShaderByKey(L"StaticMeshPixelShaderWorldNormal");
-    
+
 }
 
 void FStaticMeshRenderPass::SetSpotLightShadowMap(FSpotLightShadowMap* InSpotLightShadowMap)
@@ -208,11 +209,16 @@ void FStaticMeshRenderPass::Initialize(FDXDBufferManager* InBufferManager, FGrap
 
 void FStaticMeshRenderPass::PrepareRender()
 {
+    ToggleActors.Empty();
     for (const auto iter : TObjectRange<UStaticMeshComponent>())
     {
         if (!Cast<UGizmoBaseComponent>(iter) && iter->GetWorld() == GEngine->ActiveWorld)
         {
             StaticMeshComponents.Add(iter);
+            if (AAnimPlayerActor* AnimPlayer = Cast<AAnimPlayerActor>(iter->GetOwner()))
+            {
+                ToggleActors.Add(iter);
+            }
         }
     }
 
@@ -221,7 +227,7 @@ void FStaticMeshRenderPass::PrepareRender()
         FVector LocalHalfExtents = iter->GetBoxExtent();  // 이미 반사이즈
         FVector WorldPosition = iter->GetWorldLocation();
         FVector LocalMin = -LocalHalfExtents;  // (-X, -Y, -Z)
-        FVector LocalMax =  LocalHalfExtents;  // ( +X, +Y, +Z)
+        FVector LocalMax = LocalHalfExtents;  // ( +X, +Y, +Z)
 
         FEngineLoop::PrimitiveDrawBatch.AddAABBToBatch(iter->GetBoundingBox(), iter->GetWorldMatrix());
         FEngineLoop::PrimitiveDrawBatch.AddOBBToBatch(FBoundingBox(LocalMin, LocalMax), iter->GetWorldMatrix());
@@ -240,10 +246,10 @@ void FStaticMeshRenderPass::PrepareRender()
     }
 }
 
-void FStaticMeshRenderPass::PrepareRenderState(const std::shared_ptr<FEditorViewportClient>& Viewport) 
+void FStaticMeshRenderPass::PrepareRenderState(const std::shared_ptr<FEditorViewportClient>& Viewport)
 {
     const EViewModeIndex ViewMode = Viewport->GetViewMode();
-    
+
     Graphics->DeviceContext->VSSetShader(VertexShader, nullptr, 0);
     Graphics->DeviceContext->IASetInputLayout(InputLayout);
 
@@ -261,7 +267,7 @@ void FStaticMeshRenderPass::PrepareRenderState(const std::shared_ptr<FEditorView
 
     BufferManager->BindConstantBuffer(TEXT("FLightInfoBuffer"), 0, EShaderStage::Vertex);
     BufferManager->BindConstantBuffer(TEXT("FMaterialConstants"), 1, EShaderStage::Vertex);
-    
+
     ChangeViewMode(ViewMode);
 
     // Rasterizer
@@ -393,13 +399,46 @@ void FStaticMeshRenderPass::Render(const std::shared_ptr<FEditorViewportClient>&
 
     PrepareRenderState(Viewport);
 
+    for (UStaticMeshComponent* Comp : ToggleActors)
+    {
+
+        AAnimPlayerActor* AnimOwner = nullptr;
+        for (UStaticMeshComponent* Comp : ToggleActors)
+        {
+            if (!Comp) continue;
+            if (auto* Owner = Cast<AAnimPlayerActor>(Comp->GetOwner()))
+            {
+                AnimOwner = Owner;
+                break;  // “플레이어 액터는 하나” 이므로 첫 발견만으로 OK
+            }
+        }
+
+        if (AnimOwner)
+        {
+            if (AnimOwner->AccumulatedTime >= AnimOwner->ToggleInterval)
+            {
+                AnimOwner->AccumulatedTime -= AnimOwner->ToggleInterval;
+                AnimOwner->bIsMesh1Active = !AnimOwner->bIsMesh1Active;
+
+                ToggleActors[0]->SetVisibility(AnimOwner->bIsMesh1Active);
+                ToggleActors[1]->SetVisibility(!AnimOwner->bIsMesh1Active);
+            }
+        }
+
+    }
+
     for (UStaticMeshComponent* Comp : StaticMeshComponents)
     {
-        if (!Comp || !Comp->GetStaticMesh())
+        if (!Comp || !Comp->GetStaticMesh() | !Comp->IsVisibility())
         {
             continue;
         }
 
+
+        if (!Comp->IsVisibility())
+        {
+            continue;
+        }
         OBJ::FStaticMeshRenderData* RenderData = Comp->GetStaticMesh()->GetRenderData();
         if (RenderData == nullptr)
         {

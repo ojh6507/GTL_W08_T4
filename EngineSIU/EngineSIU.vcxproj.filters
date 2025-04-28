@@ -429,12 +429,6 @@
     <ClInclude Include="EngineSIU\Engine\Source\Editor\UnrealEd\SceneManager.h">
       <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
     </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Editor\UnrealEd\SceneMgr.cpp">
-      <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\UnrealEd\SceneMgr.h">
-      <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
-    </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Editor\UnrealEd\UnrealEd.cpp">
       <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
     </ClCompile>
@@ -726,12 +720,6 @@
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BillboardComponent.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
     </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CubeComp.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CubeComp.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\HeightFogComponent.cpp">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
     </ClCompile>
@@ -775,12 +763,6 @@
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
     </ClCompile>
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SkySphereComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SphereComp.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SphereComp.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
     </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\StaticMeshComponent.cpp">
@@ -1262,6 +1244,17 @@
     </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Script\LuaManager.cpp" />
     <ClCompile Include="UScriptComponent.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\BoxSphereBounds.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BoxComponent.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CapsuleComponent.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SphereComponent.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ShapeComponent.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\CollisionDispatcher.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\HitResult.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapInfo.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="EngineSIU\EngineSIU.natvis" />
@@ -1319,5 +1312,16 @@
     <ClInclude Include="EngineSIU\Engine\Script\LuaBinding.h" />
     <ClInclude Include="EngineSIU\Engine\Script\LuaManager.h" />
     <ClInclude Include="UScriptComponent.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\BoxSphereBounds.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BoxComponent.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CapsuleComponent.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SphereComponent.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ShapeComponent.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\CollisionDispatcher.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\HitResult.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapInfo.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.h" />
   </ItemGroup>
 </Project>
