@@ -20,8 +20,6 @@ void UShapeComponent::UninitializeComponent()
 void UShapeComponent::InitializeComponent()
 {
     Super::InitializeComponent();
-    // TODO : 일단 테스트용 나중에 빼기
-    //FPhysicsSystem::Get().RegisterComponent(this);
 }
 
 void UShapeComponent::BeginPlay()

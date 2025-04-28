@@ -70,21 +70,6 @@ void UEditorEngine::Tick(float DeltaTime)
             if (UWorld* World = WorldContext->World())
             {
                 EditorPlayer->Tick(DeltaTime);
-                ULevel* Level = World->GetActiveLevel();
-                
-                // TODO : Test용 코드임 나중에 여기서 하면 안됨
-                FPhysicsSystem::Get().UpdateCollisions();
-                TArray CachedActors = Level->Actors;
-                if (Level)
-                {
-                    for (AActor* Actor : CachedActors)
-                    {
-                        if (Actor && Actor->IsActorTickInEditor())
-                        {
-                            Actor->Tick(DeltaTime);
-                        }
-                    }
-                }
             }
         }
         else if (WorldContext->WorldType == EWorldType::PIE)
@@ -93,11 +78,6 @@ void UEditorEngine::Tick(float DeltaTime)
             {
                 World->Tick(DeltaTime);
                 ULevel* Level = World->GetActiveLevel();
-
-                // TODO : PrePhysics 에서 이동하면 좋음
-                // TODO : DuringPhysics 에서 충돌 검사하면 좋음
-                // TODO : PostPhysics 에서 반응하면 좋음
-
                 // 지금은 그냥 충돌 검사 후 Actor Tick
                 FPhysicsSystem::Get().UpdateCollisions();
                 

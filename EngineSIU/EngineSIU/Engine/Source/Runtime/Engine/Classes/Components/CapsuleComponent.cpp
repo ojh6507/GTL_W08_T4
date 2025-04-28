@@ -121,7 +121,7 @@ bool UCapsuleComponent::CheckOverlapComponent(UShapeComponent* Other, FHitResult
 void UCapsuleComponent::HandleBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, bool bFromSweep,
     const FHitResult& SweepResult)
 {
-    UE_LOG(ELogLevel::Display, TEXT("[Overlap] %s ↔ %s at %s"), *OverlappedComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
+    UE_LOG(ELogLevel::Display, TEXT("[Overlap] %s at %s ↔ %s at %s"), *OverlappedComp->GetOwner()->GetName(),  *OverlappedComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
 }
 
 void UCapsuleComponent::HandleEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp)

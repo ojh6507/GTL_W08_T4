@@ -11,7 +11,6 @@ bool FCollisionDispatcher::OverlapBoxToBox(const UBoxComponent* LHSBox, UBoxComp
     // --- 1) OBB 파라미터 추출 ---
     // 로컬 half-extents 에 월드 스케일을 곱한 값
     const FVector LHSScale     = LHSBox->GetWorldScale3D();
-
     const FVector LHSBoxExtent = LHSBox->GetBoxExtent();
     const FVector LHSExtents   = FVector(LHSBoxExtent.X * LHSScale.X, LHSBoxExtent.Y * LHSScale.Y, LHSBoxExtent.Z * LHSScale.Z);
 
@@ -41,17 +40,29 @@ bool FCollisionDispatcher::OverlapBoxToBox(const UBoxComponent* LHSBox, UBoxComp
     Axes.SetNum(15);
     int idx = 0;
     // A 축 3개
-    for (int i = 0; i < 3; ++i) Axes[idx++] = A1[i];
+    for (int i = 0; i < 3; ++i)
+    {
+        Axes[idx++] = A1[i];
+    }
     // B 축 3개
-    for (int i = 0; i < 3; ++i) Axes[idx++] = A2[i];
+    for (int i = 0; i < 3; ++i)
+    {
+        Axes[idx++] = A2[i];
+    }
+    
     // 크로스 9개
     for (int i = 0; i < 3; ++i)
+    {
         for (int j = 0; j < 3; ++j)
         {
-            FVector cross = A1[i] ^ A2[j]; // cross product
+            FVector cross = FVector::CrossProduct(A1[i], A2[j]); // cross product
             if (!cross.IsNearlyZero())
+            {
                 Axes[idx++] = cross.GetSafeNormal();
+            }
         }
+    }
+
 
     // --- 3) 축마다 투영(overlap) 검사 ---
     float minOverlap = FLT_MAX;

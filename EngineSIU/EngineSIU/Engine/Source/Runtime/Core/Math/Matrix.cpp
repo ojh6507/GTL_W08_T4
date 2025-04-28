@@ -173,35 +173,58 @@ FMatrix FMatrix::Inverse(const FMatrix& Mat)
 
 FMatrix FMatrix::CreateRotationMatrix(float roll, float pitch, float yaw)
 {
-    float radRoll = roll * (PI / 180.0f);
-    float radPitch = pitch * (PI / 180.0f);
-    float radYaw = yaw * (PI / 180.0f);
-
-    float cosRoll = FMath::Cos(radRoll), sinRoll = FMath::Sin(radRoll);
-    float cosPitch = FMath::Cos(radPitch), sinPitch = FMath::Sin(radPitch);
-    float cosYaw = FMath::Cos(radYaw), sinYaw = FMath::Sin(radYaw);
+    const float RadFactor = PI / 180.0f;
+    
+    float Roll  = roll  * RadFactor;
+    float Pitch = pitch * RadFactor;
+    float Yaw   = yaw   * RadFactor;
+    // 부동소수점 정밀도 보정용 람다
+    auto ClampAxis = [&](float& Value)
+    {
+        // 0 근처 클램핑
+        if (FMath::IsNearlyZero(Value, KINDA_SMALL_NUMBER))
+        {
+            Value = 0.0f;
+        }
+        else if (FMath::IsNearlyEqual(Value,  1.0f, KINDA_SMALL_NUMBER))
+        {
+            Value =  1.0f;
+        }
+        else if (FMath::IsNearlyEqual(Value, -1.0f, KINDA_SMALL_NUMBER))
+        {
+            Value = -1.0f;
+        }
+    };
+    
+    // 코사인 / 사인 계산 및 클램프
+    float CosR = FMath::Cos(Roll),  SinR = FMath::Sin(Roll);
+    float CosP = FMath::Cos(Pitch), SinP = FMath::Sin(Pitch);
+    float CosY = FMath::Cos(Yaw),   SinY = FMath::Sin(Yaw);
+    ClampAxis(CosR); ClampAxis(SinR);
+    ClampAxis(CosP); ClampAxis(SinP);
+    ClampAxis(CosY); ClampAxis(SinY);
 
     // Z축 (Yaw) 회전
     FMatrix rotationZ = { {
-        { cosYaw, sinYaw, 0, 0 },
-        { -sinYaw, cosYaw, 0, 0 },
+        { CosY, SinY, 0, 0 },
+        { -SinY, CosY, 0, 0 },
         { 0, 0, 1, 0 },
         { 0, 0, 0, 1 }
     } };
 
     // Y축 (Pitch) 회전
     FMatrix rotationY = { {
-        { cosPitch, 0, sinPitch, 0 },
+        { CosP, 0, SinP, 0 },
         { 0, 1, 0, 0 },
-        { -sinPitch, 0, cosPitch, 0 },
+        { -SinP, 0, CosP, 0 },
         { 0, 0, 0, 1 }
     } };
 
     // X축 (Roll) 회전
     FMatrix rotationX = { {
         { 1, 0, 0, 0 },
-        { 0, cosRoll, -sinRoll, 0 },
-        { 0, sinRoll, cosRoll, 0 },
+        { 0, CosR, -SinR, 0 },
+        { 0, SinR, CosR, 0 },
         { 0, 0, 0, 1 }
     } };
 

@@ -25,7 +25,6 @@ AAnimPlayerActor::AAnimPlayerActor()
 
     BoxComponent = AddComponent<UBoxComponent>(TEXT("BoxComponent"));
     BoxComponent->SetupAttachment(RootComponent);
-    BoxComponent->SetRelativeLocation(FVector(5, 0, 0));
     //CapsuleComponent = AddComponent<UCapsuleComponent>(TEXT("CapsuleComponent"));
     //CapsuleComponent->SetupAttachment(RootComponent);
     // CapsuleComponent->SetRelativeLocation(FVector(5, 0, 0));
