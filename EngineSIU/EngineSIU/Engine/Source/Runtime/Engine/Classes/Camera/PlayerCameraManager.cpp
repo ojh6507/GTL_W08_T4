@@ -33,14 +33,14 @@ void APlayerCameraManager::BeginPlay()
 
 	SetActiveCamera(TEXT("MainCamera"));
     
-    UCameraShakeModifier* modifier = FObjectFactory::ConstructObject<UCameraShakeModifier>(this);
-    AddModifier(modifier);
-    //modifier->EnableModifier();
-    //modifier->StartShake(.5f, 2.0f);
+    UCameraShakeModifier* modifier = CreateModifier<UCameraShakeModifier>(EModifierType::Shake);
 
-    UCameraModifier_Interpolation* interpolationModifier = FObjectFactory::ConstructObject<UCameraModifier_Interpolation>(this);
+    AddModifier(modifier);
+
+
+    UCameraModifier_Interpolation* interpolationModifier = CreateModifier<UCameraModifier_Interpolation>(EModifierType::Move);
     AddModifier(interpolationModifier);
-    interpolationModifier->EnableModifier();
+
 
     FViewTarget FromViewTarget = GetWorld()->GetViewTarget(TEXT("StartCamera"));
     FViewTarget ToViewTarget = GetWorld()->GetViewTarget(TEXT("MainCamera"));

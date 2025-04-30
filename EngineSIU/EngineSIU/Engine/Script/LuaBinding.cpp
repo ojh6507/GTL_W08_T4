@@ -23,6 +23,7 @@
 #include "Components/UScriptComponent.h"
 #include "Camera/CameraShakeModifier.h"
 #include "Camera/PlayerCameraManager.h"
+#include <Camera/CameraModifier_Interpolation.h>
 
 // --- !!! 중요: 선행 바인딩 필요 !!! ---
 // 이 파일 내의 바인딩 함수들은 서로 의존성을 가집니다.
@@ -181,6 +182,8 @@ namespace LuaBindings
             // GetWorld (UObject의 가상 함수 오버라이드)
             // Lua: world:GetWorld() -> world (자기 자신 반환)
             "GetWorld", &UWorld::GetWorld,
+
+            "GetViewTarget", &UWorld::GetViewTarget,
 
             // GetActiveLevel (ULevel 바인딩이 필요함)
             // Lua: local level = world:GetActiveLevel()
@@ -944,6 +947,11 @@ namespace LuaBindings
                 return Cast<UCameraShakeModifier>(modifier);
             },
 
+            "GetMoveModifier", [](APlayerCameraManager* self) -> UCameraModifier_Interpolation* {
+                UCameraModifier* modifier = self->GetModifierByType(EModifierType::Move);
+                return Cast<UCameraModifier_Interpolation>(modifier);
+            },
+
             "AddModifier", &APlayerCameraManager::AddModifier,
             "RemoveModifier", &APlayerCameraManager::RemoveModifier
         );
@@ -967,6 +975,11 @@ namespace LuaBindings
             "bIsShaking", &UCameraShakeModifier::bIsShaking,
             "bIsStart", &UCameraShakeModifier::bIsStart
         );
+
+        lua.new_usertype<UCameraModifier_Interpolation>("CameraMoveModifier",
+            sol::no_constructor,
+            "Initialize", &UCameraModifier_Interpolation::Initialize
+            );
     }
 
     // --- 코어 타입 전체 바인딩 호출 함수 ---
