@@ -7,6 +7,7 @@
 #include "Math/Rotator.h"
 
 class UStaticMeshComponent;
+class UCameraComponent;
 
 // 헬퍼 함수 예시
 template<typename Getter, typename Setter>
@@ -87,6 +88,8 @@ private:
     void RenderForMaterial(UStaticMeshComponent* StaticMeshComp);
     void RenderMaterialView(UMaterial* Material);
     void RenderCreateMaterialView();
+
+    void RenderForCamera(UCameraComponent* CameraComp);
 
     static void ShellExecuteOpen(const std::filesystem::path& FilePath);
 

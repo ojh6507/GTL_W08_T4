@@ -2,10 +2,13 @@
 
 #include "CameraComponent.h"
 #include "CameraModifier.h"
+#include "CameraModifier_Interpolation.h"
 #include "Actors/CameraActor.h"
 #include "Math/JungleMath.h"
 #include "World/World.h"
 #include "CameraShakeModifier.h"
+#include "LevelEditor/SLevelEditor.h"
+#include "UnrealEd/EditorViewportClient.h"
 
 bool FViewTarget::Equal(const FViewTarget& OtherTarget) const
 {
@@ -27,11 +30,16 @@ void APlayerCameraManager::BeginPlay()
     AActor::BeginPlay();
 
 	SetActiveCamera(TEXT("MainCamera"));
-
+    
     UCameraShakeModifier* modifier = FObjectFactory::ConstructObject<UCameraShakeModifier>(this);
     AddModifier(modifier);
-    modifier->EnableModifier();
-    modifier->StartShake(.5f, 2.0f);
+    //modifier->EnableModifier();
+    //modifier->StartShake(.5f, 2.0f);
+
+    UCameraModifier_Interpolation* interpolationModifier = FObjectFactory::ConstructObject<UCameraModifier_Interpolation>(this);
+    AddModifier(interpolationModifier);
+    //interpolationModifier->EnableModifier();
+    //interpolationModifier->Initialize()
 }
 
 void APlayerCameraManager::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -101,6 +109,9 @@ void APlayerCameraManager::Tick(float DeltaTime)
 {
     AActor::Tick(DeltaTime);
 
+    if (CurCameraComp == nullptr)
+        return;
+    
     DoUpdateCamera(DeltaTime);
     CurCameraComp->GetOwner()->SetActorLocation(CameraCachePrivate.POV.Location);
     CurCameraComp->GetOwner()->SetActorRotation(CameraCachePrivate.POV.Rotation);
@@ -111,6 +122,13 @@ void APlayerCameraManager::SetActiveCamera(const FName& name)
     ActiveCameraName = name;
     ViewTarget = GetWorld()->GetViewTarget(ActiveCameraName);
     CurCameraComp = GetWorld()->GetCameraComponent(ActiveCameraName);
+
+    std::shared_ptr<FEditorViewportClient> ActiveViewporClient = GEngineLoop.GetLevelEditor()->GetActiveViewportClient();
+
+    if (ActiveViewporClient)
+    {
+        ActiveViewporClient->SetCameraComponent(CurCameraComp);
+    }
 }
 
 void APlayerCameraManager::AddModifier(UCameraModifier* modifier)

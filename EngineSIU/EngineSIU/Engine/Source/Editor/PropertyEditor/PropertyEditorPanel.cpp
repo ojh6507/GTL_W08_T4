@@ -29,6 +29,7 @@
 #include "Renderer/Shadow/DirectionalShadowMap.h"
 
 #include "../../../UScriptComponent.h"
+#include "Camera/CameraComponent.h"
 
 void PropertyEditorPanel::Render()
 {
@@ -856,6 +857,14 @@ void PropertyEditorPanel::Render()
     }
 #pragma endregion
 
+#pragma region Camera
+    if (SelectedComponent && SelectedComponent->IsA<UCameraComponent>())
+    {
+        UCameraComponent* cameraComponent = Cast<UCameraComponent>(SelectedComponent);
+        RenderForCamera(cameraComponent);
+    }
+#pragma endregion
+
     SelectedActorPrev = SelectedActor;
     SelectedComponentPrev = SelectedComponent;
 
@@ -1218,6 +1227,58 @@ void PropertyEditorPanel::RenderCreateMaterialView()
     }
 
     ImGui::End();
+}
+
+void PropertyEditorPanel::RenderForCamera(UCameraComponent* CameraComp)
+{
+        if (!CameraComp)
+        return;
+
+    if (ImGui::Begin("Camera Component Settings"))
+    {
+        // Camera Name 편집
+        {
+            // 버퍼 준비
+            char buf[128];
+            std::string nameStr = *CameraComp->CameraName;
+            strncpy_s(buf, sizeof(buf), nameStr.c_str(), _TRUNCATE);
+            buf[sizeof(buf)-1];
+            if (ImGui::InputText("Camera Name", buf, sizeof(buf)))
+            {
+                CameraComp->CameraName = FString(buf);
+            }
+        }
+            
+        // FOV
+        float fov = CameraComp->GetVeiwFovDegrees();
+        if (ImGui::DragFloat("View FOV (deg)", &fov, 0.1f, 1.0f, 179.0f))
+        {
+            CameraComp->SetViewFovDegrees(fov);
+        }
+
+        // 클리핑
+        float nearClip = CameraComp->GetNearClip();
+        if (ImGui::DragFloat("Near Clip", &nearClip, 0.01f, 0.01f, 1000.0f))
+        {
+            CameraComp->SetNearClip(nearClip);
+        }
+        float farClip = CameraComp->GetFarClip();
+        if (ImGui::DragFloat("Far Clip", &farClip, 1.0f, 1.0f, 10000.0f))
+        {
+            CameraComp->SetFarClip(farClip);
+        }
+
+
+        // Projection Mode
+        //const char* modes[] = { "Perspective", "Orthographic" };
+        //int pm = static_cast<int>(CameraComp->ProjectionMode);
+        //if (ImGui::Combo("Projection Mode", &pm, modes, IM_ARRAYSIZE(modes)))
+        //{
+            //CameraComp->ProjectionMode = static_cast<ECameraProjectionMode::Type>(pm);
+        //}
+
+        ImGui::End();
+    }
 }
 
 void PropertyEditorPanel::ShellExecuteOpen(const std::filesystem::path& FilePath)
