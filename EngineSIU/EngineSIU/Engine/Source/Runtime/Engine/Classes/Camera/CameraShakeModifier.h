@@ -18,7 +18,7 @@ public:
     bool bIsStart;
 
     FVector OriginLocation;
-    
+    FRotator OriginRotation;
     // 셰이크 시작 함수
     void StartShake(float Intensity, float Duration);
 
