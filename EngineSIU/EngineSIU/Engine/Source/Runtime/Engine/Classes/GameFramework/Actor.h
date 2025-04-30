@@ -87,9 +87,9 @@ public:
     FRotator GetActorRotation() const;
     FVector GetActorScale() const;
 
-    FVector GetActorForwardVector() const { return RootComponent ? RootComponent->GetForwardVector() : FVector::ForwardVector; }
-    FVector GetActorRightVector() const { return RootComponent ? RootComponent->GetRightVector() : FVector::RightVector; }
-    FVector GetActorUpVector() const { return RootComponent ? RootComponent->GetUpVector() : FVector::UpVector; }
+    FVector GetActorForwardVector() const { return RootComponent ? RootComponent->GetLocalForwardVector() : FVector::ForwardVector; }
+    FVector GetActorRightVector() const { return RootComponent ? RootComponent->GetLocalRightVector() : FVector::RightVector; }
+    FVector GetActorUpVector() const { return RootComponent ? RootComponent->GetLocalUpVector() : FVector::UpVector; }
 
     bool SetActorLocation(const FVector& NewLocation);
     bool SetActorRotation(const FRotator& NewRotation);

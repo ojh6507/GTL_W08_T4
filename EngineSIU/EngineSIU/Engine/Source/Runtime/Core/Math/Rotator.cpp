@@ -162,6 +162,20 @@ FVector FRotator::ToVector() const
     return FVector(FMath::DegreesToRadians(Roll), FMath::DegreesToRadians(Pitch), FMath::DegreesToRadians(Yaw));
 }
 
+FVector FRotator::RotateVector() const
+{
+    const float CP = FMath::Cos(Pitch);
+    const float SP = FMath::Sin(Pitch);
+    const float CY = FMath::Cos(Yaw);
+    const float SY = FMath::Sin(Yaw);
+
+    return FVector(
+        CP * CY,    // X축 (앞)
+        CP * SY,    // Y축 (오른쪽)
+        SP          // Z축 (위)
+    );
+}
+
 FMatrix FRotator::ToMatrix() const
 {
     return FMatrix::GetRotationMatrix(*this);

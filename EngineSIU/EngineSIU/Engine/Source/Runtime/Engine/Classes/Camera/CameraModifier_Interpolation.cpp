@@ -1,6 +1,8 @@
 #include "CameraModifier_Interpolation.h"
 
+#include "PlayerCameraManager.h"
 #include "ViewTarget.h"
+#include "World/World.h"
 
 UCameraModifier_Interpolation::UCameraModifier_Interpolation()
 {
@@ -38,14 +40,10 @@ void UCameraModifier_Interpolation::AddedToCamera(APlayerCameraManager* Camera)
 bool UCameraModifier_Interpolation::ModifyCamera(float DeltaTime, FMinimalViewInfo& InOutPOV)
 {
     UpdateAlpha(DeltaTime);
-
-    ModifyCamera(DeltaTime, InOutPOV.Location, InOutPOV.Rotation, InOutPOV.FOV, InOutPOV.Location, InOutPOV.Rotation, InOutPOV.FOV);
-
-    LuaModifyCamera(DeltaTime, InOutPOV.Location, InOutPOV.Rotation, InOutPOV.FOV, InOutPOV.Location, InOutPOV.Rotation, InOutPOV.FOV);
     
     // 경과 시간 누적
     Elapsed += DeltaTime;
-    float t = FMath::Clamp(Elapsed / TotalTime, 0.f, 1.f);
+    const float t = FMath::Clamp(Elapsed / TotalTime, 0.f, 1.f);
 
     // 위치 선형 보간
     InOutPOV.Location = FMath::Lerp(StartPOV.Location, EndPOV.Location, t);
@@ -86,6 +84,7 @@ AActor* UCameraModifier_Interpolation::GetViewTarget() const
 void UCameraModifier_Interpolation::DisableModifier(bool bImmediate)
 {
     Super::DisableModifier(bImmediate);
+    //GetWorld()->GetActiveLevel()->PlayerCameraManager->SetActiveCamera(TEXT("MainCamera"));
 }
 
 void UCameraModifier_Interpolation::EnableModifier()

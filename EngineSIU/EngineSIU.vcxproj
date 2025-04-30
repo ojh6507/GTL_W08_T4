@@ -183,6 +183,7 @@ xcopy /y /d "$(SolutionDir)$(ProjectName)\Engine\Source\FMOD_API\studio\lib\$(Pl
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier_Interpolation.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraShakeModifier.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompileData.cpp" />
@@ -334,6 +335,7 @@ xcopy /y /d "$(SolutionDir)$(ProjectName)\Engine\Source\FMOD_API\studio\lib\$(Pl
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UScriptComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier_Interpolation.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraShakeModifier.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.h" />
     <ClInclude Include="EngineSIU\Engine\Script\LuaBinding.h" />

@@ -7,6 +7,8 @@
 #include "World/World.h"
 #include <Actors/AnimPlayerActor.h>
 
+#include "Actors/CameraActor.h"
+
 UCameraComponent::~UCameraComponent()
 {
     CameraName = TEXT("MainCamera");
@@ -23,6 +25,8 @@ void UCameraComponent::BeginPlay()
 
     FViewTarget ViewTarget;
     ViewTarget.SetNewTarget(GetOwner());
+    ViewTarget.POV.Location = GetOwner()->GetActorLocation();
+    ViewTarget.POV.Rotation = GetOwner()->GetActorRotation();
     
     GetWorld()->GetActiveLevel()->RegisterCamera(CameraName, this, ViewTarget);
 
@@ -158,8 +162,8 @@ void UCameraComponent::GetCameraView(float DeltaTime, FMinimalViewInfo& DesiredV
 void UCameraComponent::UpdateViewMatrix()
 {
     View = JungleMath::CreateViewMatrix(GetWorldLocation(),
-          GetWorldLocation() + GetForwardVector(),
-           FVector{ 0.0f,0.0f, 1.0f }
+          GetWorldLocation() + GetWorldFowardVector(),
+           FVector::UpVector
        );
 }
 

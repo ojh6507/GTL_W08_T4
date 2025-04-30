@@ -1,6 +1,7 @@
 #pragma once
 #include "CameraModifier.h"
 #include "CameraTypes.h"
+#include "ViewTarget.h"
 
 struct FViewTarget;
 
@@ -21,6 +22,8 @@ public:
     void Initialize(const FViewTarget& InFrom, const FViewTarget& InTo, float InDuration);
 
 protected:
+    FViewTarget StartViewTarget;
+    FViewTarget EndViewTarget;
     /** 보간 시작 시점 POV */
     FMinimalViewInfo StartPOV;
     /** 보간 목표 시점 POV */

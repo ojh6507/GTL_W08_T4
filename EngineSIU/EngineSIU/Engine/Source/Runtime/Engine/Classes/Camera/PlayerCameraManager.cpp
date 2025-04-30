@@ -38,8 +38,11 @@ void APlayerCameraManager::BeginPlay()
 
     UCameraModifier_Interpolation* interpolationModifier = FObjectFactory::ConstructObject<UCameraModifier_Interpolation>(this);
     AddModifier(interpolationModifier);
-    //interpolationModifier->EnableModifier();
-    //interpolationModifier->Initialize()
+    interpolationModifier->EnableModifier();
+
+    FViewTarget FromViewTarget = GetWorld()->GetViewTarget(TEXT("StartCamera"));
+    FViewTarget ToViewTarget = GetWorld()->GetViewTarget(TEXT("MainCamera"));
+    interpolationModifier->Initialize(FromViewTarget, ToViewTarget, 2);
 }
 
 void APlayerCameraManager::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -113,6 +116,7 @@ void APlayerCameraManager::Tick(float DeltaTime)
         return;
     
     DoUpdateCamera(DeltaTime);
+    
     CurCameraComp->GetOwner()->SetActorLocation(CameraCachePrivate.POV.Location);
     CurCameraComp->GetOwner()->SetActorRotation(CameraCachePrivate.POV.Rotation);
 }
@@ -134,6 +138,7 @@ void APlayerCameraManager::SetActiveCamera(const FName& name)
 void APlayerCameraManager::AddModifier(UCameraModifier* modifier)
 {
     ModifierList.Add(modifier);
+    modifier->AddedToCamera(this);
 }
 
 void APlayerCameraManager::RemoveModifier(UCameraModifier* modifier)
