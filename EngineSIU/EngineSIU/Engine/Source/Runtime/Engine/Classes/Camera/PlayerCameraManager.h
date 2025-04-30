@@ -2,6 +2,7 @@
 #include "CameraTypes.h"
 #include "GameFramework/Actor.h"
 #include "ViewTarget.h"
+#include "CameraModifier.h"
 
 class APlayerController;
 class UCameraModifier;
@@ -94,6 +95,16 @@ public:
 private:
     USceneComponent* TransformComponent;
 
+    template<typename T>
+    T* CreateModifier(EModifierType Type)
+    {
+        static_assert(std::is_base_of<UCameraModifier, T>::value, "T must derive from UCameraModifier");
+
+        T* Modifier = FObjectFactory::ConstructObject<T>(this);
+        Modifier->SetModifierType(Type);
+        AddModifier(Modifier);
+        return Modifier;
+    }
 public:
     UObject* Duplicate(UObject* InOuter) override;
     void BeginPlay() override;

@@ -29,11 +29,12 @@ void APlayerCameraManager::BeginPlay()
 
     SetActiveCamera(TEXT("MainCamera"));
 
-    UCameraShakeModifier* modifier = FObjectFactory::ConstructObject<UCameraShakeModifier>(this);
-    AddModifier(modifier);
-    modifier->EnableModifier();
-    modifier->StartShake(.5f, 2.0f);
+    auto* modifier = CreateModifier<UCameraShakeModifier>(EModifierType::Shake);
+    
+    modifier->StartShake(1.f, 2.0f);
 }
+
+
 
 void APlayerCameraManager::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
@@ -118,6 +119,7 @@ void APlayerCameraManager::SetActiveCamera(const FName& name)
 
 void APlayerCameraManager::AddModifier(UCameraModifier* modifier)
 {
+    modifier->EnableModifier();
     ModifierList.Add(modifier);
 }
 
