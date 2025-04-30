@@ -37,7 +37,7 @@ void APlayerCameraManager::BeginPlay()
     UCameraShakeModifier* modifier = FObjectFactory::ConstructObject<UCameraShakeModifier>(this);
     AddModifier(modifier);
     modifier->EnableModifier();
-    modifier->StartShake(.5f, 2.0f);
+    modifier->StartShake(1.f, 2.0f);
 }
 
 void APlayerCameraManager::EndPlay(const EEndPlayReason::Type EndPlayReason)
