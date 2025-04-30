@@ -1,6 +1,7 @@
 #include "Level.h"
 #include "GameFramework/Actor.h"
 #include "UObject/Casts.h"
+#include "Components/UScriptComponent.h"
 
 
 void ULevel::InitLevel(UWorld* InOwningWorld)

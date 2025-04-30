@@ -9,7 +9,6 @@
 #include "UnrealEd/EditorViewportClient.h"
 #include "UnrealEd/UnrealEd.h"
 #include "World/World.h"
-#include "Engine/Script/LuaManager.h"
 #include "../../../../../SoundManager.h"
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -131,6 +130,7 @@ void FEngineLoop::Tick()
 
         GEngine->Tick(DeltaTime);
         LevelEditor->Tick(DeltaTime);
+        Renderer.TickRender(DeltaTime);
         Render();
         UIMgr->BeginFrame();
         UnrealEditor->Render();

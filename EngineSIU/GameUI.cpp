@@ -1,6 +1,9 @@
+
 #include "GameUI.h"
 #include "Timer.h"
 #include "SoundManager.h"
+#include "World/World.h"
+#include "Engine/Engine.h"
 #include <cstdio>
 
 GameUI::GameUI()
@@ -30,7 +33,7 @@ void GameUI::Shutdown()
 {
     if (!initialized)
         return;
-
+  
     // 타이머 정지
     if (gameTimer)
     {
