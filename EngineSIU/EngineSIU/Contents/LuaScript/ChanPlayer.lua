@@ -1,6 +1,6 @@
 local initialLocation = nil
 local moveSpeed = 5.0
-
+local PlayerCameraManager = nil
 function BeginPlay()
     Log("[Lua] BeginPlay called!")
     if self then
@@ -31,8 +31,15 @@ function OnOverlap(OtherActor)
     if OtherActor then
         gameUI:LoseLife()
         SoundManager:PlaySound("Hit")
-        Log("[Lua] Overlapped with self: " .. Otherself:GetName():ToString())
-         local otherLoc = Otherself:GetActorLocation()
+         local otherLoc = OtherActor:GetActorLocation()
+         if PlayerCameraManager == nil then 
+            local world = self:GetWorld()
+            PlayerCameraManager = world:GetPlayerCameraManager()
+        end
+        if PlayerCameraManager then
+            local FadeColor = FLinearColor(0.5,0,0,1)
+            PlayerCameraManager:StartCameraFade(0, 1, 1.2,FadeColor, false, false)
+        end
     else
        
         Log("[Lua] Overlapped with nil Actor?")
