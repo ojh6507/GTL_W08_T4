@@ -8,7 +8,7 @@ FLuaManager::FLuaManager() : initialized(false) {}
 
 FLuaManager::~FLuaManager() 
 {
-    //Cleanup();
+    Cleanup();
 }
 
 sol::state* FLuaManager::GetState()
@@ -51,7 +51,6 @@ bool FLuaManager::Initialize()
 
 void FLuaManager::Cleanup()
 {
-    // sol::state는 자동으로 정리됨
     initialized = false;
     if (lua)
     {

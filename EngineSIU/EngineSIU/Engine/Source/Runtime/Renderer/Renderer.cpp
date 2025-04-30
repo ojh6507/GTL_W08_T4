@@ -168,6 +168,9 @@ void FRenderer::CreateConstantBuffers()
 
     UINT DepthMapData = sizeof(struct FDepthMapData);
     BufferManager->CreateBufferGeneric<struct FDepthMapData>("FDepthMapData", nullptr, DepthMapData, D3D11_BIND_CONSTANT_BUFFER, D3D11_USAGE_DYNAMIC, D3D11_CPU_ACCESS_WRITE);
+  
+    UINT CompositingParamsSize = sizeof(struct FCompositingParams);
+    BufferManager->CreateBufferGeneric<struct FCompositingParams>("FCompositingParams", nullptr, CompositingParamsSize, D3D11_BIND_CONSTANT_BUFFER, D3D11_USAGE_DYNAMIC, D3D11_CPU_ACCESS_WRITE);
 
     // TODO: 함수로 분리
     ID3D11Buffer* ObjectBuffer = BufferManager->GetConstantBuffer(TEXT("FObjectConstantBuffer"));
@@ -311,6 +314,7 @@ void FRenderer::PrepareRenderPass()
     EditorBillboardRenderPass->PrepareRender();
     UpdateLightBufferPass->PrepareRender();
     FogRenderPass->PrepareRender();
+    PostProcessCompositingPass->PrepareRender();
     EditorRenderPass->PrepareRender();
 }
 
