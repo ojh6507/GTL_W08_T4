@@ -36,35 +36,8 @@ struct FMinimalViewInfo
     /** 화면 비율 조정을 반영하기 전의 원래 시야각 */
     float DesiredFOV;
 
-    /** “IsFirstPerson” 태그가 붙은 프리미티브에 사용할 수평 시야각(도 단위) */
-    float FirstPersonFOV;
-
-    /** 
-     * “IsFirstPerson” 태그가 붙은 프리미티브에 적용할 스케일.
-     * 씬과 겹치지 않도록 카메라 쪽으로 축소하여 렌더링할 때 사용.
-     */
-    float FirstPersonScale;
-
-    /** 직교 모드에서 보이는 뷰 너비(월드 단위). 원근 모드에서는 무시됨 */
-    float OrthoWidth;
-
-    /** 직교 카메라 Near/Far 평면을 자동 계산할지 여부 */
-    bool bAutoCalculateOrthoPlanes;
-
     /** Near/Far 평면을 수동으로 조정. 양수→FarPlane 쪽 확장, 음수→NearPlane 쪽 이동 */
     float AutoPlaneShift;
-
-    /** 클리핑 및 라이트 아티팩트를 방지하기 위해 Near/Far 평면 및 뷰 원점을 자동 보정할지 여부 */
-    bool bUpdateOrthoPlanes;
-
-    /** bUpdateOrthoPlanes가 true일 때, 카메라 높이를 뷰타겟 거리로 대신 사용할지 여부 */
-    bool bUseCameraHeightAsViewTarget;
-
-    /** 직교 모드에서 Near 평면 거리(월드 단위) */
-    float OrthoNearClipPlane;
-
-    /** 직교 모드에서 Far 평면 거리(월드 단위) */
-    float OrthoFarClipPlane;
 
     /** 원근 모드에서 Near 평면 거리(월드 단위). 음수→GNearClippingPlane 전역값 사용 */
     float PerspectiveNearClipPlane;
@@ -73,13 +46,10 @@ struct FMinimalViewInfo
     float AspectRatio;
 
     // 화면 비율 축(axis) 제약 방식
-    std::optional<EAspectRatioAxisConstraint> AspectRatioConstraint;
+    std::optional<EAspectRatioAxisConstraint> AspectRatioAxisConstraint;
 
     /** 화면 비율이 다를 때 검은 여백(레터박스)을 추가할지 여부 */
     uint32 bConstrainAspectRatio; 
-
-    /** true면 “IsFirstPerson” 태그 프리미티브에 FirstPersonFOV와 FirstPersonScale 적용 */
-    uint32 bUseFirstPersonParameters;
 
     /** true면 LOD 선택 시 시야각을 고려 */
     uint32 bUseFieldOfViewForLOD;
@@ -117,19 +87,10 @@ public:
         , Rotation()
         , FOV(90.0f)
         , DesiredFOV(90.0f)
-        , FirstPersonFOV(90.0f)
-        , FirstPersonScale(1.0f)
-        , OrthoWidth(512.0f)
-        , bAutoCalculateOrthoPlanes(true)
         , AutoPlaneShift(0.0f)
-        , bUpdateOrthoPlanes(false)
-        , bUseCameraHeightAsViewTarget(false)
-        , OrthoNearClipPlane(0.0f)
-        , OrthoFarClipPlane(2097152.0)
         , PerspectiveNearClipPlane(-1.0f)
         , AspectRatio(1.33333333f)
         , bConstrainAspectRatio(false)
-        , bUseFirstPersonParameters(false)
         , bUseFieldOfViewForLOD(true)
         , ProjectionMode(ECameraProjectionMode::Perspective)
         , PostProcessBlendWeight(0.0f)

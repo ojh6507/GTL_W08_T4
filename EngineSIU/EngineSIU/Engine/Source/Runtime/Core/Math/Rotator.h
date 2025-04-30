@@ -66,4 +66,14 @@ struct FRotator
     
     FString ToString() const;
     bool InitFromString(const FString& InSourceString);
+
+    /**
+     * Clamps an angle to the range of [0, 360).
+     *
+     * @param Angle The angle to clamp.
+     * @return The clamped angle.
+     */
+    static float ClampAxis( float Angle );
+
+    static float NormalizeAxis( float Angle );
 };

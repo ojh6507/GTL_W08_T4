@@ -39,6 +39,7 @@ UObject* UWorld::Duplicate(UObject* InOuter)
 
 void UWorld::Tick(float DeltaTime)
 {
+    TimeSeconds += DeltaTime;
     // SpawnActor()에 의해 Actor가 생성된 경우, 여기서 BeginPlay 호출
     for (AActor* Actor : PendingBeginPlayActors)
     {
@@ -49,6 +50,7 @@ void UWorld::Tick(float DeltaTime)
 
 void UWorld::BeginPlay()
 {
+    TimeSeconds = 0.f;
     TArray <AActor*> CpyActors = ActiveLevel->Actors;
     for (AActor* Actor : CpyActors)
     {
