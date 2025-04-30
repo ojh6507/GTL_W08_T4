@@ -23,6 +23,7 @@ function Tick(dt)
     if not PlayerCameraManager then
         local world = self:GetWorld()
        PlayerCameraManager = world:GetPlayerCameraManager()
+       PlayerCameraManager:SetActiveLetterBox(true)
        IsWorldInit = true
 
        local moveModifier = PlayerCameraManager:GetMoveModifier()
@@ -58,7 +59,7 @@ function Tick(dt)
         if textComp then
         textComp:SetText(text2)
         local FadeColor = FLinearColor(0,0,0,1)           
-        PlayerCameraManager:StartCameraFade(1, 0, 9.5, FadeColor, false, false)
+        PlayerCameraManager:StartCameraFade(1, 0, 5.5, FadeColor, false, false)
 
         end
     end)
@@ -70,16 +71,20 @@ function Tick(dt)
    
         if textComp then
         textComp:SetText(test3)
+        local FadeColor = FLinearColor(0,0,0,1)           
+        PlayerCameraManager:StartCameraFade(0, 1, 4.8, FadeColor, false, false)
         
         end
     end)
    
+
     Delay(16, function()
         moveModifier:Initialize(RunJ, Main, 1)
         textComp = self:GetTextComponent() -- TextComponent 인스턴스 얻기
-   
         if textComp then
         textComp:SetText("")
+
+        PlayerCameraManager:SetActiveLetterBox(false)
         end
     end)
 

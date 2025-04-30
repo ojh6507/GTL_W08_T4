@@ -1034,7 +1034,8 @@ namespace LuaBindings
             },
 
             "AddModifier", &APlayerCameraManager::AddModifier,
-            "RemoveModifier", &APlayerCameraManager::RemoveModifier
+            "RemoveModifier", &APlayerCameraManager::RemoveModifier,
+            "SetActiveLetterBox", & APlayerCameraManager::SetActiveLetterBox
         );
 
         lua.new_enum("EModifierType",
