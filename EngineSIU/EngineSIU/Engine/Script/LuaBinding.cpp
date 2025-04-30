@@ -21,6 +21,7 @@
 #include "World/World.h"
 #include "PropertyEditor/ControlEditorPanel.h"
 #include "Components/UScriptComponent.h"
+#include <Camera/CameraShakeModifier.h>
 
 // --- !!! 중요: 선행 바인딩 필요 !!! ---
 // 이 파일 내의 바인딩 함수들은 서로 의존성을 가집니다.
@@ -782,6 +783,17 @@ namespace LuaBindings
         auto control = std::dynamic_pointer_cast<ControlEditorPanel>(controlPanel);
 
         lua["ControlEditorPanelInstance"] = control;
+    }
+
+    void BindCameraShakeModifier(sol::state& lua)
+    {
+        lua.new_usertype<UCameraShakeModifier>("CameraShakeModifier",
+            "StartShake", &UCameraShakeModifier::StartShake
+        );
+
+        // 필요시 인스턴스 등록 예시 (선택적)
+        // auto modifier = GetModifierFromSomewhere();
+        // lua["CameraShakeModifierInstance"] = modifier;
     }
 
     // --- 코어 타입 전체 바인딩 호출 함수 ---
