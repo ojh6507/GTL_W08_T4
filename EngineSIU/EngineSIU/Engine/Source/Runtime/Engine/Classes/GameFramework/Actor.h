@@ -58,8 +58,8 @@ public:
      */
     template <typename T>
         requires std::derived_from<T, UActorComponent>
-    T* AddComponent(FName InName);
-    UActorComponent* AddComponent(UClass* InClass, FName InName);
+    T* AddComponent(FName InName, bool bManualAttachment = false);
+    UActorComponent* AddComponent(UClass* InClass, FName InName, bool bManualAttachment = false);
 
     /** Actor가 가지고 있는 Component를 제거합니다. */
     void RemoveOwnedComponent(UActorComponent* Component);
@@ -143,9 +143,9 @@ public:
 
 template <typename T>
     requires std::derived_from<T, UActorComponent>
-T* AActor::AddComponent(FName InName)
+T* AActor::AddComponent(FName InName, bool bManualAttachment)
 {
-    return Cast<T>(AddComponent(T::StaticClass(), InName));
+    return Cast<T>(AddComponent(T::StaticClass(), InName, bManualAttachment));
 }
 
 template <typename T> requires std::derived_from<T, UActorComponent>
