@@ -24,6 +24,7 @@
 #include "Components/UScriptComponent.h"
 #include "Camera/CameraShakeModifier.h"
 #include "Camera/PlayerCameraManager.h"
+#include <Camera/CameraModifier_Interpolation.h>
 
 // --- !!! 중요: 선행 바인딩 필요 !!! ---
 // 이 파일 내의 바인딩 함수들은 서로 의존성을 가집니다.
@@ -182,6 +183,8 @@ namespace LuaBindings
             // GetWorld (UObject의 가상 함수 오버라이드)
             // Lua: world:GetWorld() -> world (자기 자신 반환)
             "GetWorld", &UWorld::GetWorld,
+
+            "GetViewTarget", &UWorld::GetViewTarget,
 
             // GetActiveLevel (ULevel 바인딩이 필요함)
             // Lua: local level = world:GetActiveLevel()
@@ -1015,11 +1018,18 @@ namespace LuaBindings
         lua.new_usertype<APlayerCameraManager>("PlayerCameraManager",
             sol::no_constructor, // Lua에서 직접 생성 금지
 
+            "StartCameraFade", &APlayerCameraManager::StartCameraFade,
+           
             // 모디파이어 관련 메서드
 
             "GetShakeModifier", [](APlayerCameraManager* self) -> UCameraShakeModifier* {
                 UCameraModifier* modifier = self->GetModifierByType(EModifierType::Shake);
                 return Cast<UCameraShakeModifier>(modifier);
+            },
+
+            "GetMoveModifier", [](APlayerCameraManager* self) -> UCameraModifier_Interpolation* {
+                UCameraModifier* modifier = self->GetModifierByType(EModifierType::Move);
+                return Cast<UCameraModifier_Interpolation>(modifier);
             },
 
             "AddModifier", &APlayerCameraManager::AddModifier,
@@ -1030,6 +1040,7 @@ namespace LuaBindings
             "Shake", EModifierType::Shake
         );
 
+       
 
         lua.new_usertype<UCameraShakeModifier>("CameraShakeModifier",
             sol::no_constructor, // Lua에서 직접 생성 금지
@@ -1044,6 +1055,11 @@ namespace LuaBindings
             "bIsShaking", &UCameraShakeModifier::bIsShaking,
             "bIsStart", &UCameraShakeModifier::bIsStart
         );
+
+        lua.new_usertype<UCameraModifier_Interpolation>("CameraMoveModifier",
+            sol::no_constructor,
+            "Initialize", &UCameraModifier_Interpolation::Initialize
+            );
     }
  
     // --- UActorComponent 바인딩 ---

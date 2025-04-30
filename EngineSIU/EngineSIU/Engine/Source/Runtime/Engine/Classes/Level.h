@@ -3,6 +3,7 @@
 #include "UObject/ObjectMacros.h"
 #include <Camera/ViewTarget.h>
 
+class APlayerCameraManager;
 class AActor;
 class UWorld;
 class UCameraComponent;
@@ -30,4 +31,6 @@ public:
     TMap<FName, UCameraComponent*> Cameras;
     TMap<FName, FViewTarget> ViewTargets;
     UWorld* OwningWorld;
+    
+    APlayerCameraManager* PlayerCameraManager = nullptr;
 };

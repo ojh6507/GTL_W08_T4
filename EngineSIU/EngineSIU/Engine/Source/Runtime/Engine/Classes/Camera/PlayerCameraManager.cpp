@@ -2,10 +2,13 @@
 
 #include "CameraComponent.h"
 #include "CameraModifier.h"
+#include "CameraModifier_Interpolation.h"
 #include "Actors/CameraActor.h"
 #include "Math/JungleMath.h"
 #include "World/World.h"
 #include "CameraShakeModifier.h"
+#include "LevelEditor/SLevelEditor.h"
+#include "UnrealEd/EditorViewportClient.h"
 
 bool FViewTarget::Equal(const FViewTarget& OtherTarget) const
 {
@@ -15,7 +18,7 @@ bool FViewTarget::Equal(const FViewTarget& OtherTarget) const
 
 APlayerCameraManager::APlayerCameraManager()
 {
-    StartCameraFade(0, 1, 3, FLinearColor(1, 0, 0, 1));
+    StartCameraFade(0, 1, 3, FLinearColor(0, 0, 0, 1));
 }
 
 UObject* APlayerCameraManager::Duplicate(UObject* InOuter)
@@ -27,11 +30,21 @@ void APlayerCameraManager::BeginPlay()
 {
     AActor::BeginPlay();
 
-    SetActiveCamera(TEXT("MainCamera"));
 
-    auto* modifier = CreateModifier<UCameraShakeModifier>(EModifierType::Shake);
-   
+	SetActiveCamera(TEXT("MainCamera"));
     
+    UCameraShakeModifier* modifier = CreateModifier<UCameraShakeModifier>(EModifierType::Shake);
+
+    AddModifier(modifier);
+
+
+    UCameraModifier_Interpolation* interpolationModifier = CreateModifier<UCameraModifier_Interpolation>(EModifierType::Move);
+    AddModifier(interpolationModifier);
+
+
+    FViewTarget FromViewTarget = GetWorld()->GetViewTarget(TEXT("StartCamera"));
+    FViewTarget ToViewTarget = GetWorld()->GetViewTarget(TEXT("MainCamera"));
+    interpolationModifier->Initialize(FromViewTarget, ToViewTarget, 2);
 }
 
 
@@ -103,9 +116,12 @@ void APlayerCameraManager::Tick(float DeltaTime)
 {
     AActor::Tick(DeltaTime);
 
-    if (!CurCameraComp) return;
 
+    if (CurCameraComp == nullptr)
+        return;
+    
     DoUpdateCamera(DeltaTime);
+    
     CurCameraComp->GetOwner()->SetActorLocation(CameraCachePrivate.POV.Location);
     CurCameraComp->GetOwner()->SetActorRotation(CameraCachePrivate.POV.Rotation);
 }
@@ -115,12 +131,20 @@ void APlayerCameraManager::SetActiveCamera(const FName& name)
     ActiveCameraName = name;
     ViewTarget = GetWorld()->GetViewTarget(ActiveCameraName);
     CurCameraComp = GetWorld()->GetCameraComponent(ActiveCameraName);
+
+    std::shared_ptr<FEditorViewportClient> ActiveViewporClient = GEngineLoop.GetLevelEditor()->GetActiveViewportClient();
+
+    if (ActiveViewporClient)
+    {
+        ActiveViewporClient->SetCameraComponent(CurCameraComp);
+    }
 }
 
 void APlayerCameraManager::AddModifier(UCameraModifier* modifier)
 {
     modifier->EnableModifier();
     ModifierList.Add(modifier);
+    modifier->AddedToCamera(this);
 }
 
 void APlayerCameraManager::RemoveModifier(UCameraModifier* modifier)

@@ -319,3 +319,83 @@ FMatrix JungleMath::CreateRotationMatrix(const FVector& rotation)
     }
     return result;
 }
+
+FQuat FQuat::Slerp_NotNormalized(const FQuat& Quat1, const FQuat& Quat2, float Slerp)
+{
+    // Get cosine of angle between quats.
+    const float RawCosom =
+        Quat1.X * Quat2.X +
+        Quat1.Y * Quat2.Y +
+        Quat1.Z * Quat2.Z +
+        Quat1.W * Quat2.W;
+    // Unaligned quats - compensate, results in taking shorter route.
+    const float Cosom = FMath::FloatSelect(RawCosom, RawCosom, -RawCosom);
+
+    float Scale0, Scale1;
+
+    if (Cosom < float(0.9999f))
+    {
+        const float Omega = FMath::Acos(Cosom);
+        const float InvSin = float(1.f) / FMath::Sin(Omega);
+        Scale0 = FMath::Sin((float(1.f) - Slerp) * Omega) * InvSin;
+        Scale1 = FMath::Sin(Slerp * Omega) * InvSin;
+    }
+    else
+    {
+        // Use linear interpolation.
+        Scale0 = float(1.0f) - Slerp;
+        Scale1 = Slerp;
+    }
+
+    // In keeping with our flipped Cosom:
+    Scale1 = FMath::FloatSelect(RawCosom, Scale1, -Scale1);
+
+    FQuat Result;
+
+    Result.X = Scale0 * Quat1.X + Scale1 * Quat2.X;
+    Result.Y = Scale0 * Quat1.Y + Scale1 * Quat2.Y;
+    Result.Z = Scale0 * Quat1.Z + Scale1 * Quat2.Z;
+    Result.W = Scale0 * Quat1.W + Scale1 * Quat2.W;
+
+    return Result;
+}
+
+FVector FMath::VInterpTo(const FVector& Current, const FVector& Target, float DeltaTime, float InterpSpeed)
+{
+    // If no interp speed, jump to target value
+    if (InterpSpeed <= 0.f)
+    {
+        return Target;
+    }
+
+    // Distance to reach
+    const FVector Dist = Target - Current;
+
+    // If distance is too small, just set the desired location
+    if (Dist.LengthSquared() < KINDA_SMALL_NUMBER)
+    {
+        return Target;
+    }
+
+    // Delta Move, Clamp so we do not over shoot.
+    const FVector DeltaMove = Dist * FMath::Clamp<float>(InterpSpeed * DeltaTime, 0.f, 1.f);
+
+    return Current + DeltaMove;
+}
+
+FQuat FMath::QInterpTo(const FQuat& Current, const FQuat& Target, float DeltaTime, float InterpSpeed)
+{
+    // If no interp speed, jump to target value
+    if (InterpSpeed <= 0.f)
+    {
+        return Target;
+    }
+
+    // If the values are nearly equal, just return Target and assume we have reached our destination.
+    if (Current.Equals(Target))
+    {
+        return Target;
+    }
+
+    return FQuat::Slerp(Current, Target, FMath::Clamp<float>(InterpSpeed * DeltaTime, 0.f, 1.f));
+}

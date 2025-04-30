@@ -20,9 +20,11 @@ public:
     virtual int CheckRayIntersection(FVector& InRayOrigin, FVector& InRayDirection, float& pfNearHitDistance);
     virtual void DestroyComponent() override;
 
-    virtual FVector GetForwardVector();
-    virtual FVector GetRightVector();
-    virtual FVector GetUpVector();
+    virtual FVector GetWorldFowardVector();
+    
+    virtual FVector GetLocalForwardVector();
+    virtual FVector GetLocalRightVector();
+    virtual FVector GetLocalUpVector();
     
     void AddLocation(const FVector& InAddValue);
     void AddRotation(const FVector& InAddValue);
@@ -37,6 +39,10 @@ public:
     void SetRelativeLocation(const FVector& InNewLocation) { RelativeLocation = InNewLocation; }
     void SetRelativeRotation(const FRotator& InNewRotation) { RelativeRotation = InNewRotation; }
     void SetRelativeScale3D(const FVector& NewScale) { RelativeScale3D = NewScale; }
+
+    void SetWorldLocation(const FVector& InNewLocation);
+    void SetWorldRotation(const FRotator& InNewRotation);
+    void SetWorldScale3D(const FVector& NewScale);
     
     FVector GetRelativeLocation() const { return RelativeLocation; }
     FRotator GetRelativeRotation() const { return RelativeRotation; }
@@ -51,6 +57,12 @@ public:
     FMatrix GetTranslationMatrix() const;
 
     FMatrix GetWorldMatrix() const;
+
+    /** Return rotation of the component, in world space */
+    FORCEINLINE FRotator GetComponentRotation() const
+    {
+        return GetWorldRotation().ToVector().GetSafeNormal();
+    }
     
     void SetupAttachment(USceneComponent* InParent);
     bool IsAttachedTo(const USceneComponent* TestComp) const;

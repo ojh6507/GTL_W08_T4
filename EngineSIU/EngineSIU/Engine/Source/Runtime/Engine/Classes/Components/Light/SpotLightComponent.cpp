@@ -7,7 +7,7 @@ USpotLightComponent::USpotLightComponent()
 {
     SpotLightInfo.Position = GetWorldLocation();
     SpotLightInfo.Radius = 30.0f;
-    SpotLightInfo.Direction = USceneComponent::GetForwardVector();
+    SpotLightInfo.Direction = USceneComponent::GetLocalForwardVector();
     SpotLightInfo.LightColor = FLinearColor(1.0f, 1.0f, 1.0f, 1.0f);
     SpotLightInfo.Intensity = 1000.0f;
     SpotLightInfo.Type = ELightType::SPOT_LIGHT;
@@ -68,7 +68,7 @@ FVector USpotLightComponent::GetDirection()
 {
     return GetWorldRotation()
            .ToQuaternion()
-           .RotateVector(GetForwardVector());
+           .RotateVector(GetLocalForwardVector());
 }
 
 const FSpotLightInfo& USpotLightComponent::GetSpotLightInfo() const

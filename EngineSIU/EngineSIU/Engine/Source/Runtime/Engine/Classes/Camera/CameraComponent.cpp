@@ -7,8 +7,11 @@
 #include "World/World.h"
 #include <Actors/AnimPlayerActor.h>
 
+#include "Actors/CameraActor.h"
+
 UCameraComponent::~UCameraComponent()
 {
+    CameraName = TEXT("MainCamera");
 }
 
 void UCameraComponent::UninitializeComponent()
@@ -22,9 +25,9 @@ void UCameraComponent::BeginPlay()
 
     FViewTarget ViewTarget;
     ViewTarget.SetNewTarget(GetOwner());
-
-    CameraName = TEXT("MainCamera");
-
+    ViewTarget.POV.Location = GetOwner()->GetActorLocation();
+    ViewTarget.POV.Rotation = GetOwner()->GetActorRotation();
+    
     GetWorld()->GetActiveLevel()->RegisterCamera(CameraName, this, ViewTarget);
 
     UpdateViewMatrix();
@@ -52,6 +55,7 @@ UObject* UCameraComponent::Duplicate(UObject* InOuter)
 
         NewComponent->View = View;
         NewComponent->Projection = Projection;
+        NewComponent->CameraName = CameraName;
     }
     return NewComponent;
 }
@@ -62,6 +66,7 @@ void UCameraComponent::GetProperties(TMap<FString, FString>& OutProperties) cons
     OutProperties.Add(TEXT("ViewFOV"), FString::Printf(TEXT("%f"), ViewFOV));
     OutProperties.Add(TEXT("NearClip"), FString::Printf(TEXT("%f"), NearClip));
     OutProperties.Add(TEXT("FarClip"), FString::Printf(TEXT("%f"), FarClip));
+    OutProperties.Add(TEXT("CameraName"), CameraName);
 }
 
 void UCameraComponent::SetProperties(const TMap<FString, FString>& InProperties)
@@ -82,6 +87,11 @@ void UCameraComponent::SetProperties(const TMap<FString, FString>& InProperties)
     if (TempStr)
     {
         FarClip = FString::ToFloat(*TempStr);
+    }
+    TempStr = InProperties.Find(TEXT("CameraName"));
+    if (TempStr)
+    {
+        CameraName = *TempStr;
     }
 }
 
@@ -152,8 +162,8 @@ void UCameraComponent::GetCameraView(float DeltaTime, FMinimalViewInfo& DesiredV
 void UCameraComponent::UpdateViewMatrix()
 {
     View = JungleMath::CreateViewMatrix(GetWorldLocation(),
-          GetWorldLocation() + GetForwardVector(),
-           FVector{ 0.0f,0.0f, 1.0f }
+          GetWorldLocation() + GetWorldFowardVector(),
+           FVector::UpVector
        );
 }
 

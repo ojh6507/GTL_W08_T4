@@ -9,6 +9,7 @@ class APlayerCameraManager;
 enum class EModifierType 
 {
     Shake,
+    Move,
 };
 
 class UCameraModifier : public UObject
