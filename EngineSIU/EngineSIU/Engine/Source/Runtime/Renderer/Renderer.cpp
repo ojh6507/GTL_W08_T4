@@ -314,12 +314,8 @@ void FRenderer::PrepareRenderPass()
     EditorBillboardRenderPass->PrepareRender();
     UpdateLightBufferPass->PrepareRender();
     FogRenderPass->PrepareRender();
+    PostProcessCompositingPass->PrepareRender();
     EditorRenderPass->PrepareRender();
-}
-
-void FRenderer::TickRender(float DeltaTime)
-{
-    PostProcessCompositingPass->Tick(DeltaTime);
 }
 
 void FRenderer::ClearRenderArr()

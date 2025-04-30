@@ -5,7 +5,11 @@
 #include "RendererHelpers.h"
 #include "UnrealClient.h"
 #include "D3D11RHI/DXDShaderManager.h"
+#include "Camera/PlayerCameraManager.h"
 #include "UnrealEd/EditorViewportClient.h"
+#include "UObject/UObjectIterator.h"
+#include "UObject/Casts.h"
+#include "Engine/Engine.h"
 
 FPostProcessCompositingPass::FPostProcessCompositingPass()
     : BufferManager(nullptr)
@@ -39,72 +43,26 @@ void FPostProcessCompositingPass::Initialize(FDXDBufferManager* InBufferManager,
     SamplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
     Graphics->Device->CreateSamplerState(&SamplerDesc, &Sampler);
-    StartFadeIn(60);
+
+
 }
 
 void FPostProcessCompositingPass::PrepareRender()
 {
-}
-void FPostProcessCompositingPass::Tick(float DeltaTime)
-{
-    UpdateFade(DeltaTime);
-}
-
-void FPostProcessCompositingPass::StartFadeIn(float Duration)
-{
-    if (Duration <= 0.0f) 
+    PlayerCameraManagers.Empty();
+    for (const auto iter : TObjectRange<APlayerCameraManager>())
     {
-        CurrentFadeAlpha = 1.0f;
-        bIsFading = false;
-    }
-    else 
-    {
-        StartFadeAlpha = CurrentFadeAlpha;
-        TargetFadeAlpha = 1.0f;
-        FadeDuration = Duration;
-        TimeSinceFadeStart = 0.0f;
-        bIsFading = true;
-    }
-}
-
-void FPostProcessCompositingPass::StartFadeOut(float Duration)
-{
-    if (Duration <= 0.0f) 
-    {
-        CurrentFadeAlpha = 0.0f;
-        bIsFading = false;
-    }
-    else 
-    {
-        StartFadeAlpha = CurrentFadeAlpha;
-        TargetFadeAlpha = 0.0f;
-        FadeDuration = Duration;
-        TimeSinceFadeStart = 0.0f;
-        bIsFading = true;
-    }
-}
-void FPostProcessCompositingPass::UpdateFade(float DeltaTime)
-{
-    if (!bIsFading) 
-    {
-        return;
+        if (iter->GetWorld() == GEngine->ActiveWorld)
+        {
+            PlayerCameraManagers.Add(iter);
+        }
     }
 
-    TimeSinceFadeStart += DeltaTime;
-    float FadeProgress = FMath::Clamp(TimeSinceFadeStart / FadeDuration, 0.0f, 1.0f);
-    float EasedProgress = FadeProgress * FadeProgress;
-    CurrentFadeAlpha = FMath::Lerp(StartFadeAlpha, TargetFadeAlpha, EasedProgress);
-
-    if (FadeProgress >= 1.0f) 
-    {
-        bIsFading = false;
-        CurrentFadeAlpha = TargetFadeAlpha; // 완료 시 목표 값으로 정확히 설정
-    }
 }
 
 void FPostProcessCompositingPass::Render(const std::shared_ptr<FEditorViewportClient>& ViewportClient)
 {
-    
+
     // --- 1. 유효성 검사 ---
     FViewportResource* ViewportResource = ViewportClient ? ViewportClient->GetViewportResource() : nullptr;
     if (!ViewportResource || !Graphics || !Graphics->DeviceContext || !ShaderManager || !Sampler || !BufferManager)
@@ -129,7 +87,7 @@ void FPostProcessCompositingPass::Render(const std::shared_ptr<FEditorViewportCl
     // --- 2. 목표 크기 및 종횡비 계산 ---
     const float TargetWidth = static_cast<float>(TargetRenderTargetRHI->GetSizeX());
     const float TargetHeight = static_cast<float>(TargetRenderTargetRHI->GetSizeY());
- 
+
     if (TargetWidth <= 0 || TargetHeight <= 0)
     {
         return;
@@ -151,25 +109,25 @@ void FPostProcessCompositingPass::Render(const std::shared_ptr<FEditorViewportCl
     {
         float BaseRenderedWidth = TargetWidth;
         float BaseRenderedHeight = TargetHeight;
-        if (SourceAspectRatio > TargetAspectRatio) 
+        if (SourceAspectRatio > TargetAspectRatio)
         {
             BaseRenderedHeight = TargetWidth / SourceAspectRatio;
         }
-        else if (SourceAspectRatio < TargetAspectRatio) 
+        else if (SourceAspectRatio < TargetAspectRatio)
         {
             BaseRenderedWidth = TargetHeight * SourceAspectRatio;
         }
         float FinalRenderedWidth = BaseRenderedWidth * ContentAreaScale;
         float FinalRenderedHeight = BaseRenderedHeight * ContentAreaScale;
-       
+
         float FinalOffsetX = (TargetWidth - FinalRenderedWidth) * 0.5f;
         float FinalOffsetY = (TargetHeight - FinalRenderedHeight) * 0.5f;
 
         ShaderParams.LetterboxScale = FVector2D(FinalRenderedWidth / TargetWidth, FinalRenderedHeight / TargetHeight); // <<< 멤버 이름 변경
-        
+
         float CenterX_Pixels = FinalOffsetX + FinalRenderedWidth * 0.5f;
         float CenterY_Pixels = FinalOffsetY + FinalRenderedHeight * 0.5f;
-        
+
         ShaderParams.LetterboxOffset = FVector2D((CenterX_Pixels / TargetWidth) * 2.0f - 1.0f, 1.0f - (CenterY_Pixels / TargetHeight) * 2.0f); // <<< 멤버 이름 변경
     }
     else
@@ -177,11 +135,24 @@ void FPostProcessCompositingPass::Render(const std::shared_ptr<FEditorViewportCl
         ShaderParams.LetterboxScale = FVector2D(1.0f, 1.0f);
         ShaderParams.LetterboxOffset = FVector2D(0.0f, 0.0f);
     }
+    if (PlayerCameraManagers.Num())
+    {
 
-    ShaderParams.FadeAlpha = CurrentFadeAlpha;
-    ShaderParams.Padding = 0.0f;
+        for (APlayerCameraManager* PlyaerCameraManager : PlayerCameraManagers)
+        {
+            ShaderParams.FadeAlpha = PlyaerCameraManager->GetCurrentFadeAmount();
 
-    // --- 5. 상수 버퍼 업데이트 및 바인딩 ---
+            ShaderParams.Padding = 0.0f;
+
+            // --- 5. 상수 버퍼 업데이트 및 바인딩 ---
+        }
+    }
+    else
+    {
+        ShaderParams.FadeAlpha = 1;
+
+        ShaderParams.Padding = 0.0f;
+    }
     BufferManager->UpdateConstantBuffer<FCompositingParams>("FCompositingParams", ShaderParams);
     BufferManager->BindConstantBuffer(TEXT("FCompositingParams"), CompositingParamsConstantBufferSlot, EShaderStage::Pixel);
 
@@ -204,7 +175,7 @@ void FPostProcessCompositingPass::Render(const std::shared_ptr<FEditorViewportCl
     // 6c. 셰이더 설정 (수정된 PostProcessCompositing 셰이더)
     ID3D11VertexShader* VertexShader = ShaderManager->GetVertexShaderByKey(L"PostProcessCompositing");
     ID3D11PixelShader* PixelShader = ShaderManager->GetPixelShaderByKey(L"PostProcessCompositing");
-    if (!VertexShader || !PixelShader) 
+    if (!VertexShader || !PixelShader)
     {
         Ctx->OMSetRenderTargets(0, nullptr, nullptr); return;
     }
@@ -252,11 +223,6 @@ void FPostProcessCompositingPass::SetLetterboxingEnabled(bool bEnabled)
 }
 
 void FPostProcessCompositingPass::SetLetterboxScale(float InScale)
-{
-
-}
-
-void FPostProcessCompositingPass::SetFadeFactor(float InFactor)
 {
 
 }

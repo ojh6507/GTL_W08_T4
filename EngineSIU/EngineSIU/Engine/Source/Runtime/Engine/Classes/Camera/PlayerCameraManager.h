@@ -270,6 +270,13 @@ public:
 
     virtual void SetDesiredColorScale(FVector NewColorScale, float InterpTime);
 
+public:
+        float GetCurrentFadeAmount() const { return FadeAmount; }
+        
+        FLinearColor GetCurrentFadeColor() const { return FadeColor; }
+        
+        bool IsFading() const { return FadeTimeRemaining > 0.f; }
+
 protected:
     virtual void DoUpdateCamera(float DeltaTime);
 
