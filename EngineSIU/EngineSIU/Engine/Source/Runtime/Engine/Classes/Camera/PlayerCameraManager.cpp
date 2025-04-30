@@ -30,8 +30,8 @@ void APlayerCameraManager::BeginPlay()
     SetActiveCamera(TEXT("MainCamera"));
 
     auto* modifier = CreateModifier<UCameraShakeModifier>(EModifierType::Shake);
+   
     
-    modifier->StartShake(1.f, 2.0f);
 }
 
 
@@ -126,6 +126,18 @@ void APlayerCameraManager::AddModifier(UCameraModifier* modifier)
 void APlayerCameraManager::RemoveModifier(UCameraModifier* modifier)
 {
     ModifierList.Remove(modifier);
+}
+
+UCameraModifier* APlayerCameraManager::GetModifierByType(EModifierType Type) const
+{
+    for (UCameraModifier* Modifier : ModifierList)
+    {
+        if (Modifier->GetModifierType() == Type)
+        {
+            return Modifier;
+        }
+    }
+    return nullptr; // 찾지 못한 경우
 }
 
 void APlayerCameraManager::ApplyCameraModifiers(float DeltaTime, FMinimalViewInfo& InOutPOV)

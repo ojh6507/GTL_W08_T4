@@ -102,6 +102,7 @@ private:
 
         T* Modifier = FObjectFactory::ConstructObject<T>(this);
         Modifier->SetModifierType(Type);
+        Modifier->EnableModifier();
         AddModifier(Modifier);
         return Modifier;
     }
@@ -291,6 +292,7 @@ public:
     // 모디파이어 관리
     void AddModifier(UCameraModifier* modifier);
     void RemoveModifier(UCameraModifier* modifier);
+    UCameraModifier* GetModifierByType(EModifierType Type) const;
 
 private:
     void ApplyCameraModifiers(float DeltaTime, FMinimalViewInfo& InOutPOV);
