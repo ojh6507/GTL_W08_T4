@@ -159,7 +159,15 @@ FQuat FRotator::ToQuaternion() const
 
 FVector FRotator::ToVector() const
 {
-    return FVector(FMath::DegreesToRadians(Roll), FMath::DegreesToRadians(Pitch), FMath::DegreesToRadians(Yaw));
+    float PitchNoWinding = fmodf(Pitch, 360);
+    float YawNoWinding = fmodf(Yaw, 360);
+
+    float CP, SP, CY, SY;
+    FMath::SinCos(&SP, &CP, FMath::DegreesToRadians(PitchNoWinding));
+    FMath::SinCos(&SY, &CY, FMath::DegreesToRadians(YawNoWinding));
+    FVector V = FVector(CP * CY, CP * SY, SP);
+
+    return V;
 }
 
 FMatrix FRotator::ToMatrix() const
