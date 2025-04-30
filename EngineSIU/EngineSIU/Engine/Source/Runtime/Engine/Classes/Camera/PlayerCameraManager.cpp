@@ -15,6 +15,12 @@ bool FViewTarget::Equal(const FViewTarget& OtherTarget) const
 
 APlayerCameraManager::APlayerCameraManager()
 {
+    FadeTimeRemaining = 3;
+    FadeAmount = 2.f;
+    FadeAlpha.X = 0;
+    FadeAlpha.Y = 1;
+    FadeTime = 2.f;
+    FadeColor = FLinearColor(1, 1, 0, 1);
 }
 
 UObject* APlayerCameraManager::Duplicate(UObject* InOuter)
@@ -509,6 +515,8 @@ void APlayerCameraManager::ProcessViewRotation(float DeltaTime, FRotator& OutVie
 void APlayerCameraManager::StartCameraFade(float FromAlpha, float ToAlpha, float InFadeTime, FLinearColor InFadeColor, bool bShouldFadeAudio,  bool bInHoldWhenFinished)
 {
     bEnableFading = true;
+    FromAlpha = FMath::Clamp(FromAlpha, 0.0f, 1.0f);
+    ToAlpha = FMath::Clamp(ToAlpha, 0.0f, 1.0f);
 
     FadeColor = InFadeColor;
     FadeAlpha = FVector2D(FromAlpha, ToAlpha);
@@ -517,6 +525,10 @@ void APlayerCameraManager::StartCameraFade(float FromAlpha, float ToAlpha, float
 
     bAutoAnimateFade = true;
     bHoldFadeWhenFinished = bInHoldWhenFinished;
+    if (FadeTimeRemaining <= 0.0f)
+    {
+        FadeAmount = FadeAlpha.Y; // 즉시 목표 알파로 설정
+    }
 }
 
 void APlayerCameraManager::StopCameraFade()

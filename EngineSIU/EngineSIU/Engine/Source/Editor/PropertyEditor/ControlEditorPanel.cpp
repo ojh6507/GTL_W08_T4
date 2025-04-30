@@ -27,7 +27,7 @@
 #include "Actors/AmbientLightActor.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
-#include "../../../../../UScriptComponent.h"
+#include "Components/UScriptComponent.h"
 #include "Actors/CameraActor.h"
 
 void ControlEditorPanel::Render()
