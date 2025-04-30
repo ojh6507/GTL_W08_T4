@@ -13,6 +13,7 @@
 #include "Engine/Script/LuaManager.h"
 #include "LevelEditor/SLevelEditor.h"
 #include "UnrealEd/EditorViewportClient.h"
+#include <Camera/PlayerCameraManager.h>
 
 namespace PrivateEditorSelection
 {
@@ -113,8 +114,8 @@ void UEditorEngine::StartPIE()
 
     PIEWorldContext.SetCurrentWorld(PIEWorld);
     ActiveWorld = PIEWorld;
-    
     PIEWorld->BeginPlay();
+    PIEWorld->SpawnActor<APlayerCameraManager>();
     // 여기서 Actor들의 BeginPlay를 해줄지 안에서 해줄 지 고민.
     WorldList.Add(GetWorldContextFromWorld(PIEWorld));
 }
