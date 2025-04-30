@@ -102,6 +102,7 @@ private:
 
         T* Modifier = FObjectFactory::ConstructObject<T>(this);
         Modifier->SetModifierType(Type);
+        Modifier->EnableModifier();
         AddModifier(Modifier);
         return Modifier;
     }

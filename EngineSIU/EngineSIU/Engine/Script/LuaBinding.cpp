@@ -930,19 +930,40 @@ namespace LuaBindings
         lua["ControlEditorPanelInstance"] = control;
     }
 
-    void BindCameraShakeModifier(sol::state& lua)
+    void BindPlayerCameraManager(sol::state& lua)
     {
-        lua.new_usertype<UCameraShakeModifier>("CameraShakeModifier",
-            "StartShake", &UCameraShakeModifier::StartShake
-        );
-
         lua.new_usertype<APlayerCameraManager>("PlayerCameraManager",
-            "StartCameraFade", &APlayerCameraManager::StartCameraFade
+            sol::no_constructor, // Lua에서 직접 생성 금지
+
+            // 모디파이어 관련 메서드
+
+            "GetShakeModifier", [](APlayerCameraManager* self) -> UCameraShakeModifier* {
+                UCameraModifier* modifier = self->GetModifierByType(EModifierType::Shake);
+                return Cast<UCameraShakeModifier>(modifier);
+            },
+
+            "AddModifier", &APlayerCameraManager::AddModifier,
+            "RemoveModifier", &APlayerCameraManager::RemoveModifier
         );
 
-        // 필요시 인스턴스 등록 예시 (선택적)
-        // auto modifier = GetModifierFromSomewhere();
-        // lua["CameraShakeModifierInstance"] = modifier;
+        lua.new_enum("EModifierType",
+            "Shake", EModifierType::Shake
+        );
+
+
+        lua.new_usertype<UCameraShakeModifier>("CameraShakeModifier",
+            sol::no_constructor, // Lua에서 직접 생성 금지
+
+            "StartShake", &UCameraShakeModifier::StartShake,
+            "StopShake", &UCameraShakeModifier::StopShake,
+
+            // 속성들 노출
+            "ShakeIntensity", &UCameraShakeModifier::ShakeIntensity,
+            "ShakeDuration", &UCameraShakeModifier::ShakeDuration,
+            "ShakeTimeRemaining", &UCameraShakeModifier::ShakeTimeRemaining,
+            "bIsShaking", &UCameraShakeModifier::bIsShaking,
+            "bIsStart", &UCameraShakeModifier::bIsStart
+        );
     }
 
     // --- 코어 타입 전체 바인딩 호출 함수 ---
@@ -971,5 +992,7 @@ namespace LuaBindings
         BindSoundManager(lua);
         BindUI(lua);
         BindMagicButton(lua);
+    
+        BindPlayerCameraManager(lua);
     }
 } // namespace LuaBindings

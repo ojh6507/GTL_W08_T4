@@ -31,6 +31,7 @@ void APlayerCameraManager::BeginPlay()
 
     auto* modifier = CreateModifier<UCameraShakeModifier>(EModifierType::Shake);
    
+    
 }
 
 
