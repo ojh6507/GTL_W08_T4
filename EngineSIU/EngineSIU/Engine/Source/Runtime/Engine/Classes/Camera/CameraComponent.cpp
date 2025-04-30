@@ -4,6 +4,8 @@
 #include "Math/JungleMath.h"
 #include "UnrealEd/EditorViewportClient.h"
 #include "UObject/Casts.h"
+#include "World/World.h"
+#include <Actors/AnimPlayerActor.h>
 
 UCameraComponent::~UCameraComponent()
 {
@@ -17,6 +19,14 @@ void UCameraComponent::UninitializeComponent()
 void UCameraComponent::BeginPlay()
 {
     Super::BeginPlay();
+
+    FViewTarget ViewTarget;
+    ViewTarget.SetNewTarget(GetOwner());
+
+    CameraName = TEXT("MainCamera");
+
+    GetWorld()->GetActiveLevel()->RegisterCamera(CameraName, this, ViewTarget);
+
     UpdateViewMatrix();
     UpdateProjectionMatrix();
 }

@@ -143,8 +143,13 @@ UWorld* UWorld::GetWorld() const
     return const_cast<UWorld*>(this);
 }
 
-FViewTarget UWorld::GetCamera(const FName InName) const
+FViewTarget UWorld::GetViewTarget(FName InName)
 {
     return ActiveLevel->GetViewTarget(InName);
+}
+
+UCameraComponent* UWorld::GetCameraComponent(FName InName)
+{
+    return ActiveLevel->GetCameraComponent(InName);
 }
 

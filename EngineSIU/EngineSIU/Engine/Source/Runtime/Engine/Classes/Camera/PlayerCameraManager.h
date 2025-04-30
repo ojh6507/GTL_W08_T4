@@ -5,6 +5,7 @@
 
 class APlayerController;
 class UCameraModifier;
+class UCameraComponent;
 
 enum EViewTargetBlendFunction : int
 {
@@ -126,41 +127,43 @@ public:
     float FadeTime;
 
     /** 카메라 페이드에 남은 시간 (bEnableFading이 true일 때 적용) */
-    float FadeTimeRemaining;
+    float FadeTimeRemaining = 0.f;
 
     /** 현재 뷰 타겟 */
     FViewTarget ViewTarget;
+
+    UCameraComponent* CurCameraComp;
 
     /** 블렌딩 중인 뷰 타겟 */
     FViewTarget PendingViewTarget;
 
     /** 뷰 타겟 블렌딩에 남은 시간 */
-    float BlendTimeToGo;
+    float BlendTimeToGo = 0;
 
     /** 현재 뷰 타겟 전환 시의 블렌드 파라미터 */
     struct FViewTargetTransitionParams BlendParams;
 
     /** 이 카메라가 FOV 대신 정사영(Orthographic) 시점을 사용해야 할 경우 true */
-    uint32 bIsOrthographic;
+    uint32 bIsOrthographic = false;
 
     /** 이 카메라가 Near/Far 평면을 자동으로 계산해야 할 경우 true */
-    uint32 bAutoCalculateOrthoPlanes;
+    uint32 bAutoCalculateOrthoPlanes = false;
 
     /** Near/Far 평면 사이의 거리를 유지하면서 평면을 수동으로 조절하는 값. 양수는 far plane 방향으로, 음수는 near plane 방향으로 이동 */
     float AutoPlaneShift;
 
     /** 목적지 뷰의 종횡비가 다를 경우 검은 막대를 추가할지 여부 (뷰 타겟에서 종횡비 제한 여부를 명시하지 않을 때만 사용됨. 대부분은 카메라 컴포넌트의 설정을 따름) */
-    uint32 bDefaultConstrainAspectRatio;
+    uint32 bDefaultConstrainAspectRatio = false;
 
     /** 화면에 FadeColor/FadeAmount를 적용할지 여부 */
-    uint32 bEnableFading;
+    uint32 bEnableFading = false;
 
     /**
      * 이번 프레임에 카메라 컷(뷰 타겟이 갑자기 바뀌는 것)이 발생했는지
      * 컷이 감지되면 한 프레임만 true가 되며, 이 값은 프레임 끝에 자동으로 false로 리셋됩니다.
      * 렌더러 차원에서는 이전 프레임의 옥클루전 쿼리 사용 여부나 모션 블러 처리 등에 영향을 줍니다.
      */
-    uint32 bGameCameraCutThisFrame;
+    uint32 bGameCameraCutThisFrame = false;
 
  public:
      /** ViewTarget이 PendingViewTarget으로 설정될 때 발생하는 이벤트 */
@@ -179,7 +182,7 @@ protected:
      * 디버그용 카메라(예: FreeCam)에도 모디파이어를 항상 적용할지 여부.
      * 기본값은 false여서 디버그 카메라에는 모디파이어가 적용되지 않음.
      */
-    uint32 bAlwaysApplyModifiers;
+    uint32 bAlwaysApplyModifiers = 1;
 
 public:
     /** Minimum view pitch, in degrees. */
@@ -351,7 +354,6 @@ public:
      * @param InViewYawMax       허용할 최대 요 각도(도 단위)
      */
     virtual void LimitViewYaw(FRotator& ViewRotation, float InViewYawMin, float InViewYawMax);
-
 
 protected:
     virtual void UpdateViewTargetInternal(FViewTarget& OutVT, float DeltaTime);

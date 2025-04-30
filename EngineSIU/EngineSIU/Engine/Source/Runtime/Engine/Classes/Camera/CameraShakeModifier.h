@@ -22,7 +22,9 @@ public:
     // 셰이크 중지 함수
     void StopShake();
 
-    // CameraModifier 인터페이스 구현
-    virtual void ModifyCamera(float DeltaTime, FVector ViewLocation, FRotator ViewRotation, float FOV,
-        FVector& NewLocation, FRotator& NewRotation, float& NewFOV) override;
+    bool ModifyCamera(float DeltaTime, struct FMinimalViewInfo& InOutPOV) override;
+
+    //// CameraModifier 인터페이스 구현
+    //virtual void ModifyCamera(float DeltaTime, FVector ViewLocation, FRotator ViewRotation, float FOV,
+    //    FVector& NewLocation, FRotator& NewRotation, float& NewFOV) override;
 };

@@ -62,8 +62,8 @@ public:
 
     FString GetWorldName() const { return WorldName; }
 
-    FViewTarget GetCamera(FName InName) const;
-    
+    FViewTarget GetViewTarget(FName InName);
+    UCameraComponent* GetCameraComponent(FName InName);
 private:
     FString WorldName = "DefaultWorld";
 

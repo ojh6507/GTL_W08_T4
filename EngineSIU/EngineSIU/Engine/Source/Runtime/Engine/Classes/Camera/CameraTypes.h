@@ -91,7 +91,7 @@ public:
         , PerspectiveNearClipPlane(-1.0f)
         , AspectRatio(1.33333333f)
         , bConstrainAspectRatio(false)
-        , bUseFieldOfViewForLOD(true)
+        , bUseFieldOfViewForLOD(false)
         , ProjectionMode(ECameraProjectionMode::Perspective)
         , PostProcessBlendWeight(0.0f)
         , OffCenterProjectionOffset(FVector2D::ZeroVector)

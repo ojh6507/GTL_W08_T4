@@ -42,6 +42,7 @@ public:
 
     virtual void GetCameraView(float DeltaTime, FMinimalViewInfo& DesiredView);
 
+    FString CameraName;
 private:
     void UpdateViewMatrix();
     void UpdateProjectionMatrix();
@@ -65,19 +66,19 @@ private:
      * bConstrainAspectRatio가 true일 때,
      * 이 카메라가 요청한 종횡비와 다른 해상도일 경우 검은 여백(레터박스)을 추가할지 여부 
      */
-    bool bConstrainAspectRatio;
+    bool bConstrainAspectRatio = false;
 
     /** 로컬 플레이어에 정의된 기본 종횡비 축 제약을 재정의할지 여부 */
-    bool bOverrideAspectRatioAxisConstraint;
+    bool bOverrideAspectRatioAxisConstraint = false;
 
     /** 뷰 프러스텀을 확대할 비율 (0.0 = 확대 없음, 1.0 = 100% 확대) */
-    float Overscan;
+    float Overscan = 0.0f;
 
     /**
      * 오버스캔 양만큼 해상도를 스케일하여 원래 프러스텀 해상도를 유지할지 여부.
      * 활성화 시 오버스캔이 늘어날수록 렌더링 부하가 증가하여 성능이 저하될 수 있습니다.
      */
-    bool bScaleResolutionWithOverscan;
+    bool bScaleResolutionWithOverscan = false;
 
     /**
      * 렌더링 파이프라인 마지막 단계에서 오버스캔된 픽셀을 크롭하여 화면에 보이지 않게 할지 여부.
@@ -85,10 +86,10 @@ private:
      * bScaleResolutionWithOverscan이 true일 때는 크롭된 이미지 해상도가 원본과 동일하며,
      * false일 때는 더 낮은 해상도로 출력됩니다.
      */
-    bool bCropOverscan;
+    bool bCropOverscan = false;
 
     /** True to enable the additive view offset, for adjusting the view without moving the component. */
-    bool bUseAdditiveOffset;
+    bool bUseAdditiveOffset = false;
 
     ECameraProjectionMode::Type ProjectionMode;
 

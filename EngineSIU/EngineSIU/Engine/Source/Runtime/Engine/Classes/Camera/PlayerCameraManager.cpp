@@ -6,7 +6,6 @@
 #include "Math/JungleMath.h"
 #include "World/World.h"
 #include "CameraShakeModifier.h"
-#
 
 bool FViewTarget::Equal(const FViewTarget& OtherTarget) const
 {
@@ -27,18 +26,23 @@ void APlayerCameraManager::BeginPlay()
 {
     AActor::BeginPlay();
 
-    AddModifier(FObjectFactory::ConstructObject<UCameraShakeModifier>(this));
+	SetActiveCamera(TEXT("MainCamera"));
+
+    UCameraShakeModifier* modifier = FObjectFactory::ConstructObject<UCameraShakeModifier>(this);
+    AddModifier(modifier);
+    modifier->EnableModifier();
+    modifier->StartShake(.5f, 2.0f);
 }
 
 void APlayerCameraManager::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
     ModifierList.Empty();
-    // clean up the temp camera actor
-    if (AnimCameraActor != nullptr)
-    {
-        AnimCameraActor->SetOwner(nullptr);
-        AnimCameraActor = nullptr;
-    }
+    //// clean up the temp camera actor
+    //if (AnimCameraActor != nullptr)
+    //{
+    //    AnimCameraActor->SetOwner(nullptr);
+    //    AnimCameraActor = nullptr;
+    //}
     
     AActor::EndPlay(EndPlayReason);
 }
@@ -98,12 +102,15 @@ void APlayerCameraManager::Tick(float DeltaTime)
     AActor::Tick(DeltaTime);
 
     DoUpdateCamera(DeltaTime);
+    CurCameraComp->SetRelativeLocation(CameraCachePrivate.POV.Location);
+    CurCameraComp->SetRelativeRotation(CameraCachePrivate.POV.Rotation);
 }
 
 void APlayerCameraManager::SetActiveCamera(const FName& name)
 {
     ActiveCameraName = name;
-    ViewTarget = GetWorld()->GetCamera(ActiveCameraName);
+    ViewTarget = GetWorld()->GetViewTarget(ActiveCameraName);
+    CurCameraComp = GetWorld()->GetCameraComponent(ActiveCameraName);
 }
 
 void APlayerCameraManager::AddModifier(UCameraModifier* modifier)
@@ -197,20 +204,7 @@ void APlayerCameraManager::SetDesiredColorScale(FVector NewColorScale, float Int
 
 void APlayerCameraManager::DoUpdateCamera(float DeltaTime)
 {
-FMinimalViewInfo NewPOV = ViewTarget.POV;
-
-    // update color scale interpolation
-    //if (bEnableColorScaleInterp)
-    //{
-        //float BlendPct = FMath::Clamp((GetWorld()->TimeSeconds - ColorScaleInterpStartTime) / ColorScaleInterpDuration, 0.f, 1.0f);
-        //ColorScale = FMath::Lerp(OriginalColorScale, DesiredColorScale, BlendPct);
-        // if we've maxed
-        //if (BlendPct == 1.0f)
-        //{
-            // disable further interpolation
-            ///bEnableColorScaleInterp = false;
-        //}
-    //}
+	FMinimalViewInfo NewPOV = ViewTarget.POV;
 
     if (PendingViewTarget.Target == nullptr || !BlendParams.bLockOutgoing)
     {
@@ -254,17 +248,10 @@ FMinimalViewInfo NewPOV = ViewTarget.POV;
                 break;
             }
 
-            // Update pending view target blend
-            NewPOV = ViewTarget.POV;
-            NewPOV.BlendViewInfo(PendingViewTarget.POV, BlendPct);//@TODO: CAMERA: Make sure the sense is correct!  BlendViewTargets(ViewTarget, PendingViewTarget, BlendPct);
 
-            // Add this pending view target's post-process settings as an override of the main view target's one,
-            // since it is blending on top of it.
+            NewPOV = ViewTarget.POV;
+            NewPOV.BlendViewInfo(PendingViewTarget.POV, BlendPct);//@TODO: CAMERA: Make sure the sense is correct!  
             const float PendingViewTargetPPWeight = PendingViewTarget.POV.PostProcessBlendWeight * BlendPct;
-            if (PendingViewTargetPPWeight > 0.f)
-            {
-                //AddCachedPPBlend(PendingViewTarget.POV.PostProcessSettings, PendingViewTargetPPWeight, VTBlendOrder_Override);
-            }
         }
         else
         {
