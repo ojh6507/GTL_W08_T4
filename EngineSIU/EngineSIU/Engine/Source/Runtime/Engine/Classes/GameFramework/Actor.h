@@ -1,4 +1,5 @@
 #pragma once
+#include "Camera/ViewTarget.h"
 #include "Components/SceneComponent.h"
 #include "Container/Set.h"
 #include "Engine/EngineTypes.h"
@@ -93,6 +94,7 @@ public:
     bool SetActorLocation(const FVector& NewLocation);
     bool SetActorRotation(const FRotator& NewRotation);
     bool SetActorScale(const FVector& NewScale);
+    virtual void CalcCamera(float DeltaTime, struct FMinimalViewInfo& OutResult);
 
 protected:
     UPROPERTY

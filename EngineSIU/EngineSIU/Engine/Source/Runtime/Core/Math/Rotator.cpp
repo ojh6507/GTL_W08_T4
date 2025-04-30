@@ -207,4 +207,31 @@ bool FRotator::InitFromString(const FString& InSourceString)
     return bSuccess;
 }
 
+float FRotator::ClampAxis(float Angle)
+{
+    // returns Angle in the range (-360,360)
+    Angle = FMath::Fmod(Angle, 360.0);
+
+    if (Angle < 0.0)
+    {
+        // shift to [0,360) range
+        Angle += 360.0f;
+    }
+
+    return Angle;
+}
+
+float FRotator::NormalizeAxis(float Angle)
+{
+    Angle = ClampAxis(Angle);
+
+    if (Angle > 180.0f)
+    {
+        // shift to (-180,180]
+        Angle -= 360.0f;
+    }
+
+    return Angle;
+}
+
 

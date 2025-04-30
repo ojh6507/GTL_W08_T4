@@ -111,7 +111,7 @@ struct FMath
 	{
 		return DegVal * (PI_DOUBLE / 180.0);
 	}
-
+    
     // Returns e^Value
     static FORCEINLINE float Exp(const float Value ) { return expf(Value); }
     static FORCEINLINE double Exp(const double Value) { return exp(Value); }
@@ -216,7 +216,7 @@ struct FMath
 
 	    // If distance is too small, just set the desired location
 	    if( FMath::Square(Dist) < SMALL_NUMBER)
-	    {
+	    {  
 	        return static_cast<RetType>(Target);
 	    }
 
@@ -247,4 +247,15 @@ struct FMath
             InterpEaseIn(0.f, 1.f, Alpha * 2.f, Exp) * 0.5f :
             InterpEaseOut(0.f, 1.f, Alpha * 2.f - 1.f, Exp) * 0.5f + 0.5f);
 	}
+
+    static float FORCEINLINE Fmod(float X, double Y)
+    {
+	    const float AbsY = FMath::Abs(Y);
+	    if (AbsY <= SMALL_NUMBER) // Note: this constant should match that used by VectorMod() implementations
+	    {
+	        return 0.0;
+	    }
+
+	    return fmodf(X, Y);
+    }
 };

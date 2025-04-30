@@ -27,6 +27,9 @@ public:
     void Tick(float DeltaTime);
     void BeginPlay();
 
+    /**  Time in seconds since level began play, but IS paused when the game is paused, and IS dilated/clamped. */
+    double TimeSeconds;
+
     void Release();
 
     /**

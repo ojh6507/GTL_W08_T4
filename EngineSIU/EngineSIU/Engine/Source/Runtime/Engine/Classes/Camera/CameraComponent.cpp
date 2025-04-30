@@ -1,5 +1,8 @@
 #include "CameraComponent.h"
 
+#include "LevelEditor/SLevelEditor.h"
+#include "Math/JungleMath.h"
+#include "UnrealEd/EditorViewportClient.h"
 #include "UObject/Casts.h"
 
 UCameraComponent::~UCameraComponent()
@@ -87,6 +90,53 @@ void UCameraComponent::TickComponent(float DeltaTime)
 void UCameraComponent::DestroyComponent()
 {
     Super::DestroyComponent();
+}
+
+void UCameraComponent::GetCameraView(float DeltaTime, FMinimalViewInfo& DesiredView)
+{
+    DesiredView.PreviousViewLocation = GetWorldLocation();
+    DesiredView.PreviousViewRotation = GetWorldRotation();
+    DesiredView.PreviousViewScale = GetWorldScale3D();
+
+    // TODO : Pawn 생기면
+    //if (bUsePawnControlRotation)
+    //{
+        //const APawn* OwningPawn = Cast<APawn>(GetOwner());
+        //const AController* OwningController = OwningPawn ? OwningPawn->GetController() : nullptr;
+        //if (OwningController && OwningController->IsLocalPlayerController())
+        //{
+            //const FRotator PawnViewRotation = OwningPawn->GetViewRotation();
+            //if (!PawnViewRotation.Equals(GetComponentRotation()))
+            //{
+                //SetWorldRotation(PawnViewRotation);
+            //}
+        //}
+    //}
+    
+    DesiredView.Location = GetWorldLocation();
+    DesiredView.Rotation = GetWorldRotation();
+        
+    DesiredView.FOV = bUseAdditiveOffset ? (ViewFOV + AdditiveFOVOffset) : ViewFOV;
+    DesiredView.AspectRatio = AspectRatio;
+    DesiredView.bConstrainAspectRatio = bConstrainAspectRatio;
+    DesiredView.bUseFieldOfViewForLOD = bUseFieldOfViewForLOD;
+    DesiredView.ProjectionMode = ProjectionMode;
+    
+    DesiredView.AutoPlaneShift = AutoPlaneShift;
+	
+    DesiredView.ApplyOverscan(Overscan, bScaleResolutionWithOverscan, bCropOverscan);
+
+    if (bOverrideAspectRatioAxisConstraint)
+    {
+        DesiredView.AspectRatioAxisConstraint = AspectRatioAxisConstraint;
+    }
+
+    // See if the CameraActor wants to override the PostProcess settings used.
+    DesiredView.PostProcessBlendWeight = PostProcessBlendWeight;
+    if (PostProcessBlendWeight > 0.0f)
+    {
+        //DesiredView.PostProcessSettings = PostProcessSettings;
+    }
 }
 
 void UCameraComponent::UpdateViewMatrix()

@@ -1,5 +1,6 @@
 #include "Actor.h"
 
+#include "Camera/CameraComponent.h"
 #include "Components/PrimitiveComponent.h"
 #include "World/World.h"
 
@@ -259,6 +260,22 @@ bool AActor::SetActorScale(const FVector& NewScale)
         return true;
     }
     return false;
+}
+
+void AActor::CalcCamera(float DeltaTime, FMinimalViewInfo& OutResult)
+{
+    for (auto comp : OwnedComponents)
+    {
+        UCameraComponent* CameraComp = Cast<UCameraComponent>(comp);
+        if (CameraComp && CameraComp->IsActive())
+        {
+            CameraComp->GetCameraView(DeltaTime, OutResult);
+            return;
+        }
+    }
+
+    OutResult.Location = GetActorLocation();
+    OutResult.Rotation = GetActorRotation();
 }
 
 void AActor::SetActorTickInEditor(bool InbInTickInEditor)

@@ -72,9 +72,9 @@ public:
         {
         case VTBlend_Linear: return FMath::Lerp(0.f, 1.f, TimePct); 
         //case VTBlend_Cubic:	return FMath::CubicInterp(0.f, 0.f, 1.f, 0.f, TimePct); 
-        //case VTBlend_EaseInOut: return FMath::InterpEaseInOut(0.f, 1.f, TimePct, BlendExp); 
-        //case VTBlend_EaseIn: return FMath::Lerp(0.f, 1.f, FMath::Pow(TimePct, BlendExp)); 
-        //case VTBlend_EaseOut: return FMath::Lerp(0.f, 1.f, FMath::Pow(TimePct, (FMath::IsNearlyZero(BlendExp) ? 1.f : (1.f / BlendExp))));
+        case VTBlend_EaseInOut: return FMath::InterpEaseInOut(0.f, 1.f, TimePct, BlendExp); 
+        case VTBlend_EaseIn: return FMath::Lerp(0.f, 1.f, FMath::Pow(TimePct, BlendExp)); 
+        case VTBlend_EaseOut: return FMath::Lerp(0.f, 1.f, FMath::Pow(TimePct, (FMath::IsNearlyZero(BlendExp) ? 1.f : (1.f / BlendExp))));
         default:
             break;
         }
@@ -104,10 +104,6 @@ public:
     float GetLockedFOV() const;
 protected:
     float LockedFOV;
-
-public:
-    /** 원근 모드가 아닐 때 사용되는 정사영 뷰의 기본 너비 (월드 단위) */
-    float DefaultOrthoWidth;
     
 protected:
     /** > 0일 경우 OrthoWidth를 고정시키는 값. <= 0이면 무시됨 */
@@ -153,14 +149,18 @@ public:
     /** Near/Far 평면 사이의 거리를 유지하면서 평면을 수동으로 조절하는 값. 양수는 far plane 방향으로, 음수는 near plane 방향으로 이동 */
     float AutoPlaneShift;
 
-    /** 클리핑이나 라이팅 아티팩트를 방지하기 위해 near/far 평면과 카메라 위치를 자동으로 조정할 경우 true */
-    uint32 bUpdateOrthoPlanes;
-
-    /** UpdateOrthoPlanes가 활성화되어 있을 때, 뷰 타겟이 없으면 카메라의 현재 높이를 뷰 타겟 거리로 대체해 계산할 경우 true */
-    uint32 bUseCameraHeightAsViewTarget;
-
     /** 목적지 뷰의 종횡비가 다를 경우 검은 막대를 추가할지 여부 (뷰 타겟에서 종횡비 제한 여부를 명시하지 않을 때만 사용됨. 대부분은 카메라 컴포넌트의 설정을 따름) */
     uint32 bDefaultConstrainAspectRatio;
+
+    /** 화면에 FadeColor/FadeAmount를 적용할지 여부 */
+    uint32 bEnableFading;
+
+    /**
+     * 이번 프레임에 카메라 컷(뷰 타겟이 갑자기 바뀌는 것)이 발생했는지
+     * 컷이 감지되면 한 프레임만 true가 되며, 이 값은 프레임 끝에 자동으로 false로 리셋됩니다.
+     * 렌더러 차원에서는 이전 프레임의 옥클루전 쿼리 사용 여부나 모션 블러 처리 등에 영향을 줍니다.
+     */
+    uint32 bGameCameraCutThisFrame;
 
  public:
      /** ViewTarget이 PendingViewTarget으로 설정될 때 발생하는 이벤트 */
@@ -168,6 +168,37 @@ public:
      FOnBlendComplete& OnBlendComplete() const { return OnBlendCompleteEvent; }
  private:
      mutable FOnBlendComplete OnBlendCompleteEvent;
+
+protected:
+    /** 페이드가 끝난 후에도 최종 컬러·알파를 유지할지 여부 (hold at final) */
+    uint32 bHoldFadeWhenFinished;
+
+    uint32 bAutoAnimateFade;
+    
+    /**
+     * 디버그용 카메라(예: FreeCam)에도 모디파이어를 항상 적용할지 여부.
+     * 기본값은 false여서 디버그 카메라에는 모디파이어가 적용되지 않음.
+     */
+    uint32 bAlwaysApplyModifiers;
+
+public:
+    /** Minimum view pitch, in degrees. */
+    float ViewPitchMin;
+
+    /** Maximum view pitch, in degrees. */
+    float ViewPitchMax;
+
+    /** Minimum view yaw, in degrees. */
+    float ViewYawMin;
+
+    /** Maximum view yaw, in degrees. */
+    float ViewYawMax;
+
+    /** Minimum view roll, in degrees. */
+    float ViewRollMin;
+
+    /** Maximum view roll, in degrees. */
+    float ViewRollMax;
 
  private:
      /** 캐시된 카메라 정보 */
@@ -245,22 +276,13 @@ public:
     void AddModifier(UCameraModifier* modifier);
     void RemoveModifier(UCameraModifier* modifier);
 
-    // 페이드 설정
-    void StartFade(const FLinearColor& color, float duration);
 private:
-    // 내부 업데이트
-    void UpdateFade(float deltaTime);
-    void ApplyModifiers(float deltaTime);
+    void ApplyCameraModifiers(float DeltaTime, FMinimalViewInfo& InOutPOV);
 
 public:
     virtual float GetFOVAngle() const;
     virtual void SetFOVAngle(float FOVAngle);
     virtual void UnLockFOV();
-    virtual bool IsOrthographic() const;
-    virtual float GetOrthoWidth() const;
-
-    virtual void SetOrthoWidth(float width);
-    virtual void UnLockOrthoWidth();
 
     virtual void GetCameraViewPoint(FVector& OutCamLoc, FRotator& OutCamRot) const;
 
@@ -282,6 +304,29 @@ protected:
 
     bool LuaUpdateCamera(AActor* CameraTarget, FVector& NewCameraLocation, FRotator& NewCameraRotation, float& NewCameraFOV);
 
+    virtual void AssignViewTarget(AActor* NewTarget, FViewTarget& VT, struct FViewTargetTransitionParams TransitionParams=FViewTargetTransitionParams());
+
+    /**
+     * 두 개의 ViewTarget을 블렌딩하는 내부 헬퍼 함수입니다.
+     *
+     * @param A      시작(소스) 뷰 타겟
+     * @param B      목표(데스티네이션) 뷰 타겟
+     * @param Alpha  A에서 B로 얼만큼(blend 비율, 0.0~1.0) 이동할지 비율
+     */
+    FPOV BlendViewTargets(const FViewTarget& A, const FViewTarget& B, float Alpha);
+
+    /** 
+     * 최종 계산된 POV 정보를 캐시에 저장하여 다른 게임 코드에서 효율적으로 접근할 수 있게 합니다. 
+     */
+    void FillCameraCache(const FMinimalViewInfo& NewInfo);
+
+    /**
+     * 주어진 ViewTarget에 대해 업데이트된 POV를 계산합니다.
+     *
+     * @param OutVT      업데이트할 ViewTarget 참조
+     * @param DeltaTime  마지막 카메라 업데이트 이후 경과된 시간(초 단위)
+     */
+    virtual void UpdateViewTarget(FViewTarget& OutVT, float DeltaTime);
 public:
     void SetViewTarget(class AActor* NewViewTarget, FViewTargetTransitionParams TransitionParams = FViewTargetTransitionParams());
 
@@ -290,4 +335,31 @@ public:
     virtual void StartCameraFade(float FromAlpha, float ToAlpha, float Duration, FLinearColor Color, bool bShouldFadeAudio = false, bool bHoldWhenFinished = false);
 
     virtual void StopCameraFade();
+    /** 
+     * 플레이어의 시야 피치(pitch)를 제한합니다.
+     * @param ViewRotation       수정할 뷰 회전값(입력 및 출력)
+     * @param InViewPitchMin     허용할 최소 피치 각도(도 단위)
+     * @param InViewPitchMax     허용할 최대 피치 각도(도 단위)
+     */
+    virtual void LimitViewPitch(FRotator& ViewRotation, float InViewPitchMin, float InViewPitchMax);
+
+    /** 
+     * 플레이어의 시야 롤(roll)을 제한합니다.
+     * @param ViewRotation       수정할 뷰 회전값(입력 및 출력)
+     * @param InViewRollMin      허용할 최소 롤 각도(도 단위)
+     * @param InViewRollMax      허용할 최대 롤 각도(도 단위)
+     */
+    virtual void LimitViewRoll(FRotator& ViewRotation, float InViewRollMin, float InViewRollMax);
+
+    /** 
+     * 플레이어의 시야 요(yaw)를 제한합니다.
+     * @param ViewRotation       수정할 뷰 회전값(입력 및 출력)
+     * @param InViewYawMin       허용할 최소 요 각도(도 단위)
+     * @param InViewYawMax       허용할 최대 요 각도(도 단위)
+     */
+    virtual void LimitViewYaw(FRotator& ViewRotation, float InViewYawMin, float InViewYawMax);
+
+
+protected:
+    virtual void UpdateViewTargetInternal(FViewTarget& OutVT, float DeltaTime);
 };
