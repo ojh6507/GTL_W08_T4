@@ -195,7 +195,8 @@ public:
     bool IsNearlyZero(float Tolerance = SMALL_NUMBER) const;
     bool IsZero() const;
 
-    
+    FVector GetClampedToMaxSize(float MaxSize) const;
+
     FString ToString() const;
     bool InitFromString(const FString& InSourceString);
 };
@@ -415,7 +416,24 @@ inline bool FVector::IsZero() const
     return X==0.f && Y==0.f && Z==0.f;
 }
 
+inline FVector FVector::GetClampedToMaxSize(float MaxSize) const
+{
+    if (MaxSize < KINDA_SMALL_NUMBER)
+    {
+        return ZeroVector;
+    }
 
+    const float VSq = LengthSquared();
+    if (VSq > FMath::Square(MaxSize))
+    {
+        const float Scale = MaxSize * FMath::InvSqrt(VSq);
+        return {X * Scale, Y * Scale, Z * Scale};
+    }
+    else
+    {
+        return *this;
+    }
+}
 
 inline FArchive& operator<<(FArchive& Ar, FVector2D& V)
 {

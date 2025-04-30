@@ -1,4 +1,5 @@
 #pragma once
+#include "MathUtility.h"
 #include "Serialization/Archive.h"
 
 struct FVector;
@@ -24,6 +25,15 @@ struct FQuat
 
     FQuat(const FMatrix& InMatrix);
 
+    /**
+     * Checks whether another Quaternion is equal to this, within specified tolerance.
+     *
+     * @param Q The other Quaternion.
+     * @param Tolerance Error tolerance for comparison with other Quaternion.
+     * @return true if two Quaternions are equal, within specified tolerance, otherwise false.
+     */
+    bool Equals(const FQuat& Q, float Tolerance = KINDA_SMALL_NUMBER) const;
+
     // 쿼터니언의 곱셈 연산 (회전 결합)
     FQuat operator*(const FQuat& Other) const;
 
@@ -36,6 +46,15 @@ struct FQuat
     // 쿼터니언 정규화 (단위 쿼터니언으로 만듬)
     FQuat Normalize() const;
 
+    /** Spherical interpolation. Will correct alignment. Result is NOT normalized. */
+    static FQuat Slerp_NotNormalized(const FQuat& Quat1, const FQuat& Quat2, float Slerp);
+
+    /** Spherical interpolation. Will correct alignment. Result is normalized. */
+    static FORCEINLINE FQuat Slerp(const FQuat& Quat1, const FQuat& Quat2, float Slerp)
+    {
+        return Slerp_NotNormalized(Quat1, Quat2, Slerp).Normalize();
+    }
+
     // 회전 각도와 축으로부터 쿼터니언 생성 (axis-angle 방식)
     static FQuat FromAxisAngle(const FVector& Axis, float Angle);
 
@@ -43,6 +62,9 @@ struct FQuat
 
     // 쿼터니언을 회전 행렬로 변환
     FMatrix ToMatrix() const;
+
+    // 쿼터니언의 역(켤레) 계산
+    FQuat Inverse() const;
 };
 
 inline FArchive& operator<<(FArchive& Ar, FQuat& Q)

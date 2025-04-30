@@ -31,6 +31,7 @@
 #include "Renderer/Shadow/PointLightShadowMap.h"
 #include "Renderer/Shadow/DirectionalShadowMap.h"
 
+#include "GameFramework/SpringArmComponent.h"
 
 #include "Components/UScriptComponent.h"
 #include "Camera/CameraComponent.h"
@@ -114,7 +115,7 @@ void PropertyEditorPanel::Render()
                         static uint32 NewCompIndex = 0;
 
                         // Add Component to Selected Actor
-                        UActorComponent* NewComp = SelectedActor->AddComponent(Class,FString::Printf(TEXT("%s_%d"), *Class->GetName(), NewCompIndex++), true);
+                        UActorComponent* NewComp = SelectedActor->AddComponent(Class, FString::Printf(TEXT("%s_%d"), *Class->GetName(), NewCompIndex++), true);
 
                         if (USceneComponent* ParentComp = Cast<USceneComponent>(SelectedComponent))
                         {
@@ -870,6 +871,169 @@ void PropertyEditorPanel::Render()
     }
 #pragma endregion
 
+#pragma region Spring Arm
+    if (SelectedComponent && SelectedComponent->IsA<USpringArmComponent>())
+    {
+        USpringArmComponent* SpringArmComponent = static_cast<USpringArmComponent*>(SelectedComponent);
+        ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.1f, 0.1f, 0.1f, 1.0f));
+        if (ImGui::TreeNodeEx("Spring Arm", ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_DefaultOpen))
+        {
+            if (ImGui::TreeNodeEx("Camera", ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_DefaultOpen))
+            {
+                float TargetArmLength = SpringArmComponent->GetTargetArmLength();
+                if (ImGui::SliderFloat("Target Arm Length", &TargetArmLength, -100.0f, 400.0f))
+                {
+                    SpringArmComponent->SetTargetArmLength(TargetArmLength);
+                }
+
+                //float SocketOffset[3] = { SpringArmComponent->GetSocketOffset().X, SpringArmComponent->GetSocketOffset().Y, SpringArmComponent->GetSocketOffset().Z };
+                //if (ImGui::InputFloat3("Socket Offset", SocketOffset, "%.1f"))
+                //{
+                //    SpringArmComponent->SetSocketOffset(FVector(SocketOffset[0], SocketOffset[1], SocketOffset[2]));
+                //}
+
+                float TargetOffset[3] = { SpringArmComponent->TargetOffset.X, SpringArmComponent->TargetOffset.Y, SpringArmComponent->TargetOffset.Z };
+                if (ImGui::InputFloat3("Target Offset", TargetOffset, "%.1f"))
+                {
+                    SpringArmComponent->TargetOffset = FVector(TargetOffset[0], TargetOffset[1], TargetOffset[2]);
+                }
+
+                ImGui::TreePop();
+            }
+
+            if (ImGui::TreeNodeEx("Camera Collision", ImGuiTreeNodeFlags_Framed))
+            {
+                ImGui::BeginDisabled(!SpringArmComponent->bDoCollisionTest);
+                {
+                    float ProbeSize = SpringArmComponent->ProbeSize;
+                    if (ImGui::SliderFloat("Probe Size", &ProbeSize, 0.0f, 100.0f))
+                    {
+                        SpringArmComponent->ProbeSize = ProbeSize;
+                    }
+
+                    //float ProbeChannel = SpringArmComponent->ProbeChannel;
+                    //if (ImGui::SliderFloat("Probe Channel", &ProbeChannel, 0.0f, 100.0f))
+                    //{
+                    //    SpringArmComponent->ProbeChannel = ProbeChannel;
+                    //}
+                }
+                ImGui::EndDisabled();
+
+                bool bDoCollisionTest = SpringArmComponent->bDoCollisionTest;
+                if (ImGui::Checkbox("Do Collision Test", &bDoCollisionTest))
+                {
+                    SpringArmComponent->bDoCollisionTest = bDoCollisionTest;
+                }
+
+                ImGui::TreePop();
+            }
+
+            if (ImGui::TreeNodeEx("Camera Setting", ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_DefaultOpen))
+            {
+                bool bUsePawnControlRotation = SpringArmComponent->bUsePawnControlRotation;
+                // @todo Pawn 구현 후 이름 수정하기
+                if (ImGui::Checkbox("Use Actor Rotation", &bUsePawnControlRotation))
+                {
+                    SpringArmComponent->bUsePawnControlRotation = bUsePawnControlRotation;
+                }
+
+                {
+                    bool bInheritPitch = SpringArmComponent->bInheritPitch;
+                    if (ImGui::Checkbox("Inherit Pitch", &bInheritPitch))
+                    {
+                        SpringArmComponent->bInheritPitch = bInheritPitch;
+                    }
+
+                    bool bInheritYaw = SpringArmComponent->bInheritYaw;
+                    if (ImGui::Checkbox("Inherit Yaw", &bInheritYaw))
+                    {
+                        SpringArmComponent->bInheritYaw = bInheritYaw;
+                    }
+
+                    bool bInheritRoll = SpringArmComponent->bInheritRoll;
+                    if (ImGui::Checkbox("Inherit Roll", &bInheritRoll))
+                    {
+                        SpringArmComponent->bInheritRoll = bInheritRoll;
+                    }
+                }
+
+                ImGui::TreePop();
+            }
+
+            if (ImGui::TreeNodeEx("Lag", ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_DefaultOpen))
+            {
+                bool bEnableCameraLag = SpringArmComponent->bEnableCameraLag;
+                if (ImGui::Checkbox("Enable Camera Lag", &bEnableCameraLag))
+                {
+                    SpringArmComponent->bEnableCameraLag = bEnableCameraLag;
+                }
+
+                bool bEnableCameraRotationLag = SpringArmComponent->bEnableCameraRotationLag;
+                if (ImGui::Checkbox("Enable Camera Rotation Lag", &bEnableCameraRotationLag))
+                {
+                    SpringArmComponent->bEnableCameraRotationLag = bEnableCameraRotationLag;
+                }
+
+                ImGui::BeginDisabled(!bEnableCameraLag);
+                {
+                    float CameraLagSpeed = SpringArmComponent->CameraLagSpeed;
+                    if (ImGui::SliderFloat("Camera Lag Speed", &CameraLagSpeed, 0.0f, 1000.0f))
+                    {
+                        SpringArmComponent->CameraLagSpeed = CameraLagSpeed;
+                    }
+                }
+                ImGui::EndDisabled();
+
+                ImGui::BeginDisabled(!bEnableCameraRotationLag);
+                {
+                    float CameraRotationLagSpeed = SpringArmComponent->CameraRotationLagSpeed;
+                    if (ImGui::SliderFloat("Camera Rotation Lag Speed", &CameraRotationLagSpeed, 0.0f, 1000.0f))
+                    {
+                        SpringArmComponent->CameraRotationLagSpeed = CameraRotationLagSpeed;
+                    }
+                }
+                ImGui::EndDisabled();
+
+                ImGui::BeginDisabled(!bEnableCameraLag);
+                {
+                    float CameraLagMaxDistance = SpringArmComponent->CameraLagMaxDistance;
+                    if (ImGui::SliderFloat("Camera Lag Max Distance", &CameraLagMaxDistance, 0.0f, 1000.0f))
+                    {
+                        SpringArmComponent->CameraLagMaxDistance = CameraLagMaxDistance;
+                    }
+                }
+                ImGui::EndDisabled();
+
+                if (ImGui::TreeNodeEx("Advance", ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_DefaultOpen))
+                {
+                    bool bUseCameraLagSubstepping = SpringArmComponent->bUseCameraLagSubstepping;
+                    if (ImGui::Checkbox("Use Camera Lag Substepping", &bUseCameraLagSubstepping))
+                    {
+                        SpringArmComponent->bUseCameraLagSubstepping = bUseCameraLagSubstepping;
+                    }
+
+                    ImGui::BeginDisabled(!bUseCameraLagSubstepping);
+                    {
+                        float CameraLagMaxTimeStep = SpringArmComponent->CameraLagMaxTimeStep;
+                        if (ImGui::SliderFloat("Camera Lag Max TimeStep", &CameraLagMaxTimeStep, 0.005f, 0.5f))
+                        {
+                            SpringArmComponent->CameraLagMaxTimeStep = CameraLagMaxTimeStep;
+                        }
+                    }
+                    ImGui::EndDisabled();
+
+                    ImGui::TreePop();
+                }
+
+                ImGui::TreePop();
+            }
+
+            ImGui::TreePop();
+        }
+        ImGui::PopStyleColor();
+    }
+#pragma endregion
+
     SelectedActorPrev = SelectedActor;
     SelectedComponentPrev = SelectedComponent;
 
@@ -1407,7 +1571,7 @@ void PropertyEditorPanel::ShowActorComponents(const char* TableID)
 
         // Recursive function to add children of USceneComponent (i.e. RootComponent)
         auto AddSceneComponentChildrenRecursively = [](ActorComponentNode* ParentNode, const USceneComponent* ParentComponent, auto& AddSceneComponentChildrenRecursivelyRef)
-        -> void
+            -> void
             {
                 for (USceneComponent* ChildComponent : ParentComponent->GetAttachChildren())
                 {
@@ -1421,7 +1585,6 @@ void PropertyEditorPanel::ShowActorComponents(const char* TableID)
         {
             AddSceneComponentChildrenRecursively(RootComponentNode, RootSceneComponent, AddSceneComponentChildrenRecursively);
         }
-
 
         // @todo 더 나은 방식 찾기
         // Add Non-SceneComponents
