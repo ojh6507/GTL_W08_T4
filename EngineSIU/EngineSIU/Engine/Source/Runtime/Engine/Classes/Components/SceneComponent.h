@@ -55,6 +55,12 @@ public:
     FMatrix GetTranslationMatrix() const;
 
     FMatrix GetWorldMatrix() const;
+
+    /** Return rotation of the component, in world space */
+    FORCEINLINE FRotator GetComponentRotation() const
+    {
+        return GetWorldRotation().ToVector().GetSafeNormal();
+    }
     
     void SetupAttachment(USceneComponent* InParent);
     bool IsAttachedTo(const USceneComponent* TestComp) const;
