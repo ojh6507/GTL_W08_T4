@@ -1,7 +1,7 @@
 #include "SoundManager.h"
 #include <iostream>
 
-std::vector<std::string> SoundFileNames = { "Main","Win","Hit","ESHappy","Angry"};
+std::vector<std::string> SoundFileNames = { "Main","Win","Hit","ESHappy","Angry","ESScream" };
 
 SoundManager& SoundManager::GetInstance() {
     static SoundManager instance;
