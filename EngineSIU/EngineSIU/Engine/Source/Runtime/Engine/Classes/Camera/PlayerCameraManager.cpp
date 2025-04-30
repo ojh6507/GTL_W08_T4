@@ -15,7 +15,7 @@ bool FViewTarget::Equal(const FViewTarget& OtherTarget) const
 
 APlayerCameraManager::APlayerCameraManager()
 {
-    StartCameraFade(0, 1, 3, FLinearColor(1, 0, 0, 1));
+    StartCameraFade(0, 1, 3, FLinearColor(0, 0, 0, 1));
 }
 
 UObject* APlayerCameraManager::Duplicate(UObject* InOuter)
