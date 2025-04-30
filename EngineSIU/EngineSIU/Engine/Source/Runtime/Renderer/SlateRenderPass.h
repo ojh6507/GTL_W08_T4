@@ -1,4 +1,4 @@
-﻿
+
 #pragma once
 #include "IRenderPass.h"
 #include "EngineBaseTypes.h"
@@ -35,4 +35,5 @@ private:
     FDXDShaderManager* ShaderManager;
 
     ID3D11SamplerState* Sampler;
+
 };

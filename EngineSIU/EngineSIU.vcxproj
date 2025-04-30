@@ -185,6 +185,7 @@ xcopy /y /d "$(SolutionDir)$(ProjectName)\Engine\Source\FMOD_API\studio\lib\$(Pl
   <ItemGroup>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier_Interpolation.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraShakeModifier.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Script\LuaBinding.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompileData.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompile.cpp" />

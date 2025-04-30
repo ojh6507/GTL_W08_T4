@@ -33,15 +33,15 @@ void UCameraShakeModifier::StopShake()
     bIsStart = false;
     DisableModifier(false);  // 부드럽게 페이드 아웃
 }
-
 bool UCameraShakeModifier::ModifyCamera(float DeltaTime, FMinimalViewInfo& InOutPOV)
 {
     if (bIsStart)
     {
         OriginLocation = InOutPOV.Location;
+        OriginRotation = InOutPOV.Rotation;
         bIsStart = false;
     }
-    
+
     if (!bIsShaking)
     {
         return false;
@@ -54,45 +54,47 @@ bool UCameraShakeModifier::ModifyCamera(float DeltaTime, FMinimalViewInfo& InOut
     if (ShakeTimeRemaining <= 0.0f)
     {
         InOutPOV.Location = OriginLocation;
+        InOutPOV.Rotation = OriginRotation;
         // 셰이크 완전 중지
         StopShake();
         return false;
     }
-
-    // 시간 감소
-    ShakeTimeRemaining -= DeltaTime;
-
-    // 간단한 난수 생성
-    float randX = (rand() % 2000 - 1000) / 1000.0f;  // -1.0 ~ 1.0
-    float randY = (rand() % 2000 - 1000) / 1000.0f;
-    float randZ = (rand() % 2000 - 1000) / 1000.0f;
 
     // 현재 강도 계산 (시간에 따른 감쇠)
     float currentIntensity = ShakeIntensity;
     if (ShakeDuration > 0.0f)
     {
         float timeRatio = ShakeTimeRemaining / ShakeDuration;
-        currentIntensity *= timeRatio; // 시간에 따라 선형 감소
+        currentIntensity *= FMath::Pow(timeRatio, 0.3f);
     }
+
+    // 달리는 방향 고려한 흔들림
+    float frequencyMultiplier = 12.0f;
+    float timeElapsed = ShakeDuration - ShakeTimeRemaining;
+
+    // 주행 방향(X축) 강조 흔들림
+    float smoothX = FMath::Sin(timeElapsed * frequencyMultiplier * 1.5f) * currentIntensity * 25.0f;
+    float smoothY = FMath::Sin(timeElapsed * frequencyMultiplier) * currentIntensity * 10.0f;
+    float smoothZ = FMath::Sin(timeElapsed * frequencyMultiplier * 0.8f) * currentIntensity * 5.0f;
 
     // 셰이크 오프셋 계산
     FVector shakeOffset;
-    shakeOffset.X = randX * currentIntensity;
-    shakeOffset.Y = randY * currentIntensity;
-    shakeOffset.Z = randZ * currentIntensity * 0.5f;  // Z축은 약하게
+    shakeOffset.X = smoothX;  // 주행 방향 강조
+    shakeOffset.Y = smoothY;  // 약간의 좌우 흔들림
+    shakeOffset.Z = smoothZ;  // 미세한 상하 흔들림
 
-    // 회전 오프셋 (선택적)
+    // 회전 오프셋 (충격감 강조)
     FRotator rotOffset;
-    rotOffset.Pitch = randX * currentIntensity * 2.0f;
-    rotOffset.Yaw = randY * currentIntensity * 2.0f;
-    rotOffset.Roll = randZ * currentIntensity * 0.5f;  // Roll은 약하게
+    rotOffset.Pitch = smoothY * 0.1f;   // 앞뒤 흔들림
+    rotOffset.Yaw = smoothX * 0.05f;    // 회전 방향 미세 조정
+    rotOffset.Roll = smoothZ * 0.03f;   // 미세한 기울임
 
-    InOutPOV.Location += shakeOffset;
-    InOutPOV.Rotation += rotOffset;
+    // 원래 위치/회전을 기준으로 오프셋 적용
+    InOutPOV.Location = OriginLocation + shakeOffset;
+    InOutPOV.Rotation = OriginRotation + rotOffset;
 
     return true;
 }
-
 //void UCameraShakeModifier::ModifyCamera(float DeltaTime, FVector ViewLocation, FRotator ViewRotation, float FOV,
 //    FVector& NewLocation, FRotator& NewRotation, float& NewFOV)
 //{

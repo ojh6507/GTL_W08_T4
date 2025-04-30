@@ -6,14 +6,25 @@
 class AActor;
 class APlayerCameraManager;
 
+enum class EModifierType 
+{
+    Shake,
+};
+
 class UCameraModifier : public UObject
 {
     DECLARE_CLASS(UCameraModifier, UObject)
+
+private:
+    EModifierType MType;
+
 public:
     UCameraModifier();
     ~UCameraModifier() override;
     UObject* Duplicate(UObject* InOuter) override;
 
+    EModifierType GetModifierType();
+    void SetModifierType(EModifierType type);
 protected:
     /** true일 경우, 이 모디파이어는 카메라에 적용되지 않습니다. */
     uint32 bDisabled = true;

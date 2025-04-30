@@ -2,330 +2,927 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include=".vs">
-      <UniqueIdentifier>{B1AF0312-20A7-4F32-9D61-0119A9BF835E}</UniqueIdentifier>
+      <UniqueIdentifier>{8D76A29B-C3EA-4511-9F7B-D9AD2C6DAB44}</UniqueIdentifier>
     </Filter>
     <Filter Include=".vs\EngineSIU">
-      <UniqueIdentifier>{B14B2246-CCDC-4D98-9BC2-52698C2CA48A}</UniqueIdentifier>
+      <UniqueIdentifier>{0EC30EBD-D855-4CB2-A9D9-00CF0393BA8E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\copilot-chat">
+      <UniqueIdentifier>{B1AC2132-E133-42C5-B0A1-471A1468AABE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\copilot-chat\5df65ed0">
+      <UniqueIdentifier>{D45384CC-8ECB-4984-80E3-C752E58AC41D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\copilot-chat\5df65ed0\sessions">
+      <UniqueIdentifier>{95A1239D-C914-4439-8C60-A32387239D6A}</UniqueIdentifier>
     </Filter>
     <Filter Include=".vs\EngineSIU\CopilotIndices">
-      <UniqueIdentifier>{433DFA60-0C67-4826-B746-0356FF63F304}</UniqueIdentifier>
+      <UniqueIdentifier>{CA18336C-44D0-4478-B69D-352A4FA5AA69}</UniqueIdentifier>
     </Filter>
     <Filter Include=".vs\EngineSIU\CopilotIndices\17.13.444.19527">
-      <UniqueIdentifier>{3DC11967-FB97-486D-AC2E-7DCDDDB43B95}</UniqueIdentifier>
+      <UniqueIdentifier>{60CBC46B-6147-462B-824F-095507E556B2}</UniqueIdentifier>
     </Filter>
     <Filter Include=".vs\EngineSIU\FileContentIndex">
-      <UniqueIdentifier>{0FA0852A-4627-4CC1-925E-D1387E547395}</UniqueIdentifier>
+      <UniqueIdentifier>{B0961914-1C6D-4F12-91AB-612EB3FBDD46}</UniqueIdentifier>
     </Filter>
     <Filter Include=".vs\EngineSIU\v17">
-      <UniqueIdentifier>{AAECB29C-803E-4435-9D73-62F1681C8404}</UniqueIdentifier>
+      <UniqueIdentifier>{A486EC2A-6730-44B9-B1F5-D3DEB8A83A31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch">
+      <UniqueIdentifier>{6E391856-59EE-404B-83CF-207D45346B2D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH">
+      <UniqueIdentifier>{0299D559-88A8-4911-99B6-A0F9D5C9AC98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\10559ccf59cd7c30">
+      <UniqueIdentifier>{BF5A435C-1F71-4F18-A6C9-00D9670D9113}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\12395560921659fa">
+      <UniqueIdentifier>{21C386A3-C477-4AB7-ABEA-33D3C993A856}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\139c74aebe7dc2f">
+      <UniqueIdentifier>{030FA315-42AA-4C87-8FA8-DBFCF599E159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\1477040aed4ff53a">
+      <UniqueIdentifier>{6AB202BF-758F-47F9-9A9C-796D793BF241}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\154de602175ad673">
+      <UniqueIdentifier>{40004FEF-DAC1-42B7-9948-820BDE80E686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\161021972655b4a7">
+      <UniqueIdentifier>{245C394E-DED4-479E-B83D-D364E3842AF8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\16104b5c9295f62">
+      <UniqueIdentifier>{DE3596DD-FB65-422A-9D68-02169975E427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\167551166ab053c1">
+      <UniqueIdentifier>{7C15DF61-26BC-43D8-A82E-7981FB5E10A4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\184a129b6871cb6e">
+      <UniqueIdentifier>{0C7B3B75-0D76-42FB-97CE-52CF2FA35DEF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\19439c754035fb0f">
+      <UniqueIdentifier>{3D661036-3BC1-4DF4-B330-3DC9624FF8F9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\1aa0bef9fef5ef17">
+      <UniqueIdentifier>{0C95DF58-8D6A-4B88-A0F5-F4F9C0A603C9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\1bd63745cf9e4c26">
+      <UniqueIdentifier>{A5AF160F-376B-4FBA-8C4A-85924E96F149}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\1d0cf01b9017e538">
+      <UniqueIdentifier>{CE217627-527C-4F7D-9410-5A6A3FBC0AAF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\1d746400a7ef836e">
+      <UniqueIdentifier>{08091156-BDE0-48C3-BD4B-04B4C930CDAD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\1e7f1953f9b5c872">
+      <UniqueIdentifier>{3FF75A45-AC5B-43B1-B009-CB00D144A8CA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\1e8f20eb800e0f88">
+      <UniqueIdentifier>{E699F18F-5E2C-410B-BC68-97258E3FF4C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\21e44a261244b1da">
+      <UniqueIdentifier>{0496E1D5-1C1D-49E9-9A95-5734D6E388D3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\2895e9cefb3a9c88">
+      <UniqueIdentifier>{C56DDDE1-4F86-4294-BC10-3B8A1065D4A9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\29217646be520e4b">
+      <UniqueIdentifier>{A696FA0C-476D-47AA-BCC1-EC9C84708FF6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\2ab6bda37ac954cc">
+      <UniqueIdentifier>{5F12ECFA-D0B3-41ED-AF8A-19920E18D8D4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\2affd3346859e1a9">
+      <UniqueIdentifier>{F90F0D2C-E93D-41F3-A239-D3527261D0BA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\2e7549141cffafcc">
+      <UniqueIdentifier>{3525A898-91AF-4A4E-B623-2C10729555FF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\31689f6d4fa1babe">
+      <UniqueIdentifier>{7FFC1C39-AAEB-4FF0-950F-C5261C19CD15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\3313c99c2b36d26d">
+      <UniqueIdentifier>{59B8B10A-D59C-448D-9E02-4A48A39AFF50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\33f6192bac6674b9">
+      <UniqueIdentifier>{5854AE54-CA29-4B33-BCD5-20E380000FD7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\34aa789b50f92217">
+      <UniqueIdentifier>{A1AFEE83-00DE-4884-A71B-063E986E1EF3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\36d7fcdf9a0465c8">
+      <UniqueIdentifier>{F5EDC33B-C278-4CF2-AE8F-A790152040B8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\385670f4904a9f8c">
+      <UniqueIdentifier>{DD8927E4-DC81-4E5F-866E-61423E5378C7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\38e38a4bf477b96a">
+      <UniqueIdentifier>{CDFC3243-431C-439D-8835-78A081083009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\3bab11aab2927e06">
+      <UniqueIdentifier>{884779D7-E4B8-4EF8-B4E5-3742EE853824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\3e0d4d49c3aae5dd">
+      <UniqueIdentifier>{63C82C57-231B-400E-A2F2-4450DD012B4F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\3eb83f614e699ae5">
+      <UniqueIdentifier>{F0E8C13E-6AB7-4ABE-B97C-E8336ABC3196}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\3f0f0aca720ec2d9">
+      <UniqueIdentifier>{1AC87921-9BBC-4F0A-9B4F-6149FB0EDA93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\4063118081928ece">
+      <UniqueIdentifier>{A9C4AA0C-4065-4987-89A2-7BA6851C92C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\422fda69667289d0">
+      <UniqueIdentifier>{B39FA9E5-0194-4D24-9B1D-5BC1264D86EC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\45f40036d57192f2">
+      <UniqueIdentifier>{D4ABFE26-E783-43B8-947E-4361A9C7FD45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\48d499662e7395a">
+      <UniqueIdentifier>{AB65BCF8-C9D5-4464-B5C1-679433D33F3B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\4b8a6e5c44f605e8">
+      <UniqueIdentifier>{B5D0840E-7E59-4694-B740-8C4826008FD5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\4be8cc68e1adab13">
+      <UniqueIdentifier>{AD32261F-1BC6-4C58-B62D-0DF3C5E4A935}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\4d2b0f75b5392b23">
+      <UniqueIdentifier>{6AE52995-D1AA-4092-913D-60705C8B138D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\58c522b22c50bc1b">
+      <UniqueIdentifier>{644B5AAF-6C93-4732-932F-93000862F017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\5a82448aa2540936">
+      <UniqueIdentifier>{2A4DAEAD-48BD-46D2-BFAD-0F6D236E459C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\5b26b23dfdabbe5d">
+      <UniqueIdentifier>{85E0DC3D-BA26-42BC-BF3C-69AE3030618C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\5ba06dabe0c9d4">
+      <UniqueIdentifier>{DE675503-9BE3-4689-9AED-7729A6A8ADDA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\5d72011df7be08b5">
+      <UniqueIdentifier>{11FACE0F-B245-4FA5-915A-5B1E6732E35C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\5e6c8354397f647d">
+      <UniqueIdentifier>{2C509517-F7D9-43B1-B240-CE936DB8C5FD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\5ec7f13f2dc554f1">
+      <UniqueIdentifier>{B83C6087-3B8E-41B7-AEF3-8046EA166B3C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\63d1dca0c2e4be48">
+      <UniqueIdentifier>{E5C7D7A4-4E6A-49B0-BA82-AEA4AA4FB9EB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\64189bbb46d3e93a">
+      <UniqueIdentifier>{97D61C9F-6B68-44FF-A2FF-D854A6F1DE5F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\66af0f7d65884028">
+      <UniqueIdentifier>{22DA2DEE-155A-4BAF-90C4-919DF31ADFB9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\68a0cce93c7369b1">
+      <UniqueIdentifier>{98C4E825-4D75-4C1F-977D-AE5C282218A0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\6d20c226c7052d23">
+      <UniqueIdentifier>{DEF8D973-C755-4D53-8C2E-6403CF39DAB4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\6d2a72ac25f465f1">
+      <UniqueIdentifier>{D08F32D6-5E0F-4C41-99DC-C7F5AF78BE8F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\7088b4416f9ffbc2">
+      <UniqueIdentifier>{E07840DF-3DB5-4444-9621-238F58F6DF61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\7163e6859c4c1203">
+      <UniqueIdentifier>{8A22A1A5-1E38-48D6-AF5F-F55FC0A2236F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\71bbd85eaf35759a">
+      <UniqueIdentifier>{06E8B6F8-22E7-4FA7-8931-32AF1E65CDE8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\7249221ad7e0eda6">
+      <UniqueIdentifier>{11C8A216-E4AF-4967-88A9-1AD34A278785}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\7283124782228a9f">
+      <UniqueIdentifier>{2F00CB62-9F14-4011-8287-5F39F5403656}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\746a8bc938505258">
+      <UniqueIdentifier>{0558148F-29C8-4C03-B027-F62583C50B4E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\74cecbaaaa80c289">
+      <UniqueIdentifier>{6B13B81B-7501-4F94-862A-7D81F32B41BB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\762e7912e025d9d5">
+      <UniqueIdentifier>{E025DD7D-D4E0-4DC9-A2D0-FAECCF12B48C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\773a7c69c7c1758f">
+      <UniqueIdentifier>{569E1B5E-0FAB-4B95-8C03-FEC23D6B4F6D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\77f09e3db21a7539">
+      <UniqueIdentifier>{A30ED479-FD0C-40F8-8C48-DE5875596D26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\7a6e888ef0b25b03">
+      <UniqueIdentifier>{30E0B307-BD7D-42D6-9615-A88CF729A672}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\7c0d264aaba2064f">
+      <UniqueIdentifier>{83819EF0-EDD6-4254-A54E-C6528FA37332}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\7cf96282c423311f">
+      <UniqueIdentifier>{0A76E42F-88D2-49D8-A904-9643C528CB42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\7d1061a41839ba11">
+      <UniqueIdentifier>{25A91814-751F-4A8E-9A05-5DB77EB6E4A6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\7dc9ba95b9bd2b2b">
+      <UniqueIdentifier>{156D3D65-2F76-497D-8B3A-47C0ACF704EB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\7e40ae5e603deade">
+      <UniqueIdentifier>{C6ACD8B8-7739-4D4C-8437-E328EC6829A8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\805471d35a15728c">
+      <UniqueIdentifier>{91B3B275-E414-4BE7-8C3B-3FD3DA1F9022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\81213752d2ded3e2">
+      <UniqueIdentifier>{80B35843-9A32-4A42-9D3B-0EFF08EC646A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\8165001075b9d09e">
+      <UniqueIdentifier>{C92D7D5B-53BB-44AB-B314-E2A6E283A7DE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\83a0c5b8b8bd43bd">
+      <UniqueIdentifier>{DF9939C1-69A4-4270-83A5-068F27A5E31A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\84dacd1702f18ef5">
+      <UniqueIdentifier>{E1516144-2715-4E9E-872D-06BF79063F2C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\85f759c1f7c3c312">
+      <UniqueIdentifier>{EB2FBB01-1A3F-482F-90FA-D606536434CE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\86bce4e5c146232c">
+      <UniqueIdentifier>{F757D54B-C0EF-413C-A50A-035F56CA4F22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\89498134e9bb844c">
+      <UniqueIdentifier>{B49C01FC-C546-45A6-9281-DB916C152EEE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\8a3759c13710ac6f">
+      <UniqueIdentifier>{673C3410-775A-4827-93BF-F68BF2CD1231}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\8ae53f2c067d67db">
+      <UniqueIdentifier>{A45B9FC1-143F-4CF7-8B5B-3434586645D3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\8b0be551f8d69da0">
+      <UniqueIdentifier>{1D33FB8C-E8DE-407C-8EBF-868D41534290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\8bb3d36b371d4374">
+      <UniqueIdentifier>{2CAB38F4-E6F5-46D9-AF3B-D162553FBEF3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\8c7b49cbfb8d88a4">
+      <UniqueIdentifier>{99AEC876-3F10-40FA-B20C-4D8F74E03D1E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\8d1d59fec1e896f7">
+      <UniqueIdentifier>{65449235-FC70-469E-934F-0E2EF73BBE2D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\8df5583326134355">
+      <UniqueIdentifier>{0B44CB1B-8A87-4EF8-8595-52CB77ADF7FA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\91fb6f67add1b277">
+      <UniqueIdentifier>{C64DD12E-7496-4E74-AD19-881D9B1CC965}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\9338ce706b9536a3">
+      <UniqueIdentifier>{C6CD11AE-DB7C-48F9-8C36-E49F95B679A1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\93e28d096609f9ae">
+      <UniqueIdentifier>{B991214F-5F3A-41CC-A7D7-A4AADDC57EF0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\9720ffd50f278127">
+      <UniqueIdentifier>{A5354DC1-C563-44EF-93B7-64BF2EE7892A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\98a591ab909e1549">
+      <UniqueIdentifier>{E0A2C3ED-6886-4E67-960D-0571F33FD996}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\9ceb6d05c69950b9">
+      <UniqueIdentifier>{69300E69-0F2B-4AB9-AAEE-8E9FED2F5EDF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a14aeac90bc2e348">
+      <UniqueIdentifier>{04DE56B7-3FB9-45E8-9EAF-4B4D818BA54B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a1aaf144fb9d6fe8">
+      <UniqueIdentifier>{6C4B0F6A-4F19-4FA4-BB85-3BDA0211AA62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a227994b86bdd5fc">
+      <UniqueIdentifier>{8729FD9A-1CA3-4367-9825-84B5F519A283}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a2fe7a5123502fb5">
+      <UniqueIdentifier>{76865C3B-2D5A-4713-8D4A-8B70203F9BEF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a396de9d80fabeb2">
+      <UniqueIdentifier>{33BB2D37-356F-4C1D-9A64-0533EE0DA6D9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a3984b5cf36f4472">
+      <UniqueIdentifier>{8C52EC6E-25F4-4827-9D17-B32F813AB106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a456b601cb92ccee">
+      <UniqueIdentifier>{8FC7A9A1-1B15-4EBC-8662-AEC832CA45EB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a5620e83714248b9">
+      <UniqueIdentifier>{D9A09C49-3B7D-4DA1-B99A-878086D8747A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a59c19237e8d3e54">
+      <UniqueIdentifier>{86C2DF66-25C3-4099-93EA-603AA29A725D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a6c632e870dc48e5">
+      <UniqueIdentifier>{46DF50D8-B4D4-4C5A-9FDC-260F0A52DEB1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a6d7ae2fdfbc894f">
+      <UniqueIdentifier>{7E304DEE-3016-4AF8-9502-03C5E0C0A2F2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a7b303c0794a3d92">
+      <UniqueIdentifier>{50056AE0-DD43-40D9-BEC6-11C7F36F34AC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a86ab157bdd90cd8">
+      <UniqueIdentifier>{CF6838A2-297B-47BC-AF3B-99B28CA31B2D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a9dd9c8237dccc92">
+      <UniqueIdentifier>{B38DDE0A-E408-495B-81D1-4D61FE61C2D4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ae2334a9b06c0ffe">
+      <UniqueIdentifier>{529C84FF-7E4C-4961-887F-E0364EF512C0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\af7cf160017569d1">
+      <UniqueIdentifier>{FC8841BE-0C07-4CA4-8F55-AAAD00FC5610}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\af948a945c186661">
+      <UniqueIdentifier>{DF383C1D-37AD-4974-A0B5-EBB6A79C058D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b02ae5f80ef526d1">
+      <UniqueIdentifier>{C6757D34-6AB9-4515-AB32-735D53B5DD01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b0460c80ef3dc42a">
+      <UniqueIdentifier>{9E0CC921-1B65-479B-BF2A-168A60BE1366}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b0d372d2d1a31b33">
+      <UniqueIdentifier>{490CA2D0-F4B7-48A5-B10B-EF65DB4B7B67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b0faa0c3b3c89775">
+      <UniqueIdentifier>{70E21FDF-819D-414D-B52C-A4396EB48AA3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b2f6b2864eb9c2da">
+      <UniqueIdentifier>{064B5451-BB3A-48D0-AEBB-189E2FE38BDB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b63b6f89b065edfc">
+      <UniqueIdentifier>{EBADF6BF-BA21-45B4-B5C0-C1159FE607BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b67dca686e5d747a">
+      <UniqueIdentifier>{22EDC185-03EA-41CF-85CA-B4E5E6D68FE3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b6e759c1e0688a36">
+      <UniqueIdentifier>{DD2E7406-7DA6-40C0-895C-AD98BFBB1F4C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b7dc36958ca38a23">
+      <UniqueIdentifier>{563D8882-BCD1-422D-BE97-6E8CE103F592}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b9ed8266bd98e86d">
+      <UniqueIdentifier>{D5AADEC0-7D4B-4670-B75A-427FB8A2D65C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ba1d2d59ca3c6a2c">
+      <UniqueIdentifier>{ABEE0B28-0BEF-40CE-B262-0E0605D25F84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\bdfab1b9d3657d65">
+      <UniqueIdentifier>{37F728D1-154D-4202-9C35-16DCBD043623}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\bf5bb864f3e7fc8c">
+      <UniqueIdentifier>{77ACA813-1A5E-4142-87C7-736E9771F259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\c0517525d575f3d9">
+      <UniqueIdentifier>{7036B72A-E83D-4163-A516-0BBAFB32721C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\c0f1daaeed10e248">
+      <UniqueIdentifier>{39027E63-CED4-4149-96CD-A1B00E128411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\c154682336d57639">
+      <UniqueIdentifier>{E24F142A-FEF5-4140-A571-80D56A0527B2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\c36dc3525cbeb6d">
+      <UniqueIdentifier>{D6FF820B-CC67-4AA2-9FC7-EDBFEA4ED5D1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\c648e710a694a540">
+      <UniqueIdentifier>{B090EA3E-A2BA-440E-B941-6DB2E6E9578F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\c7cd1f4453b22643">
+      <UniqueIdentifier>{94D01FF0-46F5-4242-AD85-FB1B94C04BCC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\c7eaee78badbca7b">
+      <UniqueIdentifier>{5FE11D53-8724-40E5-8266-F10F83287E97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\c94f325fef0a692b">
+      <UniqueIdentifier>{207EE040-9886-42CB-94C1-9755F1D8281A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\cac4ec8c9f2b2d93">
+      <UniqueIdentifier>{E60155D4-ACA0-4D07-83AE-9F534A709F0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\caf8cd4cedf8134f">
+      <UniqueIdentifier>{456AE667-2669-4C6B-92C5-27FF8ABBE3C6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\cd6e54e1e9330b79">
+      <UniqueIdentifier>{FB2DA697-1985-410C-879D-7B1240732E0D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ce2785c4adfa3a27">
+      <UniqueIdentifier>{4177C000-7E63-41D0-ACC3-8416626C600C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ce8c2122a41bf17f">
+      <UniqueIdentifier>{48EED464-8D0B-4B68-8F0A-A68DBB11E827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\cfc57b077d097a26">
+      <UniqueIdentifier>{5B4250B7-1D62-4188-9D32-AABBBF4DDEDF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\d9ef047dcdde4c5e">
+      <UniqueIdentifier>{1D9E87EA-5CF9-4F61-8B75-E327575C0198}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\da1f13d39c638f6e">
+      <UniqueIdentifier>{15D47580-2DEA-4CD0-B3B6-AD097CD29AE0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\db5830fdac0939e4">
+      <UniqueIdentifier>{D0665705-5F61-4C19-9080-DC5185AF90F2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ddc7c471571fe669">
+      <UniqueIdentifier>{98C2719D-3338-4CFA-AE02-5620264ED8AB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\df153342053dd108">
+      <UniqueIdentifier>{7943C463-DFEE-4DD1-AED8-E1B818D1D56E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\df6b02ad1d61923d">
+      <UniqueIdentifier>{935AB2D7-040D-429D-A07E-F826A314AC9B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\df8c4deaaf679d41">
+      <UniqueIdentifier>{30AB0D8B-9A4E-4C3E-856E-403A1AFE63CD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\e0f643b6bded768b">
+      <UniqueIdentifier>{0ACA4F61-E7E7-47D0-90C3-C158D9952B4C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\e157d0b12e918c3d">
+      <UniqueIdentifier>{6C1615C4-B28F-4262-8748-73BDAAB0BBF2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\e3bc486a469ce16e">
+      <UniqueIdentifier>{333CF711-F625-4494-B74B-027FAD1655DB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\e546270fd306001f">
+      <UniqueIdentifier>{B0E88103-8CF3-4F86-A5D7-9A5494CBBDE6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\e57753b9c6791f39">
+      <UniqueIdentifier>{94B94CCA-09E7-416E-BBD2-172C23CB6704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\e6eb7ee556b15f11">
+      <UniqueIdentifier>{4D139C18-6519-493D-94E6-718651ABC19A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ea5cc4723b87c871">
+      <UniqueIdentifier>{853AD28D-9243-4B10-A263-53E7FAE98549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\eb3166d831c39af3">
+      <UniqueIdentifier>{6E0C43F1-CB7C-413B-B325-E25F55C76485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\eb4cc66876caa9db">
+      <UniqueIdentifier>{8DD2CC3A-8C1C-4AFD-A292-8ACF1B2D2E60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ef71329612a21941">
+      <UniqueIdentifier>{EA646604-3BE4-4430-B956-723AAF7CFB8E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ef850ebbb6b71f97">
+      <UniqueIdentifier>{057D185D-6533-42EE-8488-A1DF2AEF613F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\f154fa20d7439dc8">
+      <UniqueIdentifier>{A981991F-BEDF-4E9B-AA65-D9B9B3716C80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\f1b8deedc8f0c1ee">
+      <UniqueIdentifier>{DFB9CF09-314F-438C-A100-4D37A4F9140F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\f278d8847997fc1b">
+      <UniqueIdentifier>{792F5663-FFF7-4154-8F97-168F7A0C1FCB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\f5e34d4713d7f956">
+      <UniqueIdentifier>{73E44F41-4803-4342-A1F4-73A732B803AD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\f5fd96497205f15f">
+      <UniqueIdentifier>{802AE515-447F-4718-AFB6-1D15C82951D9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\f6f0bbf74e7f1df1">
+      <UniqueIdentifier>{D7F0516E-5C0C-4F52-B135-FF33C6BEDB56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\f90290b0f16f5c4e">
+      <UniqueIdentifier>{229484D2-D04F-4954-A32A-5EFC4C58A06E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\f902c7b54d182fb8">
+      <UniqueIdentifier>{F0A41AEA-5106-4D34-AA62-A50D72B5C88E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\fcf9e9f164657f08">
+      <UniqueIdentifier>{CE2FC03B-F8FA-4451-B7A3-C0F9A40E199F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\fdb90e873b1a7455">
+      <UniqueIdentifier>{8F063E61-BFD6-489E-931B-E19D46EA1037}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ff9cbd7caa3a0bc0">
+      <UniqueIdentifier>{1A984F3D-5642-4020-ABE6-019C59B31996}</UniqueIdentifier>
     </Filter>
     <Filter Include="Binaries">
-      <UniqueIdentifier>{4FABD7A5-5C59-4497-A2A5-8FA0B5C5B333}</UniqueIdentifier>
+      <UniqueIdentifier>{6E671F36-16DB-4BB0-B6B2-D1F08FEA5E70}</UniqueIdentifier>
     </Filter>
     <Filter Include="Binaries\x64">
-      <UniqueIdentifier>{A28093F8-7748-4FF4-9195-700105C23687}</UniqueIdentifier>
+      <UniqueIdentifier>{6F12DB0F-C070-43D5-8B57-2C8B29AE2162}</UniqueIdentifier>
     </Filter>
     <Filter Include="Binaries\x64\EngineSIU">
-      <UniqueIdentifier>{BA7BB7A3-BC5A-47CB-80BE-65CA267FAACA}</UniqueIdentifier>
+      <UniqueIdentifier>{6EB2C954-59E8-45CD-A113-6DEA8F653D25}</UniqueIdentifier>
     </Filter>
     <Filter Include="Binaries\x64\EngineSIU\Debug">
-      <UniqueIdentifier>{A1267F35-EE2E-4B82-BB44-F00C2B182936}</UniqueIdentifier>
+      <UniqueIdentifier>{219ECF2F-7265-4BA5-B20B-B8F3D44D17E2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Binaries\x64\EngineSIU\Release">
+      <UniqueIdentifier>{29572ED3-08F1-47DA-BD3D-C95806D7CC30}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU">
-      <UniqueIdentifier>{F2941A47-5CC5-42C9-B190-1576CA3B068A}</UniqueIdentifier>
+      <UniqueIdentifier>{F5C5CC68-B3ED-4828-B165-B46E571FB392}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Assets">
-      <UniqueIdentifier>{7AF4E20D-AE03-4967-A1A7-9860567A824E}</UniqueIdentifier>
+      <UniqueIdentifier>{1B6D05CC-DB77-42F5-9F68-D96DC881A4C4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Assets\Binary">
+      <UniqueIdentifier>{0A3C502C-7ED7-4CB8-A52A-C98915164927}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Assets\Editor">
-      <UniqueIdentifier>{728A7392-84CA-4D3C-BB7A-35A4236CEDC4}</UniqueIdentifier>
+      <UniqueIdentifier>{2818BA29-B61C-4523-89B8-054D28CAF2DF}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Assets\Editor\Icon">
-      <UniqueIdentifier>{5A96ADDC-3529-4B28-8626-17527350384F}</UniqueIdentifier>
+      <UniqueIdentifier>{1D1985DE-9656-4A1D-AC5B-B4F2D3382F72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Assets\Sound">
+      <UniqueIdentifier>{38466D22-7CDC-4BA0-8C82-94A599753C89}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Assets\Texture">
-      <UniqueIdentifier>{04096FEF-7226-43BE-8607-B012738E6F9C}</UniqueIdentifier>
+      <UniqueIdentifier>{D64CFC55-CF21-479C-9930-0763B46316D2}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Contents">
-      <UniqueIdentifier>{E920636E-4435-4811-AC79-BD0DAC9F38F7}</UniqueIdentifier>
+      <UniqueIdentifier>{1F531229-F034-49EA-9A12-789344D5AE72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Contents\Asphalt">
+      <UniqueIdentifier>{99252713-A8AC-43C9-939C-8B14D1AD0932}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Contents\Asphalt\Textures">
+      <UniqueIdentifier>{9DAC2730-7F07-40A5-9066-90A4AF42A519}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Contents\Binary">
+      <UniqueIdentifier>{AD4BE2A4-5833-4310-A763-EA09E2AA6B4C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Contents\Binary\Asphalt">
+      <UniqueIdentifier>{4C4DD4CE-970A-41C9-9654-2322991DFE2C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Contents\Binary\Cube">
+      <UniqueIdentifier>{F41C29EC-F3B1-420A-8C32-F07A9502BE36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Contents\Binary\Dodge">
+      <UniqueIdentifier>{D20388D6-5BB8-4A94-B6C2-193D53CAA8EF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Contents\Binary\Reference">
+      <UniqueIdentifier>{C34160CE-6B42-4753-9F0A-F12525CF30EB}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Contents\Cube">
-      <UniqueIdentifier>{13FA556B-79A8-4E0F-8A92-8DEB72011DC9}</UniqueIdentifier>
+      <UniqueIdentifier>{0643567D-A4E2-458B-949F-E94A4F742A6F}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Contents\Dodge">
-      <UniqueIdentifier>{29B8BBFF-64C5-4D55-A047-85B70688C003}</UniqueIdentifier>
+      <UniqueIdentifier>{15610794-F28D-4988-8DF9-6D79D0C91B65}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EngineSIU\Contents\Madara">
-      <UniqueIdentifier>{2D17413D-33DD-4F94-91A4-0E7C2B90B977}</UniqueIdentifier>
+    <Filter Include="EngineSIU\Contents\LuaScript">
+      <UniqueIdentifier>{10FFDCA8-A751-4CCB-BD60-7E6F32B62E90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Contents\LuaScript\Lua">
+      <UniqueIdentifier>{5DC9DDBC-2F9C-4C31-BC3D-B245914868AE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Contents\LuaScript\Lua\Annotation">
+      <UniqueIdentifier>{A21F4579-29B4-4EA9-87C0-59D4DFDDFD08}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Contents\Reference">
-      <UniqueIdentifier>{80E65F80-23F5-4D9F-B8D1-73E279AB06C7}</UniqueIdentifier>
+      <UniqueIdentifier>{D68C0C90-7C99-4661-AB82-EF10490506F1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Contents\Scene">
+      <UniqueIdentifier>{DDB526C1-D62F-48E5-BB4D-E5E87B4C25C9}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Contents\Texture">
-      <UniqueIdentifier>{57047B62-DB35-4AA9-BC20-1FBC4A91FD81}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Contents\Unreal">
-      <UniqueIdentifier>{B86C3A49-4697-4164-BF9D-FA2DE784F144}</UniqueIdentifier>
+      <UniqueIdentifier>{7F081448-4ADC-4FC3-95AF-795E28FC45B3}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine">
-      <UniqueIdentifier>{C0D96638-129D-41BB-A158-38AC54304B8E}</UniqueIdentifier>
+      <UniqueIdentifier>{FBE83FE2-A730-479C-A160-398E85366ED8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Engine\Script">
+      <UniqueIdentifier>{6D154B3F-024B-4BB1-BCCC-30D1E14CA012}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source">
-      <UniqueIdentifier>{5D6D22A9-B23C-438E-A4A3-9973759472D8}</UniqueIdentifier>
+      <UniqueIdentifier>{55C597F9-B819-4FC1-830B-0EB24E2BC802}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Developer">
-      <UniqueIdentifier>{60E0B082-D2E4-42C3-89C5-D474415A9CED}</UniqueIdentifier>
+      <UniqueIdentifier>{BFF57BEA-5A13-466B-A06C-EC184CC9424A}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils">
-      <UniqueIdentifier>{4428A96C-124C-47D6-9B25-CE0A195A1B95}</UniqueIdentifier>
+      <UniqueIdentifier>{1128FE25-FE31-4982-92CD-92F1F44953FF}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Editor">
-      <UniqueIdentifier>{83C809FE-A9AD-44A4-825A-A058D311A407}</UniqueIdentifier>
+      <UniqueIdentifier>{B172C07B-FD4B-4FE9-8526-BC302EBF04EE}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Editor\LevelEditor">
-      <UniqueIdentifier>{F67A2B6D-3D62-44A7-84B9-A1E2D70B9355}</UniqueIdentifier>
+      <UniqueIdentifier>{00975A4F-888C-4C6C-9795-EFDF37F256A7}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Editor\PropertyEditor">
-      <UniqueIdentifier>{20568A07-3AD3-436C-B676-FEDCD3324DEA}</UniqueIdentifier>
+      <UniqueIdentifier>{9124E18B-E86B-4151-81BC-6B74A860D6E4}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Editor\UnrealEd">
-      <UniqueIdentifier>{17C20347-1693-43C9-98A9-6E8C71F32783}</UniqueIdentifier>
+      <UniqueIdentifier>{F3137C3D-B43E-402F-B4D3-9D576EC38A94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Engine\Source\FMOD_API">
+      <UniqueIdentifier>{249048BD-D566-4706-B7DC-BC38B8962ADF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Engine\Source\FMOD_API\core">
+      <UniqueIdentifier>{2D91B581-8CF3-473A-8A45-BC0CD0E0D531}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Engine\Source\FMOD_API\core\inc">
+      <UniqueIdentifier>{866A847D-B901-4CF9-9D40-2BA170841465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Engine\Source\FMOD_API\core\lib">
+      <UniqueIdentifier>{39ABA8CF-E69E-4766-AF66-50DF33633F57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Engine\Source\FMOD_API\core\lib\x64">
+      <UniqueIdentifier>{ADA94747-7646-4028-9140-0DDA87044F9D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Engine\Source\FMOD_API\studio">
+      <UniqueIdentifier>{D67CBD84-8830-4109-A76B-C0781C68BE7D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Engine\Source\FMOD_API\studio\inc">
+      <UniqueIdentifier>{C9682C82-79EF-408F-999B-EFFB6B766BA6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Engine\Source\FMOD_API\studio\lib">
+      <UniqueIdentifier>{15FF1791-63CD-4365-B531-75E2E7C4FD22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Engine\Source\FMOD_API\studio\lib\x64">
+      <UniqueIdentifier>{769C0316-D188-4D68-81C9-06F221D0B960}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime">
-      <UniqueIdentifier>{97DCB193-85FA-463F-9680-578D767D0C2A}</UniqueIdentifier>
+      <UniqueIdentifier>{434D3AEC-0025-4D89-8D2C-B121C12C5DAC}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Core">
-      <UniqueIdentifier>{10FBBA4D-4926-4A42-A6BB-5564986CF004}</UniqueIdentifier>
+      <UniqueIdentifier>{B2FB9253-07E1-4F89-990F-41EFA8B3EDB9}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Core\Container">
-      <UniqueIdentifier>{2DE9FE7F-B7B1-414D-A8F6-6B6B50CAAB5B}</UniqueIdentifier>
+      <UniqueIdentifier>{14AEE9A3-9272-4BA5-991E-D232C6266D1B}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Core\Delegates">
-      <UniqueIdentifier>{C94FE02B-E292-444D-B1E7-1BDACC899B7A}</UniqueIdentifier>
+      <UniqueIdentifier>{4DF3CDDA-5D0C-4590-86BF-0CC921928F40}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Core\HAL">
-      <UniqueIdentifier>{12735259-6694-42FD-8C7E-D42E8DB80FF5}</UniqueIdentifier>
+      <UniqueIdentifier>{7B1FDCFE-6B51-4101-8D67-E67F4A0B3E40}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Core\Math">
-      <UniqueIdentifier>{1F3DF1FA-C0E4-4F37-8373-B13CF54A3DC9}</UniqueIdentifier>
+      <UniqueIdentifier>{28EA89BF-BD7C-4087-9003-0EC9E54B6032}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Core\Misc">
-      <UniqueIdentifier>{08862956-B5F4-49DB-9495-1275A8DAFF96}</UniqueIdentifier>
+      <UniqueIdentifier>{46515E77-08FA-449D-9185-9915904C995A}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Core\Serialization">
-      <UniqueIdentifier>{50E2E0C2-DDF7-4466-A43F-14A03AE5F470}</UniqueIdentifier>
+      <UniqueIdentifier>{002EE23F-BDD7-4C37-B02A-F2DF07B38A35}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Core\Stats">
-      <UniqueIdentifier>{3B804457-98F8-421A-9C59-7BEB600C62E3}</UniqueIdentifier>
+      <UniqueIdentifier>{78F6E63E-D2E3-4E23-9A8E-98BDC2374DB4}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\CoreUObject">
-      <UniqueIdentifier>{95886429-72E9-461C-8DA3-1B3175019D06}</UniqueIdentifier>
+      <UniqueIdentifier>{BD2AC6DE-D847-4E2D-8568-AE4E50FF43B3}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject">
-      <UniqueIdentifier>{8CC72C8E-DD33-4645-B5D8-9DD326BDDED8}</UniqueIdentifier>
+      <UniqueIdentifier>{74F0E5C9-A7A7-4042-8E95-A55013C63E22}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Engine">
-      <UniqueIdentifier>{17EE011D-FF94-4014-9E08-91F23144FEA4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Camera">
-      <UniqueIdentifier>{E00FD0F0-ED04-4CC1-8451-19ADBCD47D62}</UniqueIdentifier>
+      <UniqueIdentifier>{CBCCA67B-2B36-48F0-BD7A-2FE14E368E4C}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes">
-      <UniqueIdentifier>{0BFA7C94-43FF-4FD4-A027-9CD224C8D42D}</UniqueIdentifier>
+      <UniqueIdentifier>{BDDE774F-8298-45C8-8698-6166F06AB983}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors">
-      <UniqueIdentifier>{CE11763C-2677-4EDF-9AFC-EDDB4EA2F772}</UniqueIdentifier>
+      <UniqueIdentifier>{357C71F4-C7EE-4217-9A52-4BA0819792BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera">
+      <UniqueIdentifier>{38E7D6EE-EB99-454F-97CA-6DBE17E9DD49}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components">
-      <UniqueIdentifier>{C7641B57-AA86-46FF-8086-5C8496FA2E3D}</UniqueIdentifier>
+      <UniqueIdentifier>{40DF856C-9F63-4C32-84C2-6D91C5491C53}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light">
-      <UniqueIdentifier>{78AE490C-36BC-45F0-B133-851DFF9D888C}</UniqueIdentifier>
+      <UniqueIdentifier>{14A41C8E-6E99-48F1-8B0F-82E86CB852C6}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Material">
-      <UniqueIdentifier>{76B4C2D2-21C6-4DEB-AB0F-B3A1400C62DC}</UniqueIdentifier>
+      <UniqueIdentifier>{920FE6C4-B944-49DD-ACED-D7B55631F1A9}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Mesh">
-      <UniqueIdentifier>{C663EDCE-33AD-4897-985A-283100C2CAE4}</UniqueIdentifier>
+      <UniqueIdentifier>{6A0BD9B2-1AB0-4CA7-A35F-817758E1DF84}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine">
-      <UniqueIdentifier>{2743DA54-FE46-44CC-95D5-8C400B67B735}</UniqueIdentifier>
+      <UniqueIdentifier>{26AE47A1-8EDB-45EB-8DBB-DE2AC860315F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics">
+      <UniqueIdentifier>{B3B4CCB2-8ACC-4115-89E4-2DAFDA1E3D41}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework">
-      <UniqueIdentifier>{F2DD08C4-5C89-4A51-B8DF-5FE3A87ED39A}</UniqueIdentifier>
+      <UniqueIdentifier>{6E685F0B-A654-4C6C-A358-04ECAC76E7C9}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\UserInterface">
-      <UniqueIdentifier>{1E566FEE-24ED-4773-B7FC-58E6CD4AEE09}</UniqueIdentifier>
+      <UniqueIdentifier>{B0F62693-8233-401C-9787-0AA37C277FBD}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\World">
-      <UniqueIdentifier>{DD195D29-BE6A-40A0-9431-D2B6D599EDDE}</UniqueIdentifier>
+      <UniqueIdentifier>{AB46B741-056D-4F8A-A77A-87097861907D}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\InputCore">
-      <UniqueIdentifier>{26C51379-D3A9-43CC-9F38-544018AD742A}</UniqueIdentifier>
+      <UniqueIdentifier>{DE83B6E6-FE0D-4CC8-B5B6-E8D49ABC6229}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework">
-      <UniqueIdentifier>{C6B9A36A-FFA2-43E4-8460-07C5F543138D}</UniqueIdentifier>
+      <UniqueIdentifier>{0AD0486C-6066-4014-9BC4-5177AFC2AD01}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos">
-      <UniqueIdentifier>{491305FF-81DC-4786-9307-7A456D4C46B7}</UniqueIdentifier>
+      <UniqueIdentifier>{5E42AE04-F4EA-45E3-BEA3-13DDB60C4CD3}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Launch">
-      <UniqueIdentifier>{56D55919-F0D4-45D4-BB11-8DD10F83FCE5}</UniqueIdentifier>
+      <UniqueIdentifier>{043202C7-F314-49CC-9C14-D8E8638BAF9F}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Renderer">
-      <UniqueIdentifier>{7D914BC4-D831-4A0A-BE15-C7D407B9B2AB}</UniqueIdentifier>
+      <UniqueIdentifier>{963E9C69-5B13-47BC-90A4-909C8B6A95B9}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow">
-      <UniqueIdentifier>{197DF32E-2CA3-42BE-B71D-781FBC9C313A}</UniqueIdentifier>
+      <UniqueIdentifier>{F09D0359-3C78-4C99-A58E-D33D5D9B7B5E}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Serialization">
-      <UniqueIdentifier>{5395B5BA-D817-47E0-970E-38DD3E257F00}</UniqueIdentifier>
+      <UniqueIdentifier>{20366AF3-BBB6-4837-91D6-85E4A527A94D}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Slate">
-      <UniqueIdentifier>{F26F93C5-9FC6-49A9-883F-EB98FA077DAF}</UniqueIdentifier>
+      <UniqueIdentifier>{8C0222A3-C89E-4187-90D3-73D03E9C62FB}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Slate\Widgets">
-      <UniqueIdentifier>{0DAD0073-5FBE-48D8-A66E-33371FC7AA1A}</UniqueIdentifier>
+      <UniqueIdentifier>{5110BA70-898F-4CA9-9F58-59C315E1A7B3}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Slate\Widgets\Layout">
-      <UniqueIdentifier>{B70E4714-31B6-42E4-8C94-F85A7C4D1B70}</UniqueIdentifier>
+      <UniqueIdentifier>{12944A24-61EA-4EDA-B576-C2E9D3478A98}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\SlateCore">
-      <UniqueIdentifier>{6F0D6182-5428-4668-B5E3-7CD90AB81534}</UniqueIdentifier>
+      <UniqueIdentifier>{3BA42A00-17E2-4642-97F4-5408D7548219}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\SlateCore\Input">
-      <UniqueIdentifier>{3F85EEAA-7276-4B5A-A556-698FC3C0A470}</UniqueIdentifier>
+      <UniqueIdentifier>{6AD988AA-B8E2-41FF-9EFE-135C96E06773}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\SlateCore\Widgets">
-      <UniqueIdentifier>{625A0FD8-DD59-480B-BBD6-3E5573397FDD}</UniqueIdentifier>
+      <UniqueIdentifier>{BF09703A-0051-4128-9EFB-B6F6F8B396BC}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Windows">
-      <UniqueIdentifier>{97BB55B3-6FFB-47F6-B57B-F1392FA07440}</UniqueIdentifier>
+      <UniqueIdentifier>{6AFDC592-5C06-41F0-B01A-5A31DBA44C83}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI">
-      <UniqueIdentifier>{367C345C-8779-4EC9-BB04-77FBD8C320AE}</UniqueIdentifier>
+      <UniqueIdentifier>{2C40ED80-1264-45F1-9FFC-AE03069935E8}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty">
-      <UniqueIdentifier>{31E13233-6139-43BF-BB25-5FFAF8BF5CE1}</UniqueIdentifier>
+      <UniqueIdentifier>{51E05CDD-F5B1-4E78-9ECA-8905645D74B9}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK">
-      <UniqueIdentifier>{F897F9B9-B59C-4259-A77A-BB609CB0B091}</UniqueIdentifier>
+      <UniqueIdentifier>{328C2925-6580-4790-8495-B918D23737E4}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include">
-      <UniqueIdentifier>{C913F818-D47C-4982-B60C-7C04DD7B710B}</UniqueIdentifier>
+      <UniqueIdentifier>{8D4F4EED-92A5-4CAB-8AAF-3BF52B0D25ED}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK">
-      <UniqueIdentifier>{E3E05CD6-2E06-4D23-B835-243335FC9BD7}</UniqueIdentifier>
+      <UniqueIdentifier>{73F85BF0-49CC-4025-BBE6-8D3DBA014249}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib">
-      <UniqueIdentifier>{8DEADAAF-6C24-4AE3-B404-FA2B2AE1BEC8}</UniqueIdentifier>
+      <UniqueIdentifier>{0DA9C73D-F283-4013-BEBB-E5D496A0CFC1}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x64">
-      <UniqueIdentifier>{58150408-70BC-4347-B619-2A13D8221214}</UniqueIdentifier>
+      <UniqueIdentifier>{5DE60FD5-AEFB-455B-83A7-63744D03484D}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x64\Debug">
-      <UniqueIdentifier>{18BD695A-9DDF-4E08-AC2F-2C5B046314E0}</UniqueIdentifier>
+      <UniqueIdentifier>{1B6B1CCB-4DDE-461E-88AD-18F53EA743A1}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x64\Release">
-      <UniqueIdentifier>{649DFBD2-C25A-4F55-A221-1497F1BE9673}</UniqueIdentifier>
+      <UniqueIdentifier>{200DEA10-D967-4575-88CF-F66BEB2CFE99}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x86">
-      <UniqueIdentifier>{AF0F9F57-F077-4495-A5DA-E0DB801E5108}</UniqueIdentifier>
+      <UniqueIdentifier>{12AE482D-5365-448C-B557-5B2CFDC116AC}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x86\Debug">
-      <UniqueIdentifier>{4D225AAE-C677-47D0-996D-D695C2EC37A3}</UniqueIdentifier>
+      <UniqueIdentifier>{E42B7780-8022-40B2-8C43-2382ECCE2356}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x86\Release">
-      <UniqueIdentifier>{419EF028-10C7-4AAD-AEA3-15CA995DC2B0}</UniqueIdentifier>
+      <UniqueIdentifier>{BF5FFD9A-214B-4A2F-AA3F-8F1B511803A2}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\ImGui">
-      <UniqueIdentifier>{98E804BC-CF6F-4307-8C3B-81B2C5BE2837}</UniqueIdentifier>
+      <UniqueIdentifier>{BDCC6CF8-5E95-4966-8C9C-57F6ECF1824E}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include">
-      <UniqueIdentifier>{FA5FED98-071D-408C-ABF8-38D9F5558D67}</UniqueIdentifier>
+      <UniqueIdentifier>{6894EA6E-5FA6-412A-BB41-5019B46B8CF3}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui">
-      <UniqueIdentifier>{3B0CBA99-2025-4F29-B235-5C7044C06077}</UniqueIdentifier>
+      <UniqueIdentifier>{F494FC65-C6E7-4C92-8FD0-5E65D5372B2E}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\Json">
-      <UniqueIdentifier>{9804D2C1-4E37-48FC-AD69-9832C3B53DBC}</UniqueIdentifier>
+      <UniqueIdentifier>{2D295FDB-19D1-4BBE-BFD8-C0CB68BB3A6A}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\Json\include">
-      <UniqueIdentifier>{1899014F-15F4-4A4F-8C0D-6B05C29B95F2}</UniqueIdentifier>
+      <UniqueIdentifier>{26BD41D0-9AEB-4191-8256-E0DB2FBAE573}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\Json\include\Json">
-      <UniqueIdentifier>{C97494D6-2A1E-4399-8D39-9DF2DDBFB430}</UniqueIdentifier>
+      <UniqueIdentifier>{3E3690C9-6820-4312-A689-CD1A21D91AB4}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua">
-      <UniqueIdentifier>{35C222A6-0505-4FB3-995F-012335765086}</UniqueIdentifier>
+      <UniqueIdentifier>{C0EC19B4-A41F-4658-85F5-40CA1FE1A35D}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\debug">
-      <UniqueIdentifier>{5F93974C-4821-465B-8857-E555235C000C}</UniqueIdentifier>
+      <UniqueIdentifier>{48C40084-83C2-4B2E-B94C-F18AF85AC3F1}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\debug\bin">
-      <UniqueIdentifier>{B2E3DC0D-E3B6-46A7-BA23-94C2EAE163F6}</UniqueIdentifier>
+      <UniqueIdentifier>{4ACF3C33-0384-4069-84E6-79737AC7B0ED}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\debug\lib">
-      <UniqueIdentifier>{EC3B3C1A-B491-4A40-90D2-94D9011FDD14}</UniqueIdentifier>
+      <UniqueIdentifier>{2D540D61-797B-4E99-BE1C-BA5D0228746A}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\include">
-      <UniqueIdentifier>{57378DE4-EE5E-4BFF-87F5-9C073BCE431E}</UniqueIdentifier>
+      <UniqueIdentifier>{E080798F-FA5C-436C-BB77-F845601A8651}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\release">
-      <UniqueIdentifier>{848EA1BD-BE19-49BE-A7DD-CCF74DA25D1A}</UniqueIdentifier>
+      <UniqueIdentifier>{663F6143-1AA1-4198-949C-5D8EFE4E5EAE}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\release\bin">
-      <UniqueIdentifier>{58B6D776-E546-468E-B8E4-68572320C1E4}</UniqueIdentifier>
+      <UniqueIdentifier>{927A2CB1-62AC-4AB5-9B8E-2754D799256F}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\release\lib">
-      <UniqueIdentifier>{74DDC078-532D-45A4-AA7A-BD08694B8BA1}</UniqueIdentifier>
+      <UniqueIdentifier>{9C38BEF7-31A4-4468-BB54-9ABDDCF14BAD}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\sol2">
-      <UniqueIdentifier>{E103C0DD-B0F6-42C1-B48A-8634A2F32C7D}</UniqueIdentifier>
+      <UniqueIdentifier>{8439C725-B1A8-4F50-A464-C7845621A133}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\sol2\include">
-      <UniqueIdentifier>{F26A0840-69EB-4106-A751-51D9A292510A}</UniqueIdentifier>
+      <UniqueIdentifier>{426CB233-2719-4C90-8217-C5E9DB8F3CCD}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\sol2\include\sol">
-      <UniqueIdentifier>{257C4615-8E2D-4C0D-BCE5-FF39AB5CE2B6}</UniqueIdentifier>
+      <UniqueIdentifier>{302ACC91-27D0-4C4F-95B1-90AFB86D33F0}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs">
-      <UniqueIdentifier>{E5AA14E0-BF91-4ABD-9176-6D33EDA2A524}</UniqueIdentifier>
+      <UniqueIdentifier>{C17A9386-B752-41FD-A34B-5D18FF63F3D0}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs\include">
-      <UniqueIdentifier>{B6D04D91-CAD2-4E52-B3C8-8BCF24718FB1}</UniqueIdentifier>
+      <UniqueIdentifier>{694B1EEF-ABD9-4265-8314-4035B255A56F}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Font">
-      <UniqueIdentifier>{C7855CBB-2DD1-4E59-9769-2F43E0A5F2CD}</UniqueIdentifier>
+      <UniqueIdentifier>{44F14342-43E8-4ECD-8B70-CD1A1077B8D2}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngineSIU\Shaders">
-      <UniqueIdentifier>{DD52842E-2AEF-4F5D-8DEB-E472B5EA7980}</UniqueIdentifier>
+      <UniqueIdentifier>{9C66CC38-9CFD-4733-9A91-8BCB81CBA95D}</UniqueIdentifier>
     </Filter>
     <Filter Include="Intermediate">
-      <UniqueIdentifier>{ED7972E2-B268-46D5-9414-CD4980638042}</UniqueIdentifier>
+      <UniqueIdentifier>{CC4ECE63-5869-4119-802A-3E700666BF03}</UniqueIdentifier>
     </Filter>
     <Filter Include="Intermediate\Build">
-      <UniqueIdentifier>{2C3E6759-C503-453E-BC9D-EE92E26CC1E6}</UniqueIdentifier>
+      <UniqueIdentifier>{32727780-F67D-4F3E-A775-AE89711C0C12}</UniqueIdentifier>
     </Filter>
     <Filter Include="Intermediate\Build\x64">
-      <UniqueIdentifier>{F35315C9-A550-4A0F-98DB-2973112A26BC}</UniqueIdentifier>
+      <UniqueIdentifier>{C059117E-1980-471E-B6DF-F09EB57AB10E}</UniqueIdentifier>
     </Filter>
     <Filter Include="Intermediate\Build\x64\EngineSIU">
-      <UniqueIdentifier>{34F525A2-C2D1-479F-A30E-A3A1B0EB5418}</UniqueIdentifier>
+      <UniqueIdentifier>{6EB9A711-A27A-437C-80E2-A0F29921495C}</UniqueIdentifier>
     </Filter>
     <Filter Include="Intermediate\Build\x64\EngineSIU\Debug">
-      <UniqueIdentifier>{B2E77FB2-E640-42FE-BFC5-5068DCD2E228}</UniqueIdentifier>
+      <UniqueIdentifier>{89233704-59E9-4035-859F-3165538B8124}</UniqueIdentifier>
     </Filter>
     <Filter Include="Intermediate\Build\x64\EngineSIU\Debug\EngineSIU.tlog">
-      <UniqueIdentifier>{92DCA156-1C76-419D-9654-57761C367231}</UniqueIdentifier>
+      <UniqueIdentifier>{FEC05E5B-93A3-4CC3-A5ED-066E3CE7C281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intermediate\Build\x64\EngineSIU\Release">
+      <UniqueIdentifier>{7802332A-792F-46D5-8592-96167D32FA07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intermediate\Build\x64\EngineSIU\Release\EngineSIU.tlog">
+      <UniqueIdentifier>{923E99C7-24BE-4FC9-9C4A-3F9AD17A6968}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameUI.cpp" />
+    <ClInclude Include="GameUI.h" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClInclude Include="SoundManager.h" />
+    <ClCompile Include="Timer.cpp" />
+    <ClInclude Include="Timer.h" />
     <ClCompile Include="EngineSIU\LightGridGenerator.cpp">
       <Filter>EngineSIU</Filter>
     </ClCompile>
     <ClInclude Include="EngineSIU\LightGridGenerator.h">
       <Filter>EngineSIU</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Script\LuaBinding.cpp">
+      <Filter>EngineSIU\Engine\Script</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Script\LuaBinding.h">
+      <Filter>EngineSIU\Engine\Script</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Script\LuaManager.cpp">
+      <Filter>EngineSIU\Engine\Script</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Script\LuaManager.h">
+      <Filter>EngineSIU\Engine\Script</Filter>
     </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompile.cpp">
       <Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
@@ -489,6 +1086,12 @@
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\HAL\PlatformType.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Core\HAL</Filter>
     </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\BoxSphereBounds.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\BoxSphereBounds.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+    </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Color.cpp">
       <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
     </ClCompile>
@@ -642,12 +1245,6 @@
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\ViewportClient.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine</Filter>
     </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Camera</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Camera</Filter>
-    </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Level.cpp">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes</Filter>
     </ClCompile>
@@ -658,6 +1255,18 @@
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
     </ClCompile>
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AmbientLightActor.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\CameraActor.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\CameraActor.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
     </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\Cube.cpp">
@@ -708,6 +1317,42 @@
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\SpotLightActor.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
     </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraComponent.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraComponent.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraShakeModifier.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraShakeModifier.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraTypes.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraTypes.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\PlayerCameraManager.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\PlayerCameraManager.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\ViewTarget.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\ViewTarget.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+    </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ActorComponent.cpp">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
     </ClCompile>
@@ -718,6 +1363,18 @@
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
     </ClCompile>
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BillboardComponent.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BoxComponent.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BoxComponent.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CapsuleComponent.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CapsuleComponent.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
     </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\HeightFogComponent.cpp">
@@ -759,10 +1416,22 @@
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SceneComponent.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
     </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ShapeComponent.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ShapeComponent.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+    </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SkySphereComponent.cpp">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
     </ClCompile>
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SkySphereComponent.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SphereComponent.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SphereComponent.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
     </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\StaticMeshComponent.cpp">
@@ -775,6 +1444,12 @@
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
     </ClCompile>
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\TextComponent.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UScriptComponent.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UScriptComponent.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
     </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UTextUUID.cpp">
@@ -867,10 +1542,52 @@
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Texture.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
     </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\CollisionDispatcher.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\CollisionDispatcher.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\HitResult.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\HitResult.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapInfo.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapInfo.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+    </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Actor.cpp">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
     </ClCompile>
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Actor.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.h">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
+    </ClInclude>
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\PlayerController.cpp">
+      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
+    </ClCompile>
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\PlayerController.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
     </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\UserInterface\Console.cpp">
@@ -1242,38 +1959,11 @@
     <ClInclude Include="EngineSIU\Font\RawFonts.h">
       <Filter>EngineSIU\Font</Filter>
     </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Script\LuaManager.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UScriptComponent.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\BoxSphereBounds.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BoxComponent.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CapsuleComponent.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SphereComponent.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ShapeComponent.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\CollisionDispatcher.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\HitResult.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapInfo.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\CameraActor.cpp" />
-    <ClCompile Include="GameUI.cpp" />
-    <ClCompile Include="SoundManager.cpp" />
-    <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraTypes.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\PlayerCameraManager.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\PlayerController.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\ViewTarget.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraShakeModifier.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="EngineSIU\EngineSIU.natvis" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="EngineSIU\Shaders\FogShader.hlsl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </FxCompile>
     <FxCompile Include="EngineSIU\Shaders\GizmoPixelShader.hlsl">
       <Filter>EngineSIU\Shaders</Filter>
     </FxCompile>
@@ -1310,40 +2000,16 @@
     <FxCompile Include="EngineSIU\Shaders\VSMGenerationPS.hlsl">
       <Filter>EngineSIU\Shaders</Filter>
     </FxCompile>
+    <FxCompile Include="EngineSIU\Shaders\FogShader.hlsl">
+      <Filter>EngineSIU\Shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\SimpleMath.inl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DefaultPropertySheet.props" />
     <None Include="EngineSIU\test.lua" />
     <None Include="EngineSIU\Contents\LuaTemplates\template.lua" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\SimpleMath.inl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Script\LuaBinding.h" />
-    <ClInclude Include="EngineSIU\Engine\Script\LuaManager.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UScriptComponent.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\BoxSphereBounds.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BoxComponent.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CapsuleComponent.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SphereComponent.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ShapeComponent.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\CollisionDispatcher.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\HitResult.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapInfo.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\CameraActor.h" />
-    <ClInclude Include="GameUI.h" />
-    <ClInclude Include="SoundManager.h" />
-    <ClInclude Include="Timer.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraTypes.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\PlayerCameraManager.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\PlayerController.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\ViewTarget.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraShakeModifier.h" />
   </ItemGroup>
 </Project>

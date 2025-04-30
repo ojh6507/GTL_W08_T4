@@ -16,6 +16,16 @@ UObject* UCameraModifier::Duplicate(UObject* InOuter)
     return UObject::Duplicate(InOuter);
 }
 
+EModifierType UCameraModifier::GetModifierType()
+{
+    return MType;
+}
+
+void UCameraModifier::SetModifierType(EModifierType type)
+{
+    MType = type;
+}
+
 float UCameraModifier::GetTargetAlpha()
 {
     return bPendingDisable ? 0.0f : 1.0f;
