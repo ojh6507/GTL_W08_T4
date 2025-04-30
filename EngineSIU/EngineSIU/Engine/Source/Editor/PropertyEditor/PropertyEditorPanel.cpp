@@ -1540,10 +1540,9 @@ void PropertyEditorPanel::RenderActorComponentTreeNodeTable(const char* TableID,
     ImGuiTableFlags Flags = ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_Resizable | ImGuiTableFlags_ScrollY;
     constexpr int NumColumns = 2; // 열 개수
 
-    if (ImGui::BeginTable(TableID, NumColumns, Flags)) {
+    float windowWidth = ImGui::GetContentRegionAvail().x;
+    if (ImGui::BeginTable(TableID, NumColumns, Flags, { windowWidth, 200})) {
         // --- 테이블 헤더 설정 ---
-        // ImGuiTableColumnFlags_WidthStretch: 남은 공간을 채움
-        // ImGuiTableColumnFlags_WidthFixed: 고정 너비
         ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_WidthStretch);
         ImGui::TableSetupColumn("Type", ImGuiTableColumnFlags_WidthFixed, 80.0f);
         // @note 기타 열 추가 시 추가 바람
