@@ -21,7 +21,8 @@
 #include "World/World.h"
 #include "PropertyEditor/ControlEditorPanel.h"
 #include "Components/UScriptComponent.h"
-#include <Camera/CameraShakeModifier.h>
+#include "Camera/CameraShakeModifier.h"
+#include "Camera/PlayerCameraManager.h"
 
 // --- !!! 중요: 선행 바인딩 필요 !!! ---
 // 이 파일 내의 바인딩 함수들은 서로 의존성을 가집니다.
@@ -169,7 +170,10 @@ namespace LuaBindings
                     return SpawnActorWrapper(world, actorClass, FVector::ZeroVector, FRotator(), NAME_None);
                 }
             ),
-
+            "GetPlayerCameraManager", sol::overload(
+                [](UWorld* world) {
+                    return world->GetPlayerCameraManager();
+                }),
             // DestroyActor
             // Lua: world:DestroyActor(actor_instance)
             "DestroyActor", &UWorld::DestroyActor,
@@ -561,7 +565,146 @@ namespace LuaBindings
             "ToQuat", &FMatrix::ToQuat // FQuat 바인딩 필요
         );
     }
+    void BindFColor(sol::state& lua)
+    {
+        lua.new_usertype<FColor>("FColor",
+            sol::call_constructor,
+            sol::constructors<
+            FColor(),                               // FColor.new() -> Black, A=255
+            FColor(uint8, uint8, uint8),            // FColor.new(r, g, b) -> A=255
+            FColor(uint8, uint8, uint8, uint8),     // FColor.new(r, g, b, a)
+            FColor(uint32)                          // FColor.new(bits)
+            >(),
 
+            // 멤버 변수
+            "R", &FColor::R,
+            "G", &FColor::G,
+            "B", &FColor::B,
+            "A", &FColor::A,
+        
+            // 연산자 (메타메소드)
+            sol::meta_function::equal_to, &FColor::operator==, // color1 == color2
+            sol::meta_function::to_string, [](const FColor& self) -> std::string {
+                // 간단한 문자열 표현 제공
+                return "FColor(R=" + std::to_string(self.R) +
+                    ", G=" + std::to_string(self.G) +
+                    ", B=" + std::to_string(self.B) +
+                    ", A=" + std::to_string(self.A) + ")";
+            }
+        );
+
+        // 정적 멤버 변수 (미리 정의된 색상) - 테이블에 직접 추가
+        sol::table fcolor_table = lua["FColor"];
+        fcolor_table["White"] = sol::var(FColor::White);
+        fcolor_table["Black"] = sol::var(FColor::Black);
+        fcolor_table["Transparent"] = sol::var(FColor::Transparent);
+        fcolor_table["Red"] = sol::var(FColor::Red);
+        fcolor_table["Green"] = sol::var(FColor::Green);
+        fcolor_table["Blue"] = sol::var(FColor::Blue);
+        fcolor_table["Yellow"] = sol::var(FColor::Yellow);
+        fcolor_table["Cyan"] = sol::var(FColor::Cyan);
+        fcolor_table["Magenta"] = sol::var(FColor::Magenta);
+        fcolor_table["Orange"] = sol::var(FColor::Orange);
+        fcolor_table["Purple"] = sol::var(FColor::Purple);
+        fcolor_table["Turquoise"] = sol::var(FColor::Turquoise);
+        fcolor_table["Silver"] = sol::var(FColor::Silver);
+        fcolor_table["Emerald"] = sol::var(FColor::Emerald);
+    }
+
+    void BindFLinearColor(sol::state& lua)
+    {
+        // 의존성: FString, FVector, FVector4, FColor 바인딩 필요
+        lua.new_usertype<FLinearColor>("FLinearColor",
+            sol::call_constructor,
+            sol::constructors<
+            FLinearColor(),                                 // FLinearColor.new() -> (0,0,0,0)
+            FLinearColor(float, float, float),              // FLinearColor.new(r, g, b) -> A=1.0
+            FLinearColor(float, float, float, float),       // FLinearColor.new(r, g, b, a)
+            // FString 생성자는 InitFromString을 통해 간접적으로 지원됨 (아래 참조)
+            // explicit 생성자는 sol::constructors로 직접 바인딩 가능
+            FLinearColor(const FVector&),                   // FLinearColor.new(vector3) -> A=1.0
+            FLinearColor(const FVector4&),                  // FLinearColor.new(vector4)
+            FLinearColor(const FColor&)                     // FLinearColor.new(fcolor)
+            >(),
+
+            // 멤버 변수
+            "R", &FLinearColor::R,
+            "G", &FLinearColor::G,
+            "B", &FLinearColor::B,
+            "A", &FLinearColor::A,
+
+            // 멤버 함수
+            "GetClamp", sol::overload( // 기본 인자 처리를 위한 오버로드
+                [](const FLinearColor& c) { return c.GetClamp(); },
+                [](const FLinearColor& c, float min) { return c.GetClamp(min); },
+                sol::resolve<FLinearColor(float, float) const>(&FLinearColor::GetClamp)
+            ),
+            "Equals", sol::overload( // 기본 인자 처리를 위한 오버로드
+                [](const FLinearColor& c, const FLinearColor& other) { return c.Equals(other); },
+                sol::resolve<bool(const FLinearColor&, float) const>(&FLinearColor::Equals)
+            ),
+            // 참고: Lerp는 인스턴스를 수정하므로, 필요하다면 정적 버전(FMath::Lerp)을 별도 바인딩하는 것이 더 일반적일 수 있음
+            "Lerp", &FLinearColor::Lerp, // 인스턴스 자체를 변경함: color:Lerp(start, end, alpha)
+            "GetMax", &FLinearColor::GetMax,
+            "GetMin", &FLinearColor::GetMin,
+            "ToString", [](const FLinearColor& self) -> std::string {
+                FString fstr = self.ToString();
+#if USE_WIDECHAR
+                return self.ToAnsiString(); // 예시
+#else
+                return static_cast<std::string>(fstr); // 예시
+#endif
+                // TODO: FString 변환 로직 확인
+            },
+            "InitFromString", [](FLinearColor& self, const std::string& source) -> bool {
+                // Lua 문자열(std::string)을 FString으로 변환하여 호출
+                return self.InitFromString(FString(source.c_str()));
+            },
+
+            // 연산자 (메타메소드)
+            sol::meta_function::addition, sol::resolve<FLinearColor(const FLinearColor&) const>(&FLinearColor::operator+),
+            sol::meta_function::subtraction, sol::resolve<FLinearColor(const FLinearColor&) const>(&FLinearColor::operator-),
+            sol::meta_function::multiplication, sol::overload(
+                sol::resolve<FLinearColor(const FLinearColor&) const>(&FLinearColor::operator*),
+                sol::resolve<FLinearColor(float) const>(&FLinearColor::operator*)
+            ),
+            sol::meta_function::division, sol::overload(
+                sol::resolve<FLinearColor(const FLinearColor&) const>(&FLinearColor::operator/),
+                sol::resolve<FLinearColor(float) const>(&FLinearColor::operator/)
+            ),
+            sol::meta_function::equal_to, sol::resolve<bool(const FLinearColor&) const>(&FLinearColor::operator==),
+            sol::meta_function::to_string, [](const FLinearColor& self) -> std::string { // print(color)
+                FString fstr = self.ToString();
+#if USE_WIDECHAR
+                return self.ToAnsiString(); // 예시
+#else
+                return static_cast<std::string>(fstr); // 예시
+#endif
+                // TODO: FString 변환 로직 확인
+            }
+            // 참고: +=, -=, *=, /= 연산자는 Lua에서 a = a + b 등으로 구현되므로 별도 바인딩은 보통 불필요
+        );
+
+        // 정적 멤버 변수 (미리 정의된 색상) - 테이블에 직접 추가
+        sol::table flinearcolor_table = lua["FLinearColor"];
+        flinearcolor_table["White"] = sol::var(FLinearColor::White);
+        flinearcolor_table["Gray"] = sol::var(FLinearColor::Gray);
+        flinearcolor_table["Black"] = sol::var(FLinearColor::Black);
+        flinearcolor_table["Transparent"] = sol::var(FLinearColor::Transparent);
+        flinearcolor_table["Red"] = sol::var(FLinearColor::Red);
+        flinearcolor_table["Green"] = sol::var(FLinearColor::Green);
+        flinearcolor_table["Blue"] = sol::var(FLinearColor::Blue);
+        flinearcolor_table["Yellow"] = sol::var(FLinearColor::Yellow);
+
+        // 정적 함수
+        flinearcolor_table["FromColor"] = &FLinearColor::FromColor; // FColor 바인딩 필요
+        // FString 생성자 래핑 (InitFromString 사용)
+        flinearcolor_table["FromString"] = [](const std::string& source) -> FLinearColor {
+            FLinearColor color;
+            color.InitFromString(FString(source.c_str()));
+            return color;
+            };
+    }
     // --- 수학 관련 타입 전체 바인딩 함수 ---
     void BindMathTypes(sol::state& lua)
     {
@@ -571,6 +714,8 @@ namespace LuaBindings
         BindFQuat(lua);
         BindFRotator(lua);
         BindFMatrix(lua);
+        BindFColor(lua);
+        BindFLinearColor(lua);
     }
 
     // --- AActor 바인딩 ---
@@ -789,6 +934,10 @@ namespace LuaBindings
     {
         lua.new_usertype<UCameraShakeModifier>("CameraShakeModifier",
             "StartShake", &UCameraShakeModifier::StartShake
+        );
+
+        lua.new_usertype<APlayerCameraManager>("PlayerCameraManager",
+            "StartCameraFade", &APlayerCameraManager::StartCameraFade
         );
 
         // 필요시 인스턴스 등록 예시 (선택적)

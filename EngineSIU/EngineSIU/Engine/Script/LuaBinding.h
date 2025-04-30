@@ -11,6 +11,7 @@
 #include "Math/Rotator.h"      // FRotator (값 타입이므로 포함)
 #include "Math/Quat.h"         // FQuat (값 타입이므로 포함)
 #include "Math/Matrix.h"       // FMatrix (값 타입이므로 포함)
+#include "Math/Color.h"
 #include "Engine/EngineTypes.h"  // EWorldType, ESearchCase, ESearchDir (Enum 정의 포함)
 
 // --- 전방 선언 (포인터/참조 타입) ---

@@ -49,12 +49,13 @@ void FPostProcessCompositingPass::Initialize(FDXDBufferManager* InBufferManager,
 
 void FPostProcessCompositingPass::PrepareRender()
 {
-    PlayerCameraManagers.Empty();
+    PlayerCameraManager = nullptr;
     for (const auto iter : TObjectRange<APlayerCameraManager>())
     {
         if (iter->GetWorld() == GEngine->ActiveWorld)
         {
-            PlayerCameraManagers.Add(iter);
+            PlayerCameraManager = iter;
+            break;
         }
     }
 
@@ -135,26 +136,25 @@ void FPostProcessCompositingPass::Render(const std::shared_ptr<FEditorViewportCl
         ShaderParams.LetterboxScale = FVector2D(1.0f, 1.0f);
         ShaderParams.LetterboxOffset = FVector2D(0.0f, 0.0f);
     }
-    if (PlayerCameraManagers.Num())
+
+
+    if (PlayerCameraManager && PlayerCameraManager->bEnableFading)
     {
+        ShaderParams.FadeAlpha = PlayerCameraManager->GetCurrentFadeAmount();
+        ShaderParams.FadeColor = PlayerCameraManager->GetCurrentFadeColor();
 
-        for (APlayerCameraManager* PlayerCameraManager : PlayerCameraManagers)
-        {
-            ShaderParams.FadeAlpha = PlayerCameraManager->GetCurrentFadeAmount();
-            ShaderParams.FadeColor = PlayerCameraManager->GetCurrentFadeColor();
+        BufferManager->UpdateConstantBuffer<FCompositingParams>("FCompositingParams", ShaderParams);
+        BufferManager->BindConstantBuffer(TEXT("FCompositingParams"), CompositingParamsConstantBufferSlot, EShaderStage::Pixel);
 
-            BufferManager->UpdateConstantBuffer<FCompositingParams>("FCompositingParams", ShaderParams);
-            BufferManager->BindConstantBuffer(TEXT("FCompositingParams"), CompositingParamsConstantBufferSlot, EShaderStage::Pixel);
-
-        }
     }
     else
     {
+        ShaderParams.FadeColor = FLinearColor(1, 1, 1, 1);
         ShaderParams.FadeAlpha = 1;
         BufferManager->UpdateConstantBuffer<FCompositingParams>("FCompositingParams", ShaderParams);
         BufferManager->BindConstantBuffer(TEXT("FCompositingParams"), CompositingParamsConstantBufferSlot, EShaderStage::Pixel);
 
-        
+
     }
 
     // --- 6. 렌더링 상태 설정 ---
@@ -166,6 +166,7 @@ void FPostProcessCompositingPass::Render(const std::shared_ptr<FEditorViewportCl
 
     // 6b. 목표 렌더 타겟 및 뷰포트 설정
     Ctx->OMSetRenderTargets(1, &TargetRenderTargetRHI->RTV, nullptr);
+
     D3D11_VIEWPORT D3DViewport = {};
     D3DViewport.Width = TargetWidth;
     D3DViewport.Height = TargetHeight;

@@ -10,7 +10,7 @@ class FObjectFactory;
 class AActor;
 class UObject;
 class USceneComponent;
-
+class APlayerCameraManager;
 class UWorld : public UObject
 {
     DECLARE_CLASS(UWorld, UObject)
@@ -64,6 +64,7 @@ public:
 
     FViewTarget GetViewTarget(FName InName);
     UCameraComponent* GetCameraComponent(FName InName);
+    APlayerCameraManager* GetPlayerCameraManager();
 private:
     FString WorldName = "DefaultWorld";
 
