@@ -58,6 +58,8 @@ public:
     EWorldType WorldType = EWorldType::None;
 
     FString GetWorldName() const { return WorldName; }
+
+    FViewTarget GetCamera(FName InName) const;
     
 private:
     FString WorldName = "DefaultWorld";

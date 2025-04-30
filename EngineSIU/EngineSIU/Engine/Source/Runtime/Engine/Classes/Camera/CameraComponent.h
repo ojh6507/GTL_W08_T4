@@ -1,4 +1,5 @@
 #pragma once
+#include "PlayerCameraManager.h"
 #include "Components/SceneComponent.h"
 #include "LevelEditor/SLevelEditor.h"
 #include "Math/JungleMath.h"
@@ -39,6 +40,7 @@ public:
 
     FMatrix GetViewMatrix() const  { return View; }
     FMatrix GetProjectionMatrix() const { return Projection; }
+
 private:
     void UpdateViewMatrix();
     void UpdateProjectionMatrix();

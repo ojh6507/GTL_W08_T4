@@ -14,6 +14,13 @@ enum class EViewModeIndex : uint8
     VMI_MAX,
 };
 
+enum EAspectRatioAxisConstraint : int
+{
+    AspectRatio_MaintainYFOV,
+    AspectRatio_MaintainXFOV,
+    AspectRatio_MajorAxisFOV,
+    AspectRatio_MAX,
+};
 
 enum ELevelViewportType : uint8
 {

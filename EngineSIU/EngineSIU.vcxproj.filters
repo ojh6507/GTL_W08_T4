@@ -642,10 +642,10 @@
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\ViewportClient.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine</Filter>
     </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Camera\CameraComponent.cpp">
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraComponent.cpp">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Camera</Filter>
     </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Camera\CameraComponent.h">
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraComponent.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Camera</Filter>
     </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Level.cpp">
@@ -1259,6 +1259,17 @@
     <ClCompile Include="GameUI.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraTypes.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\PlayerCameraManager.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\PlayerController.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\ViewTarget.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraShakeModifier.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\CameraActor.cpp" />
+    <ClCompile Include="GameUI.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="EngineSIU\Engine\Script\LuaBinding.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -1328,6 +1339,17 @@
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\CameraActor.h" />
+    <ClInclude Include="GameUI.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraTypes.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\PlayerCameraManager.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\PlayerController.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\ViewTarget.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraShakeModifier.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\CameraActor.h" />
     <ClInclude Include="GameUI.h" />
     <ClInclude Include="SoundManager.h" />
