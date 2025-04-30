@@ -102,7 +102,6 @@ void APlayerCameraManager::Tick(float DeltaTime)
 {
     AActor::Tick(DeltaTime);
 
-    UpdateFade(deltaTime);
     DoUpdateCamera(DeltaTime);
 }
 
@@ -542,33 +541,6 @@ void APlayerCameraManager::StartCameraFade(float FromAlpha, float ToAlpha, float
     }
 }
 
-void APlayerCameraManager::UpdateFade(float DeltaTime)
-{
-    // 페이드 진행 중일 때만 업데이트 (남은 시간 > 0)
-    if (FadeTimeRemaining > 0.0f)
-    {
-        // 남은 시간 감소
-        FadeTimeRemaining -= DeltaTime;
-
-        if (FadeTimeRemaining <= 0.0f)
-        {
-            // 페이드 완료
-            FadeAmount = FadeAlpha.Y; // 목표 알파로 정확히 설정
-            FadeTimeRemaining = 0.0f; // 남은 시간 0으로 확실히
-        }
-        else
-        {
-            // 페이드 진행 중
-            if (FadeTime > 0.0f)
-            {
-                const float ElapsedTime = FadeTime - FadeTimeRemaining;
-                const float FadeProgress = FMath::Clamp(ElapsedTime / FadeTime, 0.0f, 1.0f);
-                FadeAmount = FMath::Lerp(FadeAlpha.X, FadeAlpha.Y, FadeProgress);
-
-            }
-        }
-    }
-}
 void APlayerCameraManager::StopCameraFade()
 {
     if (bEnableFading == true)
