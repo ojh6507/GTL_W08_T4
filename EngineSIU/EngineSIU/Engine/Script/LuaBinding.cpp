@@ -935,6 +935,8 @@ namespace LuaBindings
         lua.new_usertype<APlayerCameraManager>("PlayerCameraManager",
             sol::no_constructor, // Lua에서 직접 생성 금지
 
+            "StartCameraFade", &APlayerCameraManager::StartCameraFade,
+           
             // 모디파이어 관련 메서드
 
             "GetShakeModifier", [](APlayerCameraManager* self) -> UCameraShakeModifier* {
@@ -950,6 +952,7 @@ namespace LuaBindings
             "Shake", EModifierType::Shake
         );
 
+       
 
         lua.new_usertype<UCameraShakeModifier>("CameraShakeModifier",
             sol::no_constructor, // Lua에서 직접 생성 금지
