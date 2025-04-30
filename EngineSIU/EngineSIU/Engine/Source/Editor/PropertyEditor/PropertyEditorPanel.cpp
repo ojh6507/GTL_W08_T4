@@ -1567,35 +1567,38 @@ void PropertyEditorPanel::ShowActorComponents(const char* TableID)
     if (bActorComponentNodeDirty)
     {
         RootActorNode->ClearChildren();
-        ActorComponentNode* RootComponentNode = RootActorNode->AddChild(SelectedActor->GetRootComponent()->GetName(), SelectedActor->GetRootComponent()->GetClass()->GetName(), SelectedActor->GetRootComponent());
+        // @todo RootComponent가 없는 경우에 대하여 처리 필요, 임시로 nullptr 체크로 대체
+        if (SelectedActor->GetRootComponent())
+        {
+            ActorComponentNode* RootComponentNode = RootActorNode->AddChild(SelectedActor->GetRootComponent()->GetName(), SelectedActor->GetRootComponent()->GetClass()->GetName(), SelectedActor->GetRootComponent());
 
-        // Recursive function to add children of USceneComponent (i.e. RootComponent)
-        auto AddSceneComponentChildrenRecursively = [](ActorComponentNode* ParentNode, const USceneComponent* ParentComponent, auto& AddSceneComponentChildrenRecursivelyRef)
-            -> void
-            {
-                for (USceneComponent* ChildComponent : ParentComponent->GetAttachChildren())
+            // Recursive function to add children of USceneComponent (i.e. RootComponent)
+            auto AddSceneComponentChildrenRecursively = [](ActorComponentNode* ParentNode, const USceneComponent* ParentComponent, auto& AddSceneComponentChildrenRecursivelyRef)
+                -> void
                 {
-                    ActorComponentNode* ChildNode = ParentNode->AddChild(ChildComponent->GetName(), ChildComponent->GetClass()->GetName(), ChildComponent);
-                    AddSceneComponentChildrenRecursivelyRef(ChildNode, ChildComponent, AddSceneComponentChildrenRecursivelyRef);
-                }
-            };
+                    for (USceneComponent* ChildComponent : ParentComponent->GetAttachChildren())
+                    {
+                        ActorComponentNode* ChildNode = ParentNode->AddChild(ChildComponent->GetName(), ChildComponent->GetClass()->GetName(), ChildComponent);
+                        AddSceneComponentChildrenRecursivelyRef(ChildNode, ChildComponent, AddSceneComponentChildrenRecursivelyRef);
+                    }
+                };
 
-        // Add RootComponent's Children (i.e. SceneComponents)
-        if (const USceneComponent* RootSceneComponent = SelectedActor->GetRootComponent())
-        {
-            AddSceneComponentChildrenRecursively(RootComponentNode, RootSceneComponent, AddSceneComponentChildrenRecursively);
-        }
-
-        // @todo 더 나은 방식 찾기
-        // Add Non-SceneComponents
-        for (UActorComponent* Component : SelectedActor->GetComponents())
-        {
-            if (!Component->IsA<USceneComponent>())
+            // Add RootComponent's Children (i.e. SceneComponents)
+            if (const USceneComponent* RootSceneComponent = SelectedActor->GetRootComponent())
             {
-                RootActorNode->AddChild(Component->GetName(), Component->GetClass()->GetName(), Component);
+                AddSceneComponentChildrenRecursively(RootComponentNode, RootSceneComponent, AddSceneComponentChildrenRecursively);
+            }
+
+            // @todo 더 나은 방식 찾기
+            // Add Non-SceneComponents
+            for (UActorComponent* Component : SelectedActor->GetComponents())
+            {
+                if (!Component->IsA<USceneComponent>())
+                {
+                    RootActorNode->AddChild(Component->GetName(), Component->GetClass()->GetName(), Component);
+                }
             }
         }
-
         bActorComponentNodeDirty = false;
     }
 
