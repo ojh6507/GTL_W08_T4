@@ -39,6 +39,10 @@ function OnOverlap(OtherActor)
         if PlayerCameraManager then
             local FadeColor = FLinearColor(0.5,0,0,1)
             PlayerCameraManager:StartCameraFade(0, 1, 1.2,FadeColor, false, false)
+             
+
+            local shakeModifier = PlayerCameraManager:GetShakeModifier()
+            shakeModifier:StartShake(0.02, 1)
         end
     else
        
