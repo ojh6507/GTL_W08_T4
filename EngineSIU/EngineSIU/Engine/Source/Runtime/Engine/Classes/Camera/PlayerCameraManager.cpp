@@ -101,6 +101,8 @@ void APlayerCameraManager::Tick(float DeltaTime)
 {
     AActor::Tick(DeltaTime);
 
+    if (!CurCameraComp) return;
+
     DoUpdateCamera(DeltaTime);
     CurCameraComp->GetOwner()->SetActorLocation(CameraCachePrivate.POV.Location);
     CurCameraComp->GetOwner()->SetActorRotation(CameraCachePrivate.POV.Rotation);
