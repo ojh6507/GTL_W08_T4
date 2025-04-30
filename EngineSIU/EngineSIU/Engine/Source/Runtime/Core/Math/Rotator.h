@@ -57,6 +57,8 @@ struct FRotator
     FRotator FromQuaternion(const FQuat& InQuat) const;
     FQuat ToQuaternion() const;
     FVector ToVector() const;
+    FVector RotateVector() const;
+
     FMatrix ToMatrix() const;
 
     float Clamp(float Angle) const;
@@ -66,4 +68,14 @@ struct FRotator
     
     FString ToString() const;
     bool InitFromString(const FString& InSourceString);
+
+    /**
+     * Clamps an angle to the range of [0, 360).
+     *
+     * @param Angle The angle to clamp.
+     * @return The clamped angle.
+     */
+    static float ClampAxis( float Angle );
+
+    static float NormalizeAxis( float Angle );
 };

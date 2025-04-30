@@ -273,6 +273,26 @@ float JungleMath::SegmentDistToSegment(const FVector& P1, const FVector& P2, con
     return dP.Length();
 }
 
+float JungleMath::ClampAngle(float AngleDegrees, float MinAngleDegrees, float MaxAngleDegrees)
+{
+    const float MaxDelta = FRotator::ClampAxis(MaxAngleDegrees - MinAngleDegrees) * 0.5f;			// 0..180
+    const float RangeCenter = FRotator::ClampAxis(MinAngleDegrees + MaxDelta);						// 0..360
+    const float DeltaFromCenter = FRotator::NormalizeAxis(AngleDegrees - RangeCenter);				// -180..180
+
+    // maybe clamp to nearest edge
+    if (DeltaFromCenter > MaxDelta)
+    {
+        return FRotator::NormalizeAxis(RangeCenter + MaxDelta);
+    }
+    else if (DeltaFromCenter < -MaxDelta)
+    {
+        return FRotator::NormalizeAxis(RangeCenter - MaxDelta);
+    }
+
+    // already in range, just return it
+    return FRotator::NormalizeAxis(AngleDegrees);
+}
+
 FVector JungleMath::FVectorRotate(FVector& origin, const FRotator& InRotation)
 {
     return InRotation.ToQuaternion().RotateVector(origin);

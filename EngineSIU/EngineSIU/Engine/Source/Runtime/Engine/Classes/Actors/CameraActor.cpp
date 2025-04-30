@@ -4,6 +4,8 @@
 
 #include "Camera/CameraComponent.h"
 #include "Engine/FLoaderOBJ.h"
+#include "Editor/LevelEditor/SLevelEditor.h"
+#include "Editor/UnrealEd/EditorViewportClient.h"
 
 ACameraActor::ACameraActor()
 {

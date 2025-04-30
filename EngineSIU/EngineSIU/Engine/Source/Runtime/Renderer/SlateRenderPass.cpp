@@ -1,4 +1,4 @@
-﻿#include "SlateRenderPass.h"
+#include "SlateRenderPass.h"
 
 #include "RendererHelpers.h"
 #include "UnrealClient.h"

@@ -8,16 +8,10 @@ bool FMinimalViewInfo::Equals(const FMinimalViewInfo& OtherInfo) const
         (Location == OtherInfo.Location) &&
         (Rotation == OtherInfo.Rotation) &&
         (FOV == OtherInfo.FOV) &&
-        (FirstPersonFOV == OtherInfo.FirstPersonFOV) &&
-        (FirstPersonScale == OtherInfo.FirstPersonScale) &&
-        (OrthoWidth == OtherInfo.OrthoWidth) &&
-        (OrthoNearClipPlane == OtherInfo.OrthoNearClipPlane) &&
-        (OrthoFarClipPlane == OtherInfo.OrthoFarClipPlane) &&
         ((PerspectiveNearClipPlane == OtherInfo.PerspectiveNearClipPlane) || //either they are the same or both don't override
             (PerspectiveNearClipPlane <= 0.f && OtherInfo.PerspectiveNearClipPlane <= 0.f)) &&
         (AspectRatio == OtherInfo.AspectRatio) &&
         (bConstrainAspectRatio == OtherInfo.bConstrainAspectRatio) &&
-        (bUseFirstPersonParameters == OtherInfo.bUseFirstPersonParameters) &&
         (bUseFieldOfViewForLOD == OtherInfo.bUseFieldOfViewForLOD) &&
         (ProjectionMode == OtherInfo.ProjectionMode) &&
         (OffCenterProjectionOffset == OtherInfo.OffCenterProjectionOffset);
@@ -31,17 +25,11 @@ void FMinimalViewInfo::BlendViewInfo(FMinimalViewInfo& OtherInfo, float OtherWei
     Rotation = Rotation + DeltaAng * OtherWeight;
 
     FOV = FMath::Lerp(FOV, OtherInfo.FOV, OtherWeight);
-    FirstPersonFOV = FMath::Lerp(FirstPersonFOV, OtherInfo.FirstPersonFOV, OtherWeight);
-    FirstPersonScale = FMath::Lerp(FirstPersonScale, OtherInfo.FirstPersonScale, OtherWeight);
-    OrthoWidth = FMath::Lerp(OrthoWidth, OtherInfo.OrthoWidth, OtherWeight);
-    OrthoNearClipPlane = FMath::Lerp(OrthoNearClipPlane, OtherInfo.OrthoNearClipPlane, OtherWeight);
-    OrthoFarClipPlane = FMath::Lerp(OrthoFarClipPlane, OtherInfo.OrthoFarClipPlane, OtherWeight);
     PerspectiveNearClipPlane = FMath::Lerp(PerspectiveNearClipPlane, OtherInfo.PerspectiveNearClipPlane, OtherWeight);
     OffCenterProjectionOffset = FMath::Lerp(OffCenterProjectionOffset, OtherInfo.OffCenterProjectionOffset, OtherWeight);
 
     AspectRatio = FMath::Lerp(AspectRatio, OtherInfo.AspectRatio, OtherWeight);
     bConstrainAspectRatio |= OtherInfo.bConstrainAspectRatio;
-    bUseFirstPersonParameters |= OtherInfo.bUseFirstPersonParameters;
     bUseFieldOfViewForLOD |= OtherInfo.bUseFieldOfViewForLOD;
 }
 
@@ -51,11 +39,6 @@ void FMinimalViewInfo::ApplyBlendWeight(const float& Weight)
     Rotation.Normalize();
     Rotation *= Weight;
     FOV *= Weight;
-    FirstPersonFOV *= Weight;
-    FirstPersonScale *= Weight;
-    OrthoWidth *= Weight;
-    OrthoNearClipPlane *= Weight;
-    OrthoFarClipPlane *= Weight;
     PerspectiveNearClipPlane *= Weight;
     AspectRatio *= Weight;
     OffCenterProjectionOffset *= Weight;
@@ -69,17 +52,11 @@ void FMinimalViewInfo::AddWeightedViewInfo(const FMinimalViewInfo& OtherView, co
     Location += OtherViewWeighted.Location;
     Rotation += OtherViewWeighted.Rotation;
     FOV += OtherViewWeighted.FOV;
-    FirstPersonFOV += OtherViewWeighted.FirstPersonFOV;
-    FirstPersonScale += OtherViewWeighted.FirstPersonScale;
-    OrthoWidth += OtherViewWeighted.OrthoWidth;
-    OrthoNearClipPlane += OtherViewWeighted.OrthoNearClipPlane;
-    OrthoFarClipPlane += OtherViewWeighted.OrthoFarClipPlane;
     PerspectiveNearClipPlane += OtherViewWeighted.PerspectiveNearClipPlane;
     AspectRatio += OtherViewWeighted.AspectRatio;
     OffCenterProjectionOffset += OtherViewWeighted.OffCenterProjectionOffset;
 
     bConstrainAspectRatio |= OtherViewWeighted.bConstrainAspectRatio;
-    bUseFirstPersonParameters |= OtherViewWeighted.bUseFirstPersonParameters;
     bUseFieldOfViewForLOD |= OtherViewWeighted.bUseFieldOfViewForLOD;
 }
 
@@ -102,10 +79,7 @@ void FMinimalViewInfo::ApplyOverscan(float InOverscan, bool bScaleResolutionWith
         const float HalfFOVInRadians = FMath::DegreesToRadians(0.5f * FOV);
         const float OverscannedFOV = FMath::Atan(OverscanScalar * FMath::Tan(HalfFOVInRadians));
         FOV = 2.0f * FMath::RadiansToDegrees(OverscannedFOV);
-		
-        // 직교 모드 너비도 동일 스케일 적용
-        OrthoWidth *= OverscanScalar;
-
+        
         // 해상도 확장 비율 조정 (옵션에 따라)
         OverscanResolutionFraction *= bScaleResolutionWithOverscan ? OverscanScalar : 1.0f;
         // 크롭 비율 조정 (옵션에 따라)

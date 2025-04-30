@@ -91,21 +91,28 @@ void USceneComponent::DestroyComponent()
     Super::DestroyComponent();
 }
 
-FVector USceneComponent::GetForwardVector()
+FVector USceneComponent::GetWorldFowardVector()
+{
+    FVector Forward = FVector(1.f, 0.f, 0.0f);
+    Forward = JungleMath::FVectorRotate(Forward, GetWorldRotation());
+    return Forward;
+}
+
+FVector USceneComponent::GetLocalForwardVector()
 {
 	FVector Forward = FVector(1.f, 0.f, 0.0f);
 	Forward = JungleMath::FVectorRotate(Forward, RelativeRotation);
 	return Forward;
 }
 
-FVector USceneComponent::GetRightVector()
+FVector USceneComponent::GetLocalRightVector()
 {
 	FVector Right = FVector(0.f, 1.f, 0.0f);
 	Right = JungleMath::FVectorRotate(Right, RelativeRotation);
 	return Right;
 }
 
-FVector USceneComponent::GetUpVector()
+FVector USceneComponent::GetLocalUpVector()
 {
 	FVector Up = FVector(0.f, 0.f, 1.0f);
 	Up = JungleMath::FVectorRotate(Up, RelativeRotation);
@@ -211,7 +218,7 @@ FRotator USceneComponent::GetWorldRotation() const
 {
     if (AttachParent)
     {
-        return AttachParent->GetWorldRotation().ToQuaternion() * RelativeRotation.ToQuaternion();
+        return FRotator(AttachParent->GetWorldRotation().ToQuaternion() * RelativeRotation.ToQuaternion());
     }
     return RelativeRotation;
 }

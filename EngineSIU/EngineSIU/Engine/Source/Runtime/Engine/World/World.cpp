@@ -6,6 +6,8 @@
 #include "Engine/FLoaderOBJ.h"
 #include "Engine/Engine.h"
 #include "UnrealEd/SceneManager.h"
+#include "Camera/PlayerCameraManager.h"
+#include "UObject/UObjectIterator.h"
 
 class UEditorEngine;
 
@@ -39,6 +41,7 @@ UObject* UWorld::Duplicate(UObject* InOuter)
 
 void UWorld::Tick(float DeltaTime)
 {
+    TimeSeconds += DeltaTime;
     // SpawnActor()에 의해 Actor가 생성된 경우, 여기서 BeginPlay 호출
     for (AActor* Actor : PendingBeginPlayActors)
     {
@@ -49,6 +52,7 @@ void UWorld::Tick(float DeltaTime)
 
 void UWorld::BeginPlay()
 {
+    TimeSeconds = 0.f;
     TArray <AActor*> CpyActors = ActiveLevel->Actors;
     for (AActor* Actor : CpyActors)
     {
@@ -141,8 +145,25 @@ UWorld* UWorld::GetWorld() const
     return const_cast<UWorld*>(this);
 }
 
-FViewTarget UWorld::GetCamera(const FName InName) const
+FViewTarget UWorld::GetViewTarget(FName InName)
 {
     return ActiveLevel->GetViewTarget(InName);
+}
+
+UCameraComponent* UWorld::GetCameraComponent(FName InName)
+{
+    return ActiveLevel->GetCameraComponent(InName);
+}
+
+APlayerCameraManager* UWorld::GetPlayerCameraManager()
+{
+    for (const auto iter : TObjectRange<APlayerCameraManager>())
+    {
+        if (iter->GetWorld() == GEngine->ActiveWorld)
+        {
+            return iter;
+        }
+    }
+    return nullptr;
 }
 
