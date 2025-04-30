@@ -31,7 +31,7 @@
 #include "Renderer/Shadow/PointLightShadowMap.h"
 #include "Renderer/Shadow/DirectionalShadowMap.h"
 
-#include "../../../UScriptComponent.h"
+#include "Components/UScriptComponent.h"
 
 void PropertyEditorPanel::Render()
 {
