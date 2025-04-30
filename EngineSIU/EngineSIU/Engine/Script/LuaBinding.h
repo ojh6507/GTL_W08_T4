@@ -25,6 +25,7 @@
 #include "../../../GameUI.h"
 #include "UnrealEd/UnrealEd.h"
 #include <PropertyEditor/ControlEditorPanel.h>
+#include "../../../UScriptComponent.h"
 
 // --- !!! 중요: 선행 바인딩 필요 !!! ---
 // 이 파일 내의 바인딩 함수들은 서로 의존성을 가집니다.

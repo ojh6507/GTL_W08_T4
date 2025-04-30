@@ -10,6 +10,7 @@
 #include "Physics/PhysicsSystem.h"
 
 #include "Engine/Script/LuaBinding.h"
+#include "Engine/Script/LuaManager.h"
 #include "LevelEditor/SLevelEditor.h"
 #include "UnrealEd/EditorViewportClient.h"
 

@@ -41,6 +41,14 @@ public:
         };
     }
 
+    FORCEINLINE FVector2D operator*=(const float Scale)
+    {
+        X *= Scale; Y *= Scale;
+        return *this;
+    }
+
+    
+
     FVector2D operator/(float Scalar) const
     {
         return {

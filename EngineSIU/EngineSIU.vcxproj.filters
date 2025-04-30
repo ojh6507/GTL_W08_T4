@@ -642,10 +642,10 @@
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\ViewportClient.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine</Filter>
     </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Camera\CameraComponent.cpp">
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraComponent.cpp">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Camera</Filter>
     </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Camera\CameraComponent.h">
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraComponent.h">
       <Filter>EngineSIU\Engine\Source\Runtime\Engine\Camera</Filter>
     </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Level.cpp">
@@ -1243,7 +1243,7 @@
       <Filter>EngineSIU\Font</Filter>
     </ClInclude>
     <ClCompile Include="EngineSIU\Engine\Script\LuaManager.cpp" />
-    <ClCompile Include="UScriptComponent.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UScriptComponent.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\BoxSphereBounds.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BoxComponent.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CapsuleComponent.cpp" />
@@ -1255,6 +1255,15 @@
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.cpp" />
     <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\CameraActor.cpp" />
+    <ClCompile Include="GameUI.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraTypes.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\PlayerCameraManager.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.cpp" />
+    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\PlayerController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="EngineSIU\EngineSIU.natvis" />
@@ -1311,7 +1320,7 @@
     </ClInclude>
     <ClInclude Include="EngineSIU\Engine\Script\LuaBinding.h" />
     <ClInclude Include="EngineSIU\Engine\Script\LuaManager.h" />
-    <ClInclude Include="UScriptComponent.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UScriptComponent.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\BoxSphereBounds.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BoxComponent.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CapsuleComponent.h" />
@@ -1323,5 +1332,14 @@
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.h" />
     <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\CameraActor.h" />
+    <ClInclude Include="GameUI.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraTypes.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\PlayerCameraManager.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.h" />
+    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\PlayerController.h" />
   </ItemGroup>
 </Project>

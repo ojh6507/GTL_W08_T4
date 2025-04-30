@@ -25,6 +25,7 @@ public:
     float GetCameraFarClip() const;
 
     TArray<FVector> GetFrustumCorners() const;
+    class UCameraComponent* GetCameraComponent() const { return CameraComponent; }
 
 private:
     UCameraComponent* CameraComponent;

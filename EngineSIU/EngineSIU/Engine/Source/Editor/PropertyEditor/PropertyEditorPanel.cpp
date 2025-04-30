@@ -28,6 +28,8 @@
 #include "Renderer/Shadow/PointLightShadowMap.h"
 #include "Renderer/Shadow/DirectionalShadowMap.h"
 
+#include "../../../UScriptComponent.h"
+
 void PropertyEditorPanel::Render()
 {
     /* Pre Setup */
