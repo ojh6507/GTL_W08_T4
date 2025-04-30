@@ -4,6 +4,8 @@
 #include "CameraModifier.h"
 #include "Actors/CameraActor.h"
 #include "World/World.h"
+#include "CameraShakeModifier.h"
+#
 
 bool FViewTarget::Equal(const FViewTarget& OtherTarget) const
 {
@@ -23,6 +25,8 @@ UObject* APlayerCameraManager::Duplicate(UObject* InOuter)
 void APlayerCameraManager::BeginPlay()
 {
     AActor::BeginPlay();
+
+    AddModifier(FObjectFactory::ConstructObject<UCameraShakeModifier>(this));
 }
 
 void APlayerCameraManager::EndPlay(const EEndPlayReason::Type EndPlayReason)
