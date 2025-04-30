@@ -11,7 +11,6 @@ struct FCompositingParams
     FVector2D LetterboxOffset;
     FLinearColor FadeColor;
     float FadeAlpha;
-    FVector pad;
 };
 class FPostProcessCompositingPass : public IRenderPass
 {
@@ -47,5 +46,5 @@ private:
     const UINT SceneTextureSlot = 100; // 슬롯 번호 사용 (t100)
     const UINT CompositingSamplerSlot = 0;  // 슬롯 번호 사용 (s0)
 
-    TArray<APlayerCameraManager*> PlayerCameraManagers;
+    APlayerCameraManager* PlayerCameraManager = nullptr;
 };

@@ -15,12 +15,7 @@ bool FViewTarget::Equal(const FViewTarget& OtherTarget) const
 
 APlayerCameraManager::APlayerCameraManager()
 {
-    FadeTimeRemaining = 3;
-    FadeAmount = 2.f;
-    FadeAlpha.X = 0;
-    FadeAlpha.Y = 1;
-    FadeTime = 2.f;
-    FadeColor = FLinearColor(1, 1, 0, 1);
+    StartCameraFade(0, 1, 3, FLinearColor(1, 0, 0, 1));
 }
 
 UObject* APlayerCameraManager::Duplicate(UObject* InOuter)
@@ -32,7 +27,7 @@ void APlayerCameraManager::BeginPlay()
 {
     AActor::BeginPlay();
 
-	SetActiveCamera(TEXT("MainCamera"));
+    SetActiveCamera(TEXT("MainCamera"));
 
     auto* modifier = CreateModifier<UCameraShakeModifier>(EModifierType::Shake);
     
@@ -50,7 +45,7 @@ void APlayerCameraManager::EndPlay(const EEndPlayReason::Type EndPlayReason)
     //    AnimCameraActor->SetOwner(nullptr);
     //    AnimCameraActor = nullptr;
     //}
-    
+
     AActor::EndPlay(EndPlayReason);
 }
 
@@ -137,20 +132,20 @@ void APlayerCameraManager::ApplyCameraModifiers(float DeltaTime, FMinimalViewInf
 {
     // Loop through each camera modifier
     ForEachCameraModifier([DeltaTime, &InOutPOV](UCameraModifier* CameraModifier)
-    {
-        bool bContinue = true;
-
-        // Apply camera modification and output into DesiredCameraOffset/DesiredCameraRotation
-        if ((CameraModifier != nullptr) && !CameraModifier->IsDisabled())
         {
-            // If ModifyCamera returns true, exit loop
-            // Allows high priority things to dictate if they are
-            // the last modifier to be applied
-            bContinue = !CameraModifier->ModifyCamera(DeltaTime, InOutPOV);
-        }
+            bool bContinue = true;
 
-        return bContinue;
-    });
+            // Apply camera modification and output into DesiredCameraOffset/DesiredCameraRotation
+            if ((CameraModifier != nullptr) && !CameraModifier->IsDisabled())
+            {
+                // If ModifyCamera returns true, exit loop
+                // Allows high priority things to dictate if they are
+                // the last modifier to be applied
+                bContinue = !CameraModifier->ModifyCamera(DeltaTime, InOutPOV);
+            }
+
+            return bContinue;
+        });
 }
 
 float APlayerCameraManager::GetFOVAngle() const
@@ -214,7 +209,7 @@ void APlayerCameraManager::SetDesiredColorScale(FVector NewColorScale, float Int
 
 void APlayerCameraManager::DoUpdateCamera(float DeltaTime)
 {
-	FMinimalViewInfo NewPOV = ViewTarget.POV;
+    FMinimalViewInfo NewPOV = ViewTarget.POV;
 
     if (PendingViewTarget.Target == nullptr || !BlendParams.bLockOutgoing)
     {
@@ -335,10 +330,10 @@ FPOV APlayerCameraManager::BlendViewTargets(const FViewTarget& A, const FViewTar
 {
     FPOV POV;
     POV.Location = FMath::Lerp(A.POV.Location, B.POV.Location, Alpha);
-    POV.FOV = (A.POV.FOV +  Alpha * ( B.POV.FOV - A.POV.FOV));
+    POV.FOV = (A.POV.FOV + Alpha * (B.POV.FOV - A.POV.FOV));
 
     FRotator DeltaAng = (B.POV.Rotation - A.POV.Rotation).GetNormalized();
-    POV.Rotation = A.POV.Rotation + DeltaAng *  Alpha;
+    POV.Rotation = A.POV.Rotation + DeltaAng * Alpha;
 
     return POV;
 }
@@ -450,7 +445,7 @@ void APlayerCameraManager::UpdateViewTarget(FViewTarget& OutVT, float DeltaTime)
         // Apply camera modifiers at the end (view shakes for example)
         ApplyCameraModifiers(DeltaTime, OutVT.POV);
     }
-    
+
     SetActorLocation(OutVT.POV.Location);
     SetActorRotation(OutVT.POV.Rotation);
 }
@@ -496,12 +491,12 @@ void APlayerCameraManager::SetViewTarget(AActor* NewViewTarget, FViewTargetTrans
 
 void APlayerCameraManager::ProcessViewRotation(float DeltaTime, FRotator& OutViewRotation, FRotator& OutDeltaRot)
 {
-    for( int32 ModifierIdx = 0; ModifierIdx < ModifierList.Num(); ModifierIdx++ )
+    for (int32 ModifierIdx = 0; ModifierIdx < ModifierList.Num(); ModifierIdx++)
     {
-        if( ModifierList[ModifierIdx] != nullptr && 
-            !ModifierList[ModifierIdx]->IsDisabled() )
+        if (ModifierList[ModifierIdx] != nullptr &&
+            !ModifierList[ModifierIdx]->IsDisabled())
         {
-            if( ModifierList[ModifierIdx]->ProcessViewRotation(ViewTarget.Target, DeltaTime, OutViewRotation, OutDeltaRot) )
+            if (ModifierList[ModifierIdx]->ProcessViewRotation(ViewTarget.Target, DeltaTime, OutViewRotation, OutDeltaRot))
             {
                 break;
             }
@@ -509,37 +504,42 @@ void APlayerCameraManager::ProcessViewRotation(float DeltaTime, FRotator& OutVie
     }
 
     // Limit Player View Axes
-    LimitViewPitch( OutViewRotation, ViewPitchMin, ViewPitchMax );
-    LimitViewYaw( OutViewRotation, ViewYawMin, ViewYawMax );
-    LimitViewRoll( OutViewRotation, ViewRollMin, ViewRollMax );
+    LimitViewPitch(OutViewRotation, ViewPitchMin, ViewPitchMax);
+    LimitViewYaw(OutViewRotation, ViewYawMin, ViewYawMax);
+    LimitViewRoll(OutViewRotation, ViewRollMin, ViewRollMax);
 }
 
-void APlayerCameraManager::StartCameraFade(float FromAlpha, float ToAlpha, float InFadeTime, FLinearColor InFadeColor, bool bShouldFadeAudio,  bool bInHoldWhenFinished)
+void APlayerCameraManager::StartCameraFade(float FromAlpha, float ToAlpha, float InFadeTime, FLinearColor InFadeColor, bool bShouldFadeAudio, bool bInHoldWhenFinished)
 {
-    bEnableFading = true;
-    FromAlpha = FMath::Clamp(FromAlpha, 0.0f, 1.0f);
-    ToAlpha = FMath::Clamp(ToAlpha, 0.0f, 1.0f);
-
-    FadeColor = InFadeColor;
-    FadeAlpha = FVector2D(FromAlpha, ToAlpha);
-    FadeTime = InFadeTime;
-    FadeTimeRemaining = InFadeTime;
-
-    bAutoAnimateFade = true;
-    bHoldFadeWhenFinished = bInHoldWhenFinished;
-    if (FadeTimeRemaining <= 0.0f)
+    if (!bEnableFading)
     {
-        FadeAmount = FadeAlpha.Y; // 즉시 목표 알파로 설정
+
+        bEnableFading = true;
+        FromAlpha = FMath::Clamp(FromAlpha, 0.0f, 1.0f);
+        ToAlpha = FMath::Clamp(ToAlpha, 0.0f, 1.0f);
+
+        FadeColor = InFadeColor;
+        FadeAlpha = FVector2D(FromAlpha, ToAlpha);
+        FadeTime = InFadeTime;
+        FadeTimeRemaining = InFadeTime;
+
+        bAutoAnimateFade = true;
+        bHoldFadeWhenFinished = bInHoldWhenFinished;
+        if (FadeTimeRemaining <= 0.0f)
+        {
+            FadeAmount = FadeAlpha.Y; // 즉시 목표 알파로 설정
+        }
     }
 }
 
 void APlayerCameraManager::StopCameraFade()
 {
-    if (bEnableFading == true)
+    if (bEnableFading)
     {
         // Make sure FadeAmount finishes at the desired value
         FadeAmount = FadeAlpha.Y;
         bEnableFading = false;
+        bAutoAnimateFade = false;
     }
 }
 
