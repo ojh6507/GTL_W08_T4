@@ -54,7 +54,7 @@ function Tick(dt)
     Delay(9, function()
         moveModifier:Initialize(DAngry, GetES, 1)
         textComp = self:GetTextComponent() -- TextComponent 인스턴스 얻기
-   
+        SoundManager:PlaySound("ESScream")
         if textComp then
         textComp:SetText(text2)
         local FadeColor = FLinearColor(0,0,0,1)           
