@@ -23,7 +23,7 @@ enum class ECameraShakePlaySpace
     UserDefined,
 };
 
-struct FMinimalViewInfo
+struct  FMinimalViewInfo
 {
     FVector Location;
 

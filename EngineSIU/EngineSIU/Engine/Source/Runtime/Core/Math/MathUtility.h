@@ -248,7 +248,7 @@ struct FMath
             InterpEaseOut(0.f, 1.f, Alpha * 2.f - 1.f, Exp) * 0.5f + 0.5f);
 	}
 
-    static float FORCEINLINE Fmod(float X, double Y);
+    static float FORCEINLINE Fmod(float X, double Y)
     {
 	    const float AbsY = FMath::Abs(Y);
 	    if (AbsY <= SMALL_NUMBER) // Note: this constant should match that used by VectorMod() implementations
