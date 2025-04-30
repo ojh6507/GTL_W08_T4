@@ -29,6 +29,7 @@
 #include "Renderer/Shadow/DirectionalShadowMap.h"
 
 #include "../../../UScriptComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 
 void PropertyEditorPanel::Render()
 {
@@ -850,6 +851,29 @@ void PropertyEditorPanel::Render()
                 FogComponent->SetEndDistance(FogEndtDistance);
             }
 
+            ImGui::TreePop();
+        }
+        ImGui::PopStyleColor();
+    }
+#pragma endregion
+
+#pragma region Spring Arm
+    if (SelectedComponent && SelectedComponent->IsA<USpringArmComponent>())
+    {
+        USpringArmComponent* SpringArmComponent = static_cast<USpringArmComponent*>(SelectedComponent);
+        ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.1f, 0.1f, 0.1f, 1.0f));
+        if (ImGui::TreeNodeEx("Spring Arm", ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_DefaultOpen)) // 트리 노드 생성
+        {
+            float TargetArmLength = SpringArmComponent->GetTargetArmLength();
+            if (ImGui::SliderFloat("Target Arm Length", &TargetArmLength, -100.0f, 400.0f))
+            {
+                SpringArmComponent->SetTargetArmLength(TargetArmLength);
+            }
+            //float SocketOffset[3] = { SpringArmComponent->GetSocketOffset().X, SpringArmComponent->GetSocketOffset().Y, SpringArmComponent->GetSocketOffset().Z };
+            //if (ImGui::InputFloat3("Socket Offset", SocketOffset, "%.1f"))
+            //{
+            //    SpringArmComponent->SetSocketOffset(FVector(SocketOffset[0], SocketOffset[1], SocketOffset[2]));
+            //}
             ImGui::TreePop();
         }
         ImGui::PopStyleColor();
