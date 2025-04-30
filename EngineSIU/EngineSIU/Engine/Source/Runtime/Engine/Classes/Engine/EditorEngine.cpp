@@ -14,6 +14,7 @@
 #include "LevelEditor/SLevelEditor.h"
 #include "UnrealEd/EditorViewportClient.h"
 #include <Camera/PlayerCameraManager.h>
+#include "../../../LuaDelayManager.h"
 
 namespace PrivateEditorSelection
 {
@@ -124,6 +125,7 @@ void UEditorEngine::EndPIE()
 {
     if (PIEWorld)
     {
+        LuaDelayManager::GetInstance().Clear();
         //WorldList.Remove(*GetWorldContextFromWorld(PIEWorld.get()));
         WorldList.Remove(GetWorldContextFromWorld(PIEWorld));
         PIEWorld->Release();

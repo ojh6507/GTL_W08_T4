@@ -804,7 +804,8 @@ namespace LuaBindings
                 for (UActorComponent* component : components) {
                     // Use Cast or dynamic_cast for safety if needed, or check class directly
                     if (component && component->IsA(UTextComponent::StaticClass())) { // Use StaticClass() for check
-                        return static_cast<UTextComponent*>(component);
+                        if(component->GetWorld()->WorldType == EWorldType::PIE)
+                            return static_cast<UTextComponent*>(component);
                     }
                 }
                 return nullptr;

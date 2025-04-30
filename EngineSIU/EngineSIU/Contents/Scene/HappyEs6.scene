@@ -1,0 +1,1146 @@
+{
+    "Actors": [
+        {
+            "ActorClass": "ACube",
+            "ActorID": "ACube_95",
+            "ActorLabel": "OBJ_CUBE_95",
+            "Components": [
+                {
+                    "ComponentClass": "UBoxComponent",
+                    "ComponentID": "BoxComponent",
+                    "Properties": {
+                        "AABB_max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "BoxExtent": "X=1.000 Y=1.000 Z=1.000",
+                        "ComponentClass": "UBoxComponent",
+                        "ComponentName": "BoxComponent",
+                        "ComponentOwner": "ACube_95",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ShapeColor": "R=0.000 G=0.000 B=0.000 A=0.000",
+                        "bAutoActive": "true",
+                        "bDrawOnlyIfSelected": "true",
+                        "bIsActive": "true",
+                        "m_Type": "UBoxComponent"
+                    }
+                },
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent_0",
+                    "Properties": {
+                        "AABB_max": "X=0.591 Y=0.742 Z=1.899",
+                        "AABB_min": "X=-0.593 Y=-0.741 Z=0.000",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent_0",
+                        "ComponentOwner": "ACube_95",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=8.245 Y=-8.920 Z=2.400",
+                        "RelativeRotation": "Pitch=0.000 Yaw=154.900 Roll=0.000",
+                        "RelativeScale3D": "X=2.000 Y=2.000 Z=2.000",
+                        "StaticMeshPath": "Contents/Doraemong.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UScriptComponent",
+                    "ComponentID": "ScriptComponent",
+                    "Properties": {
+                        "ComponentClass": "UScriptComponent",
+                        "ComponentName": "ScriptComponent",
+                        "ComponentOwner": "ACube_95",
+                        "ComponentOwnerClass": "ACube",
+                        "ScriptPath": "Contents/LuaScript/ULevel_58_ACube_173_UFO.lua",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "bIsScriptLoaded": "false"
+                    }
+                },
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "UStaticMeshComponent_0",
+                    "Properties": {
+                        "AABB_max": "X=1.287 Y=1.199 Z=2.555",
+                        "AABB_min": "X=-1.287 Y=-1.199 Z=-0.000",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "UStaticMeshComponent_0",
+                        "ComponentOwner": "ACube_95",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=-0.200",
+                        "RelativeRotation": "Pitch=0.000 Yaw=-90.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=0.100",
+                        "StaticMeshPath": "Contents/Reference/Reference.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent_0"
+        },
+        {
+            "ActorClass": "AAmbientLight",
+            "ActorID": "AAmbientLight_108",
+            "ActorLabel": "OBJ_AMBIENTLIGHT_108",
+            "Components": [
+                {
+                    "ComponentClass": "UAmbientLightComponent",
+                    "ComponentID": "AmbientLightComponent",
+                    "Properties": {
+                        "AABB_Max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_Min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "AmbientColor": "R=1.000 G=1.000 B=1.000 A=1.000",
+                        "ComponentClass": "UAmbientLightComponent",
+                        "ComponentName": "AmbientLightComponent",
+                        "ComponentOwner": "AAmbientLight_108",
+                        "ComponentOwnerClass": "AAmbientLight",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "bAutoActive": "true",
+                        "bIsActive": "true"
+                    }
+                },
+                {
+                    "ComponentClass": "UBillboardComponent",
+                    "ComponentID": "BillboardComponent",
+                    "Properties": {
+                        "AABB_max": "X=0.000 Y=0.000 Z=0.000",
+                        "AABB_min": "X=0.000 Y=0.000 Z=0.000",
+                        "BufferKey": "Assets/Editor/Icon/AmbientLight_64x.png",
+                        "ComponentClass": "UBillboardComponent",
+                        "ComponentName": "BillboardComponent",
+                        "ComponentOwner": "AAmbientLight_108",
+                        "ComponentOwnerClass": "AAmbientLight",
+                        "FinalIndexU": "0.000000",
+                        "FinalIndexV": "0.000000",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": "UBillboardComponent"
+                    }
+                }
+            ],
+            "RootComponentID": "AmbientLightComponent"
+        },
+        {
+            "ActorClass": "ACube",
+            "ActorID": "ACube_125",
+            "ActorLabel": "OBJ_CUBE_125",
+            "Components": [
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent_0",
+                    "Properties": {
+                        "AABB_max": "X=349.536 Y=9.000 Z=0.237",
+                        "AABB_min": "X=-349.460 Y=-9.000 Z=-0.123",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent_0",
+                        "ComponentOwner": "ACube_125",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=339.500 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "StaticMeshPath": "Contents/Asphalt/SM_SM_Street.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UBoxComponent",
+                    "ComponentID": "BoxComponent",
+                    "Properties": {
+                        "AABB_max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "BoxExtent": "X=1.000 Y=1.000 Z=1.000",
+                        "ComponentClass": "UBoxComponent",
+                        "ComponentName": "BoxComponent",
+                        "ComponentOwner": "ACube_125",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=10000.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ShapeColor": "R=0.000 G=0.000 B=0.000 A=0.000",
+                        "bAutoActive": "true",
+                        "bDrawOnlyIfSelected": "true",
+                        "bIsActive": "true",
+                        "m_Type": "UBoxComponent"
+                    }
+                },
+                {
+                    "ComponentClass": "UScriptComponent",
+                    "ComponentID": "ScriptComponent",
+                    "Properties": {
+                        "ComponentClass": "UScriptComponent",
+                        "ComponentName": "ScriptComponent",
+                        "ComponentOwner": "ACube_125",
+                        "ComponentOwnerClass": "ACube",
+                        "ScriptPath": "Contents/LuaScript/MoveRoad.lua",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "bIsScriptLoaded": "false"
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent_0"
+        },
+        {
+            "ActorClass": "AAnimPlayerActor",
+            "ActorID": "AAnimPlayerActor_189",
+            "ActorLabel": "OBJ_Player_189",
+            "Components": [
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent_0",
+                    "Properties": {
+                        "AABB_max": "X=0.948 Y=0.610 Z=1.876",
+                        "AABB_min": "X=-0.949 Y=-0.457 Z=0.000",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent_0",
+                        "ComponentOwner": "AAnimPlayerActor_189",
+                        "ComponentOwnerClass": "AAnimPlayerActor",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "StaticMeshPath": "Contents/Jingu_1.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UScriptComponent",
+                    "ComponentID": "ScriptComponent",
+                    "Properties": {
+                        "ComponentClass": "UScriptComponent",
+                        "ComponentName": "ScriptComponent",
+                        "ComponentOwner": "AAnimPlayerActor_189",
+                        "ComponentOwnerClass": "AAnimPlayerActor",
+                        "ScriptPath": "Contents/LuaScript/ChanPlayer.lua",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "bIsScriptLoaded": "false"
+                    }
+                },
+                {
+                    "ComponentClass": "UBoxComponent",
+                    "ComponentID": "BoxComponent",
+                    "Properties": {
+                        "AABB_max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "BoxExtent": "X=1.000 Y=1.000 Z=1.000",
+                        "ComponentClass": "UBoxComponent",
+                        "ComponentName": "BoxComponent",
+                        "ComponentOwner": "AAnimPlayerActor_189",
+                        "ComponentOwnerClass": "AAnimPlayerActor",
+                        "RelativeLocation": "X=-0.100 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=0.200 Y=0.200 Z=1.000",
+                        "ShapeColor": "R=0.000 G=0.000 B=0.000 A=0.000",
+                        "bAutoActive": "true",
+                        "bDrawOnlyIfSelected": "true",
+                        "bIsActive": "true",
+                        "m_Type": "UBoxComponent"
+                    }
+                },
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent_1",
+                    "Properties": {
+                        "AABB_max": "X=0.948 Y=0.457 Z=1.876",
+                        "AABB_min": "X=-0.949 Y=-0.610 Z=0.000",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent_1",
+                        "ComponentOwner": "AAnimPlayerActor_189",
+                        "ComponentOwnerClass": "AAnimPlayerActor",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "StaticMeshPath": "Contents/Jingu_2.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent_0"
+        },
+        {
+            "ActorClass": "ACube",
+            "ActorID": "ACube_276",
+            "ActorLabel": "OBJ_CUBE_276",
+            "Components": [
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent_0",
+                    "Properties": {
+                        "AABB_max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent_0",
+                        "ComponentOwner": "ACube_276",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=0.000 Y=3.700 Z=1000.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "StaticMeshPath": "Contents/helloBlender.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UBoxComponent",
+                    "ComponentID": "BoxComponent",
+                    "Properties": {
+                        "AABB_max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "BoxExtent": "X=1.000 Y=1.000 Z=1.000",
+                        "ComponentClass": "UBoxComponent",
+                        "ComponentName": "BoxComponent",
+                        "ComponentOwner": "ACube_276",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ShapeColor": "R=0.000 G=0.000 B=0.000 A=0.000",
+                        "bAutoActive": "true",
+                        "bDrawOnlyIfSelected": "true",
+                        "bIsActive": "true",
+                        "m_Type": "UBoxComponent"
+                    }
+                },
+                {
+                    "ComponentClass": "UScriptComponent",
+                    "ComponentID": "ScriptComponent",
+                    "Properties": {
+                        "ComponentClass": "UScriptComponent",
+                        "ComponentName": "ScriptComponent",
+                        "ComponentOwner": "ACube_276",
+                        "ComponentOwnerClass": "ACube",
+                        "ScriptPath": "Contents/LuaScript/GameManager.lua",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "bIsScriptLoaded": "false"
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent_0"
+        },
+        {
+            "ActorClass": "ACube",
+            "ActorID": "ACube_314",
+            "ActorLabel": "OBJ_CUBE_314",
+            "Components": [
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent_0",
+                    "Properties": {
+                        "AABB_max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent_0",
+                        "ComponentOwner": "ACube_314",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=3.000 Y=0.000 Z=1000.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "StaticMeshPath": "Contents/helloBlender.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UScriptComponent",
+                    "ComponentID": "ScriptComponent",
+                    "Properties": {
+                        "ComponentClass": "UScriptComponent",
+                        "ComponentName": "ScriptComponent",
+                        "ComponentOwner": "ACube_314",
+                        "ComponentOwnerClass": "ACube",
+                        "ScriptPath": "Contents/LuaScript/ChanCubeManager.lua",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "bIsScriptLoaded": "false"
+                    }
+                },
+                {
+                    "ComponentClass": "UBoxComponent",
+                    "ComponentID": "BoxComponent",
+                    "Properties": {
+                        "AABB_max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "BoxExtent": "X=1.000 Y=1.000 Z=1.000",
+                        "ComponentClass": "UBoxComponent",
+                        "ComponentName": "BoxComponent",
+                        "ComponentOwner": "ACube_314",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ShapeColor": "R=0.000 G=0.000 B=0.000 A=0.000",
+                        "bAutoActive": "true",
+                        "bDrawOnlyIfSelected": "true",
+                        "bIsActive": "true",
+                        "m_Type": "UBoxComponent"
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent_0"
+        },
+        {
+            "ActorClass": "ACameraActor",
+            "ActorID": "ACameraActor_968",
+            "ActorLabel": "OBJ_CAMERA_968",
+            "Components": [
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent",
+                    "Properties": {
+                        "AABB_max": "X=0.024 Y=1.201 Z=1.428",
+                        "AABB_min": "X=-4.757 Y=-1.201 Z=-1.248",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent",
+                        "ComponentOwner": "ACameraActor_968",
+                        "ComponentOwnerClass": "ACameraActor",
+                        "RelativeLocation": "X=-2.500 Y=0.000 Z=4.500",
+                        "RelativeRotation": "Pitch=-30.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "StaticMeshPath": "Contents/Camera.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UCameraComponent",
+                    "ComponentID": "CameraComponent",
+                    "Properties": {
+                        "CameraName": "MainCamera",
+                        "ComponentClass": "UCameraComponent",
+                        "ComponentName": "CameraComponent",
+                        "ComponentOwner": "ACameraActor_968",
+                        "ComponentOwnerClass": "ACameraActor",
+                        "FarClip": "1000.000000",
+                        "NearClip": "0.100000",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ViewFOV": "90.000000",
+                        "bAutoActive": "true",
+                        "bIsActive": "true"
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent"
+        },
+        {
+            "ActorClass": "ACube",
+            "ActorID": "ACube_293",
+            "ActorLabel": "OBJ_CUBE_293",
+            "Components": [
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent_0",
+                    "Properties": {
+                        "AABB_max": "X=0.253 Y=0.343 Z=1.899",
+                        "AABB_min": "X=-0.251 Y=-0.344 Z=0.000",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent_0",
+                        "ComponentOwner": "ACube_293",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=6.733 Y=-9.379 Z=2.461",
+                        "RelativeRotation": "Pitch=0.000 Yaw=156.800 Roll=0.000",
+                        "RelativeScale3D": "X=1.500 Y=1.500 Z=1.500",
+                        "StaticMeshPath": "Contents/Es.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UBoxComponent",
+                    "ComponentID": "BoxComponent",
+                    "Properties": {
+                        "AABB_max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "BoxExtent": "X=1.000 Y=1.000 Z=1.000",
+                        "ComponentClass": "UBoxComponent",
+                        "ComponentName": "BoxComponent",
+                        "ComponentOwner": "ACube_293",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ShapeColor": "R=0.000 G=0.000 B=0.000 A=0.000",
+                        "bAutoActive": "true",
+                        "bDrawOnlyIfSelected": "true",
+                        "bIsActive": "true",
+                        "m_Type": "UBoxComponent"
+                    }
+                },
+                {
+                    "ComponentClass": "UScriptComponent",
+                    "ComponentID": "ScriptComponent",
+                    "Properties": {
+                        "ComponentClass": "UScriptComponent",
+                        "ComponentName": "ScriptComponent",
+                        "ComponentOwner": "ACube_293",
+                        "ComponentOwnerClass": "ACube",
+                        "ScriptPath": "Contents/LuaScript/ULevel_58_ACube_173_UFO.lua",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "bIsScriptLoaded": "false"
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent_0"
+        },
+        {
+            "ActorClass": "ACube",
+            "ActorID": "ACube_650",
+            "ActorLabel": "OBJ_CUBE_650",
+            "Components": [
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent_0",
+                    "Properties": {
+                        "AABB_max": "X=0.949 Y=0.949 Z=1.340",
+                        "AABB_min": "X=-0.950 Y=-0.949 Z=-0.000",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent_0",
+                        "ComponentOwner": "ACube_650",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=8.027 Y=-8.800 Z=0.800",
+                        "RelativeRotation": "Pitch=0.000 Yaw=136.400 Roll=0.000",
+                        "RelativeScale3D": "X=2.800 Y=2.800 Z=1.500",
+                        "StaticMeshPath": "Contents/Dorayaki.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UBoxComponent",
+                    "ComponentID": "BoxComponent",
+                    "Properties": {
+                        "AABB_max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "BoxExtent": "X=1.000 Y=1.000 Z=1.000",
+                        "ComponentClass": "UBoxComponent",
+                        "ComponentName": "BoxComponent",
+                        "ComponentOwner": "ACube_650",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ShapeColor": "R=0.000 G=0.000 B=0.000 A=0.000",
+                        "bAutoActive": "true",
+                        "bDrawOnlyIfSelected": "true",
+                        "bIsActive": "true",
+                        "m_Type": "UBoxComponent"
+                    }
+                },
+                {
+                    "ComponentClass": "UScriptComponent",
+                    "ComponentID": "ScriptComponent",
+                    "Properties": {
+                        "ComponentClass": "UScriptComponent",
+                        "ComponentName": "ScriptComponent",
+                        "ComponentOwner": "ACube_650",
+                        "ComponentOwnerClass": "ACube",
+                        "ScriptPath": "Contents/LuaScript/ULevel_58_ACube_173_UFO.lua",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "bIsScriptLoaded": "false"
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent_0"
+        },
+        {
+            "ActorClass": "AActor",
+            "ActorID": "AActor_1641",
+            "ActorLabel": "OBJ_TEXT_1641",
+            "Components": [
+                {
+                    "ComponentClass": "UTextComponent",
+                    "ComponentID": "TextComponent",
+                    "Properties": {
+                        "AABB_max": "X=0.000 Y=0.000 Z=0.000",
+                        "AABB_min": "X=0.000 Y=0.000 Z=0.000",
+                        "BufferKey": "Assets/Texture/font.png",
+                        "ColumnCount": "106",
+                        "ComponentClass": "UTextComponent",
+                        "ComponentName": "TextComponent",
+                        "ComponentOwner": "AActor_1641",
+                        "ComponentOwnerClass": "AActor",
+                        "FinalIndexU": "0.000000",
+                        "FinalIndexV": "0.000000",
+                        "QuadHeight": "2.000000",
+                        "QuadSize": "2",
+                        "QuadWidth": "2.000000",
+                        "RelativeLocation": "X=10.183 Y=0.000 Z=5.530",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "RowCount": "106",
+                        "Text": "이슬이는 내꺼야",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": "UTextComponent"
+                    }
+                },
+                {
+                    "ComponentClass": "UScriptComponent",
+                    "ComponentID": "ScriptComponent",
+                    "Properties": {
+                        "ComponentClass": "UScriptComponent",
+                        "ComponentName": "ScriptComponent",
+                        "ComponentOwner": "AActor_1641",
+                        "ComponentOwnerClass": "AActor",
+                        "ScriptPath": "Contents/LuaScript/IntroManager.lua",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "bIsScriptLoaded": "false"
+                    }
+                }
+            ],
+            "RootComponentID": "TextComponent"
+        },
+        {
+            "ActorClass": "ACameraActor",
+            "ActorID": "ACameraActor_139",
+            "ActorLabel": "OBJ_CAMERA_139",
+            "Components": [
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent",
+                    "Properties": {
+                        "AABB_max": "X=0.024 Y=1.201 Z=1.428",
+                        "AABB_min": "X=-4.757 Y=-1.201 Z=-1.248",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent",
+                        "ComponentOwner": "ACameraActor_139",
+                        "ComponentOwnerClass": "ACameraActor",
+                        "RelativeLocation": "X=-17.000 Y=-220.000 Z=5.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=180.000 Roll=-0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "StaticMeshPath": "Contents/Camera.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UCameraComponent",
+                    "ComponentID": "CameraComponent",
+                    "Properties": {
+                        "CameraName": "StartCamera",
+                        "ComponentClass": "UCameraComponent",
+                        "ComponentName": "CameraComponent",
+                        "ComponentOwner": "ACameraActor_139",
+                        "ComponentOwnerClass": "ACameraActor",
+                        "FarClip": "1000.000000",
+                        "NearClip": "0.100000",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ViewFOV": "90.000000",
+                        "bAutoActive": "true",
+                        "bIsActive": "true"
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent"
+        },
+        {
+            "ActorClass": "ACube",
+            "ActorID": "ACube_140",
+            "ActorLabel": "OBJ_CUBE_140",
+            "Components": [
+                {
+                    "ComponentClass": "UScriptComponent",
+                    "ComponentID": "ScriptComponent",
+                    "Properties": {
+                        "ComponentClass": "UScriptComponent",
+                        "ComponentName": "ScriptComponent",
+                        "ComponentOwner": "ACube_140",
+                        "ComponentOwnerClass": "ACube",
+                        "ScriptPath": "",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "bIsScriptLoaded": "false"
+                    }
+                },
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent_0",
+                    "Properties": {
+                        "AABB_max": "X=0.648 Y=0.858 Z=1.903",
+                        "AABB_min": "X=-0.646 Y=-0.858 Z=0.000",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent_0",
+                        "ComponentOwner": "ACube_140",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=-25.863 Y=-237.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=5.000 Y=5.000 Z=5.000",
+                        "StaticMeshPath": "Contents/Happy_ES/Happy_ES.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UBoxComponent",
+                    "ComponentID": "BoxComponent",
+                    "Properties": {
+                        "AABB_max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "BoxExtent": "X=1.000 Y=1.000 Z=1.000",
+                        "ComponentClass": "UBoxComponent",
+                        "ComponentName": "BoxComponent",
+                        "ComponentOwner": "ACube_140",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ShapeColor": "R=0.000 G=0.000 B=0.000 A=0.000",
+                        "bAutoActive": "true",
+                        "bDrawOnlyIfSelected": "true",
+                        "bIsActive": "true",
+                        "m_Type": "UBoxComponent"
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent_0"
+        },
+        {
+            "ActorClass": "ACameraActor",
+            "ActorID": "ACameraActor_289",
+            "ActorLabel": "OBJ_CAMERA_289",
+            "Components": [
+                {
+                    "ComponentClass": "UCameraComponent",
+                    "ComponentID": "CameraComponent",
+                    "Properties": {
+                        "CameraName": "ESHappy",
+                        "ComponentClass": "UCameraComponent",
+                        "ComponentName": "CameraComponent",
+                        "ComponentOwner": "ACameraActor_289",
+                        "ComponentOwnerClass": "ACameraActor",
+                        "FarClip": "1000.000000",
+                        "NearClip": "0.100000",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ViewFOV": "90.000000",
+                        "bAutoActive": "true",
+                        "bIsActive": "true"
+                    }
+                },
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent",
+                    "Properties": {
+                        "AABB_max": "X=0.024 Y=1.201 Z=1.428",
+                        "AABB_min": "X=-4.757 Y=-1.201 Z=-1.248",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent",
+                        "ComponentOwner": "ACameraActor_289",
+                        "ComponentOwnerClass": "ACameraActor",
+                        "RelativeLocation": "X=-17.000 Y=-237.000 Z=5.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=180.000 Roll=-0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "StaticMeshPath": "Contents/Camera.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent"
+        },
+        {
+            "ActorClass": "ACameraActor",
+            "ActorID": "ACameraActor_838",
+            "ActorLabel": "OBJ_CAMERA_838",
+            "Components": [
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent",
+                    "Properties": {
+                        "AABB_max": "X=0.024 Y=1.201 Z=1.428",
+                        "AABB_min": "X=-4.757 Y=-1.201 Z=-1.248",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent",
+                        "ComponentOwner": "ACameraActor_838",
+                        "ComponentOwnerClass": "ACameraActor",
+                        "RelativeLocation": "X=-17.000 Y=-262.000 Z=5.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=180.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "StaticMeshPath": "Contents/Camera.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UCameraComponent",
+                    "ComponentID": "CameraComponent",
+                    "Properties": {
+                        "CameraName": "DAngry",
+                        "ComponentClass": "UCameraComponent",
+                        "ComponentName": "CameraComponent",
+                        "ComponentOwner": "ACameraActor_838",
+                        "ComponentOwnerClass": "ACameraActor",
+                        "FarClip": "1000.000000",
+                        "NearClip": "0.100000",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ViewFOV": "90.000000",
+                        "bAutoActive": "true",
+                        "bIsActive": "true"
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent"
+        },
+        {
+            "ActorClass": "ACube",
+            "ActorID": "ACube_841",
+            "ActorLabel": "OBJ_CUBE_841",
+            "Components": [
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent_0",
+                    "Properties": {
+                        "AABB_max": "X=0.591 Y=0.742 Z=1.899",
+                        "AABB_min": "X=-0.593 Y=-0.741 Z=0.000",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent_0",
+                        "ComponentOwner": "ACube_841",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=-25.982 Y=-262.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=5.000 Y=5.000 Z=5.000",
+                        "StaticMeshPath": "Contents/Doraemong.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UBoxComponent",
+                    "ComponentID": "BoxComponent",
+                    "Properties": {
+                        "AABB_max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "BoxExtent": "X=1.000 Y=1.000 Z=1.000",
+                        "ComponentClass": "UBoxComponent",
+                        "ComponentName": "BoxComponent",
+                        "ComponentOwner": "ACube_841",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ShapeColor": "R=0.000 G=0.000 B=0.000 A=0.000",
+                        "bAutoActive": "true",
+                        "bDrawOnlyIfSelected": "true",
+                        "bIsActive": "true",
+                        "m_Type": "UBoxComponent"
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent_0"
+        },
+        {
+            "ActorClass": "ACameraActor",
+            "ActorID": "ACameraActor_1108",
+            "ActorLabel": "OBJ_CAMERA_1108",
+            "Components": [
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent",
+                    "Properties": {
+                        "AABB_max": "X=0.024 Y=1.201 Z=1.428",
+                        "AABB_min": "X=-4.757 Y=-1.201 Z=-1.248",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent",
+                        "ComponentOwner": "ACameraActor_1108",
+                        "ComponentOwnerClass": "ACameraActor",
+                        "RelativeLocation": "X=-17.000 Y=-298.000 Z=5.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=180.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "StaticMeshPath": "Contents/Camera.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UCameraComponent",
+                    "ComponentID": "CameraComponent",
+                    "Properties": {
+                        "CameraName": "GetES",
+                        "ComponentClass": "UCameraComponent",
+                        "ComponentName": "CameraComponent",
+                        "ComponentOwner": "ACameraActor_1108",
+                        "ComponentOwnerClass": "ACameraActor",
+                        "FarClip": "1000.000000",
+                        "NearClip": "0.100000",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ViewFOV": "90.000000",
+                        "bAutoActive": "true",
+                        "bIsActive": "true"
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent"
+        },
+        {
+            "ActorClass": "ACube",
+            "ActorID": "ACube_1111",
+            "ActorLabel": "OBJ_CUBE_1111",
+            "Components": [
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent_0",
+                    "Properties": {
+                        "AABB_max": "X=0.591 Y=0.742 Z=1.899",
+                        "AABB_min": "X=-0.593 Y=-0.741 Z=0.000",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent_0",
+                        "ComponentOwner": "ACube_1111",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=-29.792 Y=-301.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=6.000 Y=6.000 Z=6.000",
+                        "StaticMeshPath": "Contents/Doraemong.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UScriptComponent",
+                    "ComponentID": "ScriptComponent",
+                    "Properties": {
+                        "ComponentClass": "UScriptComponent",
+                        "ComponentName": "ScriptComponent",
+                        "ComponentOwner": "ACube_1111",
+                        "ComponentOwnerClass": "ACube",
+                        "ScriptPath": "Contents/LuaScript/GoodByeES.lua",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "bIsScriptLoaded": "false"
+                    }
+                },
+                {
+                    "ComponentClass": "UBoxComponent",
+                    "ComponentID": "BoxComponent",
+                    "Properties": {
+                        "AABB_max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "BoxExtent": "X=1.000 Y=1.000 Z=1.000",
+                        "ComponentClass": "UBoxComponent",
+                        "ComponentName": "BoxComponent",
+                        "ComponentOwner": "ACube_1111",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ShapeColor": "R=0.000 G=0.000 B=0.000 A=0.000",
+                        "bAutoActive": "true",
+                        "bDrawOnlyIfSelected": "true",
+                        "bIsActive": "true",
+                        "m_Type": "UBoxComponent"
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent_0"
+        },
+        {
+            "ActorClass": "ACube",
+            "ActorID": "ACube_1114",
+            "ActorLabel": "OBJ_CUBE_1114",
+            "Components": [
+                {
+                    "ComponentClass": "UScriptComponent",
+                    "ComponentID": "ScriptComponent",
+                    "Properties": {
+                        "ComponentClass": "UScriptComponent",
+                        "ComponentName": "ScriptComponent",
+                        "ComponentOwner": "ACube_1114",
+                        "ComponentOwnerClass": "ACube",
+                        "ScriptPath": "Contents/LuaScript/GoodByeES.lua",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "bIsScriptLoaded": "false"
+                    }
+                },
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent_0",
+                    "Properties": {
+                        "AABB_max": "X=0.253 Y=0.343 Z=1.899",
+                        "AABB_min": "X=-0.251 Y=-0.344 Z=0.000",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent_0",
+                        "ComponentOwner": "ACube_1114",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=-26.746 Y=-298.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=5.000 Y=5.000 Z=5.000",
+                        "StaticMeshPath": "Contents/Es.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UBoxComponent",
+                    "ComponentID": "BoxComponent",
+                    "Properties": {
+                        "AABB_max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "BoxExtent": "X=1.000 Y=1.000 Z=1.000",
+                        "ComponentClass": "UBoxComponent",
+                        "ComponentName": "BoxComponent",
+                        "ComponentOwner": "ACube_1114",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ShapeColor": "R=0.000 G=0.000 B=0.000 A=0.000",
+                        "bAutoActive": "true",
+                        "bDrawOnlyIfSelected": "true",
+                        "bIsActive": "true",
+                        "m_Type": "UBoxComponent"
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent_0"
+        },
+        {
+            "ActorClass": "ACube",
+            "ActorID": "ACube_1327",
+            "ActorLabel": "OBJ_CUBE_1327",
+            "Components": [
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent_0",
+                    "Properties": {
+                        "AABB_max": "X=0.949 Y=0.949 Z=1.340",
+                        "AABB_min": "X=-0.950 Y=-0.949 Z=-0.000",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent_0",
+                        "ComponentOwner": "ACube_1327",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=-30.356 Y=-300.000 Z=-0.940",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=7.000 Y=7.000 Z=1.000",
+                        "StaticMeshPath": "Contents/Dorayaki.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                },
+                {
+                    "ComponentClass": "UBoxComponent",
+                    "ComponentID": "BoxComponent",
+                    "Properties": {
+                        "AABB_max": "X=1.000 Y=1.000 Z=1.000",
+                        "AABB_min": "X=-1.000 Y=-1.000 Z=-1.000",
+                        "BoxExtent": "X=1.000 Y=1.000 Z=1.000",
+                        "ComponentClass": "UBoxComponent",
+                        "ComponentName": "BoxComponent",
+                        "ComponentOwner": "ACube_1327",
+                        "ComponentOwnerClass": "ACube",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ShapeColor": "R=0.000 G=0.000 B=0.000 A=0.000",
+                        "bAutoActive": "true",
+                        "bDrawOnlyIfSelected": "true",
+                        "bIsActive": "true",
+                        "m_Type": "UBoxComponent"
+                    }
+                },
+                {
+                    "ComponentClass": "UScriptComponent",
+                    "ComponentID": "ScriptComponent",
+                    "Properties": {
+                        "ComponentClass": "UScriptComponent",
+                        "ComponentName": "ScriptComponent",
+                        "ComponentOwner": "ACube_1327",
+                        "ComponentOwnerClass": "ACube",
+                        "ScriptPath": "Contents/LuaScript/GoodByeES.lua",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "bIsScriptLoaded": "false"
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent_0"
+        },
+        {
+            "ActorClass": "ACameraActor",
+            "ActorID": "ACameraActor_1668",
+            "ActorLabel": "OBJ_CAMERA_1668",
+            "Components": [
+                {
+                    "ComponentClass": "UCameraComponent",
+                    "ComponentID": "CameraComponent",
+                    "Properties": {
+                        "CameraName": "RunJ",
+                        "ComponentClass": "UCameraComponent",
+                        "ComponentName": "CameraComponent",
+                        "ComponentOwner": "ACameraActor_1668",
+                        "ComponentOwnerClass": "ACameraActor",
+                        "FarClip": "1000.000000",
+                        "NearClip": "0.100000",
+                        "RelativeLocation": "X=0.000 Y=0.000 Z=0.000",
+                        "RelativeRotation": "Pitch=0.000 Yaw=0.000 Roll=0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "ViewFOV": "52.799999",
+                        "bAutoActive": "true",
+                        "bIsActive": "true"
+                    }
+                },
+                {
+                    "ComponentClass": "UStaticMeshComponent",
+                    "ComponentID": "StaticMeshComponent",
+                    "Properties": {
+                        "AABB_max": "X=0.024 Y=1.201 Z=1.428",
+                        "AABB_min": "X=-4.757 Y=-1.201 Z=-1.248",
+                        "ComponentClass": "UStaticMeshComponent",
+                        "ComponentName": "StaticMeshComponent",
+                        "ComponentOwner": "ACameraActor_1668",
+                        "ComponentOwnerClass": "ACameraActor",
+                        "RelativeLocation": "X=2.992 Y=0.012 Z=1.474",
+                        "RelativeRotation": "Pitch=-0.000 Yaw=180.000 Roll=-0.000",
+                        "RelativeScale3D": "X=1.000 Y=1.000 Z=1.000",
+                        "StaticMeshPath": "Contents/Camera.obj",
+                        "bAutoActive": "true",
+                        "bIsActive": "true",
+                        "m_Type": ""
+                    }
+                }
+            ],
+            "RootComponentID": "StaticMeshComponent"
+        }
+    ],
+    "NextUUID": 0,
+    "Version": 1
+}

@@ -91,7 +91,41 @@ void UTextComponent::ClearText()
 
 void UTextComponent::SetText(const FWString& text)
 {
-    Text = text;
+    // 입력 문자열 검사
+    if (text.length() == 0)
+    {
+        return;
+    }
+
+    // Text가 null인지 안전하게 확인하는 방법
+    // 여기서는 사용자 정의 타입인 FWString이 null 상태를 가질 수 있다고 가정
+    bool isTextNull = false;
+
+#ifdef _DEBUG
+    // 디버그 모드에서 로깅 추가
+    if (&Text == nullptr)
+    {
+        fprintf(stderr, "Warning: Text is null in UTextComponent::SetText\n");
+        isTextNull = true;
+    }
+#else
+    // 안전한 접근을 위한 널 체크
+    isTextNull = (&Text == nullptr);
+#endif
+
+    if (isTextNull)
+    {
+        // 엔진/프레임워크에 따라 Text 초기화 방법이 다를 수 있음
+        // 여기서는 단순히 관련 코드를 실행하지 않고 반환
+        return;
+    }
+
+    // Text가 null이 아니면 원래 의도대로 처리
+    // Text[0] && text[0] 조건을 Text.length() > 0으로 안전하게 대체
+    if (Text.length() > 0)
+    {
+        Text = text;
+    }
   
 }
 

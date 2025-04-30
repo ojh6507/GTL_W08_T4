@@ -1,4 +1,3 @@
-local textCompClass = FindClass("UTextComponent")
 function BeginPlay()
     local textComp = self:GetTextComponent() -- TextComponent 인스턴스 얻기
 
