@@ -130,6 +130,8 @@ void FRenderer::CreateConstantBuffers()
 
     UINT SubUVBufferSize = sizeof(FSubUVConstant);
     BufferManager->CreateBufferGeneric<FSubUVConstant>("FSubUVConstant", nullptr, SubUVBufferSize, D3D11_BIND_CONSTANT_BUFFER, D3D11_USAGE_DYNAMIC, D3D11_CPU_ACCESS_WRITE);
+  UINT UIConstantsSize = sizeof(FUIConstants);
+    BufferManager->CreateBufferGeneric<FUIConstants>("FUIConstants", nullptr, UIConstantsSize, D3D11_BIND_CONSTANT_BUFFER, D3D11_USAGE_DYNAMIC, D3D11_CPU_ACCESS_WRITE);
 
     UINT MaterialBufferSize = sizeof(FMaterialConstants);
     BufferManager->CreateBufferGeneric<FMaterialConstants>("FMaterialConstants", nullptr, MaterialBufferSize, D3D11_BIND_CONSTANT_BUFFER, D3D11_USAGE_DYNAMIC, D3D11_CPU_ACCESS_WRITE);

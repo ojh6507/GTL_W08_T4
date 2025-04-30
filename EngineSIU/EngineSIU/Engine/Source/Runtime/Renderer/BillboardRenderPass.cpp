@@ -65,6 +65,7 @@ void FBillboardRenderPass::PrepareTextureShader() const
 
 void FBillboardRenderPass::PrepareSubUVConstant() const
 {
+    BufferManager->BindConstantBuffer(TEXT("FSubUVConstant"), 1, EShaderStage::Vertex);
     BufferManager->BindConstantBuffer(TEXT("FSubUVConstant"), 1, EShaderStage::Pixel);
 }
 
@@ -116,6 +117,7 @@ void FBillboardRenderPass::CreateShader()
     };
 
     HRESULT hr = ShaderManager->AddVertexShaderAndInputLayout(L"VertexBillboardShader", L"Shaders/VertexBillboardShader.hlsl", "main", TextureLayoutDesc, ARRAYSIZE(TextureLayoutDesc));
+    hr = ShaderManager->AddVertexShaderAndInputLayout(L"VertexTextShader", L"Shaders/VertexTextShader.hlsl", "main", TextureLayoutDesc, ARRAYSIZE(TextureLayoutDesc));
     if (FAILED(hr))
     {
         return;
@@ -127,9 +129,7 @@ void FBillboardRenderPass::CreateShader()
         return;
     }
     
-    VertexShader = ShaderManager->GetVertexShaderByKey(L"VertexBillboardShader");
-    InputLayout = ShaderManager->GetInputLayoutByKey(L"VertexBillboardShader");
-    PixelShader = ShaderManager->GetPixelShaderByKey(L"PixelBillboardShader");
+  
 }
 
 void FBillboardRenderPass::ReleaseShader()
@@ -138,12 +138,17 @@ void FBillboardRenderPass::ReleaseShader()
 
 void FBillboardRenderPass::ReloadShader()
 {
+    VertexShader = ShaderManager->GetVertexShaderByKey(L"VertexTextShader");
     VertexShader = ShaderManager->GetVertexShaderByKey(L"VertexBillboardShader");
     PixelShader = ShaderManager->GetPixelShaderByKey(L"PixelBillboardShader");
 }
 
 void FBillboardRenderPass::Render(const std::shared_ptr<FEditorViewportClient>& Viewport)
 {
+    VertexShader = ShaderManager->GetVertexShaderByKey(L"VertexBillboardShader");
+    InputLayout = ShaderManager->GetInputLayoutByKey(L"VertexBillboardShader");
+    PixelShader = ShaderManager->GetPixelShaderByKey(L"PixelBillboardShader");
+
     FViewportResource* ViewportResource = Viewport->GetViewportResource();
 
     FRenderTargetRHI* RenderTargetRHI = ViewportResource->GetRenderTarget(ResourceType);
@@ -186,8 +191,24 @@ void FBillboardRenderPass::Render(const std::shared_ptr<FEditorViewportClient>& 
             FBufferInfo Buffers;
             float Height = TextComp->Texture->Height;
             float Width = TextComp->Texture->Width;
-            BufferManager->CreateUnicodeTextBuffer(TextComp->GetText(), Buffers, Width, Height, TextComp->GetColumnCount(), TextComp->GetRowCount());
 
+            FRenderTargetRHI* TextRenderTargetRHI = ViewportResource->GetRenderTarget(EResourceType::ERT_Overlay);
+            Graphics->DeviceContext->OMSetRenderTargets(1, &TextRenderTargetRHI->RTV, ViewportResource->GetDepthStencilView());
+
+
+            VertexShader = ShaderManager->GetVertexShaderByKey(L"VertexTextShader");
+            
+            PrepareTextureShader();
+            BufferManager->CreateUnicodeTextBuffer(TextComp->GetText(), Buffers, Width, Height, TextComp->GetColumnCount(), TextComp->GetRowCount());
+            BufferManager->BindConstantBuffer("FUIConstants", 2, EShaderStage::Vertex);
+
+            
+            FUIConstants data;
+            data.QuadPixelSize = 32.f;
+            data.ScreenSize = FVector2D(TextRenderTargetRHI->GetSizeX(), TextRenderTargetRHI->GetSizeY());
+            data.VerticalOffset = -500.f;
+
+            BufferManager->UpdateConstantBuffer("FUIConstants", data);
             UpdateSubUVConstant(FVector2D(), FVector2D(1, 1));
 
             RenderTextPrimitive(

@@ -118,22 +118,22 @@ void FPostProcessCompositingPass::Render(const std::shared_ptr<FEditorViewportCl
         {
             BaseRenderedWidth = TargetHeight * SourceAspectRatio;
         }
-        float FinalRenderedWidth = BaseRenderedWidth * ContentAreaScale;
+        float FinalRenderedWidth = BaseRenderedWidth * 2;
         float FinalRenderedHeight = BaseRenderedHeight * ContentAreaScale;
 
         float FinalOffsetX = (TargetWidth - FinalRenderedWidth) * 0.5f;
         float FinalOffsetY = (TargetHeight - FinalRenderedHeight) * 0.5f;
 
-        ShaderParams.LetterboxScale = FVector2D(FinalRenderedWidth / TargetWidth, FinalRenderedHeight / TargetHeight); // <<< 멤버 이름 변경
+        ShaderParams.LetterboxScale = FVector2D(FinalRenderedWidth / TargetWidth, FinalRenderedHeight / TargetHeight);
 
         float CenterX_Pixels = FinalOffsetX + FinalRenderedWidth * 0.5f;
         float CenterY_Pixels = FinalOffsetY + FinalRenderedHeight * 0.5f;
 
-        ShaderParams.LetterboxOffset = FVector2D((CenterX_Pixels / TargetWidth) * 2.0f - 1.0f, 1.0f - (CenterY_Pixels / TargetHeight) * 2.0f); // <<< 멤버 이름 변경
+        ShaderParams.LetterboxOffset = FVector2D((CenterX_Pixels / TargetWidth) * 2.0f - 1.0f, 1.0f - (CenterY_Pixels / TargetHeight) * 2.0f);
     }
     else
     {
-        ShaderParams.LetterboxScale = FVector2D(1.0f, 1.0f);
+        ShaderParams.LetterboxScale = FVector2D(2.0f, 2.0f);
         ShaderParams.LetterboxOffset = FVector2D(0.0f, 0.0f);
     }
 

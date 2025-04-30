@@ -275,7 +275,12 @@ struct FSubUVConstant
     FVector2D uvOffset;
     FVector2D uvScale;
 };
-
+struct FUIConstants
+{
+    FVector2D ScreenSize;      
+    FVector2D QuadPixelSize;
+    float  VerticalOffset;
+};
 struct FLitUnlitConstants
 {
     int bIsLit; // 1 = Lit, 0 = Unlit 

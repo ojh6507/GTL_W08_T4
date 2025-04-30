@@ -2,6 +2,7 @@
 Texture2D SceneTexture : register(t100);
 Texture2D PP_PostProcessTexture : register(t101);
 Texture2D EditorTexture : register(t102);
+Texture2D OverlayTexture : register(t105);
 
 SamplerState CompositingSampler : register(s0);
 
@@ -46,10 +47,12 @@ float4 mainPS(PS_Input Input) : SV_TARGET
     float4 Scene = SceneTexture.Sample(CompositingSampler, Input.UV);
     float4 PostProcess = PP_PostProcessTexture.Sample(CompositingSampler, Input.UV);
     float4 Editor = EditorTexture.Sample(CompositingSampler, Input.UV);
+    float4 Overlay = OverlayTexture.Sample(CompositingSampler, Input.UV);
 
     float4 FinalColor;
     FinalColor = lerp(Scene, PostProcess, PostProcess.a);
     FinalColor = lerp(FinalColor, Editor, Editor.a);
+    FinalColor = lerp(FinalColor, Overlay, Overlay.a);
 
     return FinalColor;
 }

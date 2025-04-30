@@ -38,7 +38,7 @@ private:
 
 
     bool bEnableLetterboxing;
-    float ContentAreaScale = 1.8f;
+    float ContentAreaScale = 1.5f;
 
     const UINT CompositingParamsConstantBufferSlot = 11;
     const UINT TextureSamplerSlot = 0;

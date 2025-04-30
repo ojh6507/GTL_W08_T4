@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"     // AActor
 #include "Components/ActorComponent.h" // UActorComponent
 #include "Components/SceneComponent.h" // USceneComponent
+#include "Components/TextComponent.h"
 
 #include "UObject/Class.h"           // UClass
 #include "Engine/EngineTypes.h"      // EEndPlayReason
@@ -717,7 +718,58 @@ namespace LuaBindings
         BindFColor(lua);
         BindFLinearColor(lua);
     }
+    void BindUTextComponent(sol::state& lua)
+    {
+        // Ensure the base class (e.g., UActorComponent) is bound first
+        lua.new_usertype<UTextComponent>("TextComponent", // Lua name
+            sol::no_constructor, // Usually created via AddComponent or spawned with an Actor
+            sol::base_classes, sol::bases<UActorComponent, UObject>(), // Adjust base class if needed
 
+            // Bind the SetText method using a lambda for string conversion
+            "SetText", [](UTextComponent& self, const std::string& lua_utf8_text) {
+                // Convert Lua's UTF-8 std::string to std::wstring for C++
+#ifdef _WIN32 // Platform-specific conversion (Windows example)
+                if (lua_utf8_text.empty()) {
+                    self.SetText(L""); // Handle empty string case
+                    return;
+                }
+                // Calculate required buffer size for wide string
+                int size_needed = MultiByteToWideChar(CP_UTF8, 0, lua_utf8_text.c_str(), (int)lua_utf8_text.size(), NULL, 0);
+                if (size_needed <= 0) {
+                    // Log error or throw Lua error
+                    std::cerr << "Lua BindUTextComponent Error: MultiByteToWideChar size calculation failed for input: " << lua_utf8_text << std::endl;
+                    // Optionally throw an error to Lua:
+                    // throw sol::error("Failed to convert UTF-8 string to wide string (size calculation).");
+                    return; // Or return early
+                }
+
+                // Perform the conversion
+                std::wstring wstrTo(size_needed, 0);
+                int chars_converted = MultiByteToWideChar(CP_UTF8, 0, lua_utf8_text.c_str(), (int)lua_utf8_text.size(), &wstrTo[0], size_needed);
+                if (chars_converted <= 0) {
+                    // Log error or throw Lua error
+                    std::cerr << "Lua BindUTextComponent Error: MultiByteToWideChar conversion failed for input: " << lua_utf8_text << std::endl;
+                    // Optionally throw an error to Lua:
+                    // throw sol::error("Failed to convert UTF-8 string to wide string (conversion).");
+                    return; // Or return early
+                }
+
+                // Call the actual C++ method with the converted wstring
+                self.SetText(wstrTo);
+
+#else
+  
+#pragma message("Warning: UTextComponent::SetText Lua binding requires platform-specific UTF-8 to wstring conversion.")
+                throw sol::error("UTextComponent::SetText binding not implemented for this non-Windows platform.");
+      
+#endif
+            },
+
+            "ClearText", &UTextComponent::ClearText,
+            "SetRowColumnCount", &UTextComponent::SetRowColumnCount
+        
+        );
+    }
     // --- AActor 바인딩 ---
     void BindAActor(sol::state& lua)
     {
@@ -726,6 +778,34 @@ namespace LuaBindings
             sol::no_constructor, // Lua에서 직접 생성 금지
             sol::base_classes, sol::bases<UObject>(), // UObject 상속 (UObject 바인딩 필요)
 
+
+            "GetComponentByClass", [](AActor& self, UClass* componentClass) -> UActorComponent* {
+                if (!componentClass) 
+                {
+                    // Return nil if the provided class is invalid
+                    return nullptr;
+                }
+                const auto& components = self.GetComponents();
+                for (UActorComponent* component : components)
+                {
+                    if (component && component->GetClass() && component->GetClass()->IsChildOf(componentClass))
+                    {
+                        return component;
+                    }
+                }
+                return nullptr;
+            },
+            "GetTextComponent", [](AActor& self) -> UTextComponent* {
+                // Reuse the logic or perform a specific search
+                const auto& components = self.GetComponents(); // Assuming GetComponents exists
+                for (UActorComponent* component : components) {
+                    // Use Cast or dynamic_cast for safety if needed, or check class directly
+                    if (component && component->IsA(UTextComponent::StaticClass())) { // Use StaticClass() for check
+                        return static_cast<UTextComponent*>(component);
+                    }
+                }
+                return nullptr;
+            },
             // 핵심 함수
             "Destroy", &AActor::Destroy,
             "IsActorBeingDestroyed", &AActor::IsActorBeingDestroyed,
@@ -965,7 +1045,44 @@ namespace LuaBindings
             "bIsStart", &UCameraShakeModifier::bIsStart
         );
     }
+ 
+    // --- UActorComponent 바인딩 ---
+    void BindUActorComponent(sol::state& lua)
+    {
+        // Ensure UObject is bound first
+        lua.new_usertype<UActorComponent>("UActorComponent", // Use C++ class name for consistency
+            sol::no_constructor, // Components are added via Actor, not created directly in Lua
+            sol::base_classes, sol::bases<UObject>(), // Inherits from UObject
 
+            // --- Core Component Functionality ---
+            "GetOwner", &UActorComponent::GetOwner,             // Get the owning Actor
+            "DestroyComponent", &UActorComponent::DestroyComponent, // Destroy this component instance
+            "Activate", &UActorComponent::Activate,           // Activate the component (e.g., enable ticking)
+            "Deactivate", &UActorComponent::Deactivate,         // Deactivate the component (e.g., disable ticking)
+
+            // --- Status ---
+            // Expose bIsActive as a read-only property for checking status.
+            // Use Activate/Deactivate methods to change the state.
+            "IsActive", &UActorComponent::IsActive,
+            // You could also bind bIsBeingDestroyed if needed for checks
+            // "IsBeingDestroyed", sol::readonly(&UActorComponent::bIsBeingDestroyed),
+
+            // --- Inherited from UObject (Re-bound for clarity/safety) ---
+            "GetName", [](const UActorComponent& self) -> std::string {
+                FName compName = self.GetFName(); // Get the FName
+                FString fstr = compName.ToString(); // Convert FName to FString
+#if USE_WIDECHAR
+                // Convert FString to std::string (UTF-8)
+                return fstr.ToAnsiString(); // Example conversion
+#else
+                return static_cast<std::string>(fstr); // Example conversion
+#endif
+                // TODO: Verify FString to std::string conversion logic
+            },
+            "GetClass", &UActorComponent::GetClass, // Get the UClass of this component
+            "GetWorld", &UActorComponent::GetWorld  // Get the world the component belongs to (inherited from UObject)
+        );
+    }
     // --- 코어 타입 전체 바인딩 호출 함수 ---
     void BindCoreTypesForLua(sol::state& lua)
     {
@@ -983,9 +1100,10 @@ namespace LuaBindings
         BindUClass(lua);
 
         // 4. 주요 게임플레이 클래스
+        BindUActorComponent(lua);
+        BindUTextComponent(lua);
         BindUWorld(lua);
         BindAActor(lua);
-
         // 5. 컨테이너 관련 (필요한 경우)
         lua["FindClass"] = &LuaFindClass;
 
