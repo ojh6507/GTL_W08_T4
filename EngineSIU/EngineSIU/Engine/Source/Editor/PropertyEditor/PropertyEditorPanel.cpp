@@ -106,10 +106,24 @@ void PropertyEditorPanel::Render()
                     {
                         // TODO: 임시로 static uint32 NewCompIndex사용
                         static uint32 NewCompIndex = 0;
-                        SelectedActor->AddComponent(
-                            Class,
-                            FString::Printf(TEXT("%s_%d"), *Class->GetName(), NewCompIndex++)
-                        );
+
+                        // Add Component to Selected Actor
+                        UActorComponent* NewComp = SelectedActor->AddComponent(Class,FString::Printf(TEXT("%s_%d"), *Class->GetName(), NewCompIndex++), true);
+
+                        if (USceneComponent* ParentComp = Cast<USceneComponent>(SelectedComponent))
+                        {
+                            if (USceneComponent* ChildComp = Cast<USceneComponent>(NewComp))
+                            {
+                                ChildComp->SetupAttachment(ParentComp);
+                            }
+                        }
+                        else
+                        {
+                            if (USceneComponent* ChildComp = Cast<USceneComponent>(NewComp))
+                            {
+                                ChildComp->SetupAttachment(SelectedActor->GetRootComponent());
+                            }
+                        }
 
                         bActorComponentNodeDirty = true;
                     }
@@ -118,6 +132,35 @@ void PropertyEditorPanel::Render()
             }
         }
         ImGui::PopStyleColor();
+    }
+#pragma endregion
+
+#pragma region Delete Component
+    if (SelectedActor)
+    {
+        ImGui::SeparatorText("Delete Component");
+
+        float windowWidth = ImGui::GetContentRegionAvail().x;
+        if (ImGui::Button("Delete", ImVec2(windowWidth, 32)))
+        {
+            if (SelectedComponent)
+            {
+                if (SelectedComponent != SelectedActor->GetRootComponent())
+                {
+                    SelectedComponent->DestroyComponent();
+                    Engine->SelectComponent(nullptr);
+                    bActorComponentNodeDirty = true;
+                }
+                else
+                {
+                    UE_LOG(ELogLevel::Warning, TEXT("Cannot Delete Root Component."));
+                }
+            }
+            else
+            {
+                UE_LOG(ELogLevel::Warning, TEXT("No Component Selected."));
+            }
+        }
     }
 #pragma endregion
 
@@ -1296,11 +1339,24 @@ void PropertyEditorPanel::ShowActorComponents(const char* TableID)
         RootActorNode->ClearChildren();
         ActorComponentNode* RootComponentNode = RootActorNode->AddChild(SelectedActor->GetRootComponent()->GetName(), SelectedActor->GetRootComponent()->GetClass()->GetName(), SelectedActor->GetRootComponent());
 
+        // Recursive function to add children of USceneComponent (i.e. RootComponent)
+        auto AddSceneComponentChildrenRecursively = [](ActorComponentNode* ParentNode, const USceneComponent* ParentComponent, auto& AddSceneComponentChildrenRecursivelyRef)
+        -> void
+            {
+                for (USceneComponent* ChildComponent : ParentComponent->GetAttachChildren())
+                {
+                    ActorComponentNode* ChildNode = ParentNode->AddChild(ChildComponent->GetName(), ChildComponent->GetClass()->GetName(), ChildComponent);
+                    AddSceneComponentChildrenRecursivelyRef(ChildNode, ChildComponent, AddSceneComponentChildrenRecursivelyRef);
+                }
+            };
+
         // Add RootComponent's Children (i.e. SceneComponents)
-        for (UActorComponent* Component : SelectedActor->GetRootComponent()->GetAttachChildren())
+        if (const USceneComponent* RootSceneComponent = SelectedActor->GetRootComponent())
         {
-            RootComponentNode->AddChild(Component->GetName(), Component->GetClass()->GetName(), Component);
+            AddSceneComponentChildrenRecursively(RootComponentNode, RootSceneComponent, AddSceneComponentChildrenRecursively);
         }
+
+
         // @todo 더 나은 방식 찾기
         // Add Non-SceneComponents
         for (UActorComponent* Component : SelectedActor->GetComponents())
