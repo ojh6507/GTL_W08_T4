@@ -1,4 +1,4 @@
-﻿#include "Quat.h"
+#include "Quat.h"
 
 #include "Vector.h"
 #include "Matrix.h"
@@ -145,4 +145,19 @@ FMatrix FQuat::ToMatrix() const
     RotationMatrix.M[3][3] = 1.0f;
 
     return RotationMatrix;
+}
+
+FQuat FQuat::Inverse() const
+{
+    // 쿼터니언의 크기 계산
+    float MagnitudeSquared = W * W + X * X + Y * Y + Z * Z;
+
+    // 크기가 0에 가까운 경우 역 계산 불가
+    if (MagnitudeSquared < SMALL_NUMBER)
+    {
+        return FQuat(1.0f, 0.0f, 0.0f, 0.0f); // 기본 단위 쿼터니언 반환
+    }
+
+    // 켤레를 크기의 제곱으로 나눔
+    return FQuat(W / MagnitudeSquared, -X / MagnitudeSquared, -Y / MagnitudeSquared, -Z / MagnitudeSquared);
 }

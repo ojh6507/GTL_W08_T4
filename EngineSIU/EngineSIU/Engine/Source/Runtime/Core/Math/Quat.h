@@ -43,6 +43,9 @@ struct FQuat
 
     // 쿼터니언을 회전 행렬로 변환
     FMatrix ToMatrix() const;
+
+    // 쿼터니언의 역(켤레) 계산
+    FQuat Inverse() const;
 };
 
 inline FArchive& operator<<(FArchive& Ar, FQuat& Q)

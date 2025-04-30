@@ -157,6 +157,47 @@ void USceneComponent::AttachToComponent(USceneComponent* InParent)
     }
 }
 
+void USceneComponent::SetWorldLocation(const FVector& InNewLocation)
+{
+    if (AttachParent)
+    {
+        RelativeLocation = InNewLocation - AttachParent->GetWorldLocation();
+    }
+    else
+    {
+        RelativeLocation = InNewLocation;
+    }
+}
+
+void USceneComponent::SetWorldRotation(const FRotator& InNewRotation)
+{
+    // 월드 회전을 쿼터니언으로 변환
+    FQuat NewWorldQuat = InNewRotation.ToQuaternion();
+
+    if (AttachParent)
+    {
+        // 상대 회전 계산: 부모의 역 쿼터니언과 곱함
+        RelativeRotation = FRotator(AttachParent->GetWorldRotation().ToQuaternion().Inverse() * NewWorldQuat);
+    }
+    else
+    {
+        // 부모가 없으면 월드 회전이 곧 상대 회전
+        RelativeRotation = InNewRotation;
+    }
+}
+
+void USceneComponent::SetWorldScale3D(const FVector& NewScale)
+{
+    if (AttachParent)
+    {
+        RelativeScale3D = NewScale / AttachParent->GetWorldScale3D();
+    }
+    else
+    {
+        RelativeScale3D = NewScale;
+    }
+}
+
 FVector USceneComponent::GetWorldLocation() const
 {
     if (AttachParent)
