@@ -6,6 +6,8 @@
 #include "Engine/FLoaderOBJ.h"
 #include "Engine/Engine.h"
 #include "UnrealEd/SceneManager.h"
+#include "Camera/PlayerCameraManager.h"
+#include "UObject/UObjectIterator.h"
 
 class UEditorEngine;
 
@@ -151,5 +153,17 @@ FViewTarget UWorld::GetViewTarget(FName InName)
 UCameraComponent* UWorld::GetCameraComponent(FName InName)
 {
     return ActiveLevel->GetCameraComponent(InName);
+}
+
+APlayerCameraManager* UWorld::GetPlayerCameraManager()
+{
+    for (const auto iter : TObjectRange<APlayerCameraManager>())
+    {
+        if (iter->GetWorld() == GEngine->ActiveWorld)
+        {
+            return iter;
+        }
+    }
+    return nullptr;
 }
 
