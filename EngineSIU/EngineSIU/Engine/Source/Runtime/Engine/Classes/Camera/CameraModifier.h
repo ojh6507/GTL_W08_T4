@@ -6,20 +6,32 @@
 class AActor;
 class APlayerCameraManager;
 
+enum class EModifierType 
+{
+    Shake,
+    Move,
+};
+
 class UCameraModifier : public UObject
 {
     DECLARE_CLASS(UCameraModifier, UObject)
+
+private:
+    EModifierType MType;
+
 public:
     UCameraModifier();
     ~UCameraModifier() override;
     UObject* Duplicate(UObject* InOuter) override;
 
+    EModifierType GetModifierType();
+    void SetModifierType(EModifierType type);
 protected:
     /** true일 경우, 이 모디파이어는 카메라에 적용되지 않습니다. */
-    uint32 bDisabled:1;
+    uint32 bDisabled = true;
 
     /** true일 경우, 보간이 끝나면 이 모디파이어는 자동으로 비활성화됩니다. */
-    uint32 bPendingDisable:1;
+    uint32 bPendingDisable = true;
     
 public:
     /** 모디파이어가 적용되는 순서를 결정하는 우선순위 값. 0 = 가장 높은 우선순위, 255 = 가장 낮은 우선순위 */

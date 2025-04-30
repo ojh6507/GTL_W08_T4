@@ -1,8 +1,9 @@
 #include "Level.h"
 #include "GameFramework/Actor.h"
 #include "UObject/Casts.h"
-#include "../../../../UScriptComponent.h"
+#include "Components/UScriptComponent.h"
 #include "Camera/PlayerCameraManager.h"
+#include "Camera/CameraComponent.h"
 
 
 void ULevel::InitLevel(UWorld* InOwningWorld)
@@ -58,20 +59,31 @@ UObject* ULevel::Duplicate(UObject* InOuter)
     return NewLevel;
 }
 
-void ULevel::RegisterCamera(const FName InName, const FViewTarget& View)
+void ULevel::RegisterCamera(FName InName, UCameraComponent* InCameraComp, const FViewTarget& View)
 {
     // 중복 제거 후 등록
     RemoveCamera(InName);
-    Cameras.Add(InName, View);
+    Cameras.Add(InName, InCameraComp);
+    ViewTargets.Add(InName, View);
 }
 
 FViewTarget ULevel::GetViewTarget(const FName InName)
+{
+    FViewTarget empty;
+    if (ViewTargets.Contains(InName))
+    {
+        return ViewTargets[InName];
+    }
+    return empty;
+}
+
+UCameraComponent* ULevel::GetCameraComponent(FName InName)
 {
     if (Cameras.Contains(InName))
     {
         return Cameras[InName];
     }
-    return FViewTarget();
+    return nullptr;
 }
 
 uint32 ULevel::RemoveCamera(const FName InName)

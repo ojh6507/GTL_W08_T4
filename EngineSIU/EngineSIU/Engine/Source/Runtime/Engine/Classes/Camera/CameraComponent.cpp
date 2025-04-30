@@ -1,9 +1,17 @@
 #include "CameraComponent.h"
 
+#include "LevelEditor/SLevelEditor.h"
+#include "Math/JungleMath.h"
+#include "UnrealEd/EditorViewportClient.h"
 #include "UObject/Casts.h"
+#include "World/World.h"
+#include <Actors/AnimPlayerActor.h>
+
+#include "Actors/CameraActor.h"
 
 UCameraComponent::~UCameraComponent()
 {
+    CameraName = TEXT("MainCamera");
 }
 
 void UCameraComponent::UninitializeComponent()
@@ -14,6 +22,14 @@ void UCameraComponent::UninitializeComponent()
 void UCameraComponent::BeginPlay()
 {
     Super::BeginPlay();
+
+    FViewTarget ViewTarget;
+    ViewTarget.SetNewTarget(GetOwner());
+    ViewTarget.POV.Location = GetOwner()->GetActorLocation();
+    ViewTarget.POV.Rotation = GetOwner()->GetActorRotation();
+    
+    GetWorld()->GetActiveLevel()->RegisterCamera(CameraName, this, ViewTarget);
+
     UpdateViewMatrix();
     UpdateProjectionMatrix();
 }
@@ -39,6 +55,7 @@ UObject* UCameraComponent::Duplicate(UObject* InOuter)
 
         NewComponent->View = View;
         NewComponent->Projection = Projection;
+        NewComponent->CameraName = CameraName;
     }
     return NewComponent;
 }
@@ -49,6 +66,7 @@ void UCameraComponent::GetProperties(TMap<FString, FString>& OutProperties) cons
     OutProperties.Add(TEXT("ViewFOV"), FString::Printf(TEXT("%f"), ViewFOV));
     OutProperties.Add(TEXT("NearClip"), FString::Printf(TEXT("%f"), NearClip));
     OutProperties.Add(TEXT("FarClip"), FString::Printf(TEXT("%f"), FarClip));
+    OutProperties.Add(TEXT("CameraName"), CameraName);
 }
 
 void UCameraComponent::SetProperties(const TMap<FString, FString>& InProperties)
@@ -70,6 +88,11 @@ void UCameraComponent::SetProperties(const TMap<FString, FString>& InProperties)
     {
         FarClip = FString::ToFloat(*TempStr);
     }
+    TempStr = InProperties.Find(TEXT("CameraName"));
+    if (TempStr)
+    {
+        CameraName = *TempStr;
+    }
 }
 
 void UCameraComponent::InitializeComponent()
@@ -89,11 +112,58 @@ void UCameraComponent::DestroyComponent()
     Super::DestroyComponent();
 }
 
+void UCameraComponent::GetCameraView(float DeltaTime, FMinimalViewInfo& DesiredView)
+{
+    DesiredView.PreviousViewLocation = GetWorldLocation();
+    DesiredView.PreviousViewRotation = GetWorldRotation();
+    DesiredView.PreviousViewScale = GetWorldScale3D();
+
+    // TODO : Pawn 생기면
+    //if (bUsePawnControlRotation)
+    //{
+        //const APawn* OwningPawn = Cast<APawn>(GetOwner());
+        //const AController* OwningController = OwningPawn ? OwningPawn->GetController() : nullptr;
+        //if (OwningController && OwningController->IsLocalPlayerController())
+        //{
+            //const FRotator PawnViewRotation = OwningPawn->GetViewRotation();
+            //if (!PawnViewRotation.Equals(GetComponentRotation()))
+            //{
+                //SetWorldRotation(PawnViewRotation);
+            //}
+        //}
+    //}
+    
+    DesiredView.Location = GetWorldLocation();
+    DesiredView.Rotation = GetWorldRotation();
+        
+    DesiredView.FOV = bUseAdditiveOffset ? (ViewFOV + AdditiveFOVOffset) : ViewFOV;
+    DesiredView.AspectRatio = AspectRatio;
+    DesiredView.bConstrainAspectRatio = bConstrainAspectRatio;
+    DesiredView.bUseFieldOfViewForLOD = bUseFieldOfViewForLOD;
+    DesiredView.ProjectionMode = ProjectionMode;
+    
+    DesiredView.AutoPlaneShift = AutoPlaneShift;
+	
+    DesiredView.ApplyOverscan(Overscan, bScaleResolutionWithOverscan, bCropOverscan);
+
+    if (bOverrideAspectRatioAxisConstraint)
+    {
+        DesiredView.AspectRatioAxisConstraint = AspectRatioAxisConstraint;
+    }
+
+    // See if the CameraActor wants to override the PostProcess settings used.
+    DesiredView.PostProcessBlendWeight = PostProcessBlendWeight;
+    if (PostProcessBlendWeight > 0.0f)
+    {
+        //DesiredView.PostProcessSettings = PostProcessSettings;
+    }
+}
+
 void UCameraComponent::UpdateViewMatrix()
 {
     View = JungleMath::CreateViewMatrix(GetWorldLocation(),
-          GetWorldLocation() + GetForwardVector(),
-           FVector{ 0.0f,0.0f, 1.0f }
+          GetWorldLocation() + GetWorldFowardVector(),
+           FVector::UpVector
        );
 }
 

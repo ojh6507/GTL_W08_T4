@@ -319,7 +319,7 @@ bool FCollisionDispatcher::OverlapSphereToSphere(const USphereComponent* LHSSphe
 bool FCollisionDispatcher::OverlapSphereToCapsule(const USphereComponent* LHSSphere, UCapsuleComponent* RHSCapsule, FHitResult& OutHitResult)
 {
     // 캡슐 중심선(segment) 두 끝점 계산
-    const FVector Dir     = RHSCapsule->GetUpVector();
+    const FVector Dir     = RHSCapsule->GetLocalUpVector();
     const FVector C       = RHSCapsule->GetWorldLocation();
     const FVector CapScale = RHSCapsule->GetWorldScale3D();
     const float H         = RHSCapsule->GetCapsuleHalfHeight() * CapScale.Z;
@@ -448,7 +448,7 @@ bool FCollisionDispatcher::OverlapCapsuleToBox(const UCapsuleComponent* LHSCapsu
 bool FCollisionDispatcher::OverlapCapsuleToSphere(UCapsuleComponent* LHSCapsule, USphereComponent* RHSSphere, FHitResult& OutHitResult)
 {
     // 캡슐 중심선(segment) 두 끝점 계산
-    const FVector Dir     = LHSCapsule->GetUpVector();
+    const FVector Dir     = LHSCapsule->GetLocalUpVector();
     const FVector C       = LHSCapsule->GetWorldLocation();
     const FVector capScale   = LHSCapsule->GetWorldScale3D();
     const float H         = LHSCapsule->GetCapsuleHalfHeight() * capScale.Z;

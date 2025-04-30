@@ -1,1349 +1,1867 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <Filter Include=".vs">
-      <UniqueIdentifier>{B1AF0312-20A7-4F32-9D61-0119A9BF835E}</UniqueIdentifier>
-    </Filter>
-    <Filter Include=".vs\EngineSIU">
-      <UniqueIdentifier>{B14B2246-CCDC-4D98-9BC2-52698C2CA48A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include=".vs\EngineSIU\CopilotIndices">
-      <UniqueIdentifier>{433DFA60-0C67-4826-B746-0356FF63F304}</UniqueIdentifier>
-    </Filter>
-    <Filter Include=".vs\EngineSIU\CopilotIndices\17.13.444.19527">
-      <UniqueIdentifier>{3DC11967-FB97-486D-AC2E-7DCDDDB43B95}</UniqueIdentifier>
-    </Filter>
-    <Filter Include=".vs\EngineSIU\FileContentIndex">
-      <UniqueIdentifier>{0FA0852A-4627-4CC1-925E-D1387E547395}</UniqueIdentifier>
-    </Filter>
-    <Filter Include=".vs\EngineSIU\v17">
-      <UniqueIdentifier>{AAECB29C-803E-4435-9D73-62F1681C8404}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Binaries">
-      <UniqueIdentifier>{4FABD7A5-5C59-4497-A2A5-8FA0B5C5B333}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Binaries\x64">
-      <UniqueIdentifier>{A28093F8-7748-4FF4-9195-700105C23687}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Binaries\x64\EngineSIU">
-      <UniqueIdentifier>{BA7BB7A3-BC5A-47CB-80BE-65CA267FAACA}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Binaries\x64\EngineSIU\Debug">
-      <UniqueIdentifier>{A1267F35-EE2E-4B82-BB44-F00C2B182936}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU">
-      <UniqueIdentifier>{F2941A47-5CC5-42C9-B190-1576CA3B068A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Assets">
-      <UniqueIdentifier>{7AF4E20D-AE03-4967-A1A7-9860567A824E}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Assets\Editor">
-      <UniqueIdentifier>{728A7392-84CA-4D3C-BB7A-35A4236CEDC4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Assets\Editor\Icon">
-      <UniqueIdentifier>{5A96ADDC-3529-4B28-8626-17527350384F}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Assets\Texture">
-      <UniqueIdentifier>{04096FEF-7226-43BE-8607-B012738E6F9C}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Contents">
-      <UniqueIdentifier>{E920636E-4435-4811-AC79-BD0DAC9F38F7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Contents\Cube">
-      <UniqueIdentifier>{13FA556B-79A8-4E0F-8A92-8DEB72011DC9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Contents\Dodge">
-      <UniqueIdentifier>{29B8BBFF-64C5-4D55-A047-85B70688C003}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Contents\Madara">
-      <UniqueIdentifier>{2D17413D-33DD-4F94-91A4-0E7C2B90B977}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Contents\Reference">
-      <UniqueIdentifier>{80E65F80-23F5-4D9F-B8D1-73E279AB06C7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Contents\Texture">
-      <UniqueIdentifier>{57047B62-DB35-4AA9-BC20-1FBC4A91FD81}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Contents\Unreal">
-      <UniqueIdentifier>{B86C3A49-4697-4164-BF9D-FA2DE784F144}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine">
-      <UniqueIdentifier>{C0D96638-129D-41BB-A158-38AC54304B8E}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source">
-      <UniqueIdentifier>{5D6D22A9-B23C-438E-A4A3-9973759472D8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Developer">
-      <UniqueIdentifier>{60E0B082-D2E4-42C3-89C5-D474415A9CED}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils">
-      <UniqueIdentifier>{4428A96C-124C-47D6-9B25-CE0A195A1B95}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Editor">
-      <UniqueIdentifier>{83C809FE-A9AD-44A4-825A-A058D311A407}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Editor\LevelEditor">
-      <UniqueIdentifier>{F67A2B6D-3D62-44A7-84B9-A1E2D70B9355}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Editor\PropertyEditor">
-      <UniqueIdentifier>{20568A07-3AD3-436C-B676-FEDCD3324DEA}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Editor\UnrealEd">
-      <UniqueIdentifier>{17C20347-1693-43C9-98A9-6E8C71F32783}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime">
-      <UniqueIdentifier>{97DCB193-85FA-463F-9680-578D767D0C2A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Core">
-      <UniqueIdentifier>{10FBBA4D-4926-4A42-A6BB-5564986CF004}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Core\Container">
-      <UniqueIdentifier>{2DE9FE7F-B7B1-414D-A8F6-6B6B50CAAB5B}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Core\Delegates">
-      <UniqueIdentifier>{C94FE02B-E292-444D-B1E7-1BDACC899B7A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Core\HAL">
-      <UniqueIdentifier>{12735259-6694-42FD-8C7E-D42E8DB80FF5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Core\Math">
-      <UniqueIdentifier>{1F3DF1FA-C0E4-4F37-8373-B13CF54A3DC9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Core\Misc">
-      <UniqueIdentifier>{08862956-B5F4-49DB-9495-1275A8DAFF96}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Core\Serialization">
-      <UniqueIdentifier>{50E2E0C2-DDF7-4466-A43F-14A03AE5F470}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Core\Stats">
-      <UniqueIdentifier>{3B804457-98F8-421A-9C59-7BEB600C62E3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\CoreUObject">
-      <UniqueIdentifier>{95886429-72E9-461C-8DA3-1B3175019D06}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject">
-      <UniqueIdentifier>{8CC72C8E-DD33-4645-B5D8-9DD326BDDED8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine">
-      <UniqueIdentifier>{17EE011D-FF94-4014-9E08-91F23144FEA4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Camera">
-      <UniqueIdentifier>{E00FD0F0-ED04-4CC1-8451-19ADBCD47D62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes">
-      <UniqueIdentifier>{0BFA7C94-43FF-4FD4-A027-9CD224C8D42D}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors">
-      <UniqueIdentifier>{CE11763C-2677-4EDF-9AFC-EDDB4EA2F772}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components">
-      <UniqueIdentifier>{C7641B57-AA86-46FF-8086-5C8496FA2E3D}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light">
-      <UniqueIdentifier>{78AE490C-36BC-45F0-B133-851DFF9D888C}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Material">
-      <UniqueIdentifier>{76B4C2D2-21C6-4DEB-AB0F-B3A1400C62DC}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Mesh">
-      <UniqueIdentifier>{C663EDCE-33AD-4897-985A-283100C2CAE4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine">
-      <UniqueIdentifier>{2743DA54-FE46-44CC-95D5-8C400B67B735}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework">
-      <UniqueIdentifier>{F2DD08C4-5C89-4A51-B8DF-5FE3A87ED39A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\UserInterface">
-      <UniqueIdentifier>{1E566FEE-24ED-4773-B7FC-58E6CD4AEE09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Engine\World">
-      <UniqueIdentifier>{DD195D29-BE6A-40A0-9431-D2B6D599EDDE}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\InputCore">
-      <UniqueIdentifier>{26C51379-D3A9-43CC-9F38-544018AD742A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework">
-      <UniqueIdentifier>{C6B9A36A-FFA2-43E4-8460-07C5F543138D}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos">
-      <UniqueIdentifier>{491305FF-81DC-4786-9307-7A456D4C46B7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Launch">
-      <UniqueIdentifier>{56D55919-F0D4-45D4-BB11-8DD10F83FCE5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Renderer">
-      <UniqueIdentifier>{7D914BC4-D831-4A0A-BE15-C7D407B9B2AB}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow">
-      <UniqueIdentifier>{197DF32E-2CA3-42BE-B71D-781FBC9C313A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Serialization">
-      <UniqueIdentifier>{5395B5BA-D817-47E0-970E-38DD3E257F00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Slate">
-      <UniqueIdentifier>{F26F93C5-9FC6-49A9-883F-EB98FA077DAF}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Slate\Widgets">
-      <UniqueIdentifier>{0DAD0073-5FBE-48D8-A66E-33371FC7AA1A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Slate\Widgets\Layout">
-      <UniqueIdentifier>{B70E4714-31B6-42E4-8C94-F85A7C4D1B70}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\SlateCore">
-      <UniqueIdentifier>{6F0D6182-5428-4668-B5E3-7CD90AB81534}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\SlateCore\Input">
-      <UniqueIdentifier>{3F85EEAA-7276-4B5A-A556-698FC3C0A470}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\SlateCore\Widgets">
-      <UniqueIdentifier>{625A0FD8-DD59-480B-BBD6-3E5573397FDD}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Windows">
-      <UniqueIdentifier>{97BB55B3-6FFB-47F6-B57B-F1392FA07440}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI">
-      <UniqueIdentifier>{367C345C-8779-4EC9-BB04-77FBD8C320AE}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty">
-      <UniqueIdentifier>{31E13233-6139-43BF-BB25-5FFAF8BF5CE1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK">
-      <UniqueIdentifier>{F897F9B9-B59C-4259-A77A-BB609CB0B091}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include">
-      <UniqueIdentifier>{C913F818-D47C-4982-B60C-7C04DD7B710B}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK">
-      <UniqueIdentifier>{E3E05CD6-2E06-4D23-B835-243335FC9BD7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib">
-      <UniqueIdentifier>{8DEADAAF-6C24-4AE3-B404-FA2B2AE1BEC8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x64">
-      <UniqueIdentifier>{58150408-70BC-4347-B619-2A13D8221214}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x64\Debug">
-      <UniqueIdentifier>{18BD695A-9DDF-4E08-AC2F-2C5B046314E0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x64\Release">
-      <UniqueIdentifier>{649DFBD2-C25A-4F55-A221-1497F1BE9673}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x86">
-      <UniqueIdentifier>{AF0F9F57-F077-4495-A5DA-E0DB801E5108}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x86\Debug">
-      <UniqueIdentifier>{4D225AAE-C677-47D0-996D-D695C2EC37A3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x86\Release">
-      <UniqueIdentifier>{419EF028-10C7-4AAD-AEA3-15CA995DC2B0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\ImGui">
-      <UniqueIdentifier>{98E804BC-CF6F-4307-8C3B-81B2C5BE2837}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include">
-      <UniqueIdentifier>{FA5FED98-071D-408C-ABF8-38D9F5558D67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui">
-      <UniqueIdentifier>{3B0CBA99-2025-4F29-B235-5C7044C06077}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\Json">
-      <UniqueIdentifier>{9804D2C1-4E37-48FC-AD69-9832C3B53DBC}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\Json\include">
-      <UniqueIdentifier>{1899014F-15F4-4A4F-8C0D-6B05C29B95F2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\Json\include\Json">
-      <UniqueIdentifier>{C97494D6-2A1E-4399-8D39-9DF2DDBFB430}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua">
-      <UniqueIdentifier>{35C222A6-0505-4FB3-995F-012335765086}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\debug">
-      <UniqueIdentifier>{5F93974C-4821-465B-8857-E555235C000C}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\debug\bin">
-      <UniqueIdentifier>{B2E3DC0D-E3B6-46A7-BA23-94C2EAE163F6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\debug\lib">
-      <UniqueIdentifier>{EC3B3C1A-B491-4A40-90D2-94D9011FDD14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\include">
-      <UniqueIdentifier>{57378DE4-EE5E-4BFF-87F5-9C073BCE431E}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\release">
-      <UniqueIdentifier>{848EA1BD-BE19-49BE-A7DD-CCF74DA25D1A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\release\bin">
-      <UniqueIdentifier>{58B6D776-E546-468E-B8E4-68572320C1E4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\release\lib">
-      <UniqueIdentifier>{74DDC078-532D-45A4-AA7A-BD08694B8BA1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\sol2">
-      <UniqueIdentifier>{E103C0DD-B0F6-42C1-B48A-8634A2F32C7D}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\sol2\include">
-      <UniqueIdentifier>{F26A0840-69EB-4106-A751-51D9A292510A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\sol2\include\sol">
-      <UniqueIdentifier>{257C4615-8E2D-4C0D-BCE5-FF39AB5CE2B6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs">
-      <UniqueIdentifier>{E5AA14E0-BF91-4ABD-9176-6D33EDA2A524}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs\include">
-      <UniqueIdentifier>{B6D04D91-CAD2-4E52-B3C8-8BCF24718FB1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Font">
-      <UniqueIdentifier>{C7855CBB-2DD1-4E59-9769-2F43E0A5F2CD}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineSIU\Shaders">
-      <UniqueIdentifier>{DD52842E-2AEF-4F5D-8DEB-E472B5EA7980}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Intermediate">
-      <UniqueIdentifier>{ED7972E2-B268-46D5-9414-CD4980638042}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Intermediate\Build">
-      <UniqueIdentifier>{2C3E6759-C503-453E-BC9D-EE92E26CC1E6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Intermediate\Build\x64">
-      <UniqueIdentifier>{F35315C9-A550-4A0F-98DB-2973112A26BC}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Intermediate\Build\x64\EngineSIU">
-      <UniqueIdentifier>{34F525A2-C2D1-479F-A30E-A3A1B0EB5418}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Intermediate\Build\x64\EngineSIU\Debug">
-      <UniqueIdentifier>{B2E77FB2-E640-42FE-BFC5-5068DCD2E228}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Intermediate\Build\x64\EngineSIU\Debug\EngineSIU.tlog">
-      <UniqueIdentifier>{92DCA156-1C76-419D-9654-57761C367231}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="EngineSIU\LightGridGenerator.cpp">
-      <Filter>EngineSIU</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\LightGridGenerator.h">
-      <Filter>EngineSIU</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompile.cpp">
-      <Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompile.h">
-      <Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompileData.cpp">
-      <Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompileData.h">
-      <Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompileUtility.cpp">
-      <Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompileUtility.h">
-      <Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderFileMetadata.cpp">
-      <Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderFileMetadata.h">
-      <Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderMetadataPtr.cpp">
-      <Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderMetadataPtr.h">
-      <Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Editor\LevelEditor\SlateAppMessageHandler.cpp">
-      <Filter>EngineSIU\Engine\Source\Editor\LevelEditor</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\LevelEditor\SlateAppMessageHandler.h">
-      <Filter>EngineSIU\Engine\Source\Editor\LevelEditor</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Editor\LevelEditor\SLevelEditor.cpp">
-      <Filter>EngineSIU\Engine\Source\Editor\LevelEditor</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\LevelEditor\SLevelEditor.h">
-      <Filter>EngineSIU\Engine\Source\Editor\LevelEditor</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Editor\PropertyEditor\ControlEditorPanel.cpp">
-      <Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\PropertyEditor\ControlEditorPanel.h">
-      <Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\PropertyEditor\IWindowToggleable.h">
-      <Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Editor\PropertyEditor\OutlinerEditorPanel.cpp">
-      <Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\PropertyEditor\OutlinerEditorPanel.h">
-      <Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Editor\PropertyEditor\PropertyEditorPanel.cpp">
-      <Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\PropertyEditor\PropertyEditorPanel.h">
-      <Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Editor\PropertyEditor\ShowFlags.cpp">
-      <Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\PropertyEditor\ShowFlags.h">
-      <Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Editor\PropertyEditor\ViewportTypePanel.cpp">
-      <Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\PropertyEditor\ViewportTypePanel.h">
-      <Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\UnrealEd\EditorPanel.h">
-      <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Editor\UnrealEd\EditorViewportClient.cpp">
-      <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\UnrealEd\EditorViewportClient.h">
-      <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Editor\UnrealEd\ImGuiWidget.cpp">
-      <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\UnrealEd\ImGuiWidget.h">
-      <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Editor\UnrealEd\PrimitiveDrawBatch.cpp">
-      <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\UnrealEd\PrimitiveDrawBatch.h">
-      <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Editor\UnrealEd\SceneManager.cpp">
-      <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\UnrealEd\SceneManager.h">
-      <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Editor\UnrealEd\UnrealEd.cpp">
-      <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Editor\UnrealEd\UnrealEd.h">
-      <Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\CoreMiscDefines.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\EngineStatics.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\EngineStatics.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\Array.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\ContainerAllocator.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\CString.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\Map.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\Pair.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\Queue.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\Set.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Container\String.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\String.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\TSafeQueue.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Delegates\Delegate.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Delegates</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Delegates\DelegateCombination.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Delegates</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\HAL\PlatformMemory.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\HAL</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\HAL\PlatformMemory.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\HAL\PlatformType.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\HAL</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Color.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\Color.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Define.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\JungleMath.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\JungleMath.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\MathSSE.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\MathUtility.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Matrix.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\Matrix.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Quat.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\Quat.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Rotator.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\Rotator.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Vector.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\Vector.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Vector4.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\Vector4.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Misc\Char.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Misc</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Misc\Parse.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Misc</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Misc\Parse.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Misc</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Serialization\Archive.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Serialization</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Serialization\Archive.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Serialization</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Serialization\MemoryArchive.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Serialization</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Serialization\MemoryArchive.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Serialization</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Stats\Stats.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Stats</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Stats\Stats.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Core\Stats</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Casts.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Casts.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Class.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Class.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\NameTypes.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\NameTypes.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Object.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Object.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\ObjectFactory.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\ObjectFactory.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\ObjectGlobals.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\ObjectGlobals.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\ObjectMacros.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\ObjectTypes.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Property.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Property.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\UObjectArray.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\UObjectArray.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\UObjectHash.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\UObjectHash.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\UObjectIterator.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\ActorEditor.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\UnrealClient.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\UnrealClient.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\ViewportClient.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Camera</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Camera</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Level.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Level.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AmbientLightActor.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AmbientLightActor.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\Cube.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\Cube.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\DirectionalLightActor.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\DirectionalLightActor.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\FireballActor.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\FireballActor.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\HeightFogActor.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\HeightFogActor.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\LightActor.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\LightActor.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\Player.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\Player.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\PointLightActor.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\PointLightActor.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\SpotLightActor.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\SpotLightActor.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ActorComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ActorComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BillboardComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BillboardComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\HeightFogComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\HeightFogComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\MeshComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\MeshComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ParticleSubUVComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ParticleSubUVComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\PrimitiveComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\PrimitiveComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ProjectileMovementComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ProjectileMovementComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Quad.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SceneComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SceneComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SkySphereComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SkySphereComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\StaticMeshComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\StaticMeshComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\TextComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\TextComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UTextUUID.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UTextUUID.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\AmbientLightComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\AmbientLightComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\DirectionalLightComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\DirectionalLightComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\LightComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\LightComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\PointLightComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\PointLightComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\SpotLightComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\SpotLightComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Material\Material.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Material</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Material\Material.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Material</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Mesh\StaticMesh.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Mesh</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Mesh\StaticMesh.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Mesh</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\AssetManager.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\AssetManager.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\EditorEngine.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\EditorEngine.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Engine.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Engine.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\EngineTypes.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\FLoaderOBJ.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\FLoaderOBJ.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\ResourceMgr.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\ResourceMgr.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\StaticMeshActor.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\StaticMeshActor.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Texture.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Actor.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Actor.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\UserInterface\Console.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\UserInterface</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\UserInterface\Console.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\UserInterface</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\World\World.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\World</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\World\World.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\World</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\World\WorldContext.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\World</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\World\WorldType.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Engine\World</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\InputCore\InputCoreTypes.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\InputCore</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\InputCore\InputCoreTypes.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\InputCore</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoArrowComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoArrowComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoBaseComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoBaseComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoCircleComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoCircleComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoRectangleComponent.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoRectangleComponent.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\TransformGizmo.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\TransformGizmo.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Launch\Define.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Launch\EngineBaseTypes.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Launch\EngineLoop.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Launch\EngineLoop.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Launch\ImGuiManager.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Launch\ImGuiManager.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Launch\Launch.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Launch\LightDefine.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Launch\ShadowDefine.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\BillboardRenderPass.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\BillboardRenderPass.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\CompositingPass.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\CompositingPass.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\EditorBillboardRenderPass.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\EditorBillboardRenderPass.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\EditorRenderPass.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\EditorRenderPass.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\FogRenderPass.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\FogRenderPass.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\GizmoRenderPass.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\GizmoRenderPass.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\IRenderPass.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\LineRenderPass.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\LineRenderPass.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\PostProcessCompositingPass.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\PostProcessCompositingPass.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\Renderer.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\Renderer.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\RendererHelpers.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\RenderResources.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\ShaderConstants.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\SlateRenderPass.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\SlateRenderPass.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\StaticMeshRenderPass.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\StaticMeshRenderPass.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\UpdateLightBufferPass.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\UpdateLightBufferPass.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\WorldBillboardRenderPass.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\WorldBillboardRenderPass.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow\DirectionalShadowMap.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer\Shadow</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow\DirectionalShadowMap.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer\Shadow</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow\PointLightShadowMap.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer\Shadow</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow\PointLightShadowMap.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer\Shadow</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow\SpotLightShadowMap.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer\Shadow</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow\SpotLightShadowMap.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Renderer\Shadow</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Serialization\Serializer.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Serialization</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Slate\Widgets\Layout\SSplitter.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Slate\Widgets\Layout</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Slate\Widgets\Layout\SSplitter.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Slate\Widgets\Layout</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\SlateCore\Input\Events.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\SlateCore\Input</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\SlateCore\Input\Events.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\SlateCore\Input</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\SlateCore\Widgets\SWindow.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\SlateCore\Widgets</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\SlateCore\Widgets\SWindow.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\SlateCore\Widgets</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Windows\RawInput.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Windows</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Windows\RawInput.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Windows</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Windows\WindowsCursor.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Windows</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Windows\WindowsCursor.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Windows</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Windows\WindowsPlatformTime.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Windows</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Windows\WindowsPlatformTime.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Windows</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI\DXDBufferManager.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI\DXDBufferManager.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI\DXDShaderManager.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI\DXDShaderManager.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI\GraphicDevice.cpp">
-      <Filter>EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI\GraphicDevice.h">
-      <Filter>EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\Audio.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\BufferHelpers.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\CommonStates.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\DDSTextureLoader.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\DirectXHelpers.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\Effects.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\GamePad.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\GeometricPrimitive.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\GraphicsMemory.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\Keyboard.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\Model.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\Mouse.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\PostProcess.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\PrimitiveBatch.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\ScreenGrab.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\SimpleMath.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\SpriteBatch.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\SpriteFont.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\VertexTypes.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\WICTextureLoader.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\XboxDDSTextureLoader.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imconfig.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui.cpp">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_demo.cpp">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_draw.cpp">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_impl_dx11.cpp">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_impl_dx11.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_impl_win32.cpp">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_impl_win32.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_internal.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_tables.cpp">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_widgets.cpp">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imstb_rectpack.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imstb_textedit.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imstb_truetype.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\Json\include\Json\json.hpp">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\Json\include\Json</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs\include\tinyfiledialogs.cpp">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs\include</Filter>
-    </ClCompile>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs\include\tinyfiledialogs.h">
-      <Filter>EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs\include</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Font\IconDefs.h">
-      <Filter>EngineSIU\Font</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Font\RawFonts.h">
-      <Filter>EngineSIU\Font</Filter>
-    </ClInclude>
-    <ClCompile Include="EngineSIU\Engine\Script\LuaManager.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UScriptComponent.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\BoxSphereBounds.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BoxComponent.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CapsuleComponent.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SphereComponent.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ShapeComponent.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\CollisionDispatcher.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\HitResult.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapInfo.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\CameraActor.cpp" />
-    <ClCompile Include="GameUI.cpp" />
-    <ClCompile Include="SoundManager.cpp" />
-    <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraTypes.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\PlayerCameraManager.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\PlayerController.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\ViewTarget.cpp" />
-    <ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraShakeModifier.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Natvis Include="EngineSIU\EngineSIU.natvis" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="EngineSIU\Shaders\FogShader.hlsl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="EngineSIU\Shaders\GizmoPixelShader.hlsl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="EngineSIU\Shaders\GizmoVertexShader.hlsl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="EngineSIU\Shaders\Light.hlsl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="EngineSIU\Shaders\PixelBillboardShader.hlsl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="EngineSIU\Shaders\PostProcessCompositingShader.hlsl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="EngineSIU\Shaders\ShaderLine.hlsl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="EngineSIU\Shaders\ShaderW0.hlsl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="EngineSIU\Shaders\StaticMeshPixelShader.hlsl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="EngineSIU\Shaders\StaticMeshVertexShader.hlsl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="EngineSIU\UberLit.hlsl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="EngineSIU\Shaders\VertexBillboardShader.hlsl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="EngineSIU\Shaders\VSMGenerationPS.hlsl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DefaultPropertySheet.props" />
-    <None Include="EngineSIU\test.lua" />
-    <None Include="EngineSIU\Contents\LuaTemplates\template.lua" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\SimpleMath.inl">
-      <Filter>EngineSIU\Shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSIU\Engine\Script\LuaBinding.h" />
-    <ClInclude Include="EngineSIU\Engine\Script\LuaManager.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UScriptComponent.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\BoxSphereBounds.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BoxComponent.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CapsuleComponent.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SphereComponent.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ShapeComponent.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\CollisionDispatcher.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\HitResult.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapInfo.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\CameraActor.h" />
-    <ClInclude Include="GameUI.h" />
-    <ClInclude Include="SoundManager.h" />
-    <ClInclude Include="Timer.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraTypes.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\PlayerCameraManager.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\PlayerController.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\ViewTarget.h" />
-    <ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraShakeModifier.h" />
-  </ItemGroup>
+	<ItemGroup>
+		<Filter Include=".vs">
+			<UniqueIdentifier>{91368CEC-4F73-41AA-B096-854115F317B6}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU">
+			<UniqueIdentifier>{EFDCCDBE-7D06-431C-806E-2D79E10D69D4}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\copilot-chat">
+			<UniqueIdentifier>{CB75AD9C-1DEB-4992-BC75-4B2356244887}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\copilot-chat\afaa6fbc">
+			<UniqueIdentifier>{6F6A598C-02F2-47E7-895D-1042A409B135}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\copilot-chat\afaa6fbc\sessions">
+			<UniqueIdentifier>{75FF84DD-6D47-4FA1-94C0-F49ABB757BCF}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\CopilotIndices">
+			<UniqueIdentifier>{32F90191-B6B1-4EC2-ADB5-310939FA2466}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\CopilotIndices\17.13.441.19478">
+			<UniqueIdentifier>{6F38B9AB-38C9-4F21-BFA9-FDA207DACCA8}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\FileContentIndex">
+			<UniqueIdentifier>{564ACDFD-1B16-4754-ADFD-903E35C7DD74}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17">
+			<UniqueIdentifier>{57043F08-A9A4-40ED-8382-F845580EC3C0}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch">
+			<UniqueIdentifier>{CFF29633-CF62-4214-8B22-7A73DE845483}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH">
+			<UniqueIdentifier>{AC996DD4-8823-40F5-9C6D-B8F794231AC2}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\13e35bbe20ccbdf9">
+			<UniqueIdentifier>{95B6D99B-6749-47F1-A8E9-7B958F24C8F8}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\14dab7788e1714ae">
+			<UniqueIdentifier>{81FE9C57-8402-432C-B402-4F930EBE63AF}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\1666d5e8a6f0a66a">
+			<UniqueIdentifier>{01CAB061-BA01-4D28-BA5F-5A4C22034B7E}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\1a32f7e98732c7d5">
+			<UniqueIdentifier>{30F3B9EB-BAD5-4322-8F6B-6C1BBEB611D5}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\1bbcd47fd5a19df">
+			<UniqueIdentifier>{2E8B019B-9EE1-4768-A30B-F8FBD446BCF7}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\1bf2a0afdfd85a0d">
+			<UniqueIdentifier>{BD7FC575-D726-4790-9998-FDD911B5A709}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\1cd75cb727430090">
+			<UniqueIdentifier>{656A45E7-2C3F-47FF-8895-6487F1B9B60E}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\20dd08163adbc41b">
+			<UniqueIdentifier>{12831EA6-24AF-4627-8D52-CA8D83F84BBC}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\233f71866726e048">
+			<UniqueIdentifier>{D05FB839-B85A-4107-AD26-CBFA0899103A}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\2dd7d43a2cadf00a">
+			<UniqueIdentifier>{056EBBA7-3763-4836-8C54-5620A0BEE516}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\334caff00a908235">
+			<UniqueIdentifier>{6EC4F47B-8E18-4DB9-A5D3-1A1A994773E1}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\34af15095375266c">
+			<UniqueIdentifier>{2A9A5148-57C1-4849-B543-17DDD1389152}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\37ba9d04569d765">
+			<UniqueIdentifier>{266637EF-6D70-4057-B1A4-5F667B59B3E2}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\3ada67a50bb4ecd3">
+			<UniqueIdentifier>{E9C0ADEB-92FE-4DCB-B49A-FBAD63F44BA7}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\3bd7b9889a1cf48e">
+			<UniqueIdentifier>{AC1DBFF9-51C8-4049-8D11-364E3F4D58A9}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\3c285a5b1fc80e59">
+			<UniqueIdentifier>{7112FCC7-FBA4-4FD4-AD0F-A2C1C268E899}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\3de9b1c15eb44d22">
+			<UniqueIdentifier>{3DFD1D6C-4863-479E-9AFC-0A7372565EF0}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\3e8964382db4b980">
+			<UniqueIdentifier>{92CAC018-7774-48A9-BDB1-1F06B7C8B48F}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\41c38d9f068719ea">
+			<UniqueIdentifier>{A03EF948-078E-4DFC-A37C-D80371B297B3}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\43f4d01875f43ed9">
+			<UniqueIdentifier>{C9497957-B75F-47D2-9FFA-DBEF0AB8098D}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\4a214fca0fd47b1a">
+			<UniqueIdentifier>{733D2F36-8D21-433B-AE20-6674C88B8C6C}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\4d11adca508358a0">
+			<UniqueIdentifier>{01835E05-AEBB-4911-BC9C-611D868E13A3}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\50169b4694144b9e">
+			<UniqueIdentifier>{8093D7C2-BC41-49F4-BB8B-1AC5D6DC7139}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\505d66990b8748be">
+			<UniqueIdentifier>{C1DD7028-F929-4903-BD25-AC0C4ABE955E}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\54a991d3da87893f">
+			<UniqueIdentifier>{6423B2CB-6094-43DC-997C-4C2A7A664A37}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\5796e69bd9dd3ec9">
+			<UniqueIdentifier>{FA467929-9C58-42CD-A128-EB78E16CD1B6}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\63c46e7507b1a4d1">
+			<UniqueIdentifier>{A4B61C3A-7EB0-4A4F-9085-B012D68C4E57}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\64558e85bf1a7364">
+			<UniqueIdentifier>{22FD6DC7-5AAB-423B-A603-B0CB2917F72F}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\6b3a9487498a15d7">
+			<UniqueIdentifier>{E8F440F9-A104-462A-B21C-4AC6A8C0E10B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\6dfa9c302bef5b38">
+			<UniqueIdentifier>{F902C06C-0414-48C6-9D06-0A09F255EE0B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\70a87ffd1002115">
+			<UniqueIdentifier>{9CC4082A-1ED4-407C-90A6-888EF35507A0}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\72e2e55ac316df1f">
+			<UniqueIdentifier>{D6DC0D0E-E014-44DB-9F34-CC82B6F56FB4}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\7308317f87474c85">
+			<UniqueIdentifier>{5A63FED9-7FE0-482C-88D1-5947872D385D}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\74a113ee20005cb5">
+			<UniqueIdentifier>{E8C1391D-83F2-4639-AF7D-407127561C63}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\7b40d4d6f014a334">
+			<UniqueIdentifier>{A3E0DEAF-4709-4E5E-930C-C1CC63C6AD70}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\7e5a9a37a41809f8">
+			<UniqueIdentifier>{29FAA9F2-A747-4738-B1E8-BF7597589EC8}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\8780666ce5034740">
+			<UniqueIdentifier>{E8B83E30-F56F-4ED4-AD46-A37D9DEB4558}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\91b946c348eb47ee">
+			<UniqueIdentifier>{C34CA14D-52D0-4322-8B89-9343125DB9FC}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\928edafc7b4d44b8">
+			<UniqueIdentifier>{5EA50415-1BBC-4825-AEFB-88F80BC7C8D4}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\998195f28edfbad1">
+			<UniqueIdentifier>{26905613-3055-4EFF-8193-D5A60705B7B2}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\99ef5475df5d181">
+			<UniqueIdentifier>{77BEB3E9-30FF-4DA9-8CAC-7CD24E89B9AC}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\9e4fd32b7f9e5fbd">
+			<UniqueIdentifier>{88C7A4EB-9A2F-4761-B0BE-031E9A993767}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\9f5563d96e80d332">
+			<UniqueIdentifier>{C108062F-A7C6-4B0E-A4D3-403DA0E5395B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a28c26b3481aa365">
+			<UniqueIdentifier>{2CCF25F2-0B05-487C-8439-1C6039D65AEA}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a3eee2e3b3d8bd85">
+			<UniqueIdentifier>{CF34A775-EC0A-4042-9563-530643400AA1}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\a76099650a707475">
+			<UniqueIdentifier>{453F2272-D6BE-480C-A3CC-4E5B758F65DA}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ac557f18fdfaf395">
+			<UniqueIdentifier>{2EC6BD90-7724-49F2-B0E0-E87DCE947837}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ac73b5e7fc744345">
+			<UniqueIdentifier>{F9584091-5BF2-4E0B-B106-220735A1C372}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b1280d28268e40bf">
+			<UniqueIdentifier>{C64F2A9F-ED05-4C79-886A-7AB2041365BB}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b27e0aee53425e9e">
+			<UniqueIdentifier>{7E970FC6-CEA3-42A6-A301-B690516D850F}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b3a39432e20e515b">
+			<UniqueIdentifier>{6F4917F7-F7E6-4EB3-B195-3B7076F25765}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b57fca4e77199134">
+			<UniqueIdentifier>{01158ECC-1E29-454B-8BCA-C42672FB60D1}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b6c3dce9f868d346">
+			<UniqueIdentifier>{349BEC71-6035-4557-98D2-7301E61B4CC2}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\b8ee72537c194ec3">
+			<UniqueIdentifier>{193BB6ED-2123-4857-BA73-8358FDA7E801}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\bd194279a918b69c">
+			<UniqueIdentifier>{9268CB8C-DD98-4787-95D2-F8D40EFC5D6B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\c29c2530e160de70">
+			<UniqueIdentifier>{3F449AF6-7709-46A5-879C-DA5A401EC8F9}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\c374b78a03a38730">
+			<UniqueIdentifier>{287A46E2-31BC-4C06-B001-7BBA95F4FA32}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\c7aeaac90b7e4a12">
+			<UniqueIdentifier>{0CEEF31F-BC49-4DFA-B01D-95832C8DEEE2}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\c7ee39324144c2b4">
+			<UniqueIdentifier>{85331F27-0CB9-403D-9126-24E3AB64A0F9}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\c90690ed3ca75161">
+			<UniqueIdentifier>{F71DEA35-D804-452F-BD75-7D095CF32DDD}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ca97ba24502287a3">
+			<UniqueIdentifier>{2AFEB1E7-8064-440D-9B01-FC1800C0D696}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\cf55b1099205d205">
+			<UniqueIdentifier>{798BDE78-BD4D-4F99-ABF0-3DE1A8E799D9}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\d007550a2247d64">
+			<UniqueIdentifier>{3077BB5C-1C66-489F-8A56-EBAD984CE706}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\d086121c859d34b7">
+			<UniqueIdentifier>{21D14A5D-6233-4C35-8155-F59598FD58A1}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\d8216c816da43b4d">
+			<UniqueIdentifier>{F0861952-9081-4B99-815C-88320BA3A2E3}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\d90ba007710ad403">
+			<UniqueIdentifier>{703020F2-01B8-499A-B42D-010A5028D843}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\daa44b86249e2c8">
+			<UniqueIdentifier>{4333C47E-E8C0-4DA4-B301-97B10A3A8A36}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ddfe47d08b62f467">
+			<UniqueIdentifier>{71343696-7D7B-45E0-83D6-75600429D499}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\df3db325f7b3d9a3">
+			<UniqueIdentifier>{F663EE25-7CB3-4B6B-B7BE-B24B0DF01D91}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\e21ec92923071597">
+			<UniqueIdentifier>{E012697C-921B-443B-AD11-70D663CC0EFC}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\e39c76d85e91b458">
+			<UniqueIdentifier>{D1685E3A-68A4-4A48-A9D5-CC6AA741E489}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\e5e7f5fe85dcf453">
+			<UniqueIdentifier>{833618C5-F03A-4C2D-A3CE-962410E22BCC}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\e72e3168b5010f36">
+			<UniqueIdentifier>{83326305-B574-4CE7-B683-38BEFD79F767}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\eab6e83119d7d233">
+			<UniqueIdentifier>{E7DD1CAE-B702-4F2D-903F-2313A21295C7}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ecd49de8585d0498">
+			<UniqueIdentifier>{EC454F1E-91AB-476D-B4EE-2B3641E99989}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\efb8c835d4bd0d">
+			<UniqueIdentifier>{6AF1D311-739E-4A6F-BE89-D8261FE82021}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\f152927833267899">
+			<UniqueIdentifier>{363366C8-4785-4B77-B27F-F2B06A89F76B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\f38f9489cf3cc21a">
+			<UniqueIdentifier>{2A12EBB8-BFAC-4271-B06B-D1F2CBF1217A}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\f4098c24d923afa7">
+			<UniqueIdentifier>{1B46074A-832E-4000-B88E-CF3680C88DB1}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\f5cf78e5a2439e52">
+			<UniqueIdentifier>{F1198090-B0FD-44EF-8D06-3B7112046162}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\f7acf1092cc1d51">
+			<UniqueIdentifier>{C901A9DE-6D2B-438B-A59F-4A6B86ECD2E9}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\f9f694abb60d6f9f">
+			<UniqueIdentifier>{BDED7890-E929-4738-842A-646DD0F9CA04}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\fab11d1c7ea75b30">
+			<UniqueIdentifier>{C7BAFFD3-CD22-498A-BA0F-D496CE2F8D79}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\fb4ab2682a44c1b0">
+			<UniqueIdentifier>{7615FF89-1F0D-49D6-97E2-7506FE58572D}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\fbd15012a2c1cb1c">
+			<UniqueIdentifier>{B07826BB-EFD4-4FF8-8B6F-9BE68EEB664E}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\fd3d3243792925c4">
+			<UniqueIdentifier>{3B0B7D75-B126-402F-B742-4146A0D719D4}</UniqueIdentifier>
+		</Filter>
+		<Filter Include=".vs\EngineSIU\v17\ipch\AutoPCH\ff34b249b5b5521f">
+			<UniqueIdentifier>{CFB4C1E8-85E3-41A8-AB70-205F63010E12}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Binaries">
+			<UniqueIdentifier>{E87FFC9B-7E67-4820-8AB5-1A605CC0E3E3}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Binaries\x64">
+			<UniqueIdentifier>{133C4B55-0697-4810-8523-5D84B486133F}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Binaries\x64\EngineSIU">
+			<UniqueIdentifier>{7B9C164E-64DF-49A6-A479-4B17ECD9FC36}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Binaries\x64\EngineSIU\Debug">
+			<UniqueIdentifier>{4334E4AD-ED02-4BF7-9442-A7CED234BC62}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU">
+			<UniqueIdentifier>{D7891096-DF6F-4F23-9CA5-4BD0FFC129E5}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Assets">
+			<UniqueIdentifier>{65629121-E283-4C14-81AF-510E9BF289F8}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Assets\Binary">
+			<UniqueIdentifier>{8E0F53B5-8648-48E0-AD4B-4C8E77021D08}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Assets\Editor">
+			<UniqueIdentifier>{9499CE89-D5A5-4EA2-8B6D-E507C93D963D}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Assets\Editor\Icon">
+			<UniqueIdentifier>{23B51E4E-E460-435A-959D-08040465DA64}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Assets\Sound">
+			<UniqueIdentifier>{42FA1C04-52C3-4BAF-91C2-054DC5C7C41E}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Assets\Texture">
+			<UniqueIdentifier>{BF03CE27-995F-428D-ACCB-AA3B42510322}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents">
+			<UniqueIdentifier>{D8A0FA28-D7C4-4B73-B4A6-DCBCF236DB8C}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\Asphalt">
+			<UniqueIdentifier>{9F75E763-FF24-4B09-B735-A1505E20FF04}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\Asphalt\Textures">
+			<UniqueIdentifier>{17453924-5C60-4013-8D84-3947DB4BF457}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\Binary">
+			<UniqueIdentifier>{A64CF019-AEEF-4292-8490-098BDCF3D666}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\Binary\Asphalt">
+			<UniqueIdentifier>{617F41DF-518D-4EB4-9EDF-7178CF1D8CC2}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\Binary\Cube">
+			<UniqueIdentifier>{ADC962EF-9A9C-45F1-823B-E059F4D23C14}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\Binary\Dodge">
+			<UniqueIdentifier>{F951B697-070D-40CF-8985-6381711DA186}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\Binary\Reference">
+			<UniqueIdentifier>{7833AD08-D215-4709-85F9-1630EC44D0AD}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\Cube">
+			<UniqueIdentifier>{E4202C65-B691-4875-9AB1-5A1F08513ED4}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\Dodge">
+			<UniqueIdentifier>{A8A25466-AFFD-4038-AE6C-B3415147ED28}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\LuaScript">
+			<UniqueIdentifier>{42940997-0985-4195-AFFE-437EAE0BD31E}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\LuaScript\Lua">
+			<UniqueIdentifier>{561129D8-5701-4AC7-A535-CA2D11946C11}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\LuaScript\Lua\Annotation">
+			<UniqueIdentifier>{4075D055-0D86-4C2A-95B4-EA27B17130E2}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\Reference">
+			<UniqueIdentifier>{D70C9E87-EEB9-4C59-B90A-BC7BE828D4F5}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\Scene">
+			<UniqueIdentifier>{E7A64EC5-99DC-4E22-B775-63DA903C0C9C}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Contents\Texture">
+			<UniqueIdentifier>{E435EA99-38E4-4E1C-B4CD-8CEED3634B8B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine">
+			<UniqueIdentifier>{2011224D-5617-401A-AB05-F4827A495F4C}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Script">
+			<UniqueIdentifier>{E95B06FF-357B-42D2-A81F-3271A8625B31}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source">
+			<UniqueIdentifier>{B9C36FF6-DF81-47A8-821C-29302ED6C06E}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Developer">
+			<UniqueIdentifier>{B2B4508B-291B-4907-AD40-D13FECD4CB16}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils">
+			<UniqueIdentifier>{215B7F09-99EC-4BE3-AF33-1973499C9812}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Editor">
+			<UniqueIdentifier>{2DD6AC4E-CE70-467A-9B64-EC78ECB64B4C}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Editor\LevelEditor">
+			<UniqueIdentifier>{F6413B0E-23CB-4723-9B71-7833A02B3F60}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Editor\PropertyEditor">
+			<UniqueIdentifier>{8FE7F467-9E7C-4A5D-BB54-50B108F1FE6D}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Editor\UnrealEd">
+			<UniqueIdentifier>{E0DF95BC-6B7A-453D-8E1B-B007B7837A70}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\FMOD_API">
+			<UniqueIdentifier>{6EDAFD6A-3B53-4CE6-A69D-D4DF28D0E490}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\FMOD_API\core">
+			<UniqueIdentifier>{1FDB0741-3DB4-4BF6-9A91-164693EB22DA}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\FMOD_API\core\inc">
+			<UniqueIdentifier>{3BD6F2FB-85F6-434E-BDCC-CBE81F024101}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\FMOD_API\core\lib">
+			<UniqueIdentifier>{369593B4-DE3D-4EA2-BFD6-035AFA69A82A}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\FMOD_API\core\lib\x64">
+			<UniqueIdentifier>{98C4B1DA-1A4E-48D6-94D3-C36A0D66B6ED}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\FMOD_API\studio">
+			<UniqueIdentifier>{CF0B7E6B-F410-4A9E-9521-9FA0DE19D87D}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\FMOD_API\studio\inc">
+			<UniqueIdentifier>{CD9B8CB4-7A5F-4317-A552-0FF67B91DB3C}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\FMOD_API\studio\lib">
+			<UniqueIdentifier>{5BE706DF-2CAB-4295-AAD9-C2CB37E9919B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\FMOD_API\studio\lib\x64">
+			<UniqueIdentifier>{2AC73A52-BCC4-43A2-896F-AC9C80D0F3FA}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime">
+			<UniqueIdentifier>{9A6CC4C0-7AD8-41CF-A08D-E022E9B7DCE8}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Core">
+			<UniqueIdentifier>{11E73EF4-2A45-4441-A5F9-74517D0DADC4}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Core\Container">
+			<UniqueIdentifier>{A38CD969-36F1-4984-98E1-5818264E384A}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Core\Delegates">
+			<UniqueIdentifier>{A5CE214A-F7A5-4563-BA82-41EC23A97912}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Core\HAL">
+			<UniqueIdentifier>{C7649D69-2D1E-4CE0-A209-1CA1AD1AC358}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Core\Math">
+			<UniqueIdentifier>{A2F7B406-EC06-4634-B39C-69ACB4A80A20}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Core\Misc">
+			<UniqueIdentifier>{8B14AE9E-F71B-4B4C-9731-76FC86CAB07A}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Core\Serialization">
+			<UniqueIdentifier>{592C104E-321B-43FD-8C64-F9C688D2F2C4}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Core\Stats">
+			<UniqueIdentifier>{A9EABE2D-EF39-4749-9A43-D14DCDF06337}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\CoreUObject">
+			<UniqueIdentifier>{49381562-0207-4AEF-834E-06DFC5925317}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject">
+			<UniqueIdentifier>{BC6F59A1-6AC4-429E-A8B1-71D5731EF170}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Engine">
+			<UniqueIdentifier>{2E6F6C0F-6BDE-445A-A5A5-C42ADB1E503C}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes">
+			<UniqueIdentifier>{8265B130-636A-4312-A3DB-B022B8A02F6D}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors">
+			<UniqueIdentifier>{2FD14BB6-15A8-4BB9-8C0F-1E58EEFA6CB5}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera">
+			<UniqueIdentifier>{39134946-F759-475B-9554-9C10E7992799}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components">
+			<UniqueIdentifier>{8E539E61-231B-497B-9817-EAAF7B27F67D}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light">
+			<UniqueIdentifier>{BF800132-E419-4D4A-932D-561133463C17}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Material">
+			<UniqueIdentifier>{DB4A09B6-83D7-45D1-8CBB-C7E551259E19}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Mesh">
+			<UniqueIdentifier>{F6CD3470-E910-4792-B3BD-CD5E357F0F60}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine">
+			<UniqueIdentifier>{3233B787-62C3-485A-81BE-57FB1817D863}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics">
+			<UniqueIdentifier>{7F0D2E09-1274-4647-ABF6-2900B42390EE}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework">
+			<UniqueIdentifier>{6669E249-DAF5-4FAB-8215-38CB8B1A009F}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Engine\UserInterface">
+			<UniqueIdentifier>{FBD3CFC5-7C17-45BE-96FE-8D695C089473}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Engine\World">
+			<UniqueIdentifier>{A185A75A-6E73-4978-8C5C-2B33712B28CF}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\InputCore">
+			<UniqueIdentifier>{80B17DF7-50BB-4DA7-BF2F-A4F2DD1260F6}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework">
+			<UniqueIdentifier>{DC843924-6F95-40DF-B782-BD88B89BFD7B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos">
+			<UniqueIdentifier>{7658BE74-52CE-4689-92E4-49C2067C6FCB}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Launch">
+			<UniqueIdentifier>{7AF9B6F7-1FDF-4744-A078-0BDD4569C49D}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Renderer">
+			<UniqueIdentifier>{353C3134-5693-4D5D-B058-7530CCD58ED9}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow">
+			<UniqueIdentifier>{0A321C18-0D4A-411B-8410-62C355156D24}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Serialization">
+			<UniqueIdentifier>{C6DD8266-699A-465E-81FC-3495092644B5}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Slate">
+			<UniqueIdentifier>{AE65F366-F1C6-413C-8BC8-BA3B343D2FF8}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Slate\Widgets">
+			<UniqueIdentifier>{0B38CCC3-D5AA-4183-B746-9E12497B4681}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Slate\Widgets\Layout">
+			<UniqueIdentifier>{2524F433-FBA5-4FDD-9F1B-0B31E3DD58E9}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\SlateCore">
+			<UniqueIdentifier>{495C8E22-5429-4300-B524-7A9494E19CDA}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\SlateCore\Input">
+			<UniqueIdentifier>{7DC1D71D-4744-4A56-A65B-7214D1F133E8}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\SlateCore\Widgets">
+			<UniqueIdentifier>{35E7488B-943F-40BE-BBD9-348D70E8F223}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Windows">
+			<UniqueIdentifier>{BF2851FB-E6AB-4C54-8889-96F6336C8127}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI">
+			<UniqueIdentifier>{2444F972-F66B-49F9-8B6E-96F481FC4FCC}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty">
+			<UniqueIdentifier>{37DEBD3A-84E0-466A-92B2-7379DDBDD2D2}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK">
+			<UniqueIdentifier>{BA0CD8E4-4E69-4F73-AF31-6B84EA1570EA}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include">
+			<UniqueIdentifier>{8DA594C6-F7EE-4BA8-A9E7-7C09FDAC8E67}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK">
+			<UniqueIdentifier>{E1C76D06-27FE-4368-B676-3CD1BA901710}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib">
+			<UniqueIdentifier>{2F87EDB1-C924-4104-835E-005A1FE19287}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x64">
+			<UniqueIdentifier>{B25DAD41-25C5-4124-905B-3125CAA8319A}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x64\Debug">
+			<UniqueIdentifier>{C226B72F-5B51-42F4-90F5-63E477AD6CDC}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x64\Release">
+			<UniqueIdentifier>{B7D34923-449C-4532-A984-ED9B2FEBCDD6}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x86">
+			<UniqueIdentifier>{7C9BAB38-7EF9-48B7-ACC7-3205657A47D6}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x86\Debug">
+			<UniqueIdentifier>{B2C31415-5B63-4EFF-A383-60C5EDF2A56B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Lib\x86\Release">
+			<UniqueIdentifier>{53910EF8-990C-4A77-95F6-3A4A1C248F6D}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\ImGui">
+			<UniqueIdentifier>{49909C63-CC89-4C16-9F1B-4084FA7C8470}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include">
+			<UniqueIdentifier>{0CF9753A-C49C-49AE-B2F0-EE1C867FB443}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui">
+			<UniqueIdentifier>{6EDF98D7-8172-4B58-B69D-C5222EE67CA6}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\Json">
+			<UniqueIdentifier>{3E41B336-0CA3-4AA9-8BD9-10FCBD55FD14}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\Json\include">
+			<UniqueIdentifier>{718E8DCE-CA99-464F-971E-A62D82A3DB76}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\Json\include\Json">
+			<UniqueIdentifier>{15A6DBBD-D4F9-4BAE-B540-49FD9440E9DE}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua">
+			<UniqueIdentifier>{4C6A3DF9-409D-4C44-A560-FBA488C03C52}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\debug">
+			<UniqueIdentifier>{788E2875-D6F1-4D57-97FE-972A483C9921}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\debug\bin">
+			<UniqueIdentifier>{61B99240-748C-4EAE-BBAE-1E1C3469827C}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\debug\lib">
+			<UniqueIdentifier>{E712CF69-9951-4A8F-8BFC-45A8EE374B0A}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\include">
+			<UniqueIdentifier>{9394227D-462B-4D20-81C5-41FB5DD273A3}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\release">
+			<UniqueIdentifier>{EC67FC70-2099-444C-9529-CD45A6D6BE83}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\release\bin">
+			<UniqueIdentifier>{3F90515B-7667-406B-A39A-EB2A9185CDEC}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\Lua\release\lib">
+			<UniqueIdentifier>{E007FAFB-268C-4490-8066-F0100907F18B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\sol2">
+			<UniqueIdentifier>{2367187A-0241-40B3-BB70-682DF6E10BAE}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\sol2\include">
+			<UniqueIdentifier>{BA5869AC-4E84-48DD-BCDE-8BC27C407E78}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\sol2\include\sol">
+			<UniqueIdentifier>{2678B117-ECFB-49DC-B7F2-8DBE001E81B7}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs">
+			<UniqueIdentifier>{6B9A6873-D338-4F1F-933F-4BCA276817A2}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs\include">
+			<UniqueIdentifier>{5FC9FAA1-1754-46AC-89E7-F4723A11A5D4}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Font">
+			<UniqueIdentifier>{25846350-150F-4267-9D11-8053BDCE1471}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="EngineSIU\Shaders">
+			<UniqueIdentifier>{64776CDA-ED81-4633-A7FA-3671A08C472A}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Intermediate">
+			<UniqueIdentifier>{2282FA98-BA8D-43DF-981A-AB805374A4C3}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Intermediate\Build">
+			<UniqueIdentifier>{0B5B1E7F-8D07-4008-9B31-E1EEC6147B50}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Intermediate\Build\x64">
+			<UniqueIdentifier>{FE85B4F5-0BCA-48F1-BDFE-AB3F93BDD039}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Intermediate\Build\x64\EngineSIU">
+			<UniqueIdentifier>{30203680-D228-4FAB-8DCB-32049D3EA82E}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Intermediate\Build\x64\EngineSIU\Debug">
+			<UniqueIdentifier>{A180F4E4-FAA9-4C80-B092-8857B62A7682}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Intermediate\Build\x64\EngineSIU\Debug\EngineSIU.tlog">
+			<UniqueIdentifier>{BF25874C-E46D-4EAA-8D26-12C70580C70C}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="GameUI.cpp" />
+		<ClInclude Include="GameUI.h" />
+		<ClCompile Include="SoundManager.cpp" />
+		<ClInclude Include="SoundManager.h" />
+		<ClCompile Include="Timer.cpp" />
+		<ClInclude Include="Timer.h" />
+		<ClCompile Include="EngineSIU\LightGridGenerator.cpp">
+			<Filter>EngineSIU</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\LightGridGenerator.h">
+			<Filter>EngineSIU</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\UberLit.hlsl">
+			<Filter>EngineSIU</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Engine\Script\LuaBinding.cpp">
+			<Filter>EngineSIU\Engine\Script</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Script\LuaBinding.h">
+			<Filter>EngineSIU\Engine\Script</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Script\LuaManager.cpp">
+			<Filter>EngineSIU\Engine\Script</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Script\LuaManager.h">
+			<Filter>EngineSIU\Engine\Script</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompile.cpp">
+			<Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompile.h">
+			<Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompileData.cpp">
+			<Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompileData.h">
+			<Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompileUtility.cpp">
+			<Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderCompileUtility.h">
+			<Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderFileMetadata.cpp">
+			<Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderFileMetadata.h">
+			<Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderMetadataPtr.cpp">
+			<Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Developer\ShaderCompileUtils\ShaderMetadataPtr.h">
+			<Filter>EngineSIU\Engine\Source\Developer\ShaderCompileUtils</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Editor\LevelEditor\SlateAppMessageHandler.cpp">
+			<Filter>EngineSIU\Engine\Source\Editor\LevelEditor</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Editor\LevelEditor\SlateAppMessageHandler.h">
+			<Filter>EngineSIU\Engine\Source\Editor\LevelEditor</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Editor\LevelEditor\SLevelEditor.cpp">
+			<Filter>EngineSIU\Engine\Source\Editor\LevelEditor</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Editor\LevelEditor\SLevelEditor.h">
+			<Filter>EngineSIU\Engine\Source\Editor\LevelEditor</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Editor\PropertyEditor\ControlEditorPanel.cpp">
+			<Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Editor\PropertyEditor\ControlEditorPanel.h">
+			<Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Editor\PropertyEditor\IWindowToggleable.h">
+			<Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Editor\PropertyEditor\OutlinerEditorPanel.cpp">
+			<Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Editor\PropertyEditor\OutlinerEditorPanel.h">
+			<Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Editor\PropertyEditor\PropertyEditorPanel.cpp">
+			<Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Editor\PropertyEditor\PropertyEditorPanel.h">
+			<Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Editor\PropertyEditor\ShowFlags.cpp">
+			<Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Editor\PropertyEditor\ShowFlags.h">
+			<Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Editor\PropertyEditor\ViewportTypePanel.cpp">
+			<Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Editor\PropertyEditor\ViewportTypePanel.h">
+			<Filter>EngineSIU\Engine\Source\Editor\PropertyEditor</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Editor\UnrealEd\EditorPanel.h">
+			<Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Editor\UnrealEd\EditorViewportClient.cpp">
+			<Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Editor\UnrealEd\EditorViewportClient.h">
+			<Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Editor\UnrealEd\ImGuiWidget.cpp">
+			<Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Editor\UnrealEd\ImGuiWidget.h">
+			<Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Editor\UnrealEd\PrimitiveDrawBatch.cpp">
+			<Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Editor\UnrealEd\PrimitiveDrawBatch.h">
+			<Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Editor\UnrealEd\SceneManager.cpp">
+			<Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Editor\UnrealEd\SceneManager.h">
+			<Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Editor\UnrealEd\UnrealEd.cpp">
+			<Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Editor\UnrealEd\UnrealEd.h">
+			<Filter>EngineSIU\Engine\Source\Editor\UnrealEd</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\FMOD_API\core\inc\fmod.h">
+			<Filter>EngineSIU\Engine\Source\FMOD_API\core\inc</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\FMOD_API\core\inc\fmod.hpp">
+			<Filter>EngineSIU\Engine\Source\FMOD_API\core\inc</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\FMOD_API\core\inc\fmod_codec.h">
+			<Filter>EngineSIU\Engine\Source\FMOD_API\core\inc</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\FMOD_API\core\inc\fmod_common.h">
+			<Filter>EngineSIU\Engine\Source\FMOD_API\core\inc</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\FMOD_API\core\inc\fmod_dsp.h">
+			<Filter>EngineSIU\Engine\Source\FMOD_API\core\inc</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\FMOD_API\core\inc\fmod_dsp_effects.h">
+			<Filter>EngineSIU\Engine\Source\FMOD_API\core\inc</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\FMOD_API\core\inc\fmod_errors.h">
+			<Filter>EngineSIU\Engine\Source\FMOD_API\core\inc</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\FMOD_API\core\inc\fmod_output.h">
+			<Filter>EngineSIU\Engine\Source\FMOD_API\core\inc</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\FMOD_API\studio\inc\fmod_studio.h">
+			<Filter>EngineSIU\Engine\Source\FMOD_API\studio\inc</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\FMOD_API\studio\inc\fmod_studio.hpp">
+			<Filter>EngineSIU\Engine\Source\FMOD_API\studio\inc</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\FMOD_API\studio\inc\fmod_studio_common.h">
+			<Filter>EngineSIU\Engine\Source\FMOD_API\studio\inc</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\CoreMiscDefines.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\EngineStatics.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\EngineStatics.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\Array.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\ContainerAllocator.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\CString.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\Map.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\Pair.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\Queue.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\Set.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Container\String.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\String.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Container\TSafeQueue.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Container</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Delegates\Delegate.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Delegates</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Delegates\DelegateCombination.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Delegates</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\HAL\PlatformMemory.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\HAL</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\HAL\PlatformMemory.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\HAL</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\HAL\PlatformType.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\HAL</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\BoxSphereBounds.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\BoxSphereBounds.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Color.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\Color.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Define.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\JungleMath.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\JungleMath.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\MathSSE.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\MathUtility.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Matrix.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\Matrix.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Quat.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\Quat.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Rotator.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\Rotator.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Vector.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\Vector.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Math\Vector4.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Math\Vector4.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Math</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Misc\Char.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Misc</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Misc\Parse.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Misc</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Misc\Parse.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Misc</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Serialization\Archive.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Serialization</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Serialization\Archive.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Serialization</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Serialization\MemoryArchive.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Serialization</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Serialization\MemoryArchive.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Serialization</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Core\Stats\Stats.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Stats</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Core\Stats\Stats.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Core\Stats</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Casts.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Casts.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Class.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Class.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\NameTypes.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\NameTypes.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Object.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Object.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\ObjectFactory.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\ObjectFactory.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\ObjectGlobals.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\ObjectGlobals.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\ObjectMacros.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\ObjectTypes.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Property.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\Property.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\UObjectArray.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\UObjectArray.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\UObjectHash.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\UObjectHash.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\CoreUObject\UObject\UObjectIterator.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\CoreUObject\UObject</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\ActorEditor.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\UnrealClient.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\UnrealClient.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\ViewportClient.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Level.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Level.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AmbientLightActor.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AmbientLightActor.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\AnimPlayerActor.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\CameraActor.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\CameraActor.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\Cube.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\Cube.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\DirectionalLightActor.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\DirectionalLightActor.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\FireballActor.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\FireballActor.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\HeightFogActor.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\HeightFogActor.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\LightActor.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\LightActor.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\Player.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\Player.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\PointLightActor.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\PointLightActor.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\SpotLightActor.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors\SpotLightActor.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Actors</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier_Interpolation.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraModifier_Interpolation.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraShakeModifier.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraShakeModifier.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraTypes.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\CameraTypes.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\PlayerCameraManager.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\PlayerCameraManager.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\ViewTarget.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera\ViewTarget.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Camera</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ActorComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ActorComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BillboardComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BillboardComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BoxComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\BoxComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CapsuleComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\CapsuleComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\HeightFogComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\HeightFogComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\MeshComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\MeshComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ParticleSubUVComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ParticleSubUVComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\PrimitiveComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\PrimitiveComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ProjectileMovementComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ProjectileMovementComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Quad.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SceneComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SceneComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ShapeComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\ShapeComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SkySphereComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SkySphereComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SphereComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\SphereComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\StaticMeshComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\StaticMeshComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\TextComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\TextComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UScriptComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UScriptComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UTextUUID.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\UTextUUID.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\AmbientLightComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\AmbientLightComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\DirectionalLightComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\DirectionalLightComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\LightComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\LightComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\PointLightComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\PointLightComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\SpotLightComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light\SpotLightComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Light</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Material\Material.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Material</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Material\Material.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Material</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Mesh\StaticMesh.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Mesh</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Mesh\StaticMesh.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Components\Mesh</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\AssetManager.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\AssetManager.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\EditorEngine.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\EditorEngine.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Engine.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Engine.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\EngineTypes.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\FLoaderOBJ.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\FLoaderOBJ.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\ResourceMgr.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\ResourceMgr.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\StaticMeshActor.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\StaticMeshActor.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Texture.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\CollisionDispatcher.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\CollisionDispatcher.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\HitResult.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\HitResult.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapInfo.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapInfo.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\OverlapResult.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics\PhysicsSystem.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\Engine\Physics</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Actor.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Actor.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\Controller.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\PlayerController.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\PlayerController.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\SpringArmComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework\SpringArmComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\Classes\GameFramework</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\UserInterface\Console.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\UserInterface</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\UserInterface\Console.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\UserInterface</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Engine\World\World.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\World</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\World\World.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\World</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\World\WorldContext.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\World</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Engine\World\WorldType.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Engine\World</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\InputCore\InputCoreTypes.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\InputCore</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\InputCore\InputCoreTypes.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\InputCore</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoArrowComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoArrowComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoBaseComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoBaseComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoCircleComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoCircleComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoRectangleComponent.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\GizmoRectangleComponent.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\TransformGizmo.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos\TransformGizmo.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\InteractiveToolsFramework\BaseGizmos</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Launch\Define.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Launch\EngineBaseTypes.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Launch\EngineLoop.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Launch\EngineLoop.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Launch\ImGuiManager.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Launch\ImGuiManager.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Launch\Launch.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Launch\LightDefine.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Launch\ShadowDefine.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Launch</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\BillboardRenderPass.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\BillboardRenderPass.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\CompositingPass.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\CompositingPass.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\EditorBillboardRenderPass.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\EditorBillboardRenderPass.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\EditorRenderPass.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\EditorRenderPass.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\FogRenderPass.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\FogRenderPass.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\GizmoRenderPass.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\GizmoRenderPass.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\IRenderPass.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\LineRenderPass.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\LineRenderPass.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\PostProcessCompositingPass.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\PostProcessCompositingPass.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\Renderer.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\Renderer.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\RendererHelpers.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\RenderResources.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\ShaderConstants.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\SlateRenderPass.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\SlateRenderPass.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\StaticMeshRenderPass.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\StaticMeshRenderPass.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\UpdateLightBufferPass.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\UpdateLightBufferPass.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\WorldBillboardRenderPass.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\WorldBillboardRenderPass.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow\DirectionalShadowMap.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer\Shadow</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow\DirectionalShadowMap.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer\Shadow</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow\PointLightShadowMap.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer\Shadow</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow\PointLightShadowMap.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer\Shadow</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow\SpotLightShadowMap.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer\Shadow</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Renderer\Shadow\SpotLightShadowMap.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Renderer\Shadow</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Serialization\Serializer.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Serialization</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Slate\Widgets\Layout\SSplitter.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Slate\Widgets\Layout</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Slate\Widgets\Layout\SSplitter.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Slate\Widgets\Layout</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\SlateCore\Input\Events.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\SlateCore\Input</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\SlateCore\Input\Events.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\SlateCore\Input</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\SlateCore\Widgets\SWindow.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\SlateCore\Widgets</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\SlateCore\Widgets\SWindow.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\SlateCore\Widgets</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Windows\RawInput.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Windows</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Windows\RawInput.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Windows</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Windows\WindowsCursor.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Windows</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Windows\WindowsCursor.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Windows</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Windows\WindowsPlatformTime.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Windows</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Windows\WindowsPlatformTime.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Windows</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI\DXDBufferManager.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI\DXDBufferManager.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI\DXDShaderManager.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI\DXDShaderManager.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI\GraphicDevice.cpp">
+			<Filter>EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI\GraphicDevice.h">
+			<Filter>EngineSIU\Engine\Source\Runtime\Windows\D3D11RHI</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\Audio.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\BufferHelpers.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\CommonStates.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\DDSTextureLoader.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\DirectXHelpers.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\Effects.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\GamePad.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\GeometricPrimitive.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\GraphicsMemory.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\Keyboard.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\Model.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\Mouse.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\PostProcess.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\PrimitiveBatch.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\ScreenGrab.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\SimpleMath.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\SpriteBatch.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\SpriteFont.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\VertexTypes.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\WICTextureLoader.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK\XboxDDSTextureLoader.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\DirectXTK\Include\DirectXTK</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imconfig.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui.cpp">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_demo.cpp">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_draw.cpp">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_impl_dx11.cpp">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_impl_dx11.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_impl_win32.cpp">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_impl_win32.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_internal.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_tables.cpp">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imgui_widgets.cpp">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imstb_rectpack.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imstb_textedit.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui\imstb_truetype.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\ImGui\include\ImGui</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\Json\include\Json\json.hpp">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\Json\include\Json</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\Lua\include\lauxlib.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\Lua\include</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\Lua\include\lua.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\Lua\include</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\Lua\include\lua.hpp">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\Lua\include</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\Lua\include\luaconf.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\Lua\include</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\Lua\include\lualib.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\Lua\include</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\sol2\include\sol\config.hpp">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\sol2\include\sol</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\sol2\include\sol\forward.hpp">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\sol2\include\sol</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\sol2\include\sol\sol.hpp">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\sol2\include\sol</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs\include\tinyfiledialogs.cpp">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs\include</Filter>
+		</ClCompile>
+		<ClInclude Include="EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs\include\tinyfiledialogs.h">
+			<Filter>EngineSIU\Engine\Source\ThirdParty\tinyfiledialogs\include</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Font\IconDefs.h">
+			<Filter>EngineSIU\Font</Filter>
+		</ClInclude>
+		<ClInclude Include="EngineSIU\Font\RawFonts.h">
+			<Filter>EngineSIU\Font</Filter>
+		</ClInclude>
+		<ClCompile Include="EngineSIU\Shaders\CompositingShader.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\DepthBufferPixelShader.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\DepthBufferVertexShader.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\DepthCubeVisualize.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\DepthOnlyVertexShader.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\DepthVisualize.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\EditorShader.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\FogShader.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\GizmoPixelShader.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\GizmoVertexShader.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\Light.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\PixelBillBoardShader.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\PostProcessCompositingShader.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\ShaderLine.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\ShaderRegisters.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\ShaderW0.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\SlateShader.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\StaticMeshPixelShader.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\StaticMeshPixelShaderDepth.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\StaticMeshPixelShaderWorldNormal.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\StaticMeshVertexShader.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\VertexBillBoardShader.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+		<ClCompile Include="EngineSIU\Shaders\VSMGenerationPS.hlsl">
+			<Filter>EngineSIU\Shaders</Filter>
+		</ClCompile>
+	</ItemGroup>
 </Project>

@@ -10,7 +10,7 @@ class FObjectFactory;
 class AActor;
 class UObject;
 class USceneComponent;
-
+class APlayerCameraManager;
 class UWorld : public UObject
 {
     DECLARE_CLASS(UWorld, UObject)
@@ -26,6 +26,9 @@ public:
 
     void Tick(float DeltaTime);
     void BeginPlay();
+
+    /**  Time in seconds since level began play, but IS paused when the game is paused, and IS dilated/clamped. */
+    double TimeSeconds;
 
     void Release();
 
@@ -59,8 +62,9 @@ public:
 
     FString GetWorldName() const { return WorldName; }
 
-    FViewTarget GetCamera(FName InName) const;
-    
+    FViewTarget GetViewTarget(FName InName);
+    UCameraComponent* GetCameraComponent(FName InName);
+    APlayerCameraManager* GetPlayerCameraManager();
 private:
     FString WorldName = "DefaultWorld";
 

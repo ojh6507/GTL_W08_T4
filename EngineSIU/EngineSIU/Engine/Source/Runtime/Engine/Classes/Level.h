@@ -3,8 +3,10 @@
 #include "UObject/ObjectMacros.h"
 #include <Camera/ViewTarget.h>
 
+class APlayerCameraManager;
 class AActor;
 class UWorld;
+class UCameraComponent;
 
 class ULevel : public UObject
 {
@@ -18,13 +20,17 @@ public:
 
     virtual UObject* Duplicate(UObject* InOuter) override;
 
-    void RegisterCamera(FName InName, const FViewTarget& View);
+    void RegisterCamera(FName InName, UCameraComponent* InCameraComp, const FViewTarget& View);
 
     FViewTarget GetViewTarget(FName InName);
+    UCameraComponent* GetCameraComponent(FName InName);
 
     uint32 RemoveCamera(FName InName);
 
     TArray<AActor*> Actors;
-    TMap<FName, FViewTarget> Cameras;
+    TMap<FName, UCameraComponent*> Cameras;
+    TMap<FName, FViewTarget> ViewTargets;
     UWorld* OwningWorld;
+    
+    APlayerCameraManager* PlayerCameraManager = nullptr;
 };

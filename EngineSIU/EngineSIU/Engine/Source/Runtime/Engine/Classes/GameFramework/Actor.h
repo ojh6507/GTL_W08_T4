@@ -1,4 +1,5 @@
 #pragma once
+#include "Camera/ViewTarget.h"
 #include "Components/SceneComponent.h"
 #include "Container/Set.h"
 #include "Engine/EngineTypes.h"
@@ -86,13 +87,14 @@ public:
     FRotator GetActorRotation() const;
     FVector GetActorScale() const;
 
-    FVector GetActorForwardVector() const { return RootComponent ? RootComponent->GetForwardVector() : FVector::ForwardVector; }
-    FVector GetActorRightVector() const { return RootComponent ? RootComponent->GetRightVector() : FVector::RightVector; }
-    FVector GetActorUpVector() const { return RootComponent ? RootComponent->GetUpVector() : FVector::UpVector; }
+    FVector GetActorForwardVector() const { return RootComponent ? RootComponent->GetLocalForwardVector() : FVector::ForwardVector; }
+    FVector GetActorRightVector() const { return RootComponent ? RootComponent->GetLocalRightVector() : FVector::RightVector; }
+    FVector GetActorUpVector() const { return RootComponent ? RootComponent->GetLocalUpVector() : FVector::UpVector; }
 
     bool SetActorLocation(const FVector& NewLocation);
     bool SetActorRotation(const FRotator& NewRotation);
     bool SetActorScale(const FVector& NewScale);
+    virtual void CalcCamera(float DeltaTime, struct FMinimalViewInfo& OutResult);
 
 protected:
     UPROPERTY

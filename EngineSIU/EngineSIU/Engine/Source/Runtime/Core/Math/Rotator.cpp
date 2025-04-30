@@ -159,7 +159,29 @@ FQuat FRotator::ToQuaternion() const
 
 FVector FRotator::ToVector() const
 {
-    return FVector(FMath::DegreesToRadians(Roll), FMath::DegreesToRadians(Pitch), FMath::DegreesToRadians(Yaw));
+    float PitchNoWinding = fmodf(Pitch, 360);
+    float YawNoWinding = fmodf(Yaw, 360);
+
+    float CP, SP, CY, SY;
+    FMath::SinCos(&SP, &CP, FMath::DegreesToRadians(PitchNoWinding));
+    FMath::SinCos(&SY, &CY, FMath::DegreesToRadians(YawNoWinding));
+    FVector V = FVector(CP * CY, CP * SY, SP);
+
+    return V;
+}
+
+FVector FRotator::RotateVector() const
+{
+    const float CP = FMath::Cos(Pitch);
+    const float SP = FMath::Sin(Pitch);
+    const float CY = FMath::Cos(Yaw);
+    const float SY = FMath::Sin(Yaw);
+
+    return FVector(
+        CP * CY,    // X축 (앞)
+        CP * SY,    // Y축 (오른쪽)
+        SP          // Z축 (위)
+    );
 }
 
 FMatrix FRotator::ToMatrix() const
@@ -205,6 +227,33 @@ bool FRotator::InitFromString(const FString& InSourceString)
         FParse::Value(*InSourceString, TEXT("Roll="), Roll);
 
     return bSuccess;
+}
+
+float FRotator::ClampAxis(float Angle)
+{
+    // returns Angle in the range (-360,360)
+    Angle = FMath::Fmod(Angle, 360.0);
+
+    if (Angle < 0.0)
+    {
+        // shift to [0,360) range
+        Angle += 360.0f;
+    }
+
+    return Angle;
+}
+
+float FRotator::NormalizeAxis(float Angle)
+{
+    Angle = ClampAxis(Angle);
+
+    if (Angle > 180.0f)
+    {
+        // shift to (-180,180]
+        Angle -= 360.0f;
+    }
+
+    return Angle;
 }
 
 

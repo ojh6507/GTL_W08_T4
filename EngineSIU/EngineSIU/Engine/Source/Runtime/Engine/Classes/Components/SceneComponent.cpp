@@ -91,21 +91,28 @@ void USceneComponent::DestroyComponent()
     Super::DestroyComponent();
 }
 
-FVector USceneComponent::GetForwardVector()
+FVector USceneComponent::GetWorldFowardVector()
+{
+    FVector Forward = FVector(1.f, 0.f, 0.0f);
+    Forward = JungleMath::FVectorRotate(Forward, GetWorldRotation());
+    return Forward;
+}
+
+FVector USceneComponent::GetLocalForwardVector()
 {
 	FVector Forward = FVector(1.f, 0.f, 0.0f);
 	Forward = JungleMath::FVectorRotate(Forward, RelativeRotation);
 	return Forward;
 }
 
-FVector USceneComponent::GetRightVector()
+FVector USceneComponent::GetLocalRightVector()
 {
 	FVector Right = FVector(0.f, 1.f, 0.0f);
 	Right = JungleMath::FVectorRotate(Right, RelativeRotation);
 	return Right;
 }
 
-FVector USceneComponent::GetUpVector()
+FVector USceneComponent::GetLocalUpVector()
 {
 	FVector Up = FVector(0.f, 0.f, 1.0f);
 	Up = JungleMath::FVectorRotate(Up, RelativeRotation);
@@ -157,6 +164,47 @@ void USceneComponent::AttachToComponent(USceneComponent* InParent)
     }
 }
 
+void USceneComponent::SetWorldLocation(const FVector& InNewLocation)
+{
+    if (AttachParent)
+    {
+        RelativeLocation = InNewLocation - AttachParent->GetWorldLocation();
+    }
+    else
+    {
+        RelativeLocation = InNewLocation;
+    }
+}
+
+void USceneComponent::SetWorldRotation(const FRotator& InNewRotation)
+{
+    // 월드 회전을 쿼터니언으로 변환
+    FQuat NewWorldQuat = InNewRotation.ToQuaternion();
+
+    if (AttachParent)
+    {
+        // 상대 회전 계산: 부모의 역 쿼터니언과 곱함
+        RelativeRotation = FRotator(AttachParent->GetWorldRotation().ToQuaternion().Inverse() * NewWorldQuat);
+    }
+    else
+    {
+        // 부모가 없으면 월드 회전이 곧 상대 회전
+        RelativeRotation = InNewRotation;
+    }
+}
+
+void USceneComponent::SetWorldScale3D(const FVector& NewScale)
+{
+    if (AttachParent)
+    {
+        RelativeScale3D = NewScale / AttachParent->GetWorldScale3D();
+    }
+    else
+    {
+        RelativeScale3D = NewScale;
+    }
+}
+
 FVector USceneComponent::GetWorldLocation() const
 {
     if (AttachParent)
@@ -170,7 +218,7 @@ FRotator USceneComponent::GetWorldRotation() const
 {
     if (AttachParent)
     {
-        return AttachParent->GetWorldRotation().ToQuaternion() * RelativeRotation.ToQuaternion();
+        return FRotator(AttachParent->GetWorldRotation().ToQuaternion() * RelativeRotation.ToQuaternion());
     }
     return RelativeRotation;
 }
