@@ -138,23 +138,24 @@ void FPostProcessCompositingPass::Render(const std::shared_ptr<FEditorViewportCl
     if (PlayerCameraManagers.Num())
     {
 
-        for (APlayerCameraManager* PlyaerCameraManager : PlayerCameraManagers)
+        for (APlayerCameraManager* PlayerCameraManager : PlayerCameraManagers)
         {
-            ShaderParams.FadeAlpha = PlyaerCameraManager->GetCurrentFadeAmount();
+            ShaderParams.FadeAlpha = PlayerCameraManager->GetCurrentFadeAmount();
+            ShaderParams.FadeColor = PlayerCameraManager->GetCurrentFadeColor();
 
-            ShaderParams.Padding = 0.0f;
+            BufferManager->UpdateConstantBuffer<FCompositingParams>("FCompositingParams", ShaderParams);
+            BufferManager->BindConstantBuffer(TEXT("FCompositingParams"), CompositingParamsConstantBufferSlot, EShaderStage::Pixel);
 
-            // --- 5. 상수 버퍼 업데이트 및 바인딩 ---
         }
     }
     else
     {
         ShaderParams.FadeAlpha = 1;
+        BufferManager->UpdateConstantBuffer<FCompositingParams>("FCompositingParams", ShaderParams);
+        BufferManager->BindConstantBuffer(TEXT("FCompositingParams"), CompositingParamsConstantBufferSlot, EShaderStage::Pixel);
 
-        ShaderParams.Padding = 0.0f;
+        
     }
-    BufferManager->UpdateConstantBuffer<FCompositingParams>("FCompositingParams", ShaderParams);
-    BufferManager->BindConstantBuffer(TEXT("FCompositingParams"), CompositingParamsConstantBufferSlot, EShaderStage::Pixel);
 
     // --- 6. 렌더링 상태 설정 ---
     ID3D11DeviceContext* Ctx = Graphics->DeviceContext;

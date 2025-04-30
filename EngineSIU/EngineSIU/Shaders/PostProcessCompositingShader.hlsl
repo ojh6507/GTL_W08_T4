@@ -9,8 +9,10 @@ cbuffer CompositingParams : register(b11)
 {
     float2 LetterboxScale; // 레터박스 영역 스케일
     float2 LetterboxOffset; // 레터박스 영역 중심 오프셋 (NDC)
+    float4 FadeColor;
     float FadeAlpha; // 페이드 알파 (0.0 = 투명, 1.0 = 불투명)
     float Padding; // 정렬용 패딩
+
 };
 struct PS_Input
 {
@@ -73,7 +75,7 @@ float4 mainPS(PS_Input input) : SV_Target
         outputColor = float4(compositedRGB, compositedAlpha);
     }
 
-    outputColor.rgb = lerp(float3(0, 0, 0), outputColor.rgb, FadeAlpha);
+    outputColor.rgb = lerp(FadeColor.rgb, outputColor.rgb, FadeAlpha);
 
     return outputColor;
 }

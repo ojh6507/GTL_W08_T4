@@ -21,6 +21,7 @@ APlayerCameraManager::APlayerCameraManager()
     FadeAlpha.X = 0;
     FadeAlpha.Y = 1;
     FadeTime = 2.f;
+    FadeColor = FLinearColor(1, 1, 0, 1);
 }
 
 UObject* APlayerCameraManager::Duplicate(UObject* InOuter)

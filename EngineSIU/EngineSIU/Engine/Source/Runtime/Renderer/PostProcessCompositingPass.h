@@ -2,15 +2,16 @@
 #include "IRenderPass.h"
 #include "Delegates/Delegate.h"
 #include "LevelEditor/SlateAppMessageHandler.h"
-
+#include "Math/Color.h"
 class APlayerCameraManager;
 
 struct FCompositingParams
 {
     FVector2D LetterboxScale;
     FVector2D LetterboxOffset;
+    FLinearColor FadeColor;
     float FadeAlpha;
-    float Padding;
+    FVector pad;
 };
 class FPostProcessCompositingPass : public IRenderPass
 {
