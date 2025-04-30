@@ -21,7 +21,7 @@ FQuat::FQuat(const FMatrix& InMatrix)
     // Check diagonal (trace)
     const float trace = InMatrix.M[0][0] + InMatrix.M[1][1] + InMatrix.M[2][2]; // 행렬의 Trace 값 (대각합)
 
-    if (trace > 0.0f) 
+    if (trace > 0.0f)
     {
         float InvS = FMath::InvSqrt(trace + 1.f);
         this->W = 0.5f * (1.f / InvS);
@@ -30,8 +30,8 @@ FQuat::FQuat(const FMatrix& InMatrix)
         this->X = ((InMatrix.M[1][2] - InMatrix.M[2][1]) * S);
         this->Y = ((InMatrix.M[2][0] - InMatrix.M[0][2]) * S);
         this->Z = ((InMatrix.M[0][1] - InMatrix.M[1][0]) * S);
-    } 
-    else 
+    }
+    else
     {
         // diagonal is negative
         int32 i = 0;
@@ -45,7 +45,7 @@ FQuat::FQuat(const FMatrix& InMatrix)
         static constexpr int32 nxt[3] = { 1, 2, 0 };
         const int32 j = nxt[i];
         const int32 k = nxt[j];
- 
+
         S = InMatrix.M[i][i] - InMatrix.M[j][j] - InMatrix.M[k][k] + 1.0f;
 
         float InvS = FMath::InvSqrt(S);
@@ -63,18 +63,23 @@ FQuat::FQuat(const FMatrix& InMatrix)
         this->Y = qt[1];
         this->Z = qt[2];
         this->W = qt[3];
-
     }
+}
+
+bool FQuat::Equals(const FQuat& Q, float Tolerance) const
+{
+    return (FMath::Abs(X - Q.X) <= Tolerance && FMath::Abs(Y - Q.Y) <= Tolerance && FMath::Abs(Z - Q.Z) <= Tolerance && FMath::Abs(W - Q.W) <= Tolerance)
+        || (FMath::Abs(X + Q.X) <= Tolerance && FMath::Abs(Y + Q.Y) <= Tolerance && FMath::Abs(Z + Q.Z) <= Tolerance && FMath::Abs(W + Q.W) <= Tolerance);
 }
 
 FQuat FQuat::operator*(const FQuat& Other) const
 {
     return FQuat(
-            W * Other.W - X * Other.X - Y * Other.Y - Z * Other.Z,
-            W * Other.X + X * Other.W + Y * Other.Z - Z * Other.Y,
-            W * Other.Y - X * Other.Z + Y * Other.W + Z * Other.X,
-            W * Other.Z + X * Other.Y - Y * Other.X + Z * Other.W
-        );
+        W * Other.W - X * Other.X - Y * Other.Y - Z * Other.Z,
+        W * Other.X + X * Other.W + Y * Other.Z - Z * Other.Y,
+        W * Other.Y - X * Other.Z + Y * Other.W + Z * Other.X,
+        W * Other.Z + X * Other.Y - Y * Other.X + Z * Other.W
+    );
 }
 
 FVector FQuat::RotateVector(const FVector& Vec) const
@@ -129,7 +134,6 @@ FMatrix FQuat::ToMatrix() const
     RotationMatrix.M[0][1] = 2.0f * (X * Y - W * Z);
     RotationMatrix.M[0][2] = 2.0f * (X * Z + W * Y);
     RotationMatrix.M[0][3] = 0.0f;
-
 
     RotationMatrix.M[1][0] = 2.0f * (X * Y + W * Z);
     RotationMatrix.M[1][1] = 1.0f - 2.0f * (X * X + Z * Z);

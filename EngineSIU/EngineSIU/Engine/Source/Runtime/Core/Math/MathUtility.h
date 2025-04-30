@@ -10,7 +10,8 @@
 
 #define PI_DOUBLE            (3.141592653589793238462643383279502884197169399)
 
-
+struct FVector;
+struct FQuat;
 struct FMath
 {
 	/** A와 B중에 더 작은 값을 반환합니다. */
@@ -215,7 +216,7 @@ struct FMath
 	    const RetType Dist = Target - Current;
 
 	    // If distance is too small, just set the desired location
-	    if( FMath::Square(Dist) < SMALL_NUMBER)
+	    if( FMath::Square(Dist) < KINDA_SMALL_NUMBER)
 	    {
 	        return static_cast<RetType>(Target);
 	    }
@@ -225,6 +226,32 @@ struct FMath
 
 	    return Current + DeltaMove;				
 	}
+
+    /**
+     * Returns value based on comparand. The main purpose of this function is to avoid
+     * branching based on floating point comparison which can be avoided via compiler
+     * intrinsics.
+     *
+     * Please note that we don't define what happens in the case of NaNs as there might
+     * be platform specific differences.
+     *
+     * @param	Comparand		Comparand the results are based on
+     * @param	ValueGEZero		Return value if Comparand >= 0
+     * @param	ValueLTZero		Return value if Comparand < 0
+     *
+     * @return	ValueGEZero if Comparand >= 0, ValueLTZero otherwise
+     */
+    static constexpr FORCEINLINE float FloatSelect(float Comparand, float ValueGEZero, float ValueLTZero)
+    {
+        return Comparand >= 0.f ? ValueGEZero : ValueLTZero;
+    }
+
+
+    /** Interpolate vector from Current to Target. Scaled by distance to Target, so it has a strong start speed and ease out. */
+    static FVector VInterpTo(const FVector& Current, const FVector& Target, float DeltaTime, float InterpSpeed);
+
+    /** Interpolate quaternion from Current to Target. Scaled by angle to Target, so it has a strong start speed and ease out. */
+    static FQuat QInterpTo(const FQuat& Current, const FQuat& Target, float DeltaTime, float InterpSpeed);
     
     template< class T >
     [[nodiscard]] static FORCEINLINE T InterpEaseIn(const T& A, const T& B, const float Alpha, const float Exp)
