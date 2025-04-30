@@ -172,6 +172,7 @@ public:
     /** 화면에 FadeColor/FadeAmount를 적용할지 여부 */
     bool bEnableFading = false;
 
+    bool ActiveLetterBox = false;
     /**
      * 이번 프레임에 카메라 컷(뷰 타겟이 갑자기 바뀌는 것)이 발생했는지
      * 컷이 감지되면 한 프레임만 true가 되며, 이 값은 프레임 끝에 자동으로 false로 리셋됩니다.
@@ -317,6 +318,8 @@ public:
 
     bool IsFading() const { return FadeTimeRemaining > 0.f; }
 
+    bool IsLetter() const { return ActiveLetterBox; }
+    void SetActiveLetterBox(bool InLetter) { ActiveLetterBox = InLetter; }
 protected:
     virtual void DoUpdateCamera(float DeltaTime);
 

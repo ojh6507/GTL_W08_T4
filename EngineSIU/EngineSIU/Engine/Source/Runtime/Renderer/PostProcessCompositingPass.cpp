@@ -106,7 +106,7 @@ void FPostProcessCompositingPass::Render(const std::shared_ptr<FEditorViewportCl
 
     FCompositingParams ShaderParams;
 
-    if (1)
+    if (PlayerCameraManager &&  PlayerCameraManager->ActiveLetterBox)
     {
         float BaseRenderedWidth = TargetWidth;
         float BaseRenderedHeight = TargetHeight;
@@ -138,7 +138,7 @@ void FPostProcessCompositingPass::Render(const std::shared_ptr<FEditorViewportCl
     }
 
 
-    if (PlayerCameraManager && PlayerCameraManager->bEnableFading)
+    if (PlayerCameraManager)
     {
         ShaderParams.FadeAlpha = PlayerCameraManager->GetCurrentFadeAmount();
         ShaderParams.FadeColor = PlayerCameraManager->GetCurrentFadeColor();

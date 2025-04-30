@@ -94,6 +94,7 @@ void UTextComponent::SetText(const FWString& text)
     // 입력 문자열 검사
     if (text.length() == 0)
     {
+        Text = L" ";
         return;
     }
 
