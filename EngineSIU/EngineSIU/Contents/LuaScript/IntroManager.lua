@@ -40,7 +40,7 @@ function Tick(dt)
         local text1 = "크크크딱걸렸다"
         local text2 = "진구야 구해줘"
         local test3 = "내가 구해줄게 이슬아"
-       Delay(4.5, function()
+        Delay(4.5, function()
         SoundManager:Stop("ESHappy")
         SoundManager:PlaySound("Angry")
         moveModifier:Initialize(ESHappy, DAngry, 2)
@@ -48,9 +48,19 @@ function Tick(dt)
    
         if textComp then
         textComp:SetText(text1)
+
+       
         end
     end)
+    Delay(9, function()
+        moveModifier:Initialize(DAngry, GetES, 1)
 
+        local shakeModifier = PlayerCameraManager:GetShakeModifier()
+        shakeModifier:StartShake(0.02, 1)
+
+        local FadeColor = FLinearColor(0.4,0.4,0.4,1)           
+        PlayerCameraManager:StartCameraFade(0, 1, 2., FadeColor, false, false)
+        end)
 
     Delay(9, function()
         moveModifier:Initialize(DAngry, GetES, 1)
