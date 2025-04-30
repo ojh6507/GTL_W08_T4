@@ -42,9 +42,9 @@ void APlayerCameraManager::BeginPlay()
     AddModifier(interpolationModifier);
 
 
-    FViewTarget FromViewTarget = GetWorld()->GetViewTarget(TEXT("StartCamera"));
-    FViewTarget ToViewTarget = GetWorld()->GetViewTarget(TEXT("MainCamera"));
-    interpolationModifier->Initialize(FromViewTarget, ToViewTarget, 2);
+   // FViewTarget FromViewTarget = GetWorld()->GetViewTarget(TEXT("StartCamera"));
+   // FViewTarget ToViewTarget = GetWorld()->GetViewTarget(TEXT("MainCamera"));
+   // interpolationModifier->Initialize(FromViewTarget, ToViewTarget, 2);
 }
 
 

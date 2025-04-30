@@ -10,6 +10,7 @@
 #include "UnrealEd/UnrealEd.h"
 #include "World/World.h"
 #include "../../../../../SoundManager.h"
+#include "../../../../../LuaDelayManager.h"
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -130,6 +131,8 @@ void FEngineLoop::Tick()
 
         GEngine->Tick(DeltaTime);
         LevelEditor->Tick(DeltaTime);
+        LuaDelayManager::GetInstance().Update(DeltaTime);
+
         Render();
         UIMgr->BeginFrame();
         UnrealEditor->Render();

@@ -1,5 +1,6 @@
 #include "LuaManager.h"
 #include <iostream>
+#include "../../../LuaDelayManager.h"
 
 // 전역 인스턴스
 FLuaManager GLuaManager;
@@ -95,6 +96,8 @@ void FLuaManager::RegisterEngineAPI()
     (*lua)["Log"] = [](const std::string& message) {
         std::cout << "Lua: " << message << std::endl;
         };
+
+    RegisterDelayToLua(*lua);
 
     // 추가 엔진 함수 등록 예시
     // lua["Render"] = &YourRenderFunction;
