@@ -36,7 +36,8 @@ public:
 
     FCameraCacheEntry()
         : TimeStamp(0.f)
-    {}
+    {
+    }
 };
 
 
@@ -53,28 +54,29 @@ public:
     /** Exponent, used by certain blend functions to control the shape of the curve. */
     float BlendExp;
 
-    /** 
+    /**
      * If true, lock outgoing viewtarget to last frame's camera POV for the remainder of the blend.
-     * This is useful if you plan to teleport the old viewtarget, but don't want to affect the blend. 
+     * This is useful if you plan to teleport the old viewtarget, but don't want to affect the blend.
      */
-    uint32 bLockOutgoing:1;
+    uint32 bLockOutgoing : 1;
 
     FViewTargetTransitionParams()
         : BlendTime(0.f)
         , BlendFunction(VTBlend_Cubic)
         , BlendExp(2.f)
         , bLockOutgoing(false)
-    {}
+    {
+    }
 
     /** For a given linear blend value (blend percentage), return the final blend alpha with the requested function applied */
     float GetBlendAlpha(const float& TimePct) const
     {
         switch (BlendFunction)
         {
-        case VTBlend_Linear: return FMath::Lerp(0.f, 1.f, TimePct); 
-        //case VTBlend_Cubic:	return FMath::CubicInterp(0.f, 0.f, 1.f, 0.f, TimePct); 
-        case VTBlend_EaseInOut: return FMath::InterpEaseInOut(0.f, 1.f, TimePct, BlendExp); 
-        case VTBlend_EaseIn: return FMath::Lerp(0.f, 1.f, FMath::Pow(TimePct, BlendExp)); 
+        case VTBlend_Linear: return FMath::Lerp(0.f, 1.f, TimePct);
+            //case VTBlend_Cubic:	return FMath::CubicInterp(0.f, 0.f, 1.f, 0.f, TimePct); 
+        case VTBlend_EaseInOut: return FMath::InterpEaseInOut(0.f, 1.f, TimePct, BlendExp);
+        case VTBlend_EaseIn: return FMath::Lerp(0.f, 1.f, FMath::Pow(TimePct, BlendExp));
         case VTBlend_EaseOut: return FMath::Lerp(0.f, 1.f, FMath::Pow(TimePct, (FMath::IsNearlyZero(BlendExp) ? 1.f : (1.f / BlendExp))));
         default:
             break;
@@ -96,7 +98,7 @@ public:
     UObject* Duplicate(UObject* InOuter) override;
     void BeginPlay() override;
     void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
-    
+
     FName CameraStyle;
 
     // Radian인지 Degree인지 확인 필수
@@ -105,7 +107,7 @@ public:
     float GetLockedFOV() const;
 protected:
     float LockedFOV;
-    
+
 protected:
     /** > 0일 경우 OrthoWidth를 고정시키는 값. <= 0이면 무시됨 */
     float LockedOrthoWidth;
@@ -113,12 +115,12 @@ protected:
 public:
     /** 기본 종횡비. 대부분의 경우 카메라 컴포넌트에서 값을 사용함 */
     float DefaultAspectRatio;
-    
+
     /** 화면이 점점 사라질 때 사용할 색상 (bEnableFading이 true일 때 적용) */
     FLinearColor FadeColor;
 
     /** 화면 사라짐 효과의 강도 (bEnableFading이 true일 때 적용) */
-    float FadeAmount;
+    float FadeAmount = 1;
 
     /** 카메라 페이드 알파 범위, X = 시작 알파, Y = 최종 알파 (bEnableFading이 true일 때 적용) */
     FVector2D FadeAlpha;
@@ -156,7 +158,7 @@ public:
     uint32 bDefaultConstrainAspectRatio = false;
 
     /** 화면에 FadeColor/FadeAmount를 적용할지 여부 */
-    uint32 bEnableFading = false;
+    bool bEnableFading = false;
 
     /**
      * 이번 프레임에 카메라 컷(뷰 타겟이 갑자기 바뀌는 것)이 발생했는지
@@ -165,19 +167,19 @@ public:
      */
     uint32 bGameCameraCutThisFrame = false;
 
- public:
-     /** ViewTarget이 PendingViewTarget으로 설정될 때 발생하는 이벤트 */
-     DECLARE_EVENT(APlayerCameraManager, FOnBlendComplete)
-     FOnBlendComplete& OnBlendComplete() const { return OnBlendCompleteEvent; }
- private:
-     mutable FOnBlendComplete OnBlendCompleteEvent;
+public:
+    /** ViewTarget이 PendingViewTarget으로 설정될 때 발생하는 이벤트 */
+    DECLARE_EVENT(APlayerCameraManager, FOnBlendComplete)
+    FOnBlendComplete& OnBlendComplete() const { return OnBlendCompleteEvent; }
+private:
+    mutable FOnBlendComplete OnBlendCompleteEvent;
 
 protected:
     /** 페이드가 끝난 후에도 최종 컬러·알파를 유지할지 여부 (hold at final) */
     uint32 bHoldFadeWhenFinished;
 
     uint32 bAutoAnimateFade;
-    
+
     /**
      * 디버그용 카메라(예: FreeCam)에도 모디파이어를 항상 적용할지 여부.
      * 기본값은 false여서 디버그 카메라에는 모디파이어가 적용되지 않음.
@@ -203,12 +205,12 @@ public:
     /** Maximum view roll, in degrees. */
     float ViewRollMax;
 
- private:
-     /** 캐시된 카메라 정보 */
-     struct FCameraCacheEntry CameraCachePrivate;
+private:
+    /** 캐시된 카메라 정보 */
+    struct FCameraCacheEntry CameraCachePrivate;
 
-     /** 한 프레임 전의 캐시된 카메라 정보 */
-     struct FCameraCacheEntry LastFrameCameraCachePrivate;
+    /** 한 프레임 전의 캐시된 카메라 정보 */
+    struct FCameraCacheEntry LastFrameCameraCachePrivate;
 protected:
     FName ActiveCameraName;
     /** 최종 카메라 POV(Point of View)를 갱신할 수 있는 활성 카메라 모디파이어 인스턴스 목록 */
@@ -227,10 +229,10 @@ public:
 
     /** 카메라에 대해 기본적으로 생성할 모디파이어 목록 */
     TArray<UCameraModifier*> DefaultModifiers;
-    
+
     /** CameraCachePrivate.POV 값을 설정함 */
     virtual void SetCameraCachePOV(const FMinimalViewInfo& InPOV);
-	
+
     /** LastFrameCameraCachePrivate.POV 값을 설정함 */
     virtual void SetLastFrameCameraCachePOV(const FMinimalViewInfo& InPOV);
 
@@ -296,18 +298,18 @@ public:
     virtual void SetDesiredColorScale(FVector NewColorScale, float InterpTime);
 
 public:
-        float GetCurrentFadeAmount() const { return FadeAmount; }
-        
-        FLinearColor GetCurrentFadeColor() const { return FadeColor; }
-        
-        bool IsFading() const { return FadeTimeRemaining > 0.f; }
+    float GetCurrentFadeAmount() { return FMath::Clamp(FadeAmount, 0.f, 1.f); }
+
+    FLinearColor GetCurrentFadeColor() const { return FadeColor; }
+
+    bool IsFading() const { return FadeTimeRemaining > 0.f; }
 
 protected:
     virtual void DoUpdateCamera(float DeltaTime);
 
     bool LuaUpdateCamera(AActor* CameraTarget, FVector& NewCameraLocation, FRotator& NewCameraRotation, float& NewCameraFOV);
 
-    virtual void AssignViewTarget(AActor* NewTarget, FViewTarget& VT, struct FViewTargetTransitionParams TransitionParams=FViewTargetTransitionParams());
+    virtual void AssignViewTarget(AActor* NewTarget, FViewTarget& VT, struct FViewTargetTransitionParams TransitionParams = FViewTargetTransitionParams());
 
     /**
      * 두 개의 ViewTarget을 블렌딩하는 내부 헬퍼 함수입니다.
@@ -318,8 +320,8 @@ protected:
      */
     FPOV BlendViewTargets(const FViewTarget& A, const FViewTarget& B, float Alpha);
 
-    /** 
-     * 최종 계산된 POV 정보를 캐시에 저장하여 다른 게임 코드에서 효율적으로 접근할 수 있게 합니다. 
+    /**
+     * 최종 계산된 POV 정보를 캐시에 저장하여 다른 게임 코드에서 효율적으로 접근할 수 있게 합니다.
      */
     void FillCameraCache(const FMinimalViewInfo& NewInfo);
 
@@ -338,7 +340,7 @@ public:
     virtual void StartCameraFade(float FromAlpha, float ToAlpha, float Duration, FLinearColor Color, bool bShouldFadeAudio = false, bool bHoldWhenFinished = false);
 
     virtual void StopCameraFade();
-    /** 
+    /**
      * 플레이어의 시야 피치(pitch)를 제한합니다.
      * @param ViewRotation       수정할 뷰 회전값(입력 및 출력)
      * @param InViewPitchMin     허용할 최소 피치 각도(도 단위)
@@ -346,7 +348,7 @@ public:
      */
     virtual void LimitViewPitch(FRotator& ViewRotation, float InViewPitchMin, float InViewPitchMax);
 
-    /** 
+    /**
      * 플레이어의 시야 롤(roll)을 제한합니다.
      * @param ViewRotation       수정할 뷰 회전값(입력 및 출력)
      * @param InViewRollMin      허용할 최소 롤 각도(도 단위)
@@ -354,7 +356,7 @@ public:
      */
     virtual void LimitViewRoll(FRotator& ViewRotation, float InViewRollMin, float InViewRollMax);
 
-    /** 
+    /**
      * 플레이어의 시야 요(yaw)를 제한합니다.
      * @param ViewRotation       수정할 뷰 회전값(입력 및 출력)
      * @param InViewYawMin       허용할 최소 요 각도(도 단위)
