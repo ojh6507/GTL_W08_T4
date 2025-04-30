@@ -15,7 +15,10 @@ public:
     float ShakeDuration;        // 총 지속 시간
     float ShakeTimeRemaining;   // 남은 셰이크 시간
     bool bIsShaking;            // 셰이크 활성화 상태
+    bool bIsStart;
 
+    FVector OriginLocation;
+    
     // 셰이크 시작 함수
     void StartShake(float Intensity, float Duration);
 

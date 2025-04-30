@@ -19,6 +19,7 @@ void UCameraShakeModifier::StartShake(float Intensity, float Duration)
     ShakeDuration = Duration;
     ShakeTimeRemaining = Duration;  // 남은 시간을 총 지속 시간으로 초기화
     bIsShaking = true;
+    bIsStart = true;
 
     // 모디파이어 활성화
     EnableModifier();
@@ -29,11 +30,18 @@ void UCameraShakeModifier::StopShake()
     bIsShaking = false;
     ShakeTimeRemaining = 0.0f;
     ShakeIntensity = 0.0f;
+    bIsStart = false;
     DisableModifier(false);  // 부드럽게 페이드 아웃
 }
 
 bool UCameraShakeModifier::ModifyCamera(float DeltaTime, FMinimalViewInfo& InOutPOV)
 {
+    if (bIsStart)
+    {
+        OriginLocation = InOutPOV.Location;
+        bIsStart = false;
+    }
+    
     if (!bIsShaking)
     {
         return false;
@@ -45,6 +53,7 @@ bool UCameraShakeModifier::ModifyCamera(float DeltaTime, FMinimalViewInfo& InOut
     // 셰이크 시간 종료 체크
     if (ShakeTimeRemaining <= 0.0f)
     {
+        InOutPOV.Location = OriginLocation;
         // 셰이크 완전 중지
         StopShake();
         return false;
@@ -78,8 +87,8 @@ bool UCameraShakeModifier::ModifyCamera(float DeltaTime, FMinimalViewInfo& InOut
     rotOffset.Yaw = randY * currentIntensity * 2.0f;
     rotOffset.Roll = randZ * currentIntensity * 0.5f;  // Roll은 약하게
 
-    InOutPOV.Location = shakeOffset;
-    InOutPOV.Rotation = rotOffset;
+    InOutPOV.Location += shakeOffset;
+    InOutPOV.Rotation += rotOffset;
 
     return true;
 }

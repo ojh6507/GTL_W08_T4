@@ -102,8 +102,8 @@ void APlayerCameraManager::Tick(float DeltaTime)
     AActor::Tick(DeltaTime);
 
     DoUpdateCamera(DeltaTime);
-    CurCameraComp->SetRelativeLocation(CameraCachePrivate.POV.Location);
-    CurCameraComp->SetRelativeRotation(CameraCachePrivate.POV.Rotation);
+    CurCameraComp->GetOwner()->SetActorLocation(CameraCachePrivate.POV.Location);
+    CurCameraComp->GetOwner()->SetActorRotation(CameraCachePrivate.POV.Rotation);
 }
 
 void APlayerCameraManager::SetActiveCamera(const FName& name)
