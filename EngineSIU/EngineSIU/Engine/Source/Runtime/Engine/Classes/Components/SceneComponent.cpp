@@ -75,6 +75,16 @@ void USceneComponent::DestroyComponent()
 {
     if (AttachParent)
     {
+        // 자식 컴포넌트들의 부모를 자신에서 부모로 위임
+        for (auto Child : AttachChildren)
+        {
+            // @todo 올바른 방식인지 확인 필요
+            // @note 이미 SetupAttachment를 호출한 상태라면 다시 호출이 불가능함, 따라서 수동으로 부모를 설정
+            //Child->SetupAttachment(AttachParent);
+            AttachParent->AttachChildren.AddUnique(Child);
+            Child->AttachParent = AttachParent;
+        }
+
         AttachParent->AttachChildren.Remove(this);
         AttachParent = nullptr;
     }
@@ -225,19 +235,47 @@ FMatrix USceneComponent::GetWorldMatrix() const
 
 void USceneComponent::SetupAttachment(USceneComponent* InParent)
 {
-    if (
-        InParent != AttachParent                                  // 설정하려는 Parent가 기존의 Parent와 다르거나
-        && InParent != this                                       // InParent가 본인이 아니고
-        && InParent != nullptr                                    // InParent가 유효한 포인터 이며
-        && (
-            AttachParent == nullptr                               // AttachParent도 유효하며
-            || !AttachParent->AttachChildren.Contains(this)  // 한번이라도 SetupAttachment가 호출된적이 없는 경우
-        ) 
-    )
+    if (InParent != AttachParent)
     {
-        AttachParent = InParent;
+        if (InParent != this)
+        {
+            if (InParent == nullptr || !InParent->IsAttachedTo(this))
+            {
+                if (AttachParent == nullptr || !AttachParent->AttachChildren.Contains(this))
+                {
+                    AttachParent = InParent;
 
-        // TODO: .AddUnique의 실행 위치를 RegisterComponent로 바꾸거나 해야할 듯
-        InParent->AttachChildren.AddUnique(this);
+                    // TODO: .AddUnique의 실행 위치를 RegisterComponent로 바꾸거나 해야할 듯
+                    AttachParent->AttachChildren.AddUnique(this);
+                }
+                else
+                {
+                    UE_LOG(ELogLevel::Error, TEXT("SetupAttachment cannot be used once a component has already had AttachTo used to connect it to a parent."));
+                }
+            }
+            else
+            {
+                UE_LOG(ELogLevel::Error, TEXT("Setting up attachment would create a cycle."));
+            }
+        }
+        else
+        {
+            UE_LOG(ELogLevel::Error, TEXT("Cannot attach a component to itself."));
+        }
     }
+}
+
+bool USceneComponent::IsAttachedTo(const USceneComponent* TestComp) const
+{
+    if (TestComp != nullptr)
+    {
+        for (const USceneComponent* Comp = this->GetAttachParent(); Comp != nullptr; Comp = Comp->GetAttachParent())
+        {
+            if (TestComp == Comp)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
 }

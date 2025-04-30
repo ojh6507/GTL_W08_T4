@@ -590,8 +590,8 @@ namespace LuaBindings
             "IsActorBeingDestroyed", &AActor::IsActorBeingDestroyed,
 
             // 컴포넌트 관련
-            "AddComponent", sol::resolve<UActorComponent * (UClass*, FName)>( // UClass, FName 바인딩 필요
-                static_cast<UActorComponent * (AActor::*)(UClass*, FName)>(&AActor::AddComponent)
+            "AddComponent", sol::resolve<UActorComponent * (UClass*, FName, bool)>( // UClass, FName 바인딩 필요
+                static_cast<UActorComponent * (AActor::*)(UClass*, FName, bool)>(&AActor::AddComponent)
             ),
           
             "GetRootComponent", &AActor::GetRootComponent, // USceneComponent 바인딩 필요

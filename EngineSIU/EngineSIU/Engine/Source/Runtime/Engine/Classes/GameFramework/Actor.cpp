@@ -3,7 +3,6 @@
 #include "Components/PrimitiveComponent.h"
 #include "World/World.h"
 
-
 UObject* AActor::Duplicate(UObject* InOuter)
 {
     ThisClass* NewActor = Cast<ThisClass>(Super::Duplicate(InOuter));
@@ -17,7 +16,6 @@ UObject* AActor::Duplicate(UObject* InOuter)
         Components->DestroyComponent();
     }
     NewActor->OwnedComponents.Empty();
-
 
     // 부모-자식 관계 저장용 맵
     TMap<USceneComponent*, USceneComponent*> ParentChildMap;
@@ -119,14 +117,14 @@ bool AActor::Destroy()
     return IsActorBeingDestroyed();
 }
 
-UActorComponent* AActor::AddComponent(UClass* InClass, FName InName)
+UActorComponent* AActor::AddComponent(UClass* InClass, FName InName, bool bManualAttachment)
 {
     if (!InClass)
     {
         UE_LOG(ELogLevel::Error, TEXT("UActorComponent failed: ComponentClass is null."));
         return nullptr;
     }
-    
+
     if (InClass->IsChildOf<UActorComponent>())
     {
         UActorComponent* Component = dynamic_cast<UActorComponent*>(FObjectFactory::ConstructObject(InClass, this, InName));
@@ -136,20 +134,23 @@ UActorComponent* AActor::AddComponent(UClass* InClass, FName InName)
             UE_LOG(ELogLevel::Error, TEXT("UActorComponent failed: Class '%s' is not derived from AActor."), *InClass->GetName());
             return nullptr;
         }
-        
+
         OwnedComponents.Add(Component);
         Component->OwnerPrivate = this;
 
         // 만약 SceneComponent를 상속 받았다면
         if (USceneComponent* SceneComp = Cast<USceneComponent>(Component))
         {
-            if (RootComponent == nullptr)
+            if (!bManualAttachment)
             {
-                RootComponent = SceneComp;
-            }
-            else
-            {
-                SceneComp->SetupAttachment(RootComponent);
+                if (RootComponent == nullptr)
+                {
+                    RootComponent = SceneComp;
+                }
+                else
+                {
+                    SceneComp->SetupAttachment(RootComponent);
+                }
             }
         }
 
@@ -157,7 +158,7 @@ UActorComponent* AActor::AddComponent(UClass* InClass, FName InName)
 
         return Component;
     }
-    
+
     UE_LOG(ELogLevel::Error, TEXT("UActorComponent failed: ComponentClass is null."));
     return nullptr;
 }
@@ -217,7 +218,7 @@ bool AActor::SetRootComponent(USceneComponent* NewRootComponent)
 
 FVector AActor::GetActorLocation() const
 {
-    return RootComponent ? RootComponent->GetRelativeLocation() : FVector(FVector::ZeroVector); 
+    return RootComponent ? RootComponent->GetRelativeLocation() : FVector(FVector::ZeroVector);
 }
 
 FRotator AActor::GetActorRotation() const
@@ -227,14 +228,14 @@ FRotator AActor::GetActorRotation() const
 
 FVector AActor::GetActorScale() const
 {
-    return RootComponent ? RootComponent->GetRelativeScale3D() : FVector(FVector::OneVector); 
+    return RootComponent ? RootComponent->GetRelativeScale3D() : FVector(FVector::OneVector);
 }
 
 bool AActor::SetActorLocation(const FVector& NewLocation)
 {
     if (RootComponent)
     {
-       RootComponent->SetRelativeLocation(NewLocation);
+        RootComponent->SetRelativeLocation(NewLocation);
         return true;
     }
     return false;
