@@ -50,6 +50,28 @@ struct FRenderTargetRHI
             Texture2D = nullptr;
         }
     }
+
+    UINT GetSizeX() const
+    {
+        if (Texture2D)
+        {
+            D3D11_TEXTURE2D_DESC desc;
+            Texture2D->GetDesc(&desc);
+            return desc.Width;
+        }
+        return 0;
+    }
+
+    UINT GetSizeY() const
+    {
+        if (Texture2D)
+        {
+            D3D11_TEXTURE2D_DESC desc;
+            Texture2D->GetDesc(&desc);
+            return desc.Height;
+        }
+        return 0;
+    }
 };
 
 class FViewportResource

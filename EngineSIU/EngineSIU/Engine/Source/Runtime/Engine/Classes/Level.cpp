@@ -1,7 +1,7 @@
 #include "Level.h"
 #include "GameFramework/Actor.h"
 #include "UObject/Casts.h"
-#include "../../../../UScriptComponent.h"
+#include "Components/UScriptComponent.h"
 #include "Camera/PlayerCameraManager.h"
 #include "Camera/CameraComponent.h"
 

@@ -31,6 +31,7 @@ public:
     ID3D11DepthStencilState* DepthStencilState = nullptr;
     
     ID3D11BlendState* AlphaBlendState = nullptr;
+    ID3D11BlendState* OpaqueBlendState = nullptr;
     
     DXGI_SWAP_CHAIN_DESC SwapchainDesc;
     
